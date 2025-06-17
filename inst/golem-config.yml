@@ -1,11 +1,8 @@
 default:
-  golem_name: climate_indicator_projections
+  golem_name: ClimateIndicatorProjections
   golem_version: 0.0.0.9000
   app_prod: no
-
 production:
   app_prod: yes
-
 dev:
   golem_wd: !expr golem::pkg_path()
-

@@ -9,7 +9,7 @@
 #'
 #' @noRd
 app_sys <- function(...) {
-  system.file(..., package = "climate_indicator_projections")
+  system.file(..., package = "ClimateIndicatorProjections")
 }
 
 
