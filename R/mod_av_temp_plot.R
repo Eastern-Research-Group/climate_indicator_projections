@@ -11,7 +11,7 @@ mod_av_temp_plot_ui <- function(id) {
   ns <- NS(id)
   tagList(
 
-
+    shinycssloaders::withSpinner(highcharter::highchartOutput(ns("plot")))
 
   )
 }
@@ -22,6 +22,8 @@ mod_av_temp_plot_ui <- function(id) {
 mod_av_temp_plot_server <- function(id){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
+
+    ### Get data ready for plotting ###
 
     # Read in data
     av_temp_path <- "inst/extdata/av_temp" # path to data
@@ -59,6 +61,25 @@ mod_av_temp_plot_server <- function(id){
     # Align modeled data with observed data
     temp_all_adj <- adjust_anomaly(temp_model_av_cln, temp_obs_proj_diff, NA, temp_mod_range, smoothed_anom) %>%
       rename_scenarios()
+
+    ### Create the plot ###
+    av_temp_hc <- create_hc_plot(temp_all_adj,
+                                 "Temperatures in the Contiguous 48 States, 1901–2100",
+                                 "Temperature Anomaly (°F)",
+                                 "°F")
+
+    output$plot <- highcharter::renderHighchart({
+
+      av_temp_hc
+
+    })
+
+    # reactive values
+    av_temp_plot <- reactiveVal()
+    av_temp_plot(av_temp_hc)
+
+    return(av_temp_plot)
+
 
 
   })
