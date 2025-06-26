@@ -36,7 +36,7 @@ calc_anom = function(mod_data, var_name, base_start, base_end, window_size, ncli
     dplyr::summarize(mean_val = mean({{var_name}}))
 
   # Calculate the anomaly
-  anom <- left_join(mod_data, av_val, by = grouping_var) %>%
+  anom <- dplyr::left_join(mod_data, av_val, by = grouping_var) %>%
     dplyr::mutate(anomaly = {{var_name}} - mean_val) %>%
     dplyr::ungroup() %>%
     dplyr::group_by(dplyr::across(dplyr::all_of(grouping_var))) %>%

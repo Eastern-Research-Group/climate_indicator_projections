@@ -16,7 +16,7 @@ adjust_anomaly = function(obs_mod_data, obs_proj_diff, obs_ncimgrid_diff, mod_ra
 
   # Adjust the anomaly for the bayesian average
   anom_adj <- obs_mod_data %>%
-    mutate(smoothed_anom_adj = case_when(
+    dplyr::mutate(smoothed_anom_adj = dplyr::case_when(
       scenario %in% c("ssp126", "ssp245", "ssp370", "ssp585", "hindcast") ~ {{anom_var}} + obs_proj_diff,
       scenario == "nclimgrid" ~ {{anom_var}} + obs_ncimgrid_diff,
       scenario == "observed" ~ {{anom_var}}
@@ -24,8 +24,8 @@ adjust_anomaly = function(obs_mod_data, obs_proj_diff, obs_ncimgrid_diff, mod_ra
 
   # Adjust the anomalies for the model range
   mod_range <- anom_adj %>%
-    full_join(mod_range_data, by = c("year", "scenario")) %>%
-    mutate(p10_adj = p10 + obs_proj_diff,
+    dplyr::full_join(mod_range_data, by = c("year", "scenario")) %>%
+    dplyr::mutate(p10_adj = p10 + obs_proj_diff,
            p90_adj = p90 + obs_proj_diff)
 
   return(mod_range)

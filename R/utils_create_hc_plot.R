@@ -18,7 +18,7 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit){
   ssp245_col <- "#f79420"
   ssp370_col <- "#e00101"
   ssp585_col <- "#990002"
-  hindcast_col <- "darkgrey"
+  hindcast_col <- "#989898"
 
   ipcc_colors <- c(hindcast_col, ssp126_col, ssp245_col, ssp370_col, ssp585_col)
 
@@ -92,7 +92,8 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit){
                             style = list(fontSize = "14px")
                           )) %>%
     highcharter::hc_title(text = plot_title) %>%
-    highcharter::hc_plotOptions(line = list(marker = list(enabled = FALSE)))
+    highcharter::hc_plotOptions(line = list(marker = list(enabled = FALSE)),
+                                arearange  = list(marker = list(enabled = FALSE)))
 
   return(hc_plot)
 

@@ -12,7 +12,7 @@
 calc_model_range = function(ssp_df, var_name){
 
   p_all <- ssp_df %>%
-    ungroup() %>%
+    dplyr::ungroup() %>%
     dplyr::group_by(scenario, year) %>%
     dplyr::summarize(p10 = stats::quantile({{var_name}}, probs=c(0.1), na.rm=T),
               p90 = stats::quantile({{var_name}}, probs=c(0.9), na.rm=T))
