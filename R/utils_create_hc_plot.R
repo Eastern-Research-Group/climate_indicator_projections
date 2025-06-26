@@ -1,12 +1,17 @@
 #' create_hc_plot
 #'
-#' @description A utils function
+#' @param scenario_df Dataframe with observed and projected data and model range
+#' @param plot_title String title
+#' @param y_title String title
+#' @param val_unit String unit of the value
 #'
-#' @return The return value, if any, from executing the utility.
+#' @description Create a highchart plot for the time series plot
+#'
+#' @return Highchart
 #'
 #' @noRd
 
-create_hc_plot = function(scenario_df, plot_title, y_title){
+create_hc_plot = function(scenario_df, plot_title, y_title, val_unit){
 
   # IPCC colors
   ssp126_col <- "#003466"
@@ -17,6 +22,7 @@ create_hc_plot = function(scenario_df, plot_title, y_title){
 
   ipcc_colors <- c(hindcast_col, ssp126_col, ssp245_col, ssp370_col, ssp585_col)
 
+  # Split up observed and modeled data
   obs_data <- scenario_df %>%
     dplyr::filter(scenario == "observed") %>%
     dplyr::filter(!is.na(smoothed_anom_adj))
@@ -25,6 +31,7 @@ create_hc_plot = function(scenario_df, plot_title, y_title){
     dplyr::filter(scenario != "observed") %>%
     dplyr::filter(!is.na(smoothed_anom_adj))
 
+  # Reorder the levels of the scenario names
   proj_data$scenario_line <- factor(proj_data$scenario_line,
                                     levels = c(
                                       "Model hindcast",
@@ -43,8 +50,8 @@ create_hc_plot = function(scenario_df, plot_title, y_title){
                                       "Very high emissions (SSP5-8.5) model range"
                                     ))
 
-  # make the highchart
-  area_tooltip <- "<br> 90th Percentile: {point.high} <br> 10th Percentile: {point.low}"
+  # Make the highchart
+  area_tooltip <- sprintf("<br> 90th Percentile: {point.high}%s <br> 10th Percentile: {point.low}%s", val_unit, val_unit)
 
   hc_plot <- highcharter::highchart() %>%
     highcharter::hc_add_series(data = proj_data, type = "arearange",
@@ -63,7 +70,7 @@ create_hc_plot = function(scenario_df, plot_title, y_title){
                                                   x = year, y = smoothed_anom_adj),
                                color = "black",
                                tooltip = list(headerFormat = "<b>{series.name}</b>",
-                                              pointFormat = "<br>{point.year}: {point.y}"
+                                              pointFormat = sprintf("<br>{point.year}: {point.y}%s", val_unit)
                                )) %>%
 
     highcharter::hc_add_series(data = proj_data, type = "line",
@@ -72,7 +79,7 @@ create_hc_plot = function(scenario_df, plot_title, y_title){
                                                   x = year, y = smoothed_anom_adj),
                                dashStyle = "shortdash",
                                tooltip = list(headerFormat = "<b>{series.name}</b>",
-                                              pointFormat = "<br>{point.year}: {point.y}"
+                                              pointFormat = sprintf("<br>{point.year}: {point.y}%s", val_unit)
                                )) %>%
     highcharter::hc_colors(ipcc_colors) %>%
     highcharter::hc_tooltip(crosshairs = TRUE, valueDecimals = 2) %>%
