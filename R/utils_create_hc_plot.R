@@ -54,6 +54,46 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit){
   area_tooltip <- sprintf("<br> 90th Percentile: {point.high}%s <br> 10th Percentile: {point.low}%s", val_unit, val_unit)
 
   hc_plot <- highcharter::highchart() %>%
+
+    # Add dummy element to make legend group titles
+    highcharter::hc_add_series(
+      name = "<u><b style='font-size:13px;'>Model Average</b></u>",
+      data = list(),
+      showInLegend = TRUE,
+      enableMouseTracking = FALSE,
+      color = "transparent",
+      marker = list(enabled = FALSE),
+      states = list(hover = list(enabled = FALSE))
+    ) %>%
+    # Observed data
+    highcharter::hc_add_series(data = obs_data, type = "line",
+                               highcharter::hcaes(name = scenario_line,
+                                                  group = scenario_line,
+                                                  x = year, y = smoothed_anom_adj),
+                               color = "black",
+                               tooltip = list(headerFormat = "<b>{series.name}</b>",
+                                              pointFormat = sprintf("<br>{point.year}: {point.y}%s", val_unit)
+                               )) %>%
+    # Projections data
+    highcharter::hc_add_series(data = proj_data, type = "line",
+                               highcharter::hcaes(name = scenario_line,
+                                                  group = scenario_line,
+                                                  x = year, y = smoothed_anom_adj),
+                               dashStyle = "shortdash",
+                               tooltip = list(headerFormat = "<b>{series.name}</b>",
+                                              pointFormat = sprintf("<br>{point.year}: {point.y}%s", val_unit)
+                               )) %>%
+    # Add dummy element to make legend group titles
+    highcharter::hc_add_series(
+      name = "<u><b style='font-size:13px;'>Model Range</b></u>",
+      data = list(),
+      showInLegend = TRUE,
+      enableMouseTracking = FALSE,
+      color = "transparent",
+      marker = list(enabled = FALSE),
+      states = list(hover = list(enabled = FALSE))
+    ) %>%
+    # Add model ranges
     highcharter::hc_add_series(data = proj_data, type = "arearange",
                                highcharter::hcaes(name = scenario_ribbon,
                                                   group = scenario_ribbon,
@@ -64,23 +104,7 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit){
                                fillOpacity = 0.3,
                                tooltip = list(headerFormat ="<b>{series.name}</b>",
                                               pointFormat = area_tooltip)) %>%
-    highcharter::hc_add_series(data = obs_data, type = "line",
-                               highcharter::hcaes(name = scenario_line,
-                                                  group = scenario_line,
-                                                  x = year, y = smoothed_anom_adj),
-                               color = "black",
-                               tooltip = list(headerFormat = "<b>{series.name}</b>",
-                                              pointFormat = sprintf("<br>{point.year}: {point.y}%s", val_unit)
-                               )) %>%
-
-    highcharter::hc_add_series(data = proj_data, type = "line",
-                               highcharter::hcaes(name = scenario_line,
-                                                  group = scenario_line,
-                                                  x = year, y = smoothed_anom_adj),
-                               dashStyle = "shortdash",
-                               tooltip = list(headerFormat = "<b>{series.name}</b>",
-                                              pointFormat = sprintf("<br>{point.year}: {point.y}%s", val_unit)
-                               )) %>%
+   # Plot aesthetics
     highcharter::hc_colors(ipcc_colors) %>%
     highcharter::hc_tooltip(crosshairs = TRUE, valueDecimals = 2) %>%
     highcharter::hc_yAxis(title = list(text = y_title, style = list(fontSize = "16px")),
@@ -93,7 +117,16 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit){
                           )) %>%
     highcharter::hc_title(text = plot_title) %>%
     highcharter::hc_plotOptions(line = list(marker = list(enabled = FALSE)),
-                                arearange  = list(marker = list(enabled = FALSE)))
+                                arearange  = list(marker = list(enabled = FALSE))) %>%
+    highcharter::hc_legend(
+      layout = "vertical",
+      align = "right",
+      verticalAlign = "middle",
+      useHTML = TRUE,
+      itemStyle = list(
+        fontSize = "12px"
+      )
+    )
 
   return(hc_plot)
 
