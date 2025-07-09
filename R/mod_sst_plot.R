@@ -32,7 +32,7 @@ mod_sst_plot_server <- function(id){
     ssps_sst <- read_ssps('sst\\.global_average\\.ssp.*\\.csv', sst_path, "sst")
 
     # first year of observed data
-    min_obs_yr <- 1880
+    min_hind_yr <- 1880
 
     # Years for anomaly
     base_yr_start <- 1971
@@ -59,10 +59,9 @@ mod_sst_plot_server <- function(id){
       var_name = sst,
       base_start = base_yr_start,
       base_end = base_yr_end,
-      model_range = TRUE,
       obs_mod_data = proj_obs_sst,
       which_anom = smoothed_anom,
-      min_obs_yr = min_obs_yr)
+      min_hind_yr = min_hind_yr)
 
     ### Create the plot ###
     sst_hc <- create_hc_plot(sst_all_adj,

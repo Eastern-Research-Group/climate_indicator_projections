@@ -33,7 +33,7 @@ mod_av_temp_plot_server <- function(id){
       dplyr::filter(scenario != "hist")
 
     # Set years for calculating anomalies
-    min_obs_yr <- 1950
+    min_hind_yr <- 1950
     base_yr_start <- 1951
     base_yr_end <- 2000
 
@@ -58,10 +58,9 @@ mod_av_temp_plot_server <- function(id){
       var_name = avg_ann_temp_f,
       base_start = base_yr_start,
       base_end = base_yr_end,
-      model_range = TRUE,
       obs_mod_data = temp_model_av_cln,
       which_anom = anomaly,
-      min_obs_yr = min_obs_yr)
+      min_hind_yr = min_hind_yr)
 
     ### Create the plot ###
     av_temp_hc <- create_hc_plot(temp_all_adj,
