@@ -9,7 +9,7 @@
 #' @param model_range True if calculating anomaly for model range
 #' @param obs_mod_data Dataframe with both observed and modeled values
 #' @param which_anom Name of the anomaly varaible to take the average of
-#' @param min_obs_yr Minimum observed year
+#' @param min_hind_yr Minimum hindcast model year to catlculate overlap with observed data
 #'
 #' @description A wrapper function that applies the model processing steps to calculate the model anomaly and range and align the data with the observed.
 #'
@@ -17,18 +17,18 @@
 #'
 #' @noRd
 
-model_processing <- function(mod_data, var_name, base_start, base_end, window_size = 11, nclimgrid_smooth = FALSE, model_range = FALSE,
-                             obs_mod_data, which_anom, min_obs_yr) {
+model_processing <- function(mod_data, var_name, base_start, base_end, window_size = 11, nclimgrid_smooth = FALSE, model_range = TRUE,
+                             obs_mod_data, which_anom, min_hind_yr) {
 
   # Calculate the anomaly for the model range
   mod_range <- calc_anom(mod_data, {{var_name}}, base_start, base_end, window_size, nclimgrid_smooth, model_range) %>%
     calc_model_range(., anomaly)
 
   # Difference between the averages of the modeled and observed data
-  obs_proj_diff <- calc_diff_avs(obs_mod_data, "observed", "hindcast", {{which_anom}}, min_obs_yr, 2014)
+  obs_proj_diff <- calc_diff_avs(obs_mod_data, "observed", "hindcast", {{which_anom}}, min_hind_yr, 2014)
 
   # Align modeled data with observed data
-  all_adj <- adjust_anomaly(obs_mod_data, obs_proj_diff, NA, mod_range, smoothed_anom) %>%
+  all_adj <- adjust_anomaly(obs_mod_data, obs_proj_diff, NA, mod_range, {{which_anom}}) %>%
     rename_scenarios()
 
   return(all_adj)
