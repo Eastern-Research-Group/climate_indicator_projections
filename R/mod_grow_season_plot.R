@@ -24,7 +24,7 @@ mod_grow_season_plot_server <- function(id){
     ns <- session$ns
 
     ### Get data ready for plotting ###
-    min_obs_yr <- 1955
+    min_hind_yr <- 1955
     base_yr_start <- 1951
     base_yr_end <- 2000
 
@@ -40,11 +40,9 @@ mod_grow_season_plot_server <- function(id){
       dplyr::rename(smoothed_anom = deviation_from_average_length_of_growing_season) %>%
       dplyr::mutate(scenario = "observed")
 
-    # Calculate anomalies and moving average
-    gs_proj_length_anom <- calc_anom(gs_length, GrowingSeasonLength, base_yr_start, base_yr_end, 11)
-
-    # Combine with observed data
-    gs_length_all <- gs_proj_length_anom %>%
+    # Calculate anomalies and moving average and Combine with observed data
+    gs_length_all <- gs_length %>%
+      calc_anom(., GrowingSeasonLength, base_yr_start, base_yr_end, 11) %>%
       dplyr::select(year, scenario, smoothed_anom) %>%
       rbind(gs_obs_length) %>%
       dplyr::filter(scenario != "nclimgrid")
@@ -55,10 +53,9 @@ mod_grow_season_plot_server <- function(id){
       var_name = growing_seas_length_days,
       base_start = base_yr_start,
       base_end = base_yr_end,
-      model_range = TRUE,
       obs_mod_data = gs_length_all,
       which_anom = smoothed_anom,
-      min_obs_yr = min_obs_yr)
+      min_hind_yr = min_hind_yr)
 
     ### Create the plot ###
     gs_hc <- create_hc_plot(gs_all_adj,
