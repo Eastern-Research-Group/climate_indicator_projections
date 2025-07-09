@@ -53,16 +53,16 @@ mod_sst_plot_server <- function(id){
       dplyr::filter(year >= min_obs_yr) %>%
       rbind(obs_sst_cln)
 
-    # Calculate the anomaly for the model range
-    sst_mod_range <- calc_anom(ssps_sst, sst, base_yr_start, base_yr_end, 11, FALSE, TRUE) %>%
-      calc_model_range(., anomaly)
-
-    # Difference between the averages of the modeled and observed data
-    sst_obs_proj_diff <- calc_diff_avs(proj_obs_sst, "observed", "hindcast", smoothed_anom, min_obs_yr, 2014)
-
-    # Align modeled data with observed data
-    sst_all_adj <- adjust_anomaly(proj_obs_sst, sst_obs_proj_diff, NA, sst_mod_range, smoothed_anom) %>%
-      rename_scenarios()
+    # Process and align the model data
+    sst_all_adj <- model_processing(
+      mod_data = ssps_sst,
+      var_name = sst,
+      base_start = base_yr_start,
+      base_end = base_yr_end,
+      model_range = TRUE,
+      obs_mod_data = proj_obs_sst,
+      which_anom = smoothed_anom,
+      min_obs_yr = min_obs_yr)
 
     ### Create the plot ###
     sst_hc <- create_hc_plot(sst_all_adj,
