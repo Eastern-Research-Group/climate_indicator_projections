@@ -33,7 +33,8 @@ calc_anom = function(mod_data, var_name, base_start, base_end, window_size, ncli
     dplyr::filter(year >= base_start) %>%
     dplyr::filter(year <= base_end) %>%
     dplyr::group_by(dplyr::across(dplyr::all_of(grouping_var))) %>%
-    dplyr::summarize(mean_val = mean({{var_name}}))
+    dplyr::summarize(mean_val = mean({{var_name}})) %>%
+    dplyr::ungroup()
 
   # Calculate the anomaly
   anom <- dplyr::left_join(mod_data, av_val, by = grouping_var) %>%
