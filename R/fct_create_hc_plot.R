@@ -39,16 +39,16 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit){
                                       "Intermediate emissions (SSP2-4.5)",
                                       "High emissions (SSP3-7.0)",
                                       "Very high emissions (SSP5-8.5)"
-  ))
+                                    ))
 
   proj_data$scenario_ribbon <- factor(proj_data$scenario_ribbon,
-                                    levels = c(
-                                      "Model hindcast range",
-                                      "Low emissions (SSP1-2.6) model range",
-                                      "Intermediate emissions (SSP2-4.5) model range",
-                                      "High emissions (SSP3-7.0) model range",
-                                      "Very high emissions (SSP5-8.5) model range"
-                                    ))
+                                      levels = c(
+                                        "Model hindcast range",
+                                        "Low emissions (SSP1-2.6) model range",
+                                        "Intermediate emissions (SSP2-4.5) model range",
+                                        "High emissions (SSP3-7.0) model range",
+                                        "Very high emissions (SSP5-8.5) model range"
+                                      ))
 
   # Make the highchart
   area_tooltip <- sprintf("<br> 90th Percentile: {point.high}%s <br> 10th Percentile: {point.low}%s", val_unit, val_unit)
@@ -104,7 +104,7 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit){
                                fillOpacity = 0.3,
                                tooltip = list(headerFormat ="<b>{series.name}</b>",
                                               pointFormat = area_tooltip)) %>%
-   # Plot aesthetics
+    # Plot aesthetics
     highcharter::hc_colors(ipcc_colors) %>%
     highcharter::hc_tooltip(crosshairs = TRUE, valueDecimals = 2) %>%
     highcharter::hc_yAxis(title = list(text = y_title, style = list(fontSize = "16px")),
