@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(climate_indicator_projections)
+library(ClimateIndicatorProjections)
 
-test_check("climate_indicator_projections")
+test_check("ClimateIndicatorProjections")
