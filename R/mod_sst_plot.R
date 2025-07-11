@@ -50,7 +50,7 @@ mod_sst_plot_server <- function(id){
       tidyr::pivot_longer(cols = starts_with("SSP"), names_to = "scenario", values_to = "sst") %>%
       calc_anom(., sst, base_yr_start, base_yr_end, 11) %>%
       dplyr::select(year, scenario, smoothed_anom) %>%
-      dplyr::filter(year >= min_obs_yr) %>%
+      dplyr::filter(year >= min_hind_yr) %>%
       rbind(obs_sst_cln)
 
     # Process and align the model data
