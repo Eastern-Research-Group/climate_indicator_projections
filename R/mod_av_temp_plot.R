@@ -33,7 +33,7 @@ mod_av_temp_plot_server <- function(id){
       dplyr::filter(scenario != "hist")
 
     # Set years for calculating anomalies
-    min_hind_yr <- 1950
+    min_hind_yr <- 1955
     base_yr_start <- 1951
     base_yr_end <- 2000
 
@@ -43,7 +43,7 @@ mod_av_temp_plot_server <- function(id){
       dplyr::select(year, earths_surface) %>%
       dplyr::rename(anomaly = earths_surface) %>%
       dplyr::mutate(scenario = "observed") %>%
-      dplyr::mutate(smoothed_anom = anomaly) # this anomaly is already smoothed so rename
+      dplyr::mutate(smoothed_anom = anomaly) # rename to combine with projected data
 
     temp_model_av_cln <- temp_model_av %>%
       dplyr::filter(!is.na(av_temp)) %>%
@@ -59,7 +59,7 @@ mod_av_temp_plot_server <- function(id){
       base_start = base_yr_start,
       base_end = base_yr_end,
       obs_mod_data = temp_model_av_cln,
-      which_anom = anomaly,
+      which_anom = smoothed_anom,
       min_hind_yr = min_hind_yr)
 
     ### Create the plot ###
