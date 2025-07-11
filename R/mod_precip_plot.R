@@ -37,13 +37,13 @@ mod_precip_plot_server <- function(id){
     # Clean up the observed data
     precip_obs_clean <- precip_obs_raw %>%
       janitor::clean_names() %>%
-      dplyr::mutate(scenario = "observed")
+      dplyr::mutate(scenario = "observed") %>%
+      dplyr::rename(smoothed_anom = anomaly)  # rename to bind with projected data
 
     # Calculate anomalies and moving average and Combine with observed data
     precip_all_data <- precip_proj_raw %>%
       calc_anom(., total_pr, base_yr_start, base_yr_end, 11, nclimgrid_smooth = FALSE) %>%
       dplyr::select(year, scenario, smoothed_anom) %>%
-      dplyr::rename(anomaly = smoothed_anom) %>%  # rename to bind with observed data
       rbind(precip_obs_clean) %>%
       # remove nclimgrid
       dplyr::filter(scenario != "nclimgrid")
@@ -56,7 +56,7 @@ mod_precip_plot_server <- function(id){
       base_end = base_yr_end,
       model_range = TRUE,
       obs_mod_data = precip_all_data,
-      which_anom = anomaly,
+      which_anom = smoothed_anom,
       min_hind_yr = min_hind_yr)
 
     ### Create the plot ###
