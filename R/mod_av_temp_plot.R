@@ -63,23 +63,15 @@ mod_av_temp_plot_server <- function(id){
       min_hind_yr = min_hind_yr)
 
     ### Create the plot ###
-    av_temp_hc <- create_hc_plot(temp_all_adj,
-                                 "Temperatures in the Contiguous 48 States, 1901–2100",
-                                 "Temperature Anomaly (°F)",
-                                 "°F")
 
     output$plot <- highcharter::renderHighchart({
 
-      av_temp_hc
+      create_hc_plot(temp_all_adj,
+                     "Temperatures in the Contiguous 48 States, 1901–2100",
+                     "Temperature Anomaly (°F)",
+                     "°F")
 
     })
-
-    # reactive values
-    av_temp_plot <- reactiveVal()
-    av_temp_plot(av_temp_hc)
-
-    return(av_temp_plot)
-
 
 
   })

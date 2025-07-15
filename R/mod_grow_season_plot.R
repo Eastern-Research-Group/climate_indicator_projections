@@ -58,22 +58,15 @@ mod_grow_season_plot_server <- function(id){
       min_hind_yr = min_hind_yr)
 
     ### Create the plot ###
-    gs_hc <- create_hc_plot(gs_all_adj,
-                                 "Length of Growing Season in the Contiguous 48 States, 1895–2100",
-                                 "Deviation from average (days)",
-                                 "days")
 
     output$plot <- highcharter::renderHighchart({
 
-      gs_hc
+      create_hc_plot(gs_all_adj,
+                     "Length of Growing Season in the Contiguous 48 States, 1895–2100",
+                     "Deviation from average (days)",
+                     "days")
 
     })
-
-    # reactive values
-    gs_plot <- reactiveVal()
-    gs_plot(gs_hc)
-
-    return(gs_plot)
 
   })
 }

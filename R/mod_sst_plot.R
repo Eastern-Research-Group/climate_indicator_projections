@@ -64,22 +64,15 @@ mod_sst_plot_server <- function(id){
       min_hind_yr = min_hind_yr)
 
     ### Create the plot ###
-    sst_hc <- create_hc_plot(sst_all_adj,
-                            "Average Global Sea Surface Temperature, 1880–2100",
-                            "Temperature anomaly (°F)",
-                            "°F")
 
     output$plot <- highcharter::renderHighchart({
 
-      sst_hc
+      create_hc_plot(sst_all_adj,
+                     "Average Global Sea Surface Temperature, 1880–2100",
+                     "Temperature anomaly (°F)",
+                     "°F")
 
     })
-
-    # reactive values
-    sst_plot <- reactiveVal()
-    sst_plot(sst_hc)
-
-    return(sst_plot)
 
 
   })

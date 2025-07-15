@@ -60,22 +60,14 @@ mod_precip_plot_server <- function(id){
       min_hind_yr = min_hind_yr)
 
     ### Create the plot ###
-    precip_hc <- create_hc_plot(precip_all_adj,
-                                 "Precipitation in the Contiguous 48 States, 1901–2100",
-                                 "Precipitation Anomaly (inches)",
-                                 " in.")
-
     output$plot <- highcharter::renderHighchart({
 
-      precip_hc
+      create_hc_plot(precip_all_adj,
+                     "Precipitation in the Contiguous 48 States, 1901–2100",
+                     "Precipitation Anomaly (inches)",
+                     " in.")
 
     })
-
-    # reactive values
-    precip_plot <- reactiveVal()
-    precip_plot(precip_hc)
-
-    return(precip_plot)
 
 
   })
