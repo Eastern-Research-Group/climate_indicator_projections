@@ -32,7 +32,8 @@ mod_grow_season_plot_server <- function(id){
     gs_path <- "inst/extdata/grow_season" # path to data
     gs_obs_length_raw <- readr::read_csv(file.path(gs_path, "growing-season_fig-1.csv"), skip = 6) # observed data
     gs_length <- readr::read_csv(file.path(gs_path, "GrowingSeasonLength_USav.csv"))
-    length_ssps <- vroom::vroom(list.files(path = gs_path, pattern = 'growing_seas_length_conus_av_*', full.names = TRUE)) # model averages
+    length_ssps <- vroom::vroom(list.files(path = gs_path, pattern = 'growing_seas_length_conus_av_*', full.names = TRUE)) %>% # model averages
+      dplyr::filter(scenario != "hist")
 
     # Clean data
     gs_obs_length <- gs_obs_length_raw %>%
