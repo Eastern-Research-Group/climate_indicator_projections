@@ -40,8 +40,6 @@ mod_seasonal_temp_plot_server <- function(id){
     # Read in observed data
     obs_raw <- readr::read_csv(file.path(st_path, "seasonal-temperature_fig-1.csv"), skip = 6)
 
-
-
     seas_proj_adj_out <- reactive({
 
       # Set variable values depending on which season is selected
@@ -73,7 +71,8 @@ mod_seasonal_temp_plot_server <- function(id){
       # read in the projections dataset for the chosen season
       proj_av <- readr::read_csv(file.path(st_path, sprintf('conus_avg_%s_temp.csv', proj_av_pattern))) # Average Conus
       proj_all <- vroom::vroom(list.files(path = st_path, pattern = sprintf('avg_%s_temp_conus_av_*', proj_all_pattern), full.names = TRUE)) %>% # model averages
-        dplyr::rename("avg_temp_f" = {{var_name}})
+        dplyr::rename("avg_temp_f" = {{var_name}}) %>%
+        dplyr::filter(scenario != "hist")
 
       # Process the projections indicator
       seas_proj_adj <- process_seasons(
