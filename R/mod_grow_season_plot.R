@@ -59,7 +59,6 @@ mod_grow_season_plot_server <- function(id){
       min_hind_yr = min_hind_yr)
 
     ### Create the plot ###
-
     output$plot <- highcharter::renderHighchart({
 
       create_hc_plot(gs_all_adj,
