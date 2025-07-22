@@ -1,0 +1,408 @@
+@font-face {
+    font-family: 'Open Sans Web';
+    src: url('../fonts/OpenSans-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Open Sans Web';
+    src: url('../fonts/OpenSans-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Open Sans Web';
+    src: url('../fonts/OpenSans-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Open Sans Web';
+    src: url('../fonts/OpenSans-BoldItalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Open Sans Web';
+    src: url('../fonts/OpenSans-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Open Sans Web';
+    src: url('../fonts/OpenSans-SemiBoldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Merriweather';
+    src: url('../fonts/Merriweather.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Merriweather';
+    src: url('../fonts/Merriweather.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Merriweather';
+    src: url('../fonts/Merriweather-Italic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+p{
+    line-height: 1.6;
+}
+.usa-button {
+    font-family: "Open Sans Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.06rem;
+    line-height: .9;
+    color: #fff;
+    background-color: #005ea2;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    align-items: center;
+    border: 0;
+    border-radius: .25rem;
+    cursor: pointer;
+    -moz-column-gap: .5rem;
+    column-gap: .5rem;
+    display: inline-flex;
+    font-weight: 700;
+    justify-content: center;
+    margin-right: .5rem;
+    padding: 1rem 2rem;
+    text-align: center;
+    text-decoration: none;
+    width: auto;
+}
+.usa-button--big {
+    border-radius: .25rem;
+    font-size: 1.33rem;
+    padding: 1.5rem 2.5rem;
+}
+a{
+    color: #005ea2;
+}
+a:hover, a:focus{
+    color: #1a4480
+}
+.usa-button:hover{
+    background-color: #1a4480;
+} 
+.usa-button:active{
+    background-color: #162e51;
+}
+
+main h1{
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding: 1rem 3rem;
+}
+
+footer{
+    background-color: #e1f3f8;
+    padding: 3rem;
+    margin-top: 3rem;
+}
+footer p.temp{
+    color: #a6d7e4;
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+#home{
+    background: url(../images/home.jpg) top center no-repeat;
+    background-size: 100% auto;
+}
+#home-header{
+    color: #fff;
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+}
+#home-header h1 {
+    font-size: 4rem;
+    margin-bottom: 3rem;
+    padding: 20px;
+    text-align: center;
+}
+#home h2{
+    font-size: 2.5rem;
+}
+#home-content{
+    background-color: #fff;
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 3rem 5rem;
+    border-radius: 5px;
+}
+#home-content h2 {
+    font-size: 2.5rem;
+    margin-top: 0;
+    text-align: center;
+}
+.center{
+    text-align: center;
+}
+
+/* header */
+header {
+    background-color: #162E51;
+    color: #fff;
+}
+header h1 {
+    font-size: 1.1rem;
+    margin: 0;
+    padding: 1rem 3rem;
+}
+header nav{
+    background-color: #E1F3F8;
+    color: #005EA2;
+    padding: 1.5rem 3rem;
+}
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+header nav ul li {
+    margin-right: 2rem;
+}
+header nav a{
+    color: #005EA2;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.25rem;
+    border-right: 3px solid #97D4EA;
+    padding-right: 2rem;
+}
+header nav li:last-child a {
+    border-right: none;
+}
+
+
+/* Container for sidebar and main content */
+.layout-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.sidebar {
+    width: 25%;
+    order: 0;
+    border-right: 2px solid #28A0CB;
+    padding: 0 0 0 4rem;
+}
+.main {
+    width: 75%;
+    order: 1;
+    padding: 0 3rem;
+}
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+.sidebar ul li {
+    font-weight: 700;
+    font-size: 1rem;
+    border-bottom: 1px solid #28A0CB;
+    padding: 1.75rem 1rem 1.75rem 4.5rem;
+    position: relative;
+}
+.sidebar ul li a {
+    color: #005EA2;
+    text-decoration: none;
+    display: block;
+    padding-bottom: 1rem;
+}
+.sidebar ul li a.active{
+    color: #1f1f1f;
+}
+.sidebar ul li a:last-child {
+    padding-bottom: 0;
+}
+.sidebar .nav-icon {
+    display: inline-block;
+    width: 3.5rem;
+    height: 3.5rem;
+    background: url(../images/nav-icon.png) no-repeat 0 5px;
+    margin-right: 1rem;
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+}
+.sidebar .temp .nav-icon{
+    background-position: 0 -68px;
+}
+.sidebar .precip .nav-icon{
+    background-position: 0 -156px;
+}
+.sidebar .ocean .nav-icon{
+    background-position: 0 -237px;
+}
+.sidebar .snow .nav-icon{
+    background-position: 0 -313px;
+}
+
+.tab-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: stretch;
+    border-bottom: 2px solid #e1f3f8;
+}
+.tab-nav li a.active {
+   border: 2px solid #e1f3f8;
+   border-bottom: 2px solid #fff;
+   border-radius: 6px;
+   border-bottom-left-radius: 0;
+   border-bottom-right-radius: 0;
+   color: #1f1f1f;
+   position: relative;
+   top: 2px; /* Adjust to align with the border */
+}
+.tab-nav a {
+    color: #005EA2;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3.5rem;
+    min-height: 3.5rem;
+    box-sizing: border-box;
+}
+.tab-content {
+    display: none;
+    padding: 1rem 0;
+}
+.tab-content.active {
+    display: block;
+}
+
+
+main{
+    font-size: 1rem;
+}
+main h2{
+    font-family: "Merriweather", serif;
+    font-size: 2rem;
+}
+main h3{
+    font-family: "Merriweather", serif;
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+main .content ul li{
+    margin-bottom: 1rem;
+    line-height: 1.5rem;
+}
+
+.usa-select, .form-item__select {
+    font-size: 1rem;
+    border-width: 1px;
+    border-color: #565c65;
+    border-style: solid;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    color: #1b1b1b;
+    display: block;
+    height: 2.5rem;
+    margin-top: .5rem;
+    max-width: 30rem;
+    padding: .5rem;
+    width: 100%;
+
+    background-image: url(../images/dropdown-icon.png);
+    background-repeat: no-repeat;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    background-position: right .5rem center;
+    padding-right: 2rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 2rem; /* optional spacing between selects */
+}
+.form-item--select {
+    flex: 1 1 50%;
+    max-width: 50%;
+}
+
+.chart{
+    text-align: center;
+}
+.chart .title{
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.datasource{
+    margin: 2rem 0;
+    padding: 1.5rem;
+    font-size: 0.85rem;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+}
+.datasource-title{
+    font-weight: bold;
+}
+
+
+@media screen and (max-width: 768px) {
+    header nav a{
+        font-size: 0.85rem;
+    }
+    .layout-container {
+        flex-direction: column;
+    }
+    .content{
+        padding: 1rem;
+    }
+    .sidebar {
+        width: 100%;
+        order: 0;
+        border-right: none;
+        padding: 0;
+    }
+    .main {
+        width: 100%;
+        order: 1;
+        padding: 0;
+    }
+    .tab-nav ul {
+        flex-direction: column;
+    }
+    .tab-nav li a {
+        padding: 1rem;
+        border-bottom: 2px solid #e1f3f8;
+    }
+    .tab-nav li a.active{
+        border: 2px solid #e1f3f8;
+        background-color: #e1f3f8;
+        border-radius: 0;
+        top: 0; /* Reset top position for mobile */
+    }
+}
