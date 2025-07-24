@@ -11,7 +11,7 @@
 #'
 #' @noRd
 
-create_hc_plot = function(scenario_df, plot_title, y_title, val_unit){
+create_hc_plot = function(scenario_df, plot_title, y_title, val_unit, is_oa = FALSE){
 
   # IPCC colors
   ssp126_col <- "#003466"
@@ -24,12 +24,12 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit){
 
   # Split up observed and modeled data
   obs_data <- scenario_df %>%
-    dplyr::filter(scenario == "observed") %>%
-    dplyr::filter(!is.na(smoothed_anom_adj))
+    dplyr::filter(scenario == "observed") #%>%
+   # dplyr::filter(!is.na(smoothed_anom_adj))
 
   proj_data <- scenario_df %>%
-    dplyr::filter(scenario != "observed") %>%
-    dplyr::filter(!is.na(smoothed_anom_adj))
+    dplyr::filter(scenario != "observed") #%>%
+   # dplyr::filter(!is.na(smoothed_anom_adj))
 
   # Reorder the levels of the scenario names
   proj_data$scenario_line <- factor(proj_data$scenario_line,
@@ -110,10 +110,7 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit){
     highcharter::hc_yAxis(title = list(text = y_title, style = list(fontSize = "16px")),
                           labels = list(
                             style = list(fontSize = "14px")
-                          )) %>%
-    highcharter::hc_xAxis(title = list(text = "Year", style = list(fontSize = "16px")),
-                          labels = list(
-                            style = list(fontSize = "14px")
+
                           )) %>%
     highcharter::hc_title(text = plot_title) %>%
     highcharter::hc_plotOptions(line = list(marker = list(enabled = FALSE)),
@@ -127,6 +124,30 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit){
         fontSize = "12px"
       )
     )
+
+  if (is_oa) { # if it's the ocean acidity plot
+
+    hc_plot <- hc_plot %>%
+      highcharter::hc_xAxis(title = list(text = "Year", style = list(fontSize = "16px")),
+                             type = "datetime",
+                            labels = list(
+                              style = list(fontSize = "14px"),
+                                 format = "{value:%Y}"
+                            )
+
+      )
+
+  }else{
+
+    hc_plot <- hc_plot %>%
+      highcharter::hc_xAxis(title = list(text = "Year", style = list(fontSize = "16px")),
+                          labels = list(
+                            style = list(fontSize = "14px")
+                          )
+
+    )
+
+  }
 
   return(hc_plot)
 
