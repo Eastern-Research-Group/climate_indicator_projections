@@ -20,10 +20,12 @@ calc_anom = function(mod_data, var_name, base_start, base_end, window_size, ncli
 
   if (model_range) {
 
+    min_hind_yr <- 2014
     grouping_var <- c("scenario", "model")
 
   } else{
 
+    min_hind_yr <- 2009
     grouping_var <- c("scenario")
 
   }
@@ -46,7 +48,7 @@ calc_anom = function(mod_data, var_name, base_start, base_end, window_size, ncli
   #Add  a hindcast scenario
   hindcast <- anom %>%
     dplyr::filter(scenario == "ssp126") %>%
-    dplyr::filter(year <= 2014) %>%
+    dplyr::filter(year <= min_hind_yr) %>%
     dplyr::mutate(scenario = "hindcast")
 
   anom <- rbind(anom, hindcast) %>%
