@@ -8,11 +8,17 @@
 #' @export
 #'
 #' @examples oa_hind_years <- oa_proj_av_cln %>% dplyr::group_by(station_name) %>% add_hind_data(., c(2004:2014))
-add_hind_data <- function(proj_av, years){
+add_hind_data <- function(proj_av, years, is_date = TRUE){
+
+  if (is_date) {
+
+    proj_av <- proj_av %>%
+      dplyr::mutate(year = lubridate::year(date))
+
+  }
 
   hind_yrs <- proj_av %>%
     dplyr::filter(scenario == "hindcast") %>%
-    dplyr::mutate(year = lubridate::year(date)) %>%
     dplyr::filter(year %in% years) %>%
     dplyr::rename(index = scenario)
 
