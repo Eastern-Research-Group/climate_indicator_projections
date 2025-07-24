@@ -51,7 +51,7 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit, is_oa = FA
                                       ))
 
   # Make the highchart
-  area_tooltip <- sprintf("<br> 90th Percentile: {point.high}%s <br> 10th Percentile: {point.low}%s", val_unit, val_unit)
+  area_tooltip <- sprintf("<br>{point.year}<br>90th Percentile: {point.high}%s <br> 10th Percentile: {point.low}%s", val_unit, val_unit)
 
   hc_plot <- highcharter::highchart() %>%
 
