@@ -9,7 +9,7 @@
 #' @examples
 clean_oa_obs <- function(which_station, obs_raw){
 
-  obs_select <- oa_obs %>%
+  obs_select <- obs_raw %>%
     dplyr::select(tidyselect::starts_with(which_station)) %>%
     dplyr::select(tidyselect::contains(c("Year", "pH"))) %>%
     dplyr::select(!tidyselect::contains(c("pCO2"))) %>%
