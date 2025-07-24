@@ -57,7 +57,7 @@ mod_ocean_acidity_plot_server <- function(id){
     # Add 2009-2014 to the ssps so there isn't a gap when we smooth
     oa_hind_years <- oa_proj_av_cln %>%
       dplyr::group_by(station_name) %>%
-      add_hind_data(., c(2004:2014)) %>%
+      add_hind_data(., c(2009:2014)) %>%
       dplyr::ungroup()
 
     # Combine with hindcast data and add smoothing
