@@ -11,6 +11,8 @@ mod_slr_plot_ui <- function(id) {
   ns <- NS(id)
   tagList(
 
+    shinycssloaders::withSpinner(highcharter::highchartOutput(ns("plot")))
+
   )
 }
 
@@ -56,10 +58,8 @@ mod_slr_plot_server <- function(id){
   # Clean up projected data
   slr_proj_cln <- slr_proj %>%
     janitor::clean_names() %>%
-    dplyr::filter(scenario %in% c("0.5 - MED", "1.0 - MED")) %>%
     dplyr::filter(noaa_name == "GMSL") %>%
     dplyr::select(scenario, tidyr::starts_with("rsl"), -rsl_grid_num, -rsl_contribution_from_vlm_trend_cm_year) %>%
-    dplyr::mutate(scenario = ifelse(scenario == "0.5 - MED", "Lower sea level rise", "Higher sea level rise")) %>%
     tidyr::pivot_longer(cols = tidyr::starts_with("rsl"), names_to = "year", values_to = "slr_cm") %>%
     dplyr::mutate(year = stringr::str_replace_all(year, "[^0-9]", "")) %>%
     dplyr::mutate(slr_in = measurements::conv_unit(slr_cm, "cm", "inch")) %>%
@@ -67,23 +67,50 @@ mod_slr_plot_server <- function(id){
     dplyr::select(-slr_cm) %>%
     dplyr::mutate(year = as.numeric(year))
 
+  # SLR proj mid
+  slr_proj_mi <- slr_proj_cln %>%
+    dplyr::filter(scenario %in% c("0.5 - MED", "1.0 - MED")) %>%
+    dplyr::mutate(scenario = ifelse(scenario == "0.5 - MED", "Lower sea level rise", "Higher sea level rise"))
+
+  # SLR proj range
+  slr_proj_range <- slr_proj_cln %>%
+    dplyr::filter(scenario %in% c("0.5 - LOW", "0.5 - HIGH", "1.0 - LOW", "1.0 - HIGH")) %>%
+    dplyr::mutate(bound = ifelse(stringr::str_detect(scenario, "LOW"), "lower_bound", "upper_bound")) %>%
+    dplyr::mutate(scenario = ifelse(stringr::str_detect(scenario, "0.5"), "Lower sea level rise",
+                                                                   "Higher sea level rise")) %>%
+    tidyr::pivot_wider(names_from = bound, values_from = slr_in)
+
+  # Combine back together
+  slr_proj_all <- dplyr::left_join(slr_proj_mi, slr_proj_range, by = c("year", "scenario"))
+
   # model hindcast
-  slr_hindcast <- slr_proj_cln %>%
+  slr_hindcast <- slr_proj_all %>%
     dplyr::filter(year <= 2020) %>%
     dplyr::mutate(scenario = "Model Hindcast") %>%
     dplyr::distinct()
 
   # add model hindcast back into slr proj
-  slr_proj_cln <- slr_proj_cln %>%
+  slr_proj_all <- slr_proj_all %>%
     dplyr::filter(year >= 2020) %>%
-    rbind(., slr_hindcast)
+    rbind(., slr_hindcast) %>%
+    dplyr::mutate(scenario_area = paste(scenario, " range"))
 
 
 # Create the plot ---------------------------------------------------------
 
   output$plot <- highcharter::renderHighchart({
 
-    hc_plot <- highcharter::highchart() %>%
+    highcharter::highchart() %>%
+      # Add dummy element to make legend group titles
+      highcharter::hc_add_series(
+        name = "<u><b style='font-size:13px;'>Average</b></u>",
+        data = list(),
+        showInLegend = TRUE,
+        enableMouseTracking = FALSE,
+        color = "transparent",
+        marker = list(enabled = FALSE),
+        states = list(hover = list(enabled = FALSE))
+      ) %>%
       # Observed data
       highcharter::hc_add_series(data = slr_obs_cln,
                                  type = "line",
@@ -95,6 +122,28 @@ mod_slr_plot_server <- function(id){
                                  ),
                                  color = c("purple", "black")
                                  ) %>%
+
+      # Projected data
+      highcharter::hc_add_series(data = slr_proj_all,
+                                 type = "line",
+                                 dashStyle = "shortdash",
+                                 highcharter::hcaes(name = scenario,
+                                                    group = scenario,
+                                                    x = year, y = slr_in),
+                                 tooltip = list(headerFormat = "<b>{series.name}</b>",
+                                                pointFormat = sprintf("<br>{point.year}: {point.y}%s", "inches")
+                                 ),
+                                 color = c("orange", "blue", "grey")) %>%
+      # Add dummy element to make legend group titles
+      highcharter::hc_add_series(
+        name = "<u><b style='font-size:13px;'>Range</b></u>",
+        data = list(),
+        showInLegend = TRUE,
+        enableMouseTracking = FALSE,
+        color = "transparent",
+        marker = list(enabled = FALSE),
+        states = list(hover = list(enabled = FALSE))
+      ) %>%
       # Add tide gauge ranges
       highcharter::hc_add_series(data = csiro_bounds, type = "arearange",
                                  highcharter::hcaes(name = scenario,
@@ -107,17 +156,18 @@ mod_slr_plot_server <- function(id){
                                  fillOpacity = 0.3,
                                  tooltip = list(headerFormat ="<b>{series.name}</b>",
                                                 pointFormat =  "<br>{point.year}<br>Likely Range: {point.low} inches – {point.high} inches")) %>%
-      # Projected data
-      highcharter::hc_add_series(data = slr_proj_cln,
-                                 type = "line",
-                                 dashStyle = "shortdash",
-                                 highcharter::hcaes(name = scenario,
-                                                    group = scenario,
-                                                    x = year, y = slr_in),
-                                 tooltip = list(headerFormat = "<b>{series.name}</b>",
-                                                pointFormat = sprintf("<br>{point.year}: {point.y}%s", "inches")
-                                 ),
-                                 color = c("orange", "blue", "grey")) %>%
+      # Projected data ranges
+      highcharter::hc_add_series(data = slr_proj_all, type = "arearange",
+                                 highcharter::hcaes(name = scenario_area,
+                                                    group = scenario_area,
+                                                    x = year,
+                                                    low = lower_bound, high = upper_bound),
+                                 lineColor = "transparent",
+                                 color = c("orange", "blue", "grey"),
+                                 visible = FALSE,
+                                 fillOpacity = 0.3,
+                                 tooltip = list(headerFormat ="<b>{series.name}</b>",
+                                                pointFormat =  "<br>{point.year}<br>Likely Range: {point.low} inches – {point.high} inches")) %>%
       # Plot aesthetics
       highcharter::hc_tooltip(crosshairs = TRUE, valueDecimals = 2) %>%
       highcharter::hc_yAxis(title = list(
@@ -142,10 +192,6 @@ mod_slr_plot_server <- function(id){
           fontSize = "12px"
         )
       )
-
-    hc_plot
-
-
 
   })
 
