@@ -60,14 +60,14 @@ mod_av_temp_map_server <- function(id){
       dplyr::filter(!is.na(rate_change_100)) %>%
       rename_scenarios(., TRUE) %>%
       dplyr::mutate(legend_buckets = cut(rate_change_100, breaks = seq(0, 16, by = 2))) %>%
-      dplyr::mutate(legend_buckets_01 = cut(rate_change_100, breaks = seq(-0.1, 0.1, by = 0.1))) %>%
-      dplyr::mutate(legend_buckets = ifelse(rate_change_100 <= 0.1, as.character(legend_buckets_01), as.character(legend_buckets)))
+      dplyr::mutate(legend_buckets_01 = cut(rate_change_100, breaks = c(-0.1, 0, 0.1, 2))) %>%
+      dplyr::mutate(legend_buckets = ifelse(rate_change_100 <= 2, as.character(legend_buckets_01), as.character(legend_buckets)))
 
     all_temps$legend_buckets <- as.factor(all_temps$legend_buckets)
     all_temps$legend_buckets <- forcats::fct_relevel(all_temps$legend_buckets, c(
       "(-0.1,0]",
       "(0,0.1]" ,
-      "(0,2]",
+      "(0.1,2]",
       "(2,4]",
       "(4,6]",
       "(6,8]",
@@ -83,7 +83,7 @@ mod_av_temp_map_server <- function(id){
     temp_colors <- c(
       "(-0.1,0]" = "#C7C7C7",
       "(0,0.1]" = "#C7C7C7",
-      "(0,2]" = "#F0D7D6",
+      "(0.1,2]" = "#F0D7D6",
       "(2,4]" =  "#F1C1BE",
       "(4,6]" = "#EF9F9C",
       "(6,8]" = "#ED7974",
@@ -99,12 +99,12 @@ mod_av_temp_map_server <- function(id){
 
 
     temp_map <- ggplot2::ggplot() +
-      ggplot2::geom_sf(data = which_map, ggplot2::aes(fill = legend_buckets), color = "#88807F") +
+      ggplot2::geom_sf(data = all_temps, ggplot2::aes(fill = legend_buckets), color = "#88807F") +
     #  ggplot2::geom_sf(data = which_map, ggplot2::aes(fill = legend_buckets, color = legend_buckets)) +
       ggplot2::scale_fill_manual(values = temp_colors, drop = FALSE) +
     #  ggplot2::scale_color_manual(values = temp_colors, drop = FALSE) +
-     # ggplot2::facet_wrap(~scenario_title, ncol = 2) +
-      ggplot2::geom_sf(data = us_states %>% dplyr::filter(!STUSPS%in%c("AK", "HI", "PR", "AS", "MP", "GU")), color = "black", fill = NA) +
+      ggplot2::facet_wrap(~scenario_title, ncol = 2) +
+    #  ggplot2::geom_sf(data = us_states %>% dplyr::filter(!STUSPS%in%c("AK", "HI", "PR", "AS", "MP", "GU")), color = "black", fill = NA) +
       ggplot2::labs(
         title = "Rate of Temperature Change in the United States, 2024–2100",
         fill = "Rate of temperature change\n(°F per century)"
