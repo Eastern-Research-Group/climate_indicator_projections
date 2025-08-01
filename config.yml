@@ -1,0 +1,12 @@
+default:
+# File paths
+  av_temp_path: inst/extdata/av_temp
+  asi_path: inst/extdata/arctic_sea_ice
+  ghg_path: inst/extdata/ghg_conc
+  grow_seas_path: inst/extdata/grow_season
+  oa_path: inst/extdata/ocean_acidity
+  seas_temp_path: inst/extdata/seasonal_temp
+  slr_path: inst/extdata/slr
+  sc_path: inst/extdata/snow_cover
+  sst_path: inst/extdata/sea_surface_temp
+
