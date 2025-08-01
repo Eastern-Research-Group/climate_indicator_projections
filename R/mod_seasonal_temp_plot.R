@@ -42,36 +42,21 @@ mod_seasonal_temp_plot_server <- function(id){
       # Set variable values depending on which season is selected
       if (input$season_choice == "Fall") {
 
-        mod_av <- seas_temp_plot_mod_av_fall
-        mod_all <- seas_temp_plot_mod_all_fall
+        seas_proj_adj <- seas_temp_plot_cln_data_fall
 
       } else if (input$season_choice == "Winter"){
 
-        mod_av <- seas_temp_plot_mod_av_winter
-        mod_all <- seas_temp_plot_mod_all_winter
+        seas_proj_adj <- seas_temp_plot_cln_data_winter
 
       } else if (input$season_choice == "Spring"){
 
-        mod_av <- seas_temp_plot_mod_av_spring
-        mod_all <- seas_temp_plot_mod_all_spring
+        seas_proj_adj <- seas_temp_plot_cln_data_spring
 
       } else if (input$season_choice == "Summer"){
 
-        mod_av <- seas_temp_plot_mod_av_summer
-        mod_all <- seas_temp_plot_mod_all_summer
+        seas_proj_adj <- seas_temp_plot_cln_data_summer
 
       }
-
-      # Process the projections indicator
-      seas_proj_adj <- process_seasons(
-        which_season = input$season_choice,
-        obs_data = seas_temp_plot_obs,
-        proj_data = mod_av,
-        ssp_data = mod_all,
-        ssp_var = avg_temp_f,
-        base_yr_start = base_yr_start,
-        base_yr_end = base_yr_end
-      )
 
       return(seas_proj_adj)
 

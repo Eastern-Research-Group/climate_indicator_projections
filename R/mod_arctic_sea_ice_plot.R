@@ -23,28 +23,11 @@ mod_arctic_sea_ice_plot_server <- function(id){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
 
-
-# Set year variables ------------------------------------------------------
-
-    min_hind_yr <- 1950 # first year of hindcast data
-    base_yr_start <- 1979
-    base_yr_end <- 2014
-
-# Process the data --------------------------------------------------------
-
-    # Combine observed and model average
-    asi_obs_mod_av <- rbind(asi_plot_obs, asi_plot_mod_av)
-
-    # Conduct bias correction and process model range
-    asi_adj_all <- process_sea_ice(asi_obs_mod_av, asi_plot_mod_all, base_yr_start, base_yr_end, min_hind_yr) %>%
-      dplyr::rename(smoothed_anom_adj = si_extent_adj) # rename for highchart
-
-
 # Create the plot ---------------------------------------------------------
 
     output$plot <- highcharter::renderHighchart({
 
-      create_hc_plot(asi_adj_all,
+      create_hc_plot(asi_plot_cln_data,
                      "September Monthly Average Arctic Sea Ice Extent, 1950–2100",
                      "Sea Ice Extent (million square miles)",
                      " million square miles")

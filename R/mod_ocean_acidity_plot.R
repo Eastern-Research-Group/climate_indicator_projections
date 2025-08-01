@@ -34,20 +34,24 @@ mod_ocean_acidity_plot_server <- function(id){
     # reactive part
     oa_proj_all_out <- reactive({
 
-      filter_obs <- clean_oa_obs(input$station_choice, oa_plot_obs)
+      if (input$station_choice == "Hawaii") {
 
-      oa_proj_mod_range_filt <- oa_plot_mod_all %>% dplyr::filter(station_name==input$station_choice)
+        oa_proj_all <- oa_plot_cln_data_hawaii
 
-      oa_proj_all <- oa_plot_mod_av %>%
-        dplyr::filter(station_name==input$station_choice) %>%
-        rbind(filter_obs) %>%
-        dplyr::full_join(oa_proj_mod_range_filt, by = c("station_name", "scenario", "date")) %>%
-        # rename for highchart function
-        dplyr::mutate(year = as.Date(date, format = "%Y-%m-%d")) %>%
-        dplyr::rename(smoothed_anom_adj = ph,
-                      p10_adj = p10,
-                      p90_adj = p90) %>%
-        rename_scenarios()
+      } else if (input$station_choice == "Canary Islands"){
+
+        oa_proj_all <- oa_plot_cln_data_canary_islands
+
+      } else if (input$station_choice == "Bermuda"){
+
+        oa_proj_all <- oa_plot_cln_data_bermuda
+
+      } else if (input$station_choice == "Cariaco"){
+
+        oa_proj_all <- oa_plot_cln_data_cariaco
+
+      }
+
       return(oa_proj_all)
 
     })
