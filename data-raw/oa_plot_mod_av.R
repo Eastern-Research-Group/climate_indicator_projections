@@ -1,5 +1,8 @@
 ## code to prepare `oa_plot_mod_av` dataset goes here
 
+# Set years
+min_hind_yr <- 1950
+
 # Read in the data
 oa_plot_mod_av_raw <- readr::read_csv(file.path(config::get("oa_path"), "ph_bayesian_ave.csv"))
 
