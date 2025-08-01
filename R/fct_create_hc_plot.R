@@ -24,12 +24,10 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit, is_oa = FA
 
   # Split up observed and modeled data
   obs_data <- scenario_df %>%
-    dplyr::filter(scenario == "observed") #%>%
-   # dplyr::filter(!is.na(smoothed_anom_adj))
+    dplyr::filter(scenario == "observed")
 
   proj_data <- scenario_df %>%
-    dplyr::filter(scenario != "observed") #%>%
-   # dplyr::filter(!is.na(smoothed_anom_adj))
+    dplyr::filter(scenario != "observed")
 
   # Reorder the levels of the scenario names
   proj_data$scenario_line <- factor(proj_data$scenario_line,
