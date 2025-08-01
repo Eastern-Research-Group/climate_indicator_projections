@@ -1,0 +1,8 @@
+## code to prepare `seas_temp_plot_mod_all_fall` dataset goes here
+
+
+seas_temp_plot_mod_all_fall <- vroom::vroom(list.files(path = config::get("seas_temp_path"), pattern = 'avg_son_temp_conus_av_*', full.names = TRUE)) %>%
+  dplyr::rename(avg_temp_f = avg_son_temp_f) %>%
+  dplyr::filter(scenario != "hist")
+
+usethis::use_data(seas_temp_plot_mod_all_fall, overwrite = TRUE)

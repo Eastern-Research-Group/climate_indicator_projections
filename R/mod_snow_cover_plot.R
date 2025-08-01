@@ -31,49 +31,32 @@ mod_snow_cover_plot_server <- function(id){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
 
-# Set year variables ------------------------------------------------------
 
-    min_hind_yr <- 1950
-
-# Read in data ------------------------------------------------------------
-
-    # Set path
-    sc_path <- "inst/extdata/snow_cover"
-
-    # Annual snow cover
-    sc_an_proj_av <- readr::read_csv(file.path(sc_path, "snc_annual_bayesian_average.csv"))
-    sc_an_proj_mod <- readr::read_csv(file.path(sc_path, "snc_annual_all_models.csv"))
-
-    # Seasonal snow cover
-    sc_seas_proj_av <- readr::read_csv(file.path(sc_path, "snc_seasonal_bayesian_average.csv")) %>%
-      dplyr::mutate(season = dplyr::case_when(
-        season == 1 ~ "Winter",
-        season == 2 ~ "Spring",
-        season == 3 ~ "Summer",
-        season == 4 ~ "Fall"
-      ))
-    sc_seas_proj_mod <- readr::read_csv(file.path(sc_path, "snc_seasonal_all_models.csv")) %>%
-      dplyr::mutate(season = dplyr::case_when(
-        season == 1 ~ "Winter",
-        season == 2 ~ "Spring",
-        season == 3 ~ "Summer",
-        season == 4 ~ "Fall"
-      ))
-
-
-# Clean and process observed and projected data ---------------------------
+# Reactive ---------------------------
 
     sc_out <- reactive({
 
-      if (input$season_choice == "Annual") {
+      if (input$season_choice == "Fall") {
 
-        sc_all <- process_sc(sc_an_proj_av, sc_an_proj_mod, min_hind_yr, input$season_choice)
+        sc_all <- sc_plot_fall
 
-      } else{
+      } else if (input$season_choice == "Winter"){
 
-        sc_all <- process_sc(sc_seas_proj_av, sc_seas_proj_mod, min_hind_yr, input$season_choice)
+        sc_all <- sc_plot_winter
 
-      }
+      } else if (input$season_choice == "Spring"){
+
+        sc_all <-  sc_plot_spring
+
+      } else if (input$season_choice == "Summer"){
+
+         sc_all <-  sc_plot_summer
+
+      } else if (input$season_choice == "Annual"){
+
+        sc_all <-  sc_plot_annual
+
+    }
 
       return(sc_all)
 

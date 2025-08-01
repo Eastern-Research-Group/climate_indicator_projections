@@ -33,35 +33,6 @@ mod_ghg_conc_plot_server <- function(id){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
 
-# Read in data ------------------------------------------------------------
-
-  # Set path
-  ghg_path <- "inst/extdata/ghg_conc"
-
-  # Observed data
-  co2_obs <- readr::read_csv(file.path(ghg_path, "ghg-concentrations_fig-1.csv"), skip = 6, col_types = readr::cols(.default = readr::col_character()))
-  ch4_obs <- readr::read_csv(file.path(ghg_path, "ghg-concentrations_fig-2.csv"), skip = 6, col_types= readr::cols(.default = readr::col_character()))
-  n2o_obs <- readr::read_csv(file.path(ghg_path, "ghg-concentrations_fig-3.csv"), skip = 6, col_types= readr::cols(.default = readr::col_character()))
-
-  # Projected data
-  ghg_proj <- readr::read_csv(file.path(ghg_path, "ghg_concentrations_projections.csv"))
-
-
-# Clean & Process data -----------------------------------------------------
-
-  # Clean the projected data
-  ghg_proj_cln <- ghg_proj %>%
-    janitor::clean_names() %>%
-    tidyr::pivot_longer(cols = tidyr::starts_with("ssp"),
-                        names_to = "scenario",
-                        values_to = "value") %>%
-    dplyr::mutate(scenario = stringr::str_remove(scenario, "_")) %>%
-    rename_scenarios() %>%
-    dplyr::group_by(ghg)
-
-  co2_obs_cln <- cln_ghg_obs(co2_obs)
-  ch4_obs_cln <- cln_ghg_obs(ch4_obs, TRUE)
-  n2o_obs_cln <- cln_ghg_obs(n2o_obs, TRUE)
 
 # When a new ghg is chosen ------------------------------------------------
 
@@ -72,18 +43,18 @@ mod_ghg_conc_plot_server <- function(id){
     # Set variable values depending on which greenhouse gas is selected
     if (input$ghg_choice == "Carbon Dioxide") {
 
-      observed_data <- co2_obs_cln
-      projected_data <- ghg_proj_cln %>% dplyr::filter(ghg == "co2")
+      observed_data <- ghg_conc_plot_obs_co2
+      projected_data <- ghg_conc_plot_mod_av %>% dplyr::filter(ghg == "co2")
 
     } else if (input$ghg_choice == "Methane") {
 
-      observed_data <- ch4_obs_cln
-      projected_data <- ghg_proj_cln %>% dplyr::filter(ghg == "ch4")
+      observed_data <- ghg_conc_plot_obs_ch4
+      projected_data <- ghg_conc_plot_mod_av %>% dplyr::filter(ghg == "ch4")
 
     } else if (input$ghg_choice == "Nitrous Oxide") {
 
-       observed_data <- n2o_obs_cln
-      projected_data <- ghg_proj_cln %>% dplyr::filter(ghg == "n2o")
+      observed_data <- ghg_conc_plot_obs_n2o
+      projected_data <- ghg_conc_plot_mod_av %>% dplyr::filter(ghg == "n2o")
 
     }
 

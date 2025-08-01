@@ -25,40 +25,21 @@ mod_av_temp_plot_server <- function(id){
 
     ### Get data ready for plotting ###
 
-    # Read in data
-    av_temp_path <- "inst/extdata/av_temp" # path to data
-    temp_obs_raw <- readr::read_csv(file.path(av_temp_path, "temperature_fig-1.csv"), skip = 6) # Observed
-    temp_model_av <- readr::read_csv(file.path(av_temp_path,'conus_AvgAnnualTemp.csv')) # Model average
-    temp_model_all <- vroom::vroom(list.files(path = av_temp_path, pattern = 'avg_ann_temp_conus_av_*', full.names = TRUE)) %>%  # Each model
-      dplyr::filter(scenario != "hist")
-
     # Set years for calculating anomalies
     min_hind_yr <- 1955
     base_yr_start <- 1951
     base_yr_end <- 2000
 
-    # Clean data
-    temp_obs_cln <- temp_obs_raw %>%
-      janitor::clean_names() %>%
-      dplyr::select(year, earths_surface) %>%
-      dplyr::rename(anomaly = earths_surface) %>%
-      dplyr::mutate(scenario = "observed") %>%
-      dplyr::mutate(smoothed_anom = anomaly) # rename to combine with projected data
-
-    temp_model_av_cln <- temp_model_av %>%
-      dplyr::filter(!is.na(av_temp)) %>%
-      calc_anom(., av_temp, base_yr_start, base_yr_end, 11, FALSE) %>% # calculate anomaly
-      dplyr::select(year, scenario, anomaly, smoothed_anom) %>%
-      dplyr::filter(scenario != "nclimgrid") %>%  # remove nclimgrid
-      rbind(temp_obs_cln) # bind with observed data
+    # Combine observed and projected average
+    av_temp_obs_proj_av <- rbind(av_temp_plot_obs, av_temp_plot_proj_av) # bind with observed data
 
     # Process and align the model data
     temp_all_adj <- model_processing(
-      mod_data = temp_model_all,
+      mod_data = av_temp_plot_mod_all,
       var_name = avg_ann_temp_f,
       base_start = base_yr_start,
       base_end = base_yr_end,
-      obs_mod_data = temp_model_av_cln,
+      obs_mod_data = av_temp_obs_proj_av,
       which_anom = smoothed_anom,
       min_hind_yr = min_hind_yr)
 

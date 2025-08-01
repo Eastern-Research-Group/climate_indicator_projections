@@ -11,6 +11,17 @@ mod_av_temp_map_ui <- function(id) {
   ns <- NS(id)
   tagList(
 
+    selectInput(ns("scenario_choice"),
+                label = "Choose a Scenario",
+                choices = c("Observations",
+                            "Low emissions (SSP1-2.6)",
+                            "Intermediate emissions (SSP2-4.5)",
+                            "High emissions (SSP3-7.0)",
+                            "Very high emissions (SSP5-8.5)))")
+    ),
+
+    shinycssloaders::withSpinner(plotOutput(ns("map")))
+
   )
 }
 
@@ -24,37 +35,12 @@ mod_av_temp_map_server <- function(id){
 
 # Read in data ------------------------------------------------------------
 
-    av_temp_path <- "inst/extdata/av_temp" # path to data
-    temp_obs_raw <- readr::read_csv(file.path(av_temp_path, "temperature_fig-3.csv"), skip = 6) # Observed
-    temp_model_av <- readr::read_csv(file.path(av_temp_path,'climdiv_AvgAnnualTemp.csv')) # Model average
     clim_divs <- sf::read_sf('inst/extdata/map_boundaries/climate_divisions.geojson') %>% clean_climdiv() # Climate divisions
     us_states <- sf::read_sf('inst/extdata/map_boundaries/us_states.geojson')
 
-# Clean observed data -----------------------------------------------------
-
-    temp_obs_cln <- temp_obs_raw %>%
-      janitor::clean_names() %>%
-      dplyr::rename(climdiv = climate_division) %>%
-      dplyr::rename(rate_change_100 = temperature_change_1901_2000_denominator) %>%
-      dplyr::select(climdiv, rate_change_100) %>%
-      dplyr::mutate(scenario = "observed")
-
-# Clean and process projections data --------------------------------------
-
-    min_yr <- 2024 # first year to start the rate of change on - the year after the end of the observed data
-
-    temp_model_av_cln <- temp_model_av %>%
-      dplyr::filter(scenario != "nclimgrid") %>%
-      dplyr::filter(year >= min_yr) %>%
-      dplyr::group_by(climdiv, scenario) %>%
-      dplyr::mutate(rate_change = lm(av_temp ~ year)$coefficients[[2]]) %>%
-      dplyr::mutate(rate_change_100 = rate_change*100) %>%
-      dplyr::slice(1) %>%
-      dplyr::select(climdiv, scenario, rate_change_100)
-
 # Bind together observed and projected and prepare for mapping ------------
 
-    all_temps <- rbind(temp_obs_cln, temp_model_av_cln) %>%
+    all_temps <- rbind(av_temp_map_obs, av_temp_map_mod) %>%
       dplyr::left_join(clim_divs, by = "climdiv") %>%
       sf::st_as_sf() %>%
       dplyr::filter(!is.na(rate_change_100)) %>%
@@ -78,7 +64,7 @@ mod_av_temp_map_server <- function(id){
     ))
 
 
-# Make the map ------------------------------------------------------------
+# Make the maps ------------------------------------------------------------
 
     temp_colors <- c(
       "(-0.1,0]" = "#C7C7C7",
@@ -93,18 +79,20 @@ mod_av_temp_map_server <- function(id){
       "(14,16]" = "#780707"
     )
 
-    which_map <- all_temps %>%
-      dplyr::filter(scenario == "ssp370")
 
+  make_temp_map <- function(which_scenario, all_temps_df, which_colors){
 
+    # Filter to the map
+    which_map <- all_temps_df %>%
+      dplyr::filter(scenario == which_scenario)
 
     temp_map <- ggplot2::ggplot() +
-      ggplot2::geom_sf(data = all_temps, ggplot2::aes(fill = legend_buckets), color = "#88807F") +
-    #  ggplot2::geom_sf(data = which_map, ggplot2::aes(fill = legend_buckets, color = legend_buckets)) +
-      ggplot2::scale_fill_manual(values = temp_colors, drop = FALSE) +
-    #  ggplot2::scale_color_manual(values = temp_colors, drop = FALSE) +
+      ggplot2::geom_sf(data = which_map, ggplot2::aes(fill = legend_buckets), color = "#88807F") +
+      #  ggplot2::geom_sf(data = which_map, ggplot2::aes(fill = legend_buckets, color = legend_buckets)) +
+      ggplot2::scale_fill_manual(values = which_colors, drop = FALSE) +
+      #  ggplot2::scale_color_manual(values = temp_colors, drop = FALSE) +
       ggplot2::facet_wrap(~scenario_title, ncol = 2) +
-    #  ggplot2::geom_sf(data = us_states %>% dplyr::filter(!STUSPS%in%c("AK", "HI", "PR", "AS", "MP", "GU")), color = "black", fill = NA) +
+      #  ggplot2::geom_sf(data = us_states %>% dplyr::filter(!STUSPS%in%c("AK", "HI", "PR", "AS", "MP", "GU")), color = "black", fill = NA) +
       ggplot2::labs(
         title = "Rate of Temperature Change in the United States, 2024–2100",
         fill = "Rate of temperature change\n(°F per century)"
@@ -112,14 +100,38 @@ mod_av_temp_map_server <- function(id){
       ggthemes::theme_map() +
       ggplot2::theme(
         text = ggplot2::element_text(size = 12),
-        plot.title = ggplot2::element_text(size = 14),
-     #   legend.key.width = ggplot2::unit(2, 'cm'),
+        plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
+        #   legend.key.width = ggplot2::unit(2, 'cm'),
         legend.position = "bottom"
       )
-    temp_map
+
+    return(temp_map)
+
+  }
+
+  all_scenarios <- unique(all_temps$scenario)
+  names(all_scenarios) <- all_scenarios  # Set names to match values
+  all_maps <- lapply(all_scenarios, make_temp_map, all_temps, temp_colors)
+
+
+# Make reactive -----------------------------------------------------------
+
+  output$map <- renderPlot({
+
+     # Map selection to file paths
+    which_map <- switch(input$scenario_choice,
+                        "Observations" = all_maps$observed,
+                        "Low emissions (SSP1-2.6)" = all_maps$ssp126,
+                        "Intermediate emissions (SSP2-4.5)" = all_maps$ssp245,
+                        "High emissions (SSP3-7.0)" = all_maps$ssp370,
+                        "Very high emissions (SSP5-8.5)))" = all_maps$ssp585
+                        )
+    return(which_map)
 
   })
+})
 }
+
 
 ## To be copied in the UI
 # mod_av_temp_map_ui("av_temp_map_1")

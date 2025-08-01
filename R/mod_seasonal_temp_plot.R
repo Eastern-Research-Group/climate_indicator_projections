@@ -30,56 +30,44 @@ mod_seasonal_temp_plot_server <- function(id){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
 
-    # Set years
+# Set years ---------------------------------------------------------------
+
     base_yr_start <- 1951
     base_yr_end <- 2000
 
-    # Set path
-    st_path <- "inst/extdata/seasonal_temp"
-
-    # Read in observed data
-    obs_raw <- readr::read_csv(file.path(st_path, "seasonal-temperature_fig-1.csv"), skip = 6)
+# Reactive ------------------------------------------------------------
 
     seas_proj_adj_out <- reactive({
 
       # Set variable values depending on which season is selected
       if (input$season_choice == "Fall") {
 
-        proj_av_pattern <- "fall"
-        proj_all_pattern <- "son"
-        var_name <- "avg_son_temp_f"
+        mod_av <- seas_temp_plot_mod_av_fall
+        mod_all <- seas_temp_plot_mod_all_fall
 
       } else if (input$season_choice == "Winter"){
 
-        proj_av_pattern <- "winter"
-        proj_all_pattern <- "djf"
-        var_name <-  "avg_djf_temp_f"
+        mod_av <- seas_temp_plot_mod_av_winter
+        mod_all <- seas_temp_plot_mod_all_winter
+
       } else if (input$season_choice == "Spring"){
 
-        proj_av_pattern <- "spring"
-        proj_all_pattern <- "mam"
-        var_name <- "avg_mam_temp_f"
+        mod_av <- seas_temp_plot_mod_av_spring
+        mod_all <- seas_temp_plot_mod_all_spring
 
       } else if (input$season_choice == "Summer"){
 
-        proj_av_pattern <- "summer"
-        proj_all_pattern <- "jja"
-        var_name <-"avg_jja_temp_f"
+        mod_av <- seas_temp_plot_mod_av_summer
+        mod_all <- seas_temp_plot_mod_all_summer
 
       }
 
-      # read in the projections dataset for the chosen season
-      proj_av <- readr::read_csv(file.path(st_path, sprintf('conus_avg_%s_temp.csv', proj_av_pattern))) # Average Conus
-      proj_all <- vroom::vroom(list.files(path = st_path, pattern = sprintf('avg_%s_temp_conus_av_*', proj_all_pattern), full.names = TRUE)) %>% # model averages
-        dplyr::rename("avg_temp_f" = {{var_name}}) %>%
-        dplyr::filter(scenario != "hist")
-
       # Process the projections indicator
       seas_proj_adj <- process_seasons(
-        which_season = tools::toTitleCase(proj_av_pattern),
-        obs_data = obs_raw,
-        proj_data = proj_av,
-        ssp_data = proj_all,
+        which_season = input$season_choice,
+        obs_data = seas_temp_plot_obs,
+        proj_data = mod_av,
+        ssp_data = mod_all,
         ssp_var = avg_temp_f,
         base_yr_start = base_yr_start,
         base_yr_end = base_yr_end
