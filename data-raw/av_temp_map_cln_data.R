@@ -46,14 +46,13 @@ av_temp_map_cln_data <- rbind(av_temp_map_obs, av_temp_map_mod) %>%
   dplyr::filter(!is.na(rate_change_100)) %>%
   rename_scenarios(., TRUE) %>%
   dplyr::mutate(legend_buckets = cut(rate_change_100, breaks = seq(0, 16, by = 2))) %>%
-  dplyr::mutate(legend_buckets_01 = cut(rate_change_100, breaks = c(-0.1, 0, 0.1, 2))) %>%
+  dplyr::mutate(legend_buckets_01 = cut(rate_change_100, breaks = c(-0.1, 0.1, 2))) %>%
   dplyr::mutate(legend_buckets = ifelse(rate_change_100 <= 2, as.character(legend_buckets_01), as.character(legend_buckets)))
 
 av_temp_map_cln_data$legend_buckets <- as.factor(av_temp_map_cln_data$legend_buckets)
 av_temp_map_cln_data$legend_buckets <- forcats::fct_relevel(
   av_temp_map_cln_data$legend_buckets, c(
-    "(-0.1,0]",
-    "(0,0.1]" ,
+    "(-0.1,0.1]" ,
     "(0.1,2]",
     "(2,4]",
     "(4,6]",
