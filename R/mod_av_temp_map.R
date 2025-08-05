@@ -41,6 +41,7 @@ mod_av_temp_map_ui <- function(id) {
       )
 
     ),
+
     # Before after slider
     tags$script("
               $(function() {
@@ -55,8 +56,8 @@ mod_av_temp_map_ui <- function(id) {
     shinycssloaders::withSpinner(
       tags$div(
         id = "mod_av_temp_map_comparison_slider",
-        plotOutput(ns("map")),
-        plotOutput(ns("map_2")),
+        plotOutput(ns("map"), width = "400px", height = "400px"),
+        plotOutput(ns("map_2"), width = "400px", height = "400px"),
       )
     )
   )
@@ -79,9 +80,7 @@ mod_av_temp_map_server <- function(id){
       "(4,6]" = "#EF9F9C",
       "(6,8]" = "#ED7974",
       "(8,10]" = "#E8413E",
-      "(10,12]" = "#BD2B2D",
-      "(12,14]" = "#A02725",
-      "(14,16]" = "#780707"
+      "(10,12]" = "#BD2B2D"
     )
 
 
@@ -115,7 +114,8 @@ mod_av_temp_map_server <- function(id){
 
   all_scenarios <- unique(av_temp_map_cln_data$scenario)
   names(all_scenarios) <- all_scenarios  # Set names to match values
-  all_maps <- lapply(all_scenarios, make_temp_map, all_temps, temp_colors)
+  all_maps <- lapply(all_scenarios, make_temp_map, av_temp_map_cln_data, temp_colors)
+
 
 
 # Make reactive -----------------------------------------------------------
