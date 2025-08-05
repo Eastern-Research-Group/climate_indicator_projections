@@ -14,21 +14,44 @@
 #'
 #' @noRd
 
-calc_anom = function(mod_data, var_name, base_start, base_end, window_size, nclimgrid_smooth = TRUE, model_range = FALSE){
+calc_anom = function(mod_data, var_name, base_start, base_end, window_size, nclimgrid_smooth = TRUE, model_range = FALSE, for_maps = FALSE){
 
   # Set grouping variables depending on data
 
-  if (model_range) {
+    # For plot set grouping variable depending on whether calculating anomaly for
+    # the model range or model average
+    if (model_range) {
 
-    min_hind_yr <- 2014
-    grouping_var <- c("scenario", "model")
+      min_hind_yr <- 2014
+      grouping_var <- c("scenario", "model")
 
-  } else{
+    } else{
 
-    min_hind_yr <- 2009
-    grouping_var <- c("scenario")
+      min_hind_yr <- 2009
+      grouping_var <- c("scenario")
 
-  }
+    }
+
+
+    # For maps, set grouping variable depending on whether calculating anomaly for
+    # the states or climate divisions
+    if (for_maps) {
+
+      climdiv_map <- any(stringr::str_detect("climdiv", names(mod_data)))
+
+      if (climdiv_map) {
+
+        grouping_var <- c("climdiv", "scenario")
+
+      } else{
+
+        grouping_var <- c("state", "scenario")
+
+      }
+
+    }
+
+  print(grouping_var)
 
   # Calculate the average value for the base period
   av_val <- mod_data %>%
