@@ -97,13 +97,32 @@ mod_seasonal_temp_map_server <- function(id){
     # Get all the scenarios in the data
     all_scenarios <- unique(seas_temp_map_cln_data_fall$scenario)
     names(all_scenarios) <- all_scenarios  # Set names to match values
-    # Create a map for each scenario
+
+    # Create a map for each scenario and season
     fall_maps <- lapply(
       all_scenarios,
       create_static_map,
       seas_temp_map_cln_data_fall,
       seas_temp_colors,
-      "Change in Seasonal Temperatures by State, 2024–2100",
+      "Change in Fall Temperatures by State, 2024–2100",
+      "Total temperature change (°F)",
+      "white")
+
+    winter_maps <- lapply(
+      all_scenarios,
+      create_static_map,
+      seas_temp_map_cln_data_winter,
+      seas_temp_colors,
+      "Change in Winter Temperatures by State, 2024–2100",
+      "Total temperature change (°F)",
+      "white")
+
+    spring_maps <- lapply(
+      all_scenarios,
+      create_static_map,
+      seas_temp_map_cln_data_spring,
+      seas_temp_colors,
+      "Change in Spring Temperatures by State, 2024–2100",
       "Total temperature change (°F)",
       "white")
 
@@ -111,12 +130,23 @@ mod_seasonal_temp_map_server <- function(id){
 # Make reactive -----------------------------------------------------------
 
     output$map <- renderPlot({
+
       if (input$seasonRadioButtons == "Fall") {
 
         all_maps <- fall_maps
 
-      } else{
+      } else if (input$seasonRadioButtons == "Winter"){
+
+        all_maps <- winter_maps
+
+      } else if (input$seasonRadioButtons == "Spring"){
+
+        all_maps <- spring_maps
+
+      } else if (input$seasonRadioButtons == "Summer"){
+
         all_maps <- NA
+
       }
 
       # Map selection to file paths
@@ -132,12 +162,23 @@ mod_seasonal_temp_map_server <- function(id){
     })
 
     output$map_2 <- renderPlot({
+
       if (input$seasonRadioButtons == "Fall") {
 
         all_maps <- fall_maps
 
-      } else{
+      } else if (input$seasonRadioButtons == "Winter"){
+
+        all_maps <- winter_maps
+
+      } else if (input$seasonRadioButtons == "Spring"){
+
+        all_maps <- spring_maps
+
+      } else if (input$seasonRadioButtons == "Summer"){
+
         all_maps <- NA
+
       }
 
       # Map selection to file paths
