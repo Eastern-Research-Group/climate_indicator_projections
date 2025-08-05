@@ -73,8 +73,7 @@ mod_av_temp_map_server <- function(id){
 # Make the maps ------------------------------------------------------------
 
     temp_colors <- c(
-      "(-0.1,0]" = "#C7C7C7",
-      "(0,0.1]" = "#C7C7C7",
+      "(-0.1,0.1]" = "#C7C7C7",
       "(0.1,2]" = "#F0D7D6",
       "(2,4]" =  "#F1C1BE",
       "(4,6]" = "#EF9F9C",
@@ -85,39 +84,17 @@ mod_av_temp_map_server <- function(id){
       "(14,16]" = "#780707"
     )
 
-
-  make_temp_map <- function(which_scenario, all_temps_df, which_colors){
-
-    # Filter to the map
-    which_map <- all_temps_df %>%
-      dplyr::filter(scenario == which_scenario)
-
-    temp_map <- ggplot2::ggplot() +
-      ggplot2::geom_sf(data = which_map, ggplot2::aes(fill = legend_buckets), color = "#88807F") +
-      #  ggplot2::geom_sf(data = which_map, ggplot2::aes(fill = legend_buckets, color = legend_buckets)) +
-      ggplot2::scale_fill_manual(values = which_colors, drop = FALSE) +
-      #  ggplot2::scale_color_manual(values = temp_colors, drop = FALSE) +
-      ggplot2::geom_sf(data = conus_cln, fill = NA, color = "black") +
-      ggplot2::labs(
-        title = "Rate of Temperature Change in the United States, 2024–2100",
-        fill = "Rate of temperature change\n(°F per century)"
-      ) +
-      ggthemes::theme_map() +
-      ggplot2::theme(
-        text = ggplot2::element_text(size = 12),
-        plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
-        #   legend.key.width = ggplot2::unit(2, 'cm'),
-        legend.position = "bottom"
-      )
-
-    return(temp_map)
-
-  }
-
+  # Get all the scenarios in the data
   all_scenarios <- unique(av_temp_map_cln_data$scenario)
   names(all_scenarios) <- all_scenarios  # Set names to match values
-  all_maps <- lapply(all_scenarios, make_temp_map, av_temp_map_cln_data, temp_colors)
-
+  # Create a map for each scenario
+  all_maps <- lapply(
+    all_scenarios,
+    create_static_map,
+    av_temp_map_cln_data,
+    temp_colors,
+    "Rate of Temperature Change in the United States, 2024–2100",
+    "Rate of temperature change\n(°F per century)")
 
 
 # Make reactive -----------------------------------------------------------
