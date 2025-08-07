@@ -126,6 +126,15 @@ mod_seasonal_temp_map_server <- function(id){
       "Total temperature change (°F)",
       "white")
 
+    summer_maps <- lapply(
+      all_scenarios,
+      create_static_map,
+      seas_temp_map_cln_data_summer,
+      seas_temp_colors,
+      "Change in Summer Temperatures by State, 2024–2100",
+      "Total temperature change (°F)",
+      "white")
+
 
 # Make reactive -----------------------------------------------------------
 
@@ -145,7 +154,7 @@ mod_seasonal_temp_map_server <- function(id){
 
       } else if (input$seasonRadioButtons == "Summer"){
 
-        all_maps <- NA
+        all_maps <- summer_maps
 
       }
 
@@ -177,7 +186,7 @@ mod_seasonal_temp_map_server <- function(id){
 
       } else if (input$seasonRadioButtons == "Summer"){
 
-        all_maps <- NA
+        all_maps <- summer_maps
 
       }
 
