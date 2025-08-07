@@ -21,29 +21,29 @@ mod_seasonal_temp_map_ui <- function(id) {
 
     fluidRow(
 
-      column(4,
+      column(6,
 
              selectInput(ns("scenario_choice"),
                          label = "Choose a Scenario",
-                         choices = c("Observations",
-                                     "Low emissions (SSP1-2.6)",
-                                     "Intermediate emissions (SSP2-4.5)",
-                                     "High emissions (SSP3-7.0)",
-                                     "Very high emissions (SSP5-8.5)")
+                         choices = c("Observations, 1896–2023",
+                                     "Low emissions (SSP1-2.6), 2024–2100",
+                                     "Intermediate emissions (SSP2-4.5), 2024–2100",
+                                     "High emissions (SSP3-7.0), 2024–2100",
+                                     "Very high emissions (SSP5-8.5), 2024–2100")
              )
 
       ),
 
-      column(4,
+      column(6,
 
              selectInput(ns("scenario_choice_2"),
                          label = "Choose a Scenario",
-                         choices = c("Observations",
-                                     "Low emissions (SSP1-2.6)",
-                                     "Intermediate emissions (SSP2-4.5)",
-                                     "High emissions (SSP3-7.0)",
-                                     "Very high emissions (SSP5-8.5)"),
-                         selected = "Very high emissions (SSP5-8.5)"
+                         choices = c("Observations, 1896–2023",
+                                     "Low emissions (SSP1-2.6), 2024–2100",
+                                     "Intermediate emissions (SSP2-4.5), 2024–2100",
+                                     "High emissions (SSP3-7.0), 2024–2100",
+                                     "Very high emissions (SSP5-8.5), 2024–2100"),
+                         selected = "Very high emissions (SSP5-8.5), 2024–2100"
              )
 
       )
@@ -104,7 +104,7 @@ mod_seasonal_temp_map_server <- function(id){
       create_static_map,
       seas_temp_map_cln_data_fall,
       seas_temp_colors,
-      "Change in Fall Temperatures by State, 2024–2100",
+      "Change in Fall Temperatures by State",
       "Total temperature change (°F)",
       "white")
 
@@ -113,7 +113,7 @@ mod_seasonal_temp_map_server <- function(id){
       create_static_map,
       seas_temp_map_cln_data_winter,
       seas_temp_colors,
-      "Change in Winter Temperatures by State, 2024–2100",
+      "Change in Winter Temperatures by State",
       "Total temperature change (°F)",
       "white")
 
@@ -122,7 +122,7 @@ mod_seasonal_temp_map_server <- function(id){
       create_static_map,
       seas_temp_map_cln_data_spring,
       seas_temp_colors,
-      "Change in Spring Temperatures by State, 2024–2100",
+      "Change in Spring Temperatures by State",
       "Total temperature change (°F)",
       "white")
 
@@ -131,7 +131,7 @@ mod_seasonal_temp_map_server <- function(id){
       create_static_map,
       seas_temp_map_cln_data_summer,
       seas_temp_colors,
-      "Change in Summer Temperatures by State, 2024–2100",
+      "Change in Summer Temperatures by State",
       "Total temperature change (°F)",
       "white")
 
@@ -160,11 +160,11 @@ mod_seasonal_temp_map_server <- function(id){
 
       # Map selection to file paths
       which_map <- switch(input$scenario_choice,
-                          "Observations" = all_maps$observed,
-                          "Low emissions (SSP1-2.6)" = all_maps$ssp126,
-                          "Intermediate emissions (SSP2-4.5)" = all_maps$ssp245,
-                          "High emissions (SSP3-7.0)" = all_maps$ssp370,
-                          "Very high emissions (SSP5-8.5)" = all_maps$ssp585
+                          "Observations, 1896–2023" = all_maps$observed,
+                          "Low emissions (SSP1-2.6), 2024–2100" = all_maps$ssp126,
+                          "Intermediate emissions (SSP2-4.5), 2024–2100" = all_maps$ssp245,
+                          "High emissions (SSP3-7.0), 2024–2100" = all_maps$ssp370,
+                          "Very high emissions (SSP5-8.5), 2024–2100" = all_maps$ssp585
       )
       return(which_map)
 
@@ -192,11 +192,11 @@ mod_seasonal_temp_map_server <- function(id){
 
       # Map selection to file paths
       which_map <- switch(input$scenario_choice_2,
-                          "Observations" = all_maps$observed,
-                          "Low emissions (SSP1-2.6)" = all_maps$ssp126,
-                          "Intermediate emissions (SSP2-4.5)" = all_maps$ssp245,
-                          "High emissions (SSP3-7.0)" = all_maps$ssp370,
-                          "Very high emissions (SSP5-8.5)" = all_maps$ssp585
+                          "Observations, 1896–2023" = all_maps$observed,
+                          "Low emissions (SSP1-2.6), 2024–2100" = all_maps$ssp126,
+                          "Intermediate emissions (SSP2-4.5), 2024–2100" = all_maps$ssp245,
+                          "High emissions (SSP3-7.0), 2024–2100" = all_maps$ssp370,
+                          "Very high emissions (SSP5-8.5), 2024–2100" = all_maps$ssp585
       )
       return(which_map)
 
