@@ -45,7 +45,7 @@ clean_seas_temp_map_mod <- function(which_season, seas_temp_obs_data, conus_gdf)
     rename_scenarios(., TRUE) %>%
     # Create legend buckets
     dplyr::mutate(legend_buckets = cut(total_change,
-                                       breaks=c(-2, -0.1, 0.1, 2, 4, 6, 8, 10, 12)))
+                                       breaks=c(-2, -0.1, 0.1, 2, 4, 6, 8, 10, 12, 14)))
 
     # Set the factors
   seas_temp_map_cln_data$legend_buckets <- as.factor(seas_temp_map_cln_data$legend_buckets)
