@@ -17,11 +17,11 @@ mod_av_temp_map_ui <- function(id) {
 
         selectInput(ns("scenario_choice"),
                     label = "Choose a Scenario",
-                    choices = c("Observations",
-                                "Low emissions (SSP1-2.6)",
-                                "Intermediate emissions (SSP2-4.5)",
-                                "High emissions (SSP3-7.0)",
-                                "Very high emissions (SSP5-8.5)")
+                    choices = c("Observations, 1901–2023",
+                                "Low emissions (SSP1-2.6), 2024–2100",
+                                "Intermediate emissions (SSP2-4.5), 2024–2100",
+                                "High emissions (SSP3-7.0), 2024–2100",
+                                "Very high emissions (SSP5-8.5), 2024–2100")
         )
 
       ),
@@ -30,12 +30,12 @@ mod_av_temp_map_ui <- function(id) {
 
         selectInput(ns("scenario_choice_2"),
                     label = "Choose a Scenario",
-                    choices = c("Observations",
-                                "Low emissions (SSP1-2.6)",
-                                "Intermediate emissions (SSP2-4.5)",
-                                "High emissions (SSP3-7.0)",
-                                "Very high emissions (SSP5-8.5)"),
-                    selected = "Very high emissions (SSP5-8.5)"
+                    choices = c("Observations, 1901–2023",
+                                "Low emissions (SSP1-2.6), 2024–2100",
+                                "Intermediate emissions (SSP2-4.5), 2024–2100",
+                                "High emissions (SSP3-7.0), 2024–2100",
+                                "Very high emissions (SSP5-8.5), 2024–2100"),
+                    selected = "Very high emissions (SSP5-8.5), 2024–2100"
         )
 
       )
@@ -93,7 +93,7 @@ mod_av_temp_map_server <- function(id){
     create_static_map,
     av_temp_map_cln_data,
     temp_colors,
-    "Rate of Temperature Change in the United States, 2024–2100",
+    "Rate of Temperature Change in the United States",
     "Rate of temperature change\n(°F per century)")
 
 
@@ -103,11 +103,11 @@ mod_av_temp_map_server <- function(id){
 
      # Map selection to file paths
     which_map <- switch(input$scenario_choice,
-                        "Observations" = all_maps$observed,
-                        "Low emissions (SSP1-2.6)" = all_maps$ssp126,
-                        "Intermediate emissions (SSP2-4.5)" = all_maps$ssp245,
-                        "High emissions (SSP3-7.0)" = all_maps$ssp370,
-                        "Very high emissions (SSP5-8.5)" = all_maps$ssp585
+                        "Observations, 1901–2023" = all_maps$observed,
+                        "Low emissions (SSP1-2.6), 2024–2100" = all_maps$ssp126,
+                        "Intermediate emissions (SSP2-4.5), 2024–2100" = all_maps$ssp245,
+                        "High emissions (SSP3-7.0), 2024–2100" = all_maps$ssp370,
+                        "Very high emissions (SSP5-8.5), 2024–2100" = all_maps$ssp585
                         )
     return(which_map)
 
@@ -117,11 +117,11 @@ mod_av_temp_map_server <- function(id){
 
     # Map selection to file paths
     which_map <- switch(input$scenario_choice_2,
-                        "Observations" = all_maps$observed,
-                        "Low emissions (SSP1-2.6)" = all_maps$ssp126,
-                        "Intermediate emissions (SSP2-4.5)" = all_maps$ssp245,
-                        "High emissions (SSP3-7.0)" = all_maps$ssp370,
-                        "Very high emissions (SSP5-8.5)" = all_maps$ssp585
+                        "Observations, 1901–2023" = all_maps$observed,
+                        "Low emissions (SSP1-2.6), 2024–2100" = all_maps$ssp126,
+                        "Intermediate emissions (SSP2-4.5), 2024–2100" = all_maps$ssp245,
+                        "High emissions (SSP3-7.0), 2024–2100" = all_maps$ssp370,
+                        "Very high emissions (SSP5-8.5), 2024–2100" = all_maps$ssp585
     )
     return(which_map)
 
