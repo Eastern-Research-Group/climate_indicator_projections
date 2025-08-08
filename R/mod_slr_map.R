@@ -103,7 +103,7 @@ mod_slr_map_server <- function(id){
                                   stroke = TRUE,
                                   fillOpacity = 1,
                                   group = "Observations",
-                                  label = ~as.character(station_name),
+                                  label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " in"),
                                   color = ~pal(relative_sea_level_change)
                                   ) %>%
         # Lower sea level rise
@@ -113,7 +113,7 @@ mod_slr_map_server <- function(id){
                                   stroke = TRUE,
                                   fillOpacity = 1,
                                   group = "Lower sea level rise",
-                                  label = ~as.character(station_name),
+                                  label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " in"),
                                   color = ~pal(relative_sea_level_change)
         ) %>%
         # Higher sea level rise
@@ -123,7 +123,7 @@ mod_slr_map_server <- function(id){
                                   stroke = TRUE,
                                   fillOpacity = 1,
                                   group = "Higher sea level rise",
-                                  label = ~as.character(station_name),
+                                  label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " in"),
                                   color = ~pal(relative_sea_level_change)
         ) %>%
         leaflet::setView(., lng = -99, lat = 39, zoom = 4) %>%
