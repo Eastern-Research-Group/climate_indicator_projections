@@ -12,15 +12,10 @@ noaa_2005 <- slr_plot_obs_raw %>%
 
 # Clean up projected data
 slr_plot_mod_all <- slr_plot_mod_all_raw %>%
-  janitor::clean_names() %>%
+  clean_slr_mod_data() %>%
   dplyr::filter(noaa_name == "GMSL") %>%
-  dplyr::select(scenario, tidyr::starts_with("rsl"), -rsl_grid_num, -rsl_contribution_from_vlm_trend_cm_year) %>%
-  tidyr::pivot_longer(cols = tidyr::starts_with("rsl"), names_to = "year", values_to = "slr_cm") %>%
-  dplyr::mutate(year = stringr::str_replace_all(year, "[^0-9]", "")) %>%
-  dplyr::mutate(slr_in = measurements::conv_unit(slr_cm, "cm", "inch")) %>%
   dplyr::mutate(slr_in = slr_in + noaa_2005) %>%  # add noaa 2005 offset
-  dplyr::select(-slr_cm) %>%
-  dplyr::mutate(year = as.numeric(year))
+  dplyr::select(-noaa_name, -lat, -long)
 
 # SLR proj mid
 slr_proj_mid <- slr_plot_mod_all %>%
