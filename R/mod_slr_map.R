@@ -98,7 +98,7 @@ mod_slr_map_server <- function(id){
         leaflet::addTiles() %>%
         # Observed data
         leaflet::addCircleMarkers(data = slr_map_obs_fnl,
-                                  layerId = ~station_name,
+                                  layerId = ~paste0(station_name, " Observations"),
                                   radius = 6,
                                   stroke = TRUE,
                                   fillOpacity = 1,
@@ -108,7 +108,7 @@ mod_slr_map_server <- function(id){
                                   ) %>%
         # Lower sea level rise
         leaflet::addCircleMarkers(data = slr_map_lo_fnl,
-                                  layerId = ~station_name,
+                                  layerId =  ~paste0(station_name, " Lower SLR"),
                                   radius = 6,
                                   stroke = TRUE,
                                   fillOpacity = 1,
@@ -118,7 +118,7 @@ mod_slr_map_server <- function(id){
         ) %>%
         # Higher sea level rise
         leaflet::addCircleMarkers(data = slr_map_hi_fnl,
-                                  layerId = ~station_name,
+                                  layerId =  ~paste0(station_name, " Higher SLR"),
                                   radius = 6,
                                   stroke = TRUE,
                                   fillOpacity = 1,
@@ -132,7 +132,7 @@ mod_slr_map_server <- function(id){
                            position = "topleft",
                            labFormat = leaflet::labelFormat(transform = function(x) sort(x, decreasing = TRUE))) %>%
         leaflet::addLayersControl(
-          overlayGroups  = c("Observations","Lower sea level rise",  "Higher sea level rise"),
+          baseGroups = c("Observations","Lower sea level rise",  "Higher sea level rise"),
           options = leaflet::layersControlOptions(collapsed = FALSE),
           position = "topleft"
         )
