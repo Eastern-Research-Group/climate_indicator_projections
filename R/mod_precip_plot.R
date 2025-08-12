@@ -23,15 +23,15 @@ mod_precip_plot_server <- function(id){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
 
-    # ### Create the plot ###
-    # output$plot <- highcharter::renderHighchart({
-    #
-    #   create_hc_plot(precip_plot_cln_data,
-    #                  "Precipitation in the Contiguous 48 States, 1901–2100",
-    #                  "Precipitation Anomaly (inches)",
-    #                  " in.")
-    #
-    # })
+    ### Create the plot ###
+    output$plot <- highcharter::renderHighchart({
+
+      create_hc_plot(precip_plot_cln_data,
+                     "Precipitation in the Contiguous 48 States, 1901–2100",
+                     "Precipitation Anomaly (inches)",
+                     " in.")
+
+    })
 
 
   })
