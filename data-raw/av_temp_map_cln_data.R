@@ -18,7 +18,6 @@ av_temp_map_obs <- av_temp_map_obs_raw %>%
   dplyr::mutate(scenario = "observed")
 
 # Clean the model average -------------------------------------------------
-
 av_temp_map_mod <- av_temp_map_mod_raw %>%
   dplyr::filter(scenario != "nclimgrid") %>%
   # Calculate the anomaly for each climate division
