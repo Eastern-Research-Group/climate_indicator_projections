@@ -9,4 +9,5 @@ default:
   slr_path: inst/extdata/slr
   sc_path: inst/extdata/snow_cover
   sst_path: inst/extdata/sea_surface_temp
+  precip_path: inst/extdata/precip
 
