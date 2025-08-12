@@ -32,11 +32,12 @@ golem::add_module(name = "grow_season_plot", with_test = TRUE)
 golem::add_module(name = "grow_season_map", with_test = TRUE)
 # Annual Total Precipitation
 golem::add_module(name = "precip_plot", with_test = TRUE)
+golem::add_module(name = "precip_map", with_test = TRUE)
 
 # Sea Level Rise
 golem::add_module(name = "slr_plot", with_test = TRUE)
 golem::add_module(name = "slr_map", with_test = TRUE)
-
+# Plots
 golem::add_module(name = "sst_plot", with_test = TRUE) # Sea surface temperature
 golem::add_module(name = "ocean_acidity_plot", with_test = TRUE) # Ocean Acidity
 golem::add_module(name = "arctic_sea_ice_plot", with_test = TRUE) # Arctic Sea Ice
@@ -70,6 +71,7 @@ golem::add_utils("create_ghg_plot", module = "ghg_conc_plot", with_test = TRUE)
 golem::add_utils("clean_climdiv", with_test = TRUE)
 golem::add_utils("calc_total_change", with_test = TRUE)
 golem::add_utils("clean_seas_temp_map_mod", with_test = TRUE)
+golem::add_utils("clean_slr_mod_data", with_test = TRUE)
 
 
 ## External resources
@@ -85,13 +87,13 @@ golem::add_any_file("file.json")
 # Arctic Sea Ice: Plots
 usethis::use_data_raw(name = "asi_plot_cln_data", open = rlang::is_interactive())
 
-# Average temperature: Plots
-usethis::use_data_raw(name = "av_temp_plot_cln_data", open = rlang::is_interactive())
+# Average temperature:
+usethis::use_data_raw(name = "av_temp_plot_cln_data", open = rlang::is_interactive()) # Plots
+usethis::use_data_raw(name = "av_temp_map_cln_data", open = rlang::is_interactive()) # Maps
 
-# Average temperature: Maps
-usethis::use_data_raw(name = "av_temp_map_obs", open = rlang::is_interactive())
-usethis::use_data_raw(name = "av_temp_map_mod", open = rlang::is_interactive())
-usethis::use_data_raw(name = "av_temp_map_cln_data", open = rlang::is_interactive())
+# Precipitation
+usethis::use_data_raw(name = "precip_plot_cln_data", open = rlang::is_interactive()) # Plots
+usethis::use_data_raw(name = "precip_map_cln_data", open = rlang::is_interactive()) # Maps
 
 # Greenhouse Gas Concentrations: Plots
 usethis::use_data_raw(name = "ghg_conc_plot_obs_co2", open = rlang::is_interactive())
@@ -99,9 +101,9 @@ usethis::use_data_raw(name = "ghg_conc_plot_obs_ch4", open = rlang::is_interacti
 usethis::use_data_raw(name = "ghg_conc_plot_obs_n2o", open = rlang::is_interactive())
 usethis::use_data_raw(name = "ghg_conc_plot_mod_av", open = rlang::is_interactive())
 
-# Growing Season: Plots
-usethis::use_data_raw(name = "grow_seas_plot_cln_data", open = rlang::is_interactive())
-usethis::use_data_raw(name = "grow_seas_map_cln_data", open = rlang::is_interactive())
+# Growing Season
+usethis::use_data_raw(name = "grow_seas_plot_cln_data", open = rlang::is_interactive()) # plots
+usethis::use_data_raw(name = "grow_seas_map_cln_data", open = rlang::is_interactive()) # map
 
 # Ocean acidity: Plots
 usethis::use_data_raw(name = "oa_plot_obs", open = rlang::is_interactive())
