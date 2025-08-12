@@ -34,8 +34,8 @@ mod_precip_map_ui <- function(id) {
                                      "Low emissions (SSP1-2.6), 2024–2100",
                                      "Intermediate emissions (SSP2-4.5), 2024–2100",
                                      "High emissions (SSP3-7.0), 2024–2100",
-                                     "Very high emissions (SSP5-8.5), 2024–2100")
-                       #  selected = "Very high emissions (SSP5-8.5), 2024–2100"
+                                     "Very high emissions (SSP5-8.5), 2024–2100"),
+                         selected = "Very high emissions (SSP5-8.5), 2024–2100"
              )
 
       )
