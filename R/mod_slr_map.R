@@ -9,10 +9,8 @@
 #' @importFrom shiny NS tagList
 mod_slr_map_ui <- function(id) {
   ns <- NS(id)
-  tagList(
-
-    shinycssloaders::withSpinner(leaflet::leafletOutput(ns("map"),width = "100%", height = 800))
-
+  render_map_page(
+    map=shinycssloaders::withSpinner(leaflet::leafletOutput(ns("map"),width = "100%", height = 800))
   )
 }
 
