@@ -57,6 +57,7 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: "Open Sans Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
 }
 p{
     line-height: 1.6;
@@ -98,7 +99,7 @@ a:hover, a:focus{
 }
 .usa-button:hover{
     background-color: #1a4480;
-} 
+}
 .usa-button:active{
     background-color: #162e51;
 }
@@ -191,6 +192,9 @@ header nav a{
 header nav li:last-child a {
     border-right: none;
 }
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+}
 
 
 /* Container for sidebar and main content */
@@ -256,7 +260,7 @@ header nav li:last-child a {
     background-position: 0 -313px;
 }
 
-.tab-nav ul {
+.nav-tabs ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -264,7 +268,7 @@ header nav li:last-child a {
     align-items: stretch;
     border-bottom: 2px solid #e1f3f8;
 }
-.tab-nav li a.active {
+.nav-tabs li a.active {
    border: 2px solid #e1f3f8;
    border-bottom: 2px solid #fff;
    border-radius: 6px;
@@ -274,7 +278,7 @@ header nav li:last-child a {
    position: relative;
    top: 2px; /* Adjust to align with the border */
 }
-.tab-nav a {
+.nav-tabs a {
     color: #005EA2;
     text-decoration: none;
     font-weight: 700;
@@ -288,11 +292,15 @@ header nav li:last-child a {
     box-sizing: border-box;
 }
 .tab-content {
-    display: none;
     padding: 1rem 0;
 }
-.tab-content.active {
-    display: block;
+
+.container-fluid {
+  padding-left: 0px;
+}
+
+button.link_clickable {
+  display: none;
 }
 
 
@@ -392,14 +400,14 @@ main .content ul li{
         order: 1;
         padding: 0;
     }
-    .tab-nav ul {
+    .nav-tabs ul {
         flex-direction: column;
     }
-    .tab-nav li a {
+    .nav-tabs li a {
         padding: 1rem;
         border-bottom: 2px solid #e1f3f8;
     }
-    .tab-nav li a.active{
+    .nav-tabs li a.active{
         border: 2px solid #e1f3f8;
         background-color: #e1f3f8;
         border-radius: 0;
