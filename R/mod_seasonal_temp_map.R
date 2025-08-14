@@ -9,15 +9,25 @@
 #' @importFrom shiny NS tagList
 mod_seasonal_temp_map_ui <- function(id) {
   ns <- NS(id)
+  return(
+    tagList(
+      radioButtons(
+        inputId = ns("seasonRadioButtons"),
+        label = "Choose a season:",
+        choices = c("Winter", "Spring", "Summer", "Fall"),
+        selected = "Fall",
+        inline = TRUE
+      ),
 
-  render_map_page(
+      render_map_page(
 
-    map=create_static_map_ui(
-      ns,
-      obs_dates="1896–2023",
-      proj_dates="2024–2100",
-      title="Change in Precipitation in the United States",
-      seasonal_temp = TRUE
+        map=create_static_map_ui(
+          ns,
+          obs_dates="1896–2023",
+          proj_dates="2024–2100",
+          title="Change in Precipitation in the United States"
+        )
+      )
     )
   )
 
