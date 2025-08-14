@@ -9,7 +9,8 @@
 #' @importFrom shiny NS tagList
 mod_seasonal_temp_map_ui <- function(id) {
   ns <- NS(id)
-  tagList(
+  render_map_page(
+    map=tagList(
 
     radioButtons(
       inputId = ns("seasonRadioButtons"),
@@ -29,7 +30,8 @@ mod_seasonal_temp_map_ui <- function(id) {
                                      "Low emissions (SSP1-2.6), 2024–2100",
                                      "Intermediate emissions (SSP2-4.5), 2024–2100",
                                      "High emissions (SSP3-7.0), 2024–2100",
-                                     "Very high emissions (SSP5-8.5), 2024–2100")
+                                     "Very high emissions (SSP5-8.5), 2024–2100"),
+                         width = "500px"
              )
 
       ),
@@ -43,7 +45,8 @@ mod_seasonal_temp_map_ui <- function(id) {
                                      "Intermediate emissions (SSP2-4.5), 2024–2100",
                                      "High emissions (SSP3-7.0), 2024–2100",
                                      "Very high emissions (SSP5-8.5), 2024–2100"),
-                         selected = "Very high emissions (SSP5-8.5), 2024–2100"
+                         selected = "Very high emissions (SSP5-8.5), 2024–2100",
+                         width = "500px"
              )
 
       )
@@ -64,11 +67,11 @@ mod_seasonal_temp_map_ui <- function(id) {
     shinycssloaders::withSpinner(
       tags$div(
         id = "mod_seas_temp_map_comparison_slider",
-        plotOutput(ns("map"), width = "400px", height = "400px"),
-        plotOutput(ns("map_2"), width = "400px", height = "400px"),
+        plotOutput(ns("map"), width = "600px", height = "600px"),
+        plotOutput(ns("map_2"), width = "600px", height = "600px"),
       )
     )
-
+)
   )
 }
 
