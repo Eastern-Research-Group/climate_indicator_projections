@@ -9,10 +9,9 @@
 #' @importFrom shiny NS tagList
 mod_av_temp_plot_ui <- function(id) {
   ns <- NS(id)
-  tagList(
-
-    shinycssloaders::withSpinner(highcharter::highchartOutput(ns("plot")))
-
+  render_timeseries_page(
+    title="Temperatures in the Contiguous 48 States, 1901-2100",
+    timeseries=shinycssloaders::withSpinner(highcharter::highchartOutput(ns("plot"))),
   )
 }
 
@@ -26,9 +25,9 @@ mod_av_temp_plot_server <- function(id){
     ### Create the plot ###
 
     output$plot <- highcharter::renderHighchart({
-
+      print("Rendering plot for av_temp_plot")
       create_hc_plot(av_temp_plot_cln_data,
-                     "Temperatures in the Contiguous 48 States, 1901–2100",
+                     "",
                      "Temperature Anomaly (°F)",
                      "°F")
 
