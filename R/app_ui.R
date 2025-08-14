@@ -109,6 +109,7 @@ app_ui <- function(request) {
           "input.selected_tab=='slr'",
           render_indicator_page(
             title="Sea Level",
+            maps=mod_slr_map_ui("slr_map_1"),
             timeseries=mod_slr_plot_ui("slr_plot_1"),
             summary=render_summary(
 
@@ -171,12 +172,6 @@ app_ui <- function(request) {
     )
   )
 
-
-      #   tabPanel("Sea Level Rise Map",
-      #            mod_slr_map_ui("slr_map_1")
-      #   ),
-
-      #   ),
 
 }
 
