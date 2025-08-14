@@ -21,7 +21,10 @@ mod_ghg_conc_plot_ui <- function(id) {
                   label = "See 800,000 years of historical data",
                   value = FALSE, width = NULL),
 
-    shinycssloaders::withSpinner(highcharter::highchartOutput(ns("plot")))
+    render_timeseries_page(
+      title="",
+      timeseries=shinycssloaders::withSpinner(highcharter::highchartOutput(ns("plot"))),
+    )
 
   )
 }

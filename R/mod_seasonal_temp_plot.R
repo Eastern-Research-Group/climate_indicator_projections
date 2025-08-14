@@ -18,7 +18,10 @@ mod_seasonal_temp_plot_ui <- function(id) {
                             "Spring",
                             "Summer")),
 
-    shinycssloaders::withSpinner(highcharter::highchartOutput(ns("plot")))
+    render_timeseries_page(
+      title="",
+      timeseries=shinycssloaders::withSpinner(highcharter::highchartOutput(ns("plot"))),
+    )
 
   )
 }

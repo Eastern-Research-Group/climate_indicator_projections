@@ -19,7 +19,10 @@ mod_snow_cover_plot_ui <- function(id) {
                             "Summer",
                             "Fall")),
 
-    shinycssloaders::withSpinner(highcharter::highchartOutput(ns("plot")))
+    render_timeseries_page(
+      title="",
+      timeseries=shinycssloaders::withSpinner(highcharter::highchartOutput(ns("plot"))),
+    )
 
   )
 }

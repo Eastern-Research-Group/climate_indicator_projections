@@ -24,7 +24,7 @@ create_static_map <- function(which_scenario, map_data, which_colors, title, leg
       ggplot2::scale_fill_manual(values = which_colors, drop = FALSE) +
       ggplot2::geom_sf(data = conus_cln, fill = NA, color = state_color) +
       ggplot2::labs(
-        title = title,
+   #     title = title,
         fill = legend_title
       ) +
       ggthemes::theme_map() +

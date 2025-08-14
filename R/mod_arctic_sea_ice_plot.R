@@ -9,10 +9,9 @@
 #' @importFrom shiny NS tagList
 mod_arctic_sea_ice_plot_ui <- function(id) {
   ns <- NS(id)
-  tagList(
-
-    shinycssloaders::withSpinner(highcharter::highchartOutput(ns("plot")))
-
+  render_timeseries_page(
+    title="",
+    timeseries=shinycssloaders::withSpinner(highcharter::highchartOutput(ns("plot"))),
   )
 }
 

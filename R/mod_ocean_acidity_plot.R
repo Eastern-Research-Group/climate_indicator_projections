@@ -19,7 +19,10 @@ mod_ocean_acidity_plot_ui <- function(id) {
                             "Cariaco"
                             )),
 
-    shinycssloaders::withSpinner(highcharter::highchartOutput(ns("plot")))
+    render_timeseries_page(
+      title="",
+      timeseries=shinycssloaders::withSpinner(highcharter::highchartOutput(ns("plot"))),
+    )
 
   )
 }
