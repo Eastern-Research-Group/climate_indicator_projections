@@ -4,30 +4,18 @@
 #' @param obs_dates string of dates for observed data title
 #' @param proj_dates string of dates for projected data title
 #' @param title title of map
-#' @param seasonal_temp TRUE/FALSE if this is for the seasonal temperature indicator, if TRUE adds radio buttons.
 #'
 #' @description A fct function that creates the map UI
 #'
 #' @return The return value, if any, from executing the function.
 #'
 #' @noRd
-create_static_map_ui <- function(ns, obs_dates, proj_dates, title, seasonal_temp=FALSE) {
+create_static_map_ui <- function(ns, obs_dates, proj_dates, title) {
 
   map_id <- ns("map_comparison")
 
   tagList(
-
-    if (seasonal_temp) {
-
-      radioButtons(
-        inputId = ns("seasonRadioButtons"),
-        label = "Choose a season:",
-        choices = c("Winter", "Spring", "Summer", "Fall"),
-        selected = "Fall",
-        inline = TRUE
-      )
-
-    },
+      tags$p("Choose two scenarios to compare"),
 
     fluidRow(
 
