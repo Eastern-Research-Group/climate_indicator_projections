@@ -20,62 +20,6 @@ mod_grow_season_map_ui <- function(id) {
     )
   )
 
-  #
-  # render_map_page(
-  #   map=tagList(
-  #     tags$div(
-  #       tags$div(
-  #         selectInput(
-  #           ns("scenario_choice"),
-  #           label = "Scenario 1",
-  #           choices = c(
-  #             "Observations, 1895–2023",
-  #             "Low emissions (SSP1-2.6), 2024–2100",
-  #             "Intermediate emissions (SSP2-4.5), 2024–2100",
-  #             "High emissions (SSP3-7.0), 2024–2100",
-  #             "Very high emissions (SSP5-8.5), 2024–2100"
-  #           ),
-  #           width="500px"
-  #         ),
-  #         class="form-item form-item--select"
-  #       ),
-  #       tags$div(
-  #         selectInput(
-  #           ns("scenario_choice_2"),
-  #           label = "Scenario 2",
-  #           choices = c("Observations, 1895–2023",
-  #                       "Low emissions (SSP1-2.6), 2024–2100",
-  #                       "Intermediate emissions (SSP2-4.5), 2024–2100",
-  #                       "High emissions (SSP3-7.0), 2024–2100",
-  #                       "Very high emissions (SSP5-8.5), 2024–2100"),
-  #           selected = "Very high emissions (SSP5-8.5), 2024–2100",
-  #           width="500px"
-  #         ),
-  #         class="form-item form-item--select"
-  #       ),
-  #       class="form-row"
-  #     ),
-  #
-  #     # Before after slider
-  #     tags$script("
-  #             $(function() {
-  #   $('#mod_gs_map_comparison_slider').beforeAfter({
-  #       introDelay: 2000,
-  #       imagePath: 'img/',
-  #       introDuration: 500,
-  #       showFullLinks: false
-  #   })
-  #               });
-  #   "),
-  #     shinycssloaders::withSpinner(
-  #       tags$div(
-  #         id = "mod_gs_map_comparison_slider",
-  #         plotOutput(ns("map"), width = "600px", height = "600px"),
-  #         plotOutput(ns("map_2"), width = "600px", height = "600px"),
-  #       )
-  #     )
-  #   )
-  # )
 }
 
 #' grow_season_map Server Functions
