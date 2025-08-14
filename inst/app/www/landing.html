@@ -17,127 +17,42 @@
         </nav>
     </header>
     <main>
-        <h1>Temperature</h1>
+      </p>
         <div class="layout-container">
             <div class="sidebar">
                 <nav>
                     <ul>
                         <li class="ghg">
                             <span class="nav-icon"></span>
-                            <a href="ghg/concentrations.html">Greenhouse Gas Concentrations</a>
+                            <a href="#" id="ghg_conc" class="link_clickable">Greenhouse Gas Concentrations</a>
                         </li>
                         <li class="temp">
                             <span class="nav-icon"></span>
-                            <a href="temperature/annual-total-temp.html" class="active">Annual Total Temperature</a>
-                            <a href="temperature/seasonal-temp.html">Seasonal Temperature</a>
-                            <a href="temperature/growing-season.html">Length of Growing Season</a>
+                            <a href="#" id="annual_total_temp" class="active link_clickable">Annual Total Temperature</a>
+                            <a href="#" id="seasonal_temp" class="link_clickable">Seasonal Temperature</a>
+                            <a href="#" id="length_of_growing_season" class="link_clickable">Length of Growing Season</a>
                         </li>
                         <li class="precip">
                             <span class="nav-icon"></span>
-                            <a href="precipitation/annual-total.html">Annual Total Precipitation</a>
+                            <a href="#" id="total_precip" class="link_clickable">Annual Total Precipitation</a>
                         </li>
                         <li class="ocean">
                             <span class="nav-icon"></span>
-                            <a href="ocean/sea-surface-temp.html">Sea Surface Temperature</a>
-                            <a href="ocean/sea-level.html">Sea Level</a>
-                            <a href="ocean/coastal-flooding.html">Coastal Flooding</a>
-                            <a href="ocean/ocean-acidity.html">Ocean Acidity</a>
+                            <a href="#" id="sst" class="link_clickable">Sea Surface Temperature</a>
+                            <a href="#" id="slr" class="link_clickable">Sea Level</a>
+                            <a href="#" id="coast_flood" class="link_clickable">Coastal Flooding</a>
+                            <a href="#" id="ocean_acid" class="link_clickable">Ocean Acidity</a>
                         </li>
                         <li class="snow">
                             <span class="nav-icon"></span>
-                            <a href="snow/arctic-sea-ice.html">Arctic Sea Ice</a>
-                            <a href="snow/snow-cover.html">Snow Cover</a>
+                            <a href="#" id="arctic_sea_ice" class="link_clickable">Arctic Sea Ice</a>
+                            <a href="#" id="snow_cover" class="link_clickable">Snow Cover</a>
                         </li>
                     </ul>
                 </nav>
             </div>
             <div class="main">
-                <h2>Annual Total Temperature</h2>
-                <div class="tab-nav">
-                    <nav>
-                        <ul>
-                            <li><a href="#" id="tab-maps" class="active">Maps</a></li>
-                            <li><a href="#" id="tab-timeseries">Timeseries Graphs</a></li>
-                            <li><a href="#" id="tab-summary">Summary</a></li>
-                            <li><a href="#" id="tab-techdoc">Technical Documentation</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="content">
-                    <div class="tab-content active" id="content-maps">
-                        <p>Choose two scenarios to compare</p>
-                        <div class="form-row">
-                            <div class="form-item form-item--select">
-                                <label class="form-item__label" for="select1">
-                                    Select 1
-                                </label>
-                                <select class="form-item__select" id="select1">
-                                    <option>Option One</option>
-                                    <option>Option Two</option>
-                                    <option>Option Three</option>
-                                    <option>Option Four</option>
-                                    <option>Option Five</option>
-                                    <option disabled="">Disabled Option</option>
-                                </select>
-                            </div>
-                            <div class="form-item form-item--select">
-                                <label class="form-item__label" for="select2">
-                                    Select 2
-                                </label>
-                                <select class="form-item__select" id="select2">
-                                    <option>Option One</option>
-                                    <option>Option Two</option>
-                                    <option>Option Three</option>
-                                    <option disabled="">Disabled Option</option>
-                                    <option>Option Four</option>
-                                </select>
-                            </div>
-                        </div><!--/.form-row-->
-                        <div class="chart">
-                            <p class="title">Map Chart Placeholder</p>
-                            <img src="images/map.png" alt="Placeholder for map chart" width="100%" />
-                        </div>
-                        <div class="datasource">
-                            <p class="datasource-title">Data Source: XXX</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.</p>
-                        </div>                        
-                    </div><!--/#content-maps-->
-                    <div class="tab-content" id="content-timeseries">
-                        <div class="chart">
-                            <p class="title">Temperatures in the Contiguous 48 States, 1901-2100</p>
-                            <img src="images/timeseries.jpg" alt="Placeholder for timeseries chart" width="100%" />
-                        </div>
-                        <div class="datasource">
-                            <p class="datasource-title">Data Source: XXX</p>
-                            <p>These graphs show concentrations of carbon dioxide, methane, and nitrous oxide in the atmosphere. Historical observations run from 1950 through 2023, with each black line representing a different data source. Projections extend from 2005 to 2100. These projected concentrations were among the inputs that fed into all of the global climate models whose results are reported in EPA’s other observation/projection pairings. Therefore, these graphs show no hindcast and no multi-model average or spread, as greenhouse gas concentrations were a common input rather than a model output.</p>
-                        </div>
-                    </div><!--/#content-timeseries-->
-                    <div class="tab-content" id="content-summary">
-                        <h3>Background</h3>
-                        <p>Temperature is a fundamental measurement for describing the climate, and the temperature in particular places can have wide-ranging effects on human life and ecosystems. As concentrations of heat-trapping greenhouse gases increase in the Earth’s atmosphere, average temperatures at the Earth’s surface are increasing and are expected to continue rising. Because climate change can shift the wind patterns and ocean currents that drive the world’s climate system, some areas are warming more than others, and some have experienced cooling.</p>
-                        <p>This feature complements EPA’s U.S. and Global Temperature indicator by showing modeled historical and future annual average surface temperature within the contiguous United States alongside the observed data.</p>
-                        <h3>Key Points</h3>
-                        <ul>
-                            <li>Since 1901, the average surface temperature across the contiguous 48 states has risen at an average rate of 0.17°F per decade. Average temperatures have risen more quickly since the late 1970s. Nine of the top 10 warmest years on record for the contiguous 48 states have occurred since 1998. </li>
-                            <li>Annual average temperatures are projected to continue to increase in all four emissions scenarios during the next several decades. Modeled ranges suggest that temperatures could stabilize or even begin to fall during the last few decades of this century in the low emissions scenario, where there are significant reductions in greenhouse gas and other air pollutant emissions. However, temperatures would continue to increase in the other three scenarios. </li>
-                            <li>Higher emissions clearly lead to higher temperatures. In the very high emissions scenario, annual average temperatures are expected to be about 8°F higher at the end of this century than they are currently. </li>
-                            <li>All 48 contiguous states can expect to experience continued warming, with acceleration relative to the past few decades in the two higher emissions scenarios.</li>
-                        </ul>
-                        <h3>Sources and Methods</h3>
-                        <p>Historical observations for this pairing come from thousands of weather stations throughout the United States, some of which have been in place for a century or more. Data have been adjusted to account for any biases that might be introduced by factors such as station moves, urbanization near the station, changes in measuring instruments, and changes in the exact times at which measurements are taken. The U.S. and Global Temperature indicator provides additional corroborating evidence from satellites that measured similar trends.</p>
-                        <p>Model outputs are based on a set of 16 global climate models that reflect scientists’ current understanding of how greenhouse gases warm the atmosphere and how this heat moves between the atmosphere, water, and land. These same 16 models were used in the most recent National Climate Assessment. The modeled lines are smoother than the historical trends because EPA averaged 16 models together and also applied an 11-year smoothing filter, both of which smooth out year-to-year variability. However, the shaded bands do include year-to-year variability.</p>
-                        <p>The graph shows annual anomalies, or differences, compared withthe difference from the average temperature from 1901 to 2000. </p>
-                        <p>For more detailed information about sources and methods, see:</p>
-                        <ul>
-                            <li><a href="#">Technical documentation for EPA’s indicator based on historical observations</a></li>
-                            <li><a href="#">Technical documentation for this pairing of observations and model outputs</a></li>
-                            <li><a href="#">General technical documentation for the observations/model outputs pairing project</a></li>
-                        </ul>
-                    </div><!--/#content-summary-->
-                    <div class="tab-content" id="content-techdoc">
-                        <p>Text goes here...</p>    
-                    </div><!--/#content-techdoc-->
-                </div><!--/.content-->
+                {{ content }}
             </div><!--/.main-->
         </div><!--/.layout-container-->
     </main>

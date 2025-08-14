@@ -1,0 +1,39 @@
+<h2>{{ title }}</h2>
+<div class="tab-nav">
+    <nav>
+        <ul>
+            {{navlist}}
+            <li><a href="#" id="{{prefix}}-tab-summary">Summary</a></li>
+            <li><a href="#" id="{{prefix}}-tab-techdoc">Technical Documentation</a></li>
+        </ul>
+    </nav>
+</div>
+<div class="content">
+    {{ maps }}
+    {{ timeseries }}
+    <div class="tab-content" id="content-{{prefix}}-summary">
+        <h3>Background</h3>
+        <p>Temperature is a fundamental measurement for describing the climate, and the temperature in particular places can have wide-ranging effects on human life and ecosystems. As concentrations of heat-trapping greenhouse gases increase in the Earth’s atmosphere, average temperatures at the Earth’s surface are increasing and are expected to continue rising. Because climate change can shift the wind patterns and ocean currents that drive the world’s climate system, some areas are warming more than others, and some have experienced cooling.</p>
+        <p>This feature complements EPA’s U.S. and Global Temperature indicator by showing modeled historical and future annual average surface temperature within the contiguous United States alongside the observed data.</p>
+        <h3>Key Points</h3>
+        <ul>
+            <li>Since 1901, the average surface temperature across the contiguous 48 states has risen at an average rate of 0.17°F per decade. Average temperatures have risen more quickly since the late 1970s. Nine of the top 10 warmest years on record for the contiguous 48 states have occurred since 1998. </li>
+            <li>Annual average temperatures are projected to continue to increase in all four emissions scenarios during the next several decades. Modeled ranges suggest that temperatures could stabilize or even begin to fall during the last few decades of this century in the low emissions scenario, where there are significant reductions in greenhouse gas and other air pollutant emissions. However, temperatures would continue to increase in the other three scenarios. </li>
+            <li>Higher emissions clearly lead to higher temperatures. In the very high emissions scenario, annual average temperatures are expected to be about 8°F higher at the end of this century than they are currently. </li>
+            <li>All 48 contiguous states can expect to experience continued warming, with acceleration relative to the past few decades in the two higher emissions scenarios.</li>
+        </ul>
+        <h3>Sources and Methods</h3>
+        <p>Historical observations for this pairing come from thousands of weather stations throughout the United States, some of which have been in place for a century or more. Data have been adjusted to account for any biases that might be introduced by factors such as station moves, urbanization near the station, changes in measuring instruments, and changes in the exact times at which measurements are taken. The U.S. and Global Temperature indicator provides additional corroborating evidence from satellites that measured similar trends.</p>
+        <p>Model outputs are based on a set of 16 global climate models that reflect scientists’ current understanding of how greenhouse gases warm the atmosphere and how this heat moves between the atmosphere, water, and land. These same 16 models were used in the most recent National Climate Assessment. The modeled lines are smoother than the historical trends because EPA averaged 16 models together and also applied an 11-year smoothing filter, both of which smooth out year-to-year variability. However, the shaded bands do include year-to-year variability.</p>
+        <p>The graph shows annual anomalies, or differences, compared withthe difference from the average temperature from 1901 to 2000. </p>
+        <p>For more detailed information about sources and methods, see:</p>
+        <ul>
+            <li><a href="#">Technical documentation for EPA’s indicator based on historical observations</a></li>
+            <li><a href="#">Technical documentation for this pairing of observations and model outputs</a></li>
+            <li><a href="#">General technical documentation for the observations/model outputs pairing project</a></li>
+        </ul>
+    </div><!--/#content-summary-->
+    <div class="tab-content" id="content-{{prefix}}-techdoc">
+        <p>Text goes here...</p>
+    </div><!--/#content-techdoc-->
+</div><!--/.content-->
