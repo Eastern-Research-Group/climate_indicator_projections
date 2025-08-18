@@ -37,15 +37,14 @@ grow_seas_map_cln_data <- gs_mod_raw %>%
   ) %>%
   # Combine with observed data
   rbind(gs_obs_cln) %>%
-  # Combine with conus geospatial file
-  dplyr::left_join(conus_cln, by = dplyr::join_by(state == stusps)) %>%
-  sf::st_as_sf() %>%
   rename_scenarios(., TRUE) %>%
   # Create legend buckets
   dplyr::mutate(legend_buckets = cut(total_change,
-                                     breaks=c(-15, -1,  1, 15, 30, 45, 60, 75, 90)))
-
-# Set the factors
-grow_seas_map_cln_data$legend_buckets <- as.factor(grow_seas_map_cln_data$legend_buckets)
+                                     breaks=c(-15, -1,  1, 15, 30, 45, 60, 75, 90))) %>%
+  # Set the factors
+  dplyr::mutate(legend_buckets= as.factor(legend_buckets)) %>%
+  # Combine with conus geospatial file
+  dplyr::left_join(conus_cln, by = dplyr::join_by(state == stusps)) %>%
+  sf::st_as_sf(crs=5070)
 
 usethis::use_data(grow_seas_map_cln_data, overwrite = TRUE)
