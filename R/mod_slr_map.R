@@ -13,6 +13,7 @@ mod_slr_map_ui <- function(id) {
     map=
       shinycssloaders::withSpinner(
         tagList(
+          tags$p("Relative Sea Level Change Along U.S. Coasts, 1960-2150", class="title"),
           leaflet::leafletOutput(
             ns("map"),
             width = "100%",
