@@ -15,7 +15,7 @@ create_static_map_ui <- function(ns, obs_dates, proj_dates, title) {
   map_id <- ns("map_comparison")
 
   tagList(
-      tags$p("Choose two scenarios to compare"),
+      tags$p("Choose two scenarios to compare using the before and after slider."),
 
     fluidRow(
 
