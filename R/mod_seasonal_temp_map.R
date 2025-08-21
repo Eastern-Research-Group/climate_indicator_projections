@@ -25,7 +25,7 @@ mod_seasonal_temp_map_ui <- function(id) {
           ns,
           obs_dates="1896–2023",
           proj_dates="2024–2100",
-          title="Change in Precipitation in the United States"
+          title=sprintf("Change in %s Temperatures by State", textOutput("selected_text"))
         )
       )
     )
@@ -98,6 +98,10 @@ mod_seasonal_temp_map_server <- function(id){
 
 
 # Make reactive -----------------------------------------------------------
+
+    output$selected_text <- renderText({
+      input$seasonRadioButtons  # This returns the selected value from the radio button
+    })
 
     output$map <- renderPlot({
 
