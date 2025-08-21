@@ -204,13 +204,13 @@ header nav li:last-child a {
     width: 100%;
 }
 .sidebar {
-    width: 25%;
+    width: 20%;
     order: 0;
     border-right: 2px solid #28A0CB;
-    padding: 0 0 0 4rem;
+    padding: 0 0 0 1rem;
 }
 .main {
-    width: 75%;
+    width: 80%;
     order: 1;
     padding: 0 3rem;
 }
@@ -362,6 +362,11 @@ main .content ul li{
 .chart{
     text-align: center;
 }
+
+.chart .leaflet {
+    text-align: left;
+}
+
 .chart .title{
     font-size: 1.3rem;
     font-weight: 700;
@@ -376,6 +381,13 @@ main .content ul li{
 }
 .datasource-title{
     font-weight: bold;
+}
+
+.map_overlay {
+  position: absolute !important;
+  margin: 0 auto;
+  top: 50px;
+  right: 50px;
 }
 
 
