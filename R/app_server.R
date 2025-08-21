@@ -22,4 +22,5 @@ app_server <- function(input, output, session) {
   mod_slr_plot_server("slr_plot_1")
   mod_slr_map_server("slr_map_1")
   mod_ghg_conc_plot_server("ghg_conc_plot_1")
+  mod_coast_fld_map_server("coast_fld_map_1")
 }
