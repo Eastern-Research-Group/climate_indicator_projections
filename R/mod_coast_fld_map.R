@@ -15,16 +15,29 @@ mod_coast_fld_map_ui <- function(id) {
         map=
           shinycssloaders::withSpinner(
             tagList(
-              tags$p("Average Number of Coastal Flood Events per Year, 1950-2100", class="title"),
-              sliderInput(ns("decade"), "Select Decade:",
+              tags$p("Average Number of Coastal Flood Days per Year, 1950-2100", class="title"),
+              tags$p("Observed period: 1950s to 2010s | Projected period: 2020s to 2090s", class="subtitle"),
+              tags$style(HTML("
+                      .irs-grid-text {
+                        font-size: 12px;
+                      }
+                      .irs--shiny .irs-min,.irs--shiny .irs-max {
+                        font-size: 12px;
+                      }
+                      .irs--shiny .irs-from,.irs--shiny .irs-to,.irs--shiny .irs-single {
+                        font-size: 14px;
+                      }
+                      ")),
+              sliderInput(inputId = ns("decade"),
+                          label = "Select Decade:",
                           min = 1950,
-                          max = 2100,
+                          max = 2090,
                           value = 2020,
                           step = 10,
                           #   animate = animationOptions(interval = 1000),
                           sep = "",
                           post = "s",
-                          width = "40%"),
+                          width = "100%"),
               leaflet::leafletOutput(
                 ns("map"),
                 width = "100%",
@@ -43,6 +56,9 @@ mod_coast_fld_map_ui <- function(id) {
 mod_coast_fld_map_server <- function(id){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
+
+
+    # Create the base map -----------------------------------------------------
 
     # Create the color palette
     pal <- leaflet::colorBin("RdYlBu", domain = coastal_flood_cln_data$fld_days_pdec, reverse = TRUE)
@@ -66,6 +82,8 @@ mod_coast_fld_map_server <- function(id){
     })
 
 
+    # Reactive map ------------------------------------------------------------
+
     # Get the scenarios pre filtered
     lower_slr <- coastal_flood_cln_data %>%
       dplyr::filter(scenario %in% c("Observed", "Lower sea level rise"))
@@ -75,6 +93,7 @@ mod_coast_fld_map_server <- function(id){
 
     # Observe changes in the slider and update markers
     observe({
+
       # Filter to the right decade
       lower_slr_filt <- lower_slr %>%
         dplyr::filter(decade == input$decade)
@@ -92,7 +111,7 @@ mod_coast_fld_map_server <- function(id){
                                   stroke = TRUE,
                                   fillOpacity = 1,
                                   group = "Lower sea level rise",
-                                  label = ~paste0(station_name, ": ", round(fld_days_pdec,2), " days"),
+                                  label = ~paste0(station_name, ": ", round(fld_days_pdec,0), " days"),
                                   color = ~pal(fld_days_pdec)
         ) %>%
         # Higher sea level rise
@@ -102,7 +121,7 @@ mod_coast_fld_map_server <- function(id){
                                   stroke = TRUE,
                                   fillOpacity = 1,
                                   group = "Higher sea level rise",
-                                  label = ~paste0(fld_days_pdec, ": ", round(fld_days_pdec,2), " days"),
+                                  label = ~paste0(station_name, ": ", round(fld_days_pdec,0), " days"),
                                   color = ~pal(fld_days_pdec)
         )
     })
