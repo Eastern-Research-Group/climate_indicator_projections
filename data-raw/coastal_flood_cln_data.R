@@ -21,23 +21,39 @@ cf_mod_cln <- cf_mod_raw %>%
   tidyr::pivot_longer(cols = !c("year", "flood_type"),
                       names_to = "station_name", values_to = "fld_days_pyr") %>%
   dplyr::filter(flood_type %in% c("floods_historical", "int", "int_high")) %>%
-  dplyr::mutate(scenario =dplyr::case_when(
+  dplyr::mutate(scenario = dplyr::case_when(
 
     flood_type == "floods_historical" ~ "Observed",
     flood_type == "int" ~ "Lower sea level rise",
     flood_type == "int_high" ~ "Higher sea level rise",
+    TRUE ~ NA
 
   )) %>%
-  # Make decade columns
+  dplyr::filter(year >= 1950) %>%
+  dplyr::filter(station_name %in% obs_stations)
+
+allowed_nas <- cf_mod_cln %>%
+  dplyr::mutate(year = as.integer(year)) %>%
+  dplyr::mutate(decade = (year %/% 10) * 10) %>%
+  dplyr::filter(is.na(fld_days_pyr)) %>%
+  dplyr::group_by(station_name, scenario, decade) %>%
+  dplyr::count() %>%
+  dplyr::mutate(pass_criteria = ifelse(n <= 4, "yes", "no")) %>%
+  dplyr::select(-n)
+
+# Make decade columns
+cf_mod_dec <- cf_mod_cln %>%
   dplyr::mutate(year = as.integer(year)) %>%
   dplyr::mutate(decade = (year %/% 10) * 10) %>%
   dplyr::group_by(station_name, scenario, decade) %>%
-  dplyr::summarise(fld_days_pdec = mean(fld_days_pyr)) %>%
-  dplyr::filter(decade >= 1950) %>%
+  dplyr::summarise(fld_days_pdec = mean(fld_days_pyr, na.rm = TRUE)) %>%
   dplyr::ungroup() %>%
+  # Don't show stations with more than 6 missing years
+  dplyr::left_join(allowed_nas, by = c("station_name", "scenario", "decade")) %>%
+  dplyr::filter(pass_criteria %in% c(NA, "yes")) %>%
+  # Make it so projected is only from 2020
   dplyr::mutate(fld_days_pdec = ifelse(scenario != "Observed" & decade < 2020, 9999, fld_days_pdec)) %>%
-  dplyr::filter(fld_days_pdec < 9999) %>%
-  dplyr::filter(station_name %in% obs_stations)
+  dplyr::filter(fld_days_pdec < 9999)
 
 
 # Get the lat/lon from the model data -------------------------------------
@@ -50,7 +66,7 @@ station_loc <- cf_mod_raw %>%
   tidyr::pivot_wider(names_from = `Station Name`, values_from = loc)
 
 # Combine and process -----------------------------------------------------
-coastal_flood_cln_data <- dplyr::left_join(cf_mod_cln, station_loc, by = "station_name") %>%
+coastal_flood_cln_data <- dplyr::left_join(cf_mod_dec, station_loc, by = "station_name") %>%
   sf::st_as_sf(coords = c("Long", "Lat"), crs = 4326)
 
 usethis::use_data(coastal_flood_cln_data, overwrite = TRUE)
