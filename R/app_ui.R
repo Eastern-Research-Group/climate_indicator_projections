@@ -109,7 +109,8 @@ app_ui <- function(request) {
           "input.selected_tab=='slr'",
           render_indicator_page(
             title="Sea Level",
-            maps=mod_slr_map_ui("slr_map_1"),
+            maps=
+                mod_slr_map_ui("slr_map_1"),
             timeseries=mod_slr_plot_ui("slr_plot_1"),
             summary=render_summary(
 
@@ -117,8 +118,29 @@ app_ui <- function(request) {
             tech_doc=render_tech_doc(
 
             )
+
+
           )
         ),
+
+
+        # Coastal Flooding --------------------------------------------------------
+        conditionalPanel(
+          "input.selected_tab=='coast_flood'",
+          render_indicator_page(
+            title="Coastal Flooding",
+            maps= mod_coast_fld_map_ui("coast_fld_map_1"),
+            summary=render_summary(
+
+            ),
+            tech_doc=render_tech_doc(
+
+            )
+
+
+          )
+        ),
+
 
         # Ocean Acidity -----------------------------------------------------------
         conditionalPanel(
