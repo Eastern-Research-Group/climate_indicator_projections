@@ -4,7 +4,12 @@
 \alias{create_slr_plot}
 \title{create_slr_plot}
 \usage{
-create_slr_plot(slr_obs_cln, slr_proj_all, csiro_bounds)
+create_slr_plot(
+  slr_obs_cln,
+  slr_proj_all,
+  csiro_bounds,
+  vertical_legend = TRUE
+)
 }
 \arguments{
 \item{slr_obs_cln}{Dataframe of observed slr data}
@@ -12,6 +17,8 @@ create_slr_plot(slr_obs_cln, slr_proj_all, csiro_bounds)
 \item{slr_proj_all}{Dataframe of projected slr data}
 
 \item{csiro_bounds}{Dataframe of CSIRO bounds for the observed slr data}
+
+\item{vertical_legend}{TRUE or FALSE whether the legend should be vertical to the right of the plot. Default to TRUE.}
 }
 \description{
 create_slr_plot
