@@ -10,8 +10,44 @@
 mod_slr_map_ui <- function(id) {
   ns <- NS(id)
   render_map_page(
-    map=shinycssloaders::withSpinner(leaflet::leafletOutput(ns("map"),width = "100%", height = 800))
+    map=
+      shinycssloaders::withSpinner(
+        tagList(
+          leaflet::leafletOutput(
+            ns("map"),
+            width = "100%",
+            height = 800
+          ),
+          absolutePanel(
+            id = ns("overlay"),
+            class = "panel panel-default map_overlay",
+            top = 90,
+            right = 40,
+            width = 440,
+            style="display:none;", # Start with it hidden, so it doesn't appear without the map
+            fixed=TRUE,
+            draggable = TRUE,
+            height = "auto",
+            tagList(
+              tags$div(
+                span(h4("Please select a location to view the sea level rise chart")),
+                id=ns("no_data_selected")
+              ),
+              tags$div(
+                tagList(
+                  h5(textOutput(ns("plot_title"))),
+                  highcharter::highchartOutput(ns("plot"))
+                ),
+                id=ns("graph_container"),
+                style="display:none"
+              )
+
+            )
+          )
+        ),
+    )
   )
+
 }
 
 #' slr_map Server Functions
@@ -21,64 +57,7 @@ mod_slr_map_server <- function(id){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
 
-    # Read in data
-    slr_map_obs_raw <- readr::read_csv(file.path(config::get("slr_path"), "sea-level_fig-2.csv"), skip = 6)
-    slr_map_mod_raw <- readr::read_csv(file.path(config::get("slr_path"), "SLR_TF U.S. Sea Level Projections.csv"), skip = 17)
-
-    # clean and process the data
-    slr_map_obs <- slr_map_obs_raw %>%
-      janitor::clean_names() %>%
-      dplyr::mutate(scenario = "observed") %>%
-      dplyr::select(-state)
-
-  # Clean and process the modeled data
-    slr_map_mod_cln <- slr_map_mod_raw %>%
-      clean_slr_mod_data() %>% # Initial clean of the modeled data
-      dplyr::filter(noaa_name != "GMSL") %>% # don't need GMSL
-      # Make a column of station names that will match the observations station names
-      dplyr::mutate(station_name = dplyr::case_when(
-        noaa_name == "Baltimore, Fort McHenry, Patapsco River" ~ "Baltimore",
-        noaa_name == "Beaufort, Duke Marine Lab" ~ "Beaufort",
-        noaa_name == "Charleston, Cooper River Entrance" ~ "Charleston",
-        noaa_name == "Freeport" ~ "Freeport Harbor",
-        noaa_name == "Hilo, Hilo Bay, Kuhio Bay" ~ "Hilo",
-        noaa_name == "Kahului, Kahului Harbor" ~ "Kahului",
-        noaa_name == "Kwajalein, Marshall Islands" ~ "Kwajalein",
-        noaa_name == "Mayport (Bar Pilots Dock)" ~ "Mayport",
-        noaa_name == "San Diego, San Diego Bay" ~ "San Diego",
-        noaa_name == "Skagway, Taiya Inlet" ~ "Skagway",
-        noaa_name == "St. Petersburg, Tampa Bay" ~ "St. Petersburg",
-        noaa_name == "Virginia Key, Biscayne Bay" ~ "Virginia Key",
-        noaa_name == "Wake Island, Pacific Ocean" ~ "Wake Island",
-        TRUE ~ noaa_name
-      )) %>%
-      dplyr::filter(year > 2005) %>%
-      dplyr::group_by(station_name, scenario) %>%
-      dplyr::mutate(rate_change = lm(slr_in ~ year)$coefficients[[2]]) %>%
-      dplyr::mutate(relative_sea_level_change = rate_change*(2150-2020)) %>%
-      dplyr::slice(1) %>%
-      dplyr::select(station_name, scenario, relative_sea_level_change, lat, long) %>%
-      # for now filter to just the medium scenarios
-      dplyr::filter(scenario %in% c("0.5 - MED", "1.0 - MED")) %>%
-      dplyr::mutate(scenario = ifelse(scenario == "0.5 - MED", "Lower sea level rise", "Higher sea level rise"))
-
-    ## TODO: Do I need to adjust for NOAA 2005 offset
-    # dplyr::mutate(slr_in = slr_in + noaa_2005)
-
-    ## TODO: observed data is from 1960 to 2023 but can only use projections that start at 2020 or 2030
-
-    # Filter to just the stations that are in bo
-    obs_stations <- unique(slr_map_obs$station_name)
-    mod_stations <- unique(slr_map_mod_cln$station_name)
-    wanted_stations <- intersect(obs_stations, mod_stations)
-
-    ## TODO: MEED TO DECIDE WHAT TO DO HERE:
-    #"Galveston Bay Entrance" / "Galveston Pleasure Pier" & "Galveston Pier 21"
-
-    # combine with observed data and final processing
-    slr_map_cln_data <- rbind(slr_map_obs, slr_map_mod_cln) %>%
-      dplyr::filter(station_name %in% wanted_stations) %>%  #filter to just stations that have both modeled and observed data
-      sf::st_as_sf(coords = c("long", "lat"), crs = 4326) # make geospatial
+    # TODO: Make sure to do all of the data todos before using this for the final
 
     # pull things out separately
     slr_map_obs_fnl <- slr_map_cln_data %>% dplyr::filter(scenario == "observed")
@@ -89,53 +68,103 @@ mod_slr_map_server <- function(id){
     pal <- leaflet::colorBin("RdYlBu", domain = slr_map_cln_data$relative_sea_level_change, reverse = TRUE)
     pal_legend <- leaflet::colorBin("RdYlBu", domain = slr_map_cln_data$relative_sea_level_change)
 
+    leaflet_map <- leaflet::leaflet() %>%
+      leaflet::addTiles(., urlTemplate = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png') %>%
+      # Observed data
+      leaflet::addCircleMarkers(data = slr_map_obs_fnl,
+                                layerId = ~paste0(station_name, " Observations"),
+                                radius = 6,
+                                stroke = TRUE,
+                                fillOpacity = 1,
+                                group = "Observations (1960-2023)",
+                                label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " in"),
+                                color = ~pal(relative_sea_level_change)
+      ) %>%
+      # Lower sea level rise
+      leaflet::addCircleMarkers(data = slr_map_lo_fnl,
+                                layerId =  ~paste0(station_name, " Lower SLR"),
+                                radius = 6,
+                                stroke = TRUE,
+                                fillOpacity = 1,
+                                group = "Lower sea level rise (2020-2150)",
+                                label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " in"),
+                                color = ~pal(relative_sea_level_change)
+      ) %>%
+      # Higher sea level rise
+      leaflet::addCircleMarkers(data = slr_map_hi_fnl,
+                                layerId =  ~paste0(station_name, " Higher SLR"),
+                                radius = 6,
+                                stroke = TRUE,
+                                fillOpacity = 1,
+                                group = "Higher sea level rise (2020-2150)",
+                                label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " in"),
+                                color = ~pal(relative_sea_level_change)
+      ) %>%
+      leaflet::setView(., lng = -99, lat = 39, zoom = 4) %>%
+      leaflet::addLegend(pal = pal_legend, values =  slr_map_cln_data$relative_sea_level_change, opacity = 1,
+                         title = "Relative Sea Level Change",
+                         position = "topleft",
+                         labFormat = leaflet::labelFormat(transform = function(x) sort(x, decreasing = TRUE))) %>%
+      leaflet::addLayersControl(
+        baseGroups = c("Observations (1960-2023)", "Lower sea level rise (2020-2150)",  "Higher sea level rise (2020-2150)"),
+        options = leaflet::layersControlOptions(collapsed = FALSE),
+        position = "topleft"
+      )
+
     # generatae leaflet map
-    output$map <- leaflet::renderLeaflet({
+    output$map <- leaflet::renderLeaflet(leaflet_map)
 
-      leaflet_map <- leaflet::leaflet() %>%
-        leaflet::addTiles() %>%
-        # Observed data
-        leaflet::addCircleMarkers(data = slr_map_obs_fnl,
-                                  layerId = ~paste0(station_name, " Observations"),
-                                  radius = 6,
-                                  stroke = TRUE,
-                                  fillOpacity = 1,
-                                  group = "Observations",
-                                  label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " in"),
-                                  color = ~pal(relative_sea_level_change)
-                                  ) %>%
-        # Lower sea level rise
-        leaflet::addCircleMarkers(data = slr_map_lo_fnl,
-                                  layerId =  ~paste0(station_name, " Lower SLR"),
-                                  radius = 6,
-                                  stroke = TRUE,
-                                  fillOpacity = 1,
-                                  group = "Lower sea level rise",
-                                  label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " in"),
-                                  color = ~pal(relative_sea_level_change)
-        ) %>%
-        # Higher sea level rise
-        leaflet::addCircleMarkers(data = slr_map_hi_fnl,
-                                  layerId =  ~paste0(station_name, " Higher SLR"),
-                                  radius = 6,
-                                  stroke = TRUE,
-                                  fillOpacity = 1,
-                                  group = "Higher sea level rise",
-                                  label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " in"),
-                                  color = ~pal(relative_sea_level_change)
-        ) %>%
-        leaflet::setView(., lng = -99, lat = 39, zoom = 4) %>%
-        leaflet::addLegend(pal = pal_legend, values =  slr_map_cln_data$relative_sea_level_change, opacity = 1,
-                           title = "Relative Sea Level Change",
-                           position = "topleft",
-                           labFormat = leaflet::labelFormat(transform = function(x) sort(x, decreasing = TRUE))) %>%
-        leaflet::addLayersControl(
-          baseGroups = c("Observations","Lower sea level rise",  "Higher sea level rise"),
-          options = leaflet::layersControlOptions(collapsed = FALSE),
-          position = "topleft"
-        )
+    city_selected <- reactiveVal(NULL)
 
-        return(leaflet_map)
+    observeEvent(input$map_bounds, {
+      # ONce the map is loaded (we know it is loaded if we get a "Map bounds" event)
+      # Then show the side overlay
+      shinyjs::show("overlay")
+    })
+
+    # Observe click event
+    observeEvent(input$map_marker_click, {
+
+      # Remove type from the ID
+      remove_list <- c(" Observations", " Lower SLR", " Higher SLR")
+      pattern <- paste(remove_list, collapse = "|")
+
+      click <- stringr::str_remove_all(input$map_marker_click$id, pattern)
+
+      city_selected(click)
+    })
+
+    observe({
+      if (is.null(city_selected())) {
+        shinyjs::show("no_data_selected")
+        shinyjs::hide("graph_container")
+      } else {
+        shinyjs::show("graph_container")
+        shinyjs::hide("no_data_selected")
+      }
+    })
+
+
+
+
+    # high chart title
+    output$plot_title <- renderText({
+      paste0(city_selected(), " Cumulative Sea Level Change\n(XXXX-XXXX)")
+    })
+
+
+
+    # high chart to render
+    output$plot <- highcharter::renderHighchart({
+
+      # Filter here
+      ## IF city_Selected() is null, that means nothing has been selected.
+
+      create_slr_plot(slr_plot_obs,
+                      slr_plot_mod_all,
+                      slr_plot_obs_csiro_bounds,
+                      FALSE)
+
 
     })
 
