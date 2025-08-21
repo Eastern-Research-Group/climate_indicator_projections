@@ -33,10 +33,12 @@ golem::add_module(name = "grow_season_map", with_test = TRUE)
 # Annual Total Precipitation
 golem::add_module(name = "precip_plot", with_test = TRUE)
 golem::add_module(name = "precip_map", with_test = TRUE)
-
+# Coastal flooding
+golem::add_module(name = "coast_fld_map", with_test = TRUE)
 # Sea Level Rise
 golem::add_module(name = "slr_plot", with_test = TRUE)
 golem::add_module(name = "slr_map", with_test = TRUE)
+golem::add_module(name = "slr_map_inset_plot", with_test = TRUE)
 # Plots
 golem::add_module(name = "sst_plot", with_test = TRUE) # Sea surface temperature
 golem::add_module(name = "ocean_acidity_plot", with_test = TRUE) # Ocean Acidity
@@ -50,6 +52,8 @@ golem::add_fct("helpers", with_test = TRUE)
 golem::add_fct("model_processing", with_test = TRUE)
 golem::add_fct("create_hc_plot", with_test = TRUE)
 golem::add_fct("create_static_map", with_test = TRUE)
+golem::add_fct("render_page", with_test = TRUE)
+golem::add_fct("create_static_map_ui", with_test = TRUE)
 golem::add_utils("calc_anom", with_test = TRUE)
 golem::add_utils("calc_model_range", with_test = TRUE)
 golem::add_utils("calc_diff_avs", with_test = TRUE)
@@ -132,6 +136,10 @@ usethis::use_data_raw(name = "seas_temp_map_cln_data_summer", open = rlang::is_i
 usethis::use_data_raw(name = "slr_plot_obs", open = rlang::is_interactive())
 usethis::use_data_raw(name = "slr_plot_obs_csiro_bounds", open = rlang::is_interactive())
 usethis::use_data_raw(name = "slr_plot_mod_all", open = rlang::is_interactive())
+usethis::use_data_raw(name = "slr_map_cln_data", open = rlang::is_interactive())
+
+# Coastal Flooding: Map
+usethis::use_data_raw(name = "coastal_flood_cln_data", open = rlang::is_interactive())
 
 # Snow Cover: Plots
 usethis::use_data_raw(name = "sc_plot_winter", open = rlang::is_interactive())
