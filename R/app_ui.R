@@ -28,9 +28,9 @@ app_ui <- function(request) {
           ),
           # Average Temperature -----------------------------------------------------
           conditionalPanel(
-            "input.selected_tab == null || input.selected_tab=='annual_total_temp'",
+            "input.selected_tab == null || input.selected_tab=='av_temp'",
             render_indicator_page(
-              title="Annual Total Temperature",
+              title="Average Temperature",
               maps=mod_av_temp_map_ui("av_temp_map_1"),
               timeseries=mod_av_temp_plot_ui("av_temp_plot_1"),
               summary=render_summary(
@@ -77,7 +77,7 @@ app_ui <- function(request) {
           conditionalPanel(
             "input.selected_tab=='total_precip'",
             render_indicator_page(
-              title="Annual Total Precipitation",
+              title="Total Precipitation",
               maps=mod_precip_map_ui("precip_map_1"),
               timeseries=mod_precip_plot_ui("precip_plot_1"),
               summary=render_summary(
