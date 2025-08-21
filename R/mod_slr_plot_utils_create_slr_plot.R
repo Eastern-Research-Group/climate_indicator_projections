@@ -3,12 +3,13 @@
 #' @param slr_obs_cln Dataframe of observed slr data
 #' @param slr_proj_all Dataframe of projected slr data
 #' @param csiro_bounds Dataframe of CSIRO bounds for the observed slr data
+#' @param vertical_legend TRUE or FALSE whether the legend should be vertical to the right of the plot. Default to TRUE.
 #'
 #' @returns
 #' @export
 #'
 #' @examples
-create_slr_plot <- function(slr_obs_cln, slr_proj_all, csiro_bounds){
+create_slr_plot <- function(slr_obs_cln, slr_proj_all, csiro_bounds, vertical_legend = TRUE){
 
   slr_plot <- highcharter::highchart() %>%
     # Add dummy element to make legend group titles
@@ -81,7 +82,7 @@ create_slr_plot <- function(slr_obs_cln, slr_proj_all, csiro_bounds){
     # Plot aesthetics
     highcharter::hc_tooltip(crosshairs = TRUE, valueDecimals = 2) %>%
     highcharter::hc_yAxis(title = list(
-      text = "Cumulative sea level change (inches)",
+      text = "Sea level change (inches)",
       style = list(fontSize = "16px")),
       labels = list(
         style = list(fontSize = "14px")
@@ -90,18 +91,45 @@ create_slr_plot <- function(slr_obs_cln, slr_proj_all, csiro_bounds){
                           labels = list(
                             style = list(fontSize = "14px")
                           )) %>%
-    highcharter::hc_title(text = "Global Average Absolute and Projected Sea Level Change, 1880–2150") %>%
     highcharter::hc_plotOptions(line = list(marker = list(enabled = FALSE)),
-                                arearange  = list(marker = list(enabled = FALSE))) %>%
-    highcharter::hc_legend(
-      layout = "vertical",
-      align = "right",
-      verticalAlign = "middle",
-      useHTML = TRUE,
-      itemStyle = list(
-        fontSize = "12px"
+                                arearange  = list(marker = list(enabled = FALSE)))
+
+  if (vertical_legend) {
+
+    slr_plot <- slr_plot %>%
+      highcharter::hc_title(text = "Global Average Absolute and Projected Sea Level Change, 1880–2150") %>%
+      highcharter::hc_legend(
+        layout = "vertical",
+        align = "right",
+        verticalAlign = "middle",
+        useHTML = TRUE,
+        itemStyle = list(
+          fontSize = "12px"
+        )
       )
-    )
+
+  } else{
+
+    slr_plot <- slr_plot %>%
+      highcharter::hc_legend(
+        # layout = "vertical",
+        # align = "center",
+        # verticalAlign = "bottom",
+        useHTML = TRUE,
+        align = "left",
+        # y = "10px",
+        # verticalAlign = "bottom",
+        # itemWidth = 200,
+        # symbolWidth = 20,
+        # width = 400,
+        itemStyle = list(
+          fontSize = "12px"
+        )
+      )
+
+  }
+
+
 
   return(slr_plot)
 
