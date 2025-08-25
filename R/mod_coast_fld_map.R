@@ -48,8 +48,8 @@ mod_coast_fld_map_ui <- function(id) {
               absolutePanel(
                 id = ns("overlay"),
                 class = "panel panel-default map_overlay",
-                top = 90,
-                right = 40,
+                top = 200,
+                right = 20,
                 width = 440,
                 style="display:none;", # Start with it hidden, so it doesn't appear without the map
                 fixed=TRUE,
@@ -57,13 +57,15 @@ mod_coast_fld_map_ui <- function(id) {
                 height = "auto",
                 tagList(
                   tags$div(
-                    span(h4("Please select a location to view coastal flooding plot.")),
+                    span(h5("Please select a location to view coastal flooding plot.")),
                     id=ns("no_data_selected")
                   ),
                   tags$div(
                     tagList(
-                      h5(textOutput(ns("plot_title"))),
-                      highcharter::highchartOutput(ns("plot"))
+                      highcharter::highchartOutput(ns("plot")),
+                      checkboxInput(ns("check"),
+                                    label = HTML("Zoom to <b>observed</b> data."),
+                                    value = FALSE, width = NULL)
                     ),
                     id=ns("graph_container"),
                     style="display:none"
@@ -84,7 +86,6 @@ mod_coast_fld_map_ui <- function(id) {
 mod_coast_fld_map_server <- function(id){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
-
 
     # Create the base map -----------------------------------------------------
 
@@ -188,25 +189,72 @@ mod_coast_fld_map_server <- function(id){
       }
     })
 
-    # high chart title
-    output$plot_title <- renderText({
-      paste0(city_selected(), " Coastal Flooding Days")
-    })
+    # Colors
+    obs_col <- "black"
+    hi_slr_col <- "orange"
+    low_slr_col<- "blue"
+
+    cf_colors <- c(hi_slr_col, low_slr_col, obs_col)
+
+    # Filter the data
+     observe({
+
+       if (!is.null(city_selected())) {
+
+         # Filter to the chosen location
+         filtered_loc <- coastal_flood_cln_data %>%
+           dplyr::filter(station_name == city_selected())
+
+         #maximum y axis
+         max_y <- 370
+
+         # zoom to observed data
+         if (isTRUE(input$check)){
+
+           filtered_loc <- filtered_loc %>%
+             dplyr::filter(scenario == "Observed")
+
+           #maximum y axis
+           max_y <- NA
+
+         }
+
+       }
+
+       # render the plot
+       output$plot <- highcharter::renderHighchart({
+
+         inset_plot <- highcharter::highchart() %>%
+           highcharter::hc_add_series(data = filtered_loc,
+                                      type = "column",
+                                      highcharter::hcaes(x = decade, y = fld_days_pdec, group = scenario),
+                                      tooltip = list(headerFormat = "<b>{series.name}</b>",
+                                                     pointFormat = "<br>{point.decade}: {point.y} days"
+                                      )
+           ) %>%
+           highcharter::hc_plotOptions(bar = list(animation = FALSE)) %>%
+           highcharter::hc_tooltip(valueDecimals = 0) %>%
+           highcharter::hc_title(text = sprintf("Average Flood Days per Year Each Decade in %s", city_selected())) %>%
+           highcharter::hc_xAxis(title = list(text = "Decade"), tickInterval = 10) %>%
+           highcharter::hc_yAxis(title = list(text = "Average Flood Days"), max = max_y)
+
+         if (isTRUE(input$check)){
+
+           inset_plot %>%
+             highcharter::hc_colors("black")
+
+         } else{
+
+           inset_plot %>%
+             highcharter::hc_colors(cf_colors)
+
+         }
+
+       })
+
+     })
 
 
-    # high chart to render
-    output$plot <- highcharter::renderHighchart({
-
-      # Filter here
-      ## IF city_Selected() is null, that means nothing has been selected.
-
-      create_slr_plot(slr_plot_obs,
-                      slr_plot_mod_all,
-                      slr_plot_obs_csiro_bounds,
-                      FALSE)
-
-
-    })
 
 
   })
