@@ -15,14 +15,14 @@ create_static_map_ui <- function(ns, obs_dates, proj_dates, title) {
   map_id <- ns("map_comparison")
 
   tagList(
-      tags$p("Choose two scenarios to compare using the before and after slider."),
+      tags$p("Choose two scenarios to compare using the slider."),
 
     fluidRow(
 
       column(5,
 
              selectInput(ns("scenario_choice"),
-                         label = "Scenario 1",
+                         label = "Left Map",
                          choices = c(sprintf("Observations, %s", obs_dates),
                                      sprintf("Low emissions (SSP1-2.6), %s", proj_dates),
                                      sprintf("Intermediate emissions (SSP2-4.5), %s", proj_dates),
@@ -36,7 +36,7 @@ create_static_map_ui <- function(ns, obs_dates, proj_dates, title) {
       column(5,
 
              selectInput(ns("scenario_choice_2"),
-                         label = "Scenario 2",
+                         label = "Right Map",
                          choices = c(sprintf("Observations, %s", obs_dates),
                                      sprintf("Low emissions (SSP1-2.6), %s", proj_dates),
                                      sprintf("Intermediate emissions (SSP2-4.5), %s", proj_dates),
