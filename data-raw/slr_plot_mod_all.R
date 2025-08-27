@@ -5,17 +5,31 @@ slr_plot_obs_raw <- readr::read_csv(file.path(config::get("slr_path"), "sea-leve
   janitor::clean_names()
 slr_plot_mod_all_raw <- readr::read_csv(file.path(config::get("slr_path"), "SLR_TF U.S. Sea Level Projections.csv"), skip = 17)
 
-# get the NOAA observed 2005 value to offset the projections data
-noaa_2005 <- slr_plot_obs_raw %>%
-  dplyr::filter(year == 2005) %>%
-  dplyr::pull(noaa_adjusted_sea_level_inches)
 
-# Clean up projected data
-slr_plot_mod_all <- slr_plot_mod_all_raw %>%
+# Clean projected data ----------------------------------------------------
+
+slr_plot_mod_cln <- slr_plot_mod_all_raw %>%
   clean_slr_mod_data() %>%
   dplyr::filter(noaa_name == "GMSL") %>%
-  dplyr::mutate(slr_in = slr_in + noaa_2005) %>%  # add noaa 2005 offset
   dplyr::select(-noaa_name, -lat, -long)
+
+# Align projected with observed -------------------------------------------
+
+# get the NOAA observed 2020 value to offset the projections data
+noaa_2020 <- slr_plot_obs_raw %>%
+  dplyr::filter(year == 2020) %>%
+  dplyr::pull(noaa_adjusted_sea_level_inches)
+
+# Get the projected 2020 value
+slr_plot_mod_2020 <- slr_plot_mod_cln %>%
+  dplyr::filter(year == 2020) %>%
+  dplyr::mutate(shift_noaa_2020 = noaa_2020 - slr_in) %>%
+  dplyr::select(-slr_in, -year)
+
+slr_plot_mod_all <- dplyr::left_join(slr_plot_mod_cln, slr_plot_mod_2020, by = c("scenario")) %>%
+  dplyr::mutate(slr_old = slr_in) %>%
+  dplyr::mutate(slr_in = slr_in + shift_noaa_2020) %>%
+  dplyr::select(scenario, year, slr_in)
 
 # SLR proj mid
 slr_proj_mid <- slr_plot_mod_all %>%
