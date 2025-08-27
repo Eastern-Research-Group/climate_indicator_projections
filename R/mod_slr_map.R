@@ -103,7 +103,7 @@ mod_slr_map_server <- function(id){
       ) %>%
       leaflet::setView(., lng = -99, lat = 39, zoom = 4) %>%
       leaflet::addLegend(pal = pal_legend, values =  slr_map_cln_data$relative_sea_level_change, opacity = 1,
-                         title = "Relative Sea Level Change",
+                         title = "Relative Sea<br>Level Change",
                          position = "topleft",
                          labFormat = leaflet::labelFormat(transform = function(x) sort(x, decreasing = TRUE))) %>%
       leaflet::addLayersControl(
