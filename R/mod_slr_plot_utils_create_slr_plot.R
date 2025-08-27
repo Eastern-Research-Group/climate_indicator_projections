@@ -29,7 +29,7 @@ create_slr_plot <- function(slr_obs_cln, slr_proj_all, csiro_bounds, vertical_le
                                                   group = scenario,
                                                   x = year, y = slr_in),
                                tooltip = list(headerFormat = "<b>{series.name}</b>",
-                                              pointFormat = sprintf("<br>{point.year}: {point.y}%s", "inches")
+                                              pointFormat = "<br>{point.year}: {point.y} inches"
                                ),
                                color = c("purple", "black")
     ) %>%
