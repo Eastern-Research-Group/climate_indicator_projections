@@ -5,6 +5,8 @@ slr_map_obs_stat_raw <- readr::read_csv(file.path(config::get("slr_path"), "9414
 slr_map_mod_stat_raw <- readr::read_csv(file.path(config::get("slr_path"), "SLR_TF U.S. Sea Level Projections.csv"), skip = 17)
 
 # Clean the observed data -------------------------------------------------
+# TODO: Add a check that there are 12 months of data in each year
+
 slr_map_obs_ann <- slr_map_obs_stat_raw %>%
   janitor::clean_names() %>%
   dplyr::filter(year >= 1960) %>%
@@ -40,12 +42,13 @@ slr_map_inset_plot <- slr_map_obs_stat %>%
   dplyr::rename(slr_in = rsl_adj) %>%
   dplyr::mutate(scenario = "observed") %>%
   dplyr::select(-rsl) %>%
-  rbind(slr_map_mod_stat_adj)
-
-
-ggplot2::ggplot(slr_map_inset_plot, ggplot2::aes(x = year, y = slr_in)) +
-  ggplot2::geom_line(ggplot2::aes(color=scenario))
-
+  rbind(slr_map_mod_stat_adj) %>%
+  dplyr::mutate(station_name = "San Francisco") %>% # TODO FIX THISS!!!!!!
+  dplyr::mutate(scenario = dplyr::case_when(
+    scenario == "0.5 - MED" ~ "Lower sea level rise",
+    scenario == "1.0 - MED" ~ "Higher sea level rise",
+    TRUE ~ "Observations"
+    ))
 
 
 usethis::use_data(slr_map_inset_plot, overwrite = TRUE)
