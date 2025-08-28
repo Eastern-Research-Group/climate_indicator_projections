@@ -22,8 +22,8 @@ mod_slr_map_ui <- function(id) {
           absolutePanel(
             id = ns("overlay"),
             class = "panel panel-default map_overlay",
-            top = 90,
-            right = 40,
+            top = 60,
+            right = 20,
             width = 440,
             style="display:none;", # Start with it hidden, so it doesn't appear without the map
             fixed=TRUE,
@@ -66,8 +66,8 @@ mod_slr_map_server <- function(id){
     slr_map_hi_fnl <- slr_map_cln_data %>% dplyr::filter(scenario == "Higher sea level rise")
 
     # Create the color palette
-    pal <- leaflet::colorBin("RdYlBu", domain = slr_map_cln_data$relative_sea_level_change, reverse = TRUE)
-    pal_legend <- leaflet::colorBin("RdYlBu", domain = slr_map_cln_data$relative_sea_level_change)
+    pal <- leaflet::colorBin("RdYlBu", domain = slr_map_cln_data$relative_sea_level_change, right = FALSE, reverse = TRUE)
+    pal_legend <- leaflet::colorBin("RdYlBu", domain = slr_map_cln_data$relative_sea_level_change, right = FALSE)
 
     leaflet_map <- leaflet::leaflet() %>%
       leaflet::addTiles(., urlTemplate = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png') %>%
@@ -102,10 +102,24 @@ mod_slr_map_server <- function(id){
                                 color = ~pal(relative_sea_level_change)
       ) %>%
       leaflet::setView(., lng = -99, lat = 39, zoom = 4) %>%
-      leaflet::addLegend(pal = pal_legend, values =  slr_map_cln_data$relative_sea_level_change, opacity = 1,
+      leaflet::addLegend(pal = pal_legend,
+                         values =  slr_map_cln_data$relative_sea_level_change,
+                         opacity = 1,
                          title = "Relative Sea<br>Level Change",
                          position = "topleft",
-                         labFormat = leaflet::labelFormat(transform = function(x) sort(x, decreasing = TRUE))) %>%
+                         # labels =  c("-80 - -59",
+                         #             "-60 - -39",
+                         #             "-40 - -19",
+                         #             "-20 - -1",
+                         #             "0 - 19",
+                         #             "20 - 39",
+                         #             "40 - 59",
+                         #             "60 - 79",
+                         #             "80 - 99",
+                         #             "100 - 120"
+                         #             ),
+                         labFormat = leaflet::labelFormat(transform = function(x) sort(x, decreasing = TRUE))
+                         ) %>%
       leaflet::addLayersControl(
         baseGroups = c("Observations (1960-2023)", "Lower sea level rise (2020-2150)",  "Higher sea level rise (2020-2150)"),
         options = leaflet::layersControlOptions(collapsed = FALSE),
@@ -150,7 +164,7 @@ mod_slr_map_server <- function(id){
 
     # high chart title
     output$plot_title <- renderText({
-      paste0(city_selected(), " Cumulative Sea Level Change\n(XXXX-XXXX)")
+      paste0(city_selected(), " Cumulative Sea Level Change\n(1960-2150)")
     })
 
 
@@ -161,10 +175,7 @@ mod_slr_map_server <- function(id){
       # Filter here
       ## IF city_Selected() is null, that means nothing has been selected.
 
-      create_slr_plot(slr_plot_obs,
-                      slr_plot_mod_all,
-                      slr_plot_obs_csiro_bounds,
-                      FALSE)
+      create_slr_station_plot(slr_map_inset_plot)
 
 
     })
