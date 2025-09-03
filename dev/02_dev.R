@@ -70,13 +70,15 @@ golem::add_utils("clean_sc_data", module = "snow_cover_plot", with_test = TRUE)
 golem::add_utils("process_sc", module = "snow_cover_plot", with_test = TRUE)
 golem::add_utils("create_sc_seas", module = "snow_cover_plot", with_test = TRUE)
 golem::add_utils("create_slr_plot", module = "slr_plot", with_test = TRUE)
+golem::add_utils("create_slr_station_plot", module = "slr_map", with_test = TRUE)
 golem::add_utils("cln_ghg_obs", module = "ghg_conc_plot", with_test = TRUE)
 golem::add_utils("create_ghg_plot", module = "ghg_conc_plot", with_test = TRUE)
 golem::add_utils("clean_climdiv", with_test = TRUE)
 golem::add_utils("calc_total_change", with_test = TRUE)
 golem::add_utils("clean_seas_temp_map_mod", with_test = TRUE)
 golem::add_utils("clean_slr_mod_data", with_test = TRUE)
-
+golem::add_utils("chain_slr_data", with_test = TRUE)
+golem::add_utils("align_slr_station_names", with_test = TRUE)
 
 ## External resources
 ## Creates .js and .css files at inst/app/www
@@ -137,6 +139,7 @@ usethis::use_data_raw(name = "slr_plot_obs", open = rlang::is_interactive())
 usethis::use_data_raw(name = "slr_plot_obs_csiro_bounds", open = rlang::is_interactive())
 usethis::use_data_raw(name = "slr_plot_mod_all", open = rlang::is_interactive())
 usethis::use_data_raw(name = "slr_map_cln_data", open = rlang::is_interactive())
+usethis::use_data_raw(name = "slr_map_inset_plot", open = rlang::is_interactive())
 
 # Coastal Flooding: Map
 usethis::use_data_raw(name = "coastal_flood_cln_data", open = rlang::is_interactive())
