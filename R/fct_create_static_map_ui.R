@@ -61,7 +61,7 @@ create_static_map_ui <- function(ns, obs_dates, proj_dates, title) {
     })
                 });
     ", map_id)),
-    tags$p(title, class="title"),
+    tags$div(title, class="title"),
     shinycssloaders::withSpinner(
       tags$div(
         id = map_id,
