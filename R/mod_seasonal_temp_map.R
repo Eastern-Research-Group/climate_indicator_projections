@@ -25,7 +25,11 @@ mod_seasonal_temp_map_ui <- function(id) {
           ns,
           obs_dates="1896–2023",
           proj_dates="2024–2100",
-          title=sprintf("Change in %s Temperatures by State", textOutput("selected_text"))
+          title=tagList(
+            tags$p("Change in "),
+            textOutput(ns("selected_text")),
+            tags$p(" Temperatures by State")
+          )
         )
       )
     )
