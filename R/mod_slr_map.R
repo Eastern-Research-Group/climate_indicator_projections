@@ -175,7 +175,7 @@ mod_slr_map_server <- function(id){
       # Filter here
       ## IF city_Selected() is null, that means nothing has been selected.
 
-      create_slr_station_plot(slr_map_inset_plot)
+      create_slr_station_plot(slr_map_inset_plot, city_selected())
 
 
     })
