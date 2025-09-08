@@ -44,7 +44,7 @@ create_slr_plot <- function(slr_obs_cln, slr_proj_all, csiro_bounds, vertical_le
                                tooltip = list(headerFormat = "<b>{series.name}</b>",
                                               pointFormat = "<br>{point.year}: {point.y} inches"
                                ),
-                               color = c("orange", "blue", "grey")) %>%
+                               color = c("orange", "blue")) %>%
     # Add dummy element to make legend group titles
     highcharter::hc_add_series(
       name = "<u><b style='font-size:13px;'>Range</b></u>",
@@ -74,7 +74,7 @@ create_slr_plot <- function(slr_obs_cln, slr_proj_all, csiro_bounds, vertical_le
                                                   x = year,
                                                   low = lower_bound, high = upper_bound),
                                lineColor = "transparent",
-                               color = c("orange", "blue", "grey"),
+                               color = c("orange", "blue"),
                                visible = FALSE,
                                fillOpacity = 0.3,
                                tooltip = list(headerFormat ="<b>{series.name}</b>",
