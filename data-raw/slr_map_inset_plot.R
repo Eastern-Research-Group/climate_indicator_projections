@@ -15,6 +15,7 @@ slr_map_mod_stat_raw <- readr::read_csv(file.path(config::get("slr_path"), "SLR_
 slr_map_obs_month <- slr_map_obs_stat_raw %>%
   janitor::clean_names() %>%
   dplyr::filter(year >= 1960) %>%
+  dplyr::filter(year <= 2023) %>%
   dplyr::mutate(monthly_msl = measurements::conv_unit(monthly_msl, "m", "in")) %>%
   dplyr::mutate(station_name = stringr::str_remove(source_file, ".csv")) %>%
   dplyr::mutate(station_name = stringr:: str_extract(station_name, "(?<=_).*")) %>%
@@ -24,7 +25,7 @@ slr_map_obs_month <- slr_map_obs_stat_raw %>%
 slr_map_obs_check <- slr_map_obs_month %>%
   dplyr::group_by(station_name) %>%
   dplyr::count(year) %>%
-  dplyr::filter(n < 6) %>%
+  dplyr::filter(n <= 6) %>% # Needs to have at least 60% to be counted
   dplyr::mutate(qc = "not complete") %>%
   dplyr::ungroup()
 
@@ -35,10 +36,11 @@ slr_map_obs_ann <- dplyr::left_join(slr_map_obs_month, slr_map_obs_check, by = c
   dplyr::summarize(rsl = mean(monthly_msl)) %>%
   dplyr::ungroup()
 
-# Adjust so that 1960 is 0
+# Adjust so that the 1960s is 0
 rsl_1960 <- slr_map_obs_ann %>%
-  dplyr::filter(year == 1960) %>%
-  dplyr::select(station_name, rsl_1960 = rsl)
+  dplyr::filter(year < 1970) %>%
+  dplyr::group_by(station_name) %>%
+  dplyr::summarise(rsl_1960 = mean(rsl))
 
 slr_map_obs_stat <- dplyr::left_join(slr_map_obs_ann, rsl_1960, by = c("station_name")) %>%
   dplyr::mutate(rsl_adj = rsl - rsl_1960) %>%
@@ -90,6 +92,7 @@ slr_map_inset_plot <- slr_map_obs_stat %>%
     scenario == "0.5 - MED" ~ "Lower sea level rise",
     scenario == "1.0 - MED" ~ "Higher sea level rise",
     TRUE ~ "Observations"
-    ))
+    )) %>%
+  dplyr::mutate(slr_ft = measurements::conv_unit(slr_in, "in", "ft"))
 
 usethis::use_data(slr_map_inset_plot, overwrite = TRUE)
