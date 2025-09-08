@@ -20,9 +20,9 @@ create_slr_station_plot <- function(slr_stations_all, which_station){
                                type = "line",
                                highcharter::hcaes(name = scenario,
                                                   group = scenario,
-                                                  x = year, y = slr_in),
+                                                  x = year, y = slr_ft),
                                tooltip = list(headerFormat = "<b>{series.name}</b>",
-                                              pointFormat = "<br>{point.year}: {point.y} inches"
+                                              pointFormat = "<br>{point.year}: {point.y} feet"
                                ),
                                connectNulls = FALSE,
                                color = c("black")) %>%
@@ -32,15 +32,15 @@ create_slr_station_plot <- function(slr_stations_all, which_station){
                                dashStyle = "shortdash",
                                highcharter::hcaes(name = scenario,
                                                   group = scenario,
-                                                  x = year, y = slr_in),
+                                                  x = year, y = slr_ft),
                                tooltip = list(headerFormat = "<b>{series.name}</b>",
-                                              pointFormat = "<br>{point.year}: {point.y} inches"
+                                              pointFormat = "<br>{point.year}: {point.y} feet"
                                ),
                                color = c("orange", "blue")) %>%
     # Plot aesthetics
     highcharter::hc_tooltip(crosshairs = TRUE, valueDecimals = 2) %>%
     highcharter::hc_yAxis(title = list(
-      text = "Sea level change (inches)",
+      text = "Sea level (feet)",
       style = list(fontSize = "16px")),
       labels = list(
         style = list(fontSize = "14px")

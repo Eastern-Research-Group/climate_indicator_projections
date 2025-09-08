@@ -36,12 +36,10 @@ obs_stations <- unique(slr_map_obs$station_name)
 mod_stations <- unique(slr_map_mod_cln$station_name)
 wanted_stations <- intersect(obs_stations, mod_stations)
 
-## TODO: MEED TO DECI
-
 # Combine and final processing --------------------------------------------
-
 slr_map_cln_data <- rbind(slr_map_obs, slr_map_mod_cln) %>%
   dplyr::filter(station_name %in% wanted_stations) %>%  #filter to just stations that have both modeled and observed data
-  sf::st_as_sf(coords = c("long", "lat"), crs = 4326)
+  sf::st_as_sf(coords = c("long", "lat"), crs = 4326) %>%
+  dplyr::mutate(relative_sea_level_change = measurements::conv_unit(relative_sea_level_change, "in", "ft"))
 
 usethis::use_data(slr_map_cln_data, overwrite = TRUE)

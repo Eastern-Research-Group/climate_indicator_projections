@@ -78,7 +78,7 @@ mod_slr_map_server <- function(id){
                                 stroke = TRUE,
                                 fillOpacity = 1,
                                 group = "Observations (1960-2023)",
-                                label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " in"),
+                                label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " ft"),
                                 color = ~pal(relative_sea_level_change)
       ) %>%
       # Lower sea level rise
@@ -88,7 +88,7 @@ mod_slr_map_server <- function(id){
                                 stroke = TRUE,
                                 fillOpacity = 1,
                                 group = "Lower sea level rise (2020-2150)",
-                                label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " in"),
+                                label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " ft"),
                                 color = ~pal(relative_sea_level_change)
       ) %>%
       # Higher sea level rise
@@ -98,14 +98,14 @@ mod_slr_map_server <- function(id){
                                 stroke = TRUE,
                                 fillOpacity = 1,
                                 group = "Higher sea level rise (2020-2150)",
-                                label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " in"),
+                                label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " ft"),
                                 color = ~pal(relative_sea_level_change)
       ) %>%
       leaflet::setView(., lng = -99, lat = 39, zoom = 4) %>%
       leaflet::addLegend(pal = pal_legend,
                          values =  slr_map_cln_data$relative_sea_level_change,
                          opacity = 1,
-                         title = "Relative Sea<br>Level Change",
+                         title = "Relative Sea<br>Level Change (ft)",
                          position = "topleft",
                          # labels =  c("-80 - -59",
                          #             "-60 - -39",
