@@ -23,4 +23,11 @@ app_server <- function(input, output, session) {
   mod_slr_map_server("slr_map_1")
   mod_ghg_conc_plot_server("ghg_conc_plot_1")
   mod_coast_fld_map_server("coast_fld_map_1")
+
+  observeEvent(input$main_tabs, {
+    req(input$main_tabs)
+    updateTabsetPanel(session, "main_tabs", selected = input$main_tabs)
+  })
+
+
 }
