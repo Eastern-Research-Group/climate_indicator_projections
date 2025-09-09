@@ -47,15 +47,16 @@ mod_grow_season_map_server <- function(id){
 
 # Make the maps ------------------------------------------------------------
 
+    cln_data <- sf::st_as_sf(grow_seas_map_cln_data)
     # Get all the scenarios in the data
-    all_scenarios <- unique(grow_seas_map_cln_data$scenario)
+    all_scenarios <- unique(cln_data$scenario)
     names(all_scenarios) <- all_scenarios  # Set names to match values
 
     all_maps <- purrr::map(
       all_scenarios,
       ~ create_static_map(
         which_scenario = .x,
-        map_data = grow_seas_map_cln_data,
+        map_data = cln_data,
         which_colors = GROW_SEASON_MAP_COLORS,
         title = "Change in Length of Growing Season by State",
         legend_title = "Change in length of\ngrowing season (days)"

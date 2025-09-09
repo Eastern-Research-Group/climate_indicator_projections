@@ -58,16 +58,17 @@ mod_slr_map_server <- function(id){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
 
-    # TODO: Make sure to do all of the data todos before using this for the final
+    # Make sur it's read in as an sf
+    cln_data <- sf::st_as_sf(slr_map_cln_data)
 
     # pull things out separately
-    slr_map_obs_fnl <- slr_map_cln_data %>% dplyr::filter(scenario == "observed")
-    slr_map_lo_fnl <- slr_map_cln_data %>% dplyr::filter(scenario == "Lower sea level rise")
-    slr_map_hi_fnl <- slr_map_cln_data %>% dplyr::filter(scenario == "Higher sea level rise")
+    slr_map_obs_fnl <- cln_data %>% dplyr::filter(scenario == "observed")
+    slr_map_lo_fnl <- cln_data %>% dplyr::filter(scenario == "Lower sea level rise")
+    slr_map_hi_fnl <- cln_data %>% dplyr::filter(scenario == "Higher sea level rise")
 
     # Create the color palette
-    pal <- leaflet::colorBin("RdYlBu", domain = slr_map_cln_data$relative_sea_level_change, right = FALSE, reverse = TRUE)
-    pal_legend <- leaflet::colorBin("RdYlBu", domain = slr_map_cln_data$relative_sea_level_change, right = FALSE)
+    pal <- leaflet::colorBin("RdYlBu", domain = cln_data$relative_sea_level_change, right = FALSE, reverse = TRUE)
+    pal_legend <- leaflet::colorBin("RdYlBu", domain = cln_data$relative_sea_level_change, right = FALSE)
 
     leaflet_map <- leaflet::leaflet() %>%
       leaflet::addTiles(., urlTemplate = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png') %>%
@@ -103,7 +104,7 @@ mod_slr_map_server <- function(id){
       ) %>%
       leaflet::setView(., lng = -99, lat = 39, zoom = 4) %>%
       leaflet::addLegend(pal = pal_legend,
-                         values =  slr_map_cln_data$relative_sea_level_change,
+                         values =  cln_data$relative_sea_level_change,
                          opacity = 1,
                          title = "Relative Sea<br>Level Change (ft)",
                          position = "topleft",

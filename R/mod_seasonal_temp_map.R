@@ -62,8 +62,9 @@ mod_seasonal_temp_map_server <- function(id){
 
 # Make the maps ------------------------------------------------------------
 
+    cln_data <- sf::st_as_sf(seas_temp_map_cln_data_fall)
     # Get all the scenarios in the data
-    all_scenarios <- unique(seas_temp_map_cln_data_fall$scenario)
+    all_scenarios <- unique(cln_data$scenario)
     names(all_scenarios) <- all_scenarios  # Set names to match values
 
     # Create a map for each scenario and season

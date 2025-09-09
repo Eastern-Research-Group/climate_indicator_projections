@@ -44,14 +44,15 @@ mod_precip_map_server <- function(id){
 
 # Make the maps ------------------------------------------------------------
 
+    cln_data <- sf::st_as_sf(precip_map_cln_data)
     # Get all the scenarios in the data
-    all_scenarios <- unique(precip_map_cln_data$scenario)
+    all_scenarios <- unique(cln_data$scenario)
     names(all_scenarios) <- all_scenarios  # Set names to match values
     # Create a map for each scenario
     all_maps <- lapply(
       all_scenarios,
       create_static_map,
-      precip_map_cln_data,
+      cln_data,
       PRECIP_MAP_COLORS,
       "Change in Precipitation in the United States",
       "Percent change in precipitation")

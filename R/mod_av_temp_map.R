@@ -46,18 +46,30 @@ mod_av_temp_map_server <- function(id){
     ns <- session$ns
 
 # Make the maps ------------------------------------------------------------
-
   # Get all the scenarios in the data
-  all_scenarios <- unique(av_temp_map_cln_data$scenario)
-  names(all_scenarios) <- all_scenarios  # Set names to match values
+  cln_data <- sf::st_as_sf(av_temp_map_cln_data)
+  all_scenarios <- unique(cln_data$scenario)
   # Create a map for each scenario
   all_maps <- lapply(
     all_scenarios,
     create_static_map,
-    av_temp_map_cln_data,
+    cln_data,
     AV_TEMP_MAP_COLORS,
     "Rate of Temperature Change in the United States",
     "Rate of temperature change\n(°F per century)")
+
+  names(all_maps) <- all_scenarios  # Set names to match values
+
+  # all_maps <- purrr::map(
+  #   all_scenarios,
+  #   ~ create_static_map(
+  #     which_scenario = .x,
+  #     map_data = av_temp_map_cln_data,
+  #     which_colors = AV_TEMP_MAP_COLORS,
+  #     title = "Rate of Temperature Change in the United States",
+  #     legend_title = "Rate of temperature change\n(°F per century)"
+  #   )
+  # )
 
 # Make reactive -----------------------------------------------------------
 

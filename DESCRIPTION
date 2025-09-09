@@ -13,13 +13,19 @@ Imports:
     config,
     dplyr,
     golem,
+    highcharter,
     janitor,
+    leaflet,
     magrittr,
     readr,
     shiny,
+    sf,
+    shinycssloaders,
     stats,
     vroom,
-    zoo
+    zoo,
+    ggplot2,
+    ggthemes
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

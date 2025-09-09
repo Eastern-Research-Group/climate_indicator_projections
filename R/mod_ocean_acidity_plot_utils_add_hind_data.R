@@ -3,11 +3,12 @@
 #'
 #' @param proj_av Projected model average
 #' @param years years to add for hindcast
+#' @param is_date TRUE if there is a date column - will be turned into a year column
 #'
 #' @returns Dataframe of projected model averages with extra hindcast data for the ssps
 #' @export
 #'
-#' @examples oa_hind_years <- oa_proj_av_cln %>% dplyr::group_by(station_name) %>% add_hind_data(., c(2004:2014))
+#' @examples proj_av %>% dplyr::group_by(station_name) %>% add_hind_data(., c(2004:2014))
 add_hind_data <- function(proj_av, years, is_date = TRUE){
 
   if (is_date) {
