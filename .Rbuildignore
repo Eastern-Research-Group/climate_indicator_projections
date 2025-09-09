@@ -6,3 +6,6 @@ dev_history.R
 $run_dev.*
 ^.here$
 ^codecov\.yml$
+^app\.R$
+^rsconnect$
+^\.rscignore$

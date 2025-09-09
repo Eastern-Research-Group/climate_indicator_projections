@@ -1,0 +1,12 @@
+name: climate_indicator_projections
+title: climate_indicator_projections
+username: erg-shiny
+account: erg-shiny
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 15397365
+bundleId: 10883599
+url: https://erg-shiny.shinyapps.io/climate_indicator_projections/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
