@@ -11,6 +11,8 @@ add_hind_data(proj_av, years, is_date = TRUE)
 \item{proj_av}{Projected model average}
 
 \item{years}{years to add for hindcast}
+
+\item{is_date}{TRUE if there is a date column - will be turned into a year column}
 }
 \value{
 Dataframe of projected model averages with extra hindcast data for the ssps
@@ -18,7 +20,4 @@ Dataframe of projected model averages with extra hindcast data for the ssps
 \description{
 add_hind_data
 Add some of the hindcast years to the ssps so that the rolling average includes those years
-}
-\examples{
-oa_hind_years <- oa_proj_av_cln \%>\% dplyr::group_by(station_name) \%>\% add_hind_data(., c(2004:2014))
 }

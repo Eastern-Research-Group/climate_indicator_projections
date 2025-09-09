@@ -7,8 +7,7 @@
 #'
 #' @returns Dataframe of projected model averages with extra hindcast data for the ssps
 #' @export
-#'
-#' @examples proj_av %>% dplyr::group_by(station_name) %>% add_hind_data(., c(2004:2014))
+
 add_hind_data <- function(proj_av, years, is_date = TRUE){
 
   if (is_date) {
