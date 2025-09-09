@@ -10,7 +10,11 @@
 #' @return The return value, if any, from executing the function.
 #'
 #' @noRd
-create_static_map_ui <- function(ns, obs_dates, proj_dates, title) {
+create_static_map_ui <- function(ns,
+                                 obs_dates,
+                                 proj_dates,
+                                 title,
+                                 legend=NULL) {
 
   map_id <- ns("map_comparison")
 
@@ -18,8 +22,9 @@ create_static_map_ui <- function(ns, obs_dates, proj_dates, title) {
       tags$p("Choose two scenarios to compare using the slider."),
 
     fluidRow(
-
-      column(5,
+      column(
+        align="center",
+        6,
 
              selectInput(ns("scenario_choice"),
                          label = "Left Map",
@@ -33,7 +38,9 @@ create_static_map_ui <- function(ns, obs_dates, proj_dates, title) {
 
       ),
 
-      column(5,
+      column(
+        align="center",
+        6,
 
              selectInput(ns("scenario_choice_2"),
                          label = "Right Map",
@@ -62,13 +69,19 @@ create_static_map_ui <- function(ns, obs_dates, proj_dates, title) {
                 });
     ", map_id)),
     tags$div(title, class="title"),
-    shinycssloaders::withSpinner(
-      tags$div(
-        id = map_id,
-        plotOutput(ns("map"), width = "600px", height = "600px"),
-        plotOutput(ns("map_2"), width = "600px", height = "600px"),
+
+      tagList(
+        tags$div(
+          id = map_id,
+          style="width: 1000px; margin: 0 auto;",
+          shinycssloaders::withSpinner(plotOutput(ns("map"), width = "1000px", height = "600px")),
+          shinycssloaders::withSpinner(plotOutput(ns("map_2"), width = "1000px", height = "600px"))
+        ),
+        tags$div(
+          style="width: 1000px; margin: 0 auto;",
+          legend
+        )
       )
     )
 
-  )
 }
