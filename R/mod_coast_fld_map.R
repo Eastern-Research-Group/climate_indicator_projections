@@ -91,7 +91,7 @@ mod_coast_fld_map_server <- function(id){
 
     # Create the color palette
     pal <- leaflet::colorBin("RdYlBu", domain = coastal_flood_cln_data$fld_days_pdec, reverse = TRUE)
-    pal_legend <- leaflet::colorBin("RdYlBu", domain = coastal_flood_cln_data$fld_days_pdec)
+    pal_legend <- leaflet::colorBin("RdYlBu", domain = c(0,366))
 
     # Initialize the map
     output$map <- leaflet::renderLeaflet({
@@ -120,9 +120,12 @@ mod_coast_fld_map_server <- function(id){
     higher_slr <- coastal_flood_cln_data %>%
       dplyr::filter(scenario %in% c("Observed", "Higher sea level rise"))
 
+    render <- reactiveVal(FALSE)
+
     # Observe changes in the slider and update markers
     observe({
-
+      req(input$decade)
+      req(render())
       # Filter to the right decade
       lower_slr_filt <- lower_slr %>%
         dplyr::filter(decade == input$decade)
@@ -160,10 +163,13 @@ mod_coast_fld_map_server <- function(id){
 
     city_selected <- reactiveVal(NULL)
 
+
+
     observeEvent(input$map_bounds, {
       # ONce the map is loaded (we know it is loaded if we get a "Map bounds" event)
       # Then show the side overlay
       shinyjs::show("overlay")
+      render(TRUE)
     })
 
     # Observe click event
