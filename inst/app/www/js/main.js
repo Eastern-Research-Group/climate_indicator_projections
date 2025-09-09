@@ -29,11 +29,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 */
-$(document).on('click', 'a.link_clickable', function(event) {
+/*$(document).on('click', 'a.link_clickable', function(event) {
   // Get ID of clicked <a> element
   Shiny.setInputValue("selected_tab", event.target.id);
   $(".link_clickable.active").removeClass("active");
   event.target.classList.add('active');
 
   //$('#' + event.target.id.replace("-link", "-button")).click();
+});*/
+
+document.addEventListener("DOMContentLoaded", function () {
+    const links = document.querySelectorAll(".link_clickable");
+
+    links.forEach(link => {
+        link.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            // Remove active class from all
+            links.forEach(l => l.classList.remove("active"));
+            this.classList.add("active");
+
+            // Tell Shiny to switch tab
+            let tabId = this.getAttribute("data-tab");
+            if (tabId == null) {
+              tabId = this.id;
+            }
+            Shiny.setInputValue("main_tabs", tabId, { priority: "event" });
+        });
+    });
 });
