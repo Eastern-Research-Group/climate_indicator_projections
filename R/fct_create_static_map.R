@@ -20,13 +20,11 @@ create_static_map <- function(which_scenario, map_data, which_colors, title, leg
 
     # Create the map
     out_map <- ggplot2::ggplot() +
-      ggplot2::geom_sf(data = which_map, ggplot2::aes(fill = legend_buckets), color = "#88807F") +
-      ggplot2::scale_fill_manual(values = which_colors, drop = FALSE) +
+      ggplot2::geom_sf(data = which_map, ggplot2::aes(fill = legend_buckets), color = "#88807F", show.legend = FALSE) +
+      ggplot2::scale_fill_manual(
+        values = which_colors,
+        drop = FALSE) +
       ggplot2::geom_sf(data = conus_cln, fill = NA, color = state_color) +
-      ggplot2::labs(
-   #     title = title,
-        fill = legend_title
-      ) +
       ggthemes::theme_map() +
       ggplot2::theme(
         text = ggplot2::element_text(size = 12),
