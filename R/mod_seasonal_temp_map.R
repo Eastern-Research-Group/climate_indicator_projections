@@ -73,8 +73,7 @@ mod_seasonal_temp_map_server <- function(id){
       seas_temp_map_cln_data_fall,
       SEASONAL_TEMP_MAP_COLORS,
       "Change in Fall Temperatures by State",
-      "Total temperature change (°F)",
-      "white")
+      "Total temperature change (°F)")
 
     winter_maps <- lapply(
       all_scenarios,
@@ -82,8 +81,7 @@ mod_seasonal_temp_map_server <- function(id){
       seas_temp_map_cln_data_winter,
       SEASONAL_TEMP_MAP_COLORS,
       "Change in Winter Temperatures by State",
-      "Total temperature change (°F)",
-      "white")
+      "Total temperature change (°F)")
 
     spring_maps <- lapply(
       all_scenarios,
@@ -91,8 +89,7 @@ mod_seasonal_temp_map_server <- function(id){
       seas_temp_map_cln_data_spring,
       SEASONAL_TEMP_MAP_COLORS,
       "Change in Spring Temperatures by State",
-      "Total temperature change (°F)",
-      "white")
+      "Total temperature change (°F)")
 
     summer_maps <- lapply(
       all_scenarios,
@@ -100,8 +97,7 @@ mod_seasonal_temp_map_server <- function(id){
       seas_temp_map_cln_data_summer,
       SEASONAL_TEMP_MAP_COLORS,
       "Change in Summer Temperatures by State",
-      "Total temperature change (°F)",
-      "white")
+      "Total temperature change (°F)")
 
 
 # Make reactive -----------------------------------------------------------
