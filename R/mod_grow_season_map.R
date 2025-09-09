@@ -51,14 +51,16 @@ mod_grow_season_map_server <- function(id){
     all_scenarios <- unique(grow_seas_map_cln_data$scenario)
     names(all_scenarios) <- all_scenarios  # Set names to match values
 
-    # Create a map for each scenario
-    all_maps <- lapply(
+    all_maps <- purrr::map(
       all_scenarios,
-      create_static_map,
-      grow_seas_map_cln_data,
-      GROW_SEASON_MAP_COLORS,
-      "Change in Length of Growing Season by State",
-      "Change in length of\ngrowing season (days)")
+      ~ create_static_map(
+        which_scenario = .x,
+        map_data = grow_seas_map_cln_data,
+        which_colors = GROW_SEASON_MAP_COLORS,
+        title = "Change in Length of Growing Season by State",
+        legend_title = "Change in length of\ngrowing season (days)"
+      )
+    )
 
 
 # Make reactive -----------------------------------------------------------
