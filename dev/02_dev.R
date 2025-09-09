@@ -79,6 +79,7 @@ golem::add_utils("clean_seas_temp_map_mod", with_test = TRUE)
 golem::add_utils("clean_slr_mod_data", with_test = TRUE)
 golem::add_utils("chain_slr_data", with_test = TRUE)
 golem::add_utils("align_slr_station_names", with_test = TRUE)
+golem::add_utils("create_map_legend", with_test = TRUE)
 
 ## External resources
 ## Creates .js and .css files at inst/app/www
