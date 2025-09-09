@@ -4,198 +4,135 @@
 #'     DO NOT REMOVE.
 #' @import shiny
 #' @noRd
+#' The application User-Interface
+#'
+#' @param request Internal parameter for `{shiny}`.
+#'     DO NOT REMOVE.
+#' @import shiny
+#' @noRd
 app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
+
     # Your application UI logic
     fluidPage(
       htmlTemplate(
         app_sys("app/www/landing.html"),
-        content = tagList(
-          # Greenhouse Gas Concentrations -------------------------------------------
-          conditionalPanel(
-            "input.selected_tab=='ghg_conc'",
-            render_indicator_page(
-              title="Greenhouse Gas Concentrations",
-              timeseries=mod_ghg_conc_plot_ui("ghg_conc_plot_1"),
-              summary=render_summary(
-              ),
-              tech_doc=render_tech_doc(
+        content = content <- tabsetPanel(
+          id = "main_tabs",
+          type = "hidden",  # Hide default tab headers (you use a custom sidebar)
+          selected="av_temp",
 
-              )
-            )
-          ),
-          # Average Temperature -----------------------------------------------------
-          conditionalPanel(
-            "input.selected_tab == null || input.selected_tab=='av_temp'",
-            render_indicator_page(
-              title="Average Temperature",
-              maps=mod_av_temp_map_ui("av_temp_map_1"),
-              timeseries=mod_av_temp_plot_ui("av_temp_plot_1"),
-              summary=render_summary(
-              ),
-              tech_doc=render_tech_doc(
-
-              )
-            )
+          tabPanel("Greenhouse Gas Concentrations", value = "ghg_conc",
+                   render_indicator_page(
+                     title = "Greenhouse Gas Concentrations",
+                     timeseries = mod_ghg_conc_plot_ui("ghg_conc_plot_1"),
+                     summary = render_summary(),
+                     tech_doc = render_tech_doc()
+                   )
           ),
 
-          # Growing season ----------------------------------------------------------
-          conditionalPanel(
-            "input.selected_tab=='length_of_growing_season'",
-            render_indicator_page(
-              title="Length of Growing Season",
-              maps=mod_grow_season_map_ui("grow_season_map_1"),
-              timeseries=mod_grow_season_plot_ui("grow_season_plot_1"),
-              summary=render_summary(
-
-              ),
-              tech_doc=render_tech_doc(
-
-              )
-            )
+          tabPanel("Average Temperature", value = "av_temp",
+                   render_indicator_page(
+                     title = "Average Temperature",
+                     maps = mod_av_temp_map_ui("av_temp_map_1"),
+                     timeseries = mod_av_temp_plot_ui("av_temp_plot_1"),
+                     summary = render_summary(),
+                     tech_doc = render_tech_doc()
+                   )
           ),
 
-          # Seasonal Temperature ----------------------------------------------------
-          conditionalPanel(
-            "input.selected_tab=='seasonal_temp'",
-            render_indicator_page(
-              title="Seasonal Temperature",
-              maps=mod_seasonal_temp_map_ui("seasonal_temp_map_1"),
-              timeseries=mod_seasonal_temp_plot_ui("seasonal_temp_plot_1"),
-              summary=render_summary(
-
-              ),
-              tech_doc=render_tech_doc(
-
-              )
-            )
+          tabPanel("Length of Growing Season", value = "length_of_growing_season",
+                   render_indicator_page(
+                     title = "Length of Growing Season",
+                     maps = mod_grow_season_map_ui("grow_season_map_1"),
+                     timeseries = mod_grow_season_plot_ui("grow_season_plot_1"),
+                     summary = render_summary(),
+                     tech_doc = render_tech_doc()
+                   )
           ),
 
-          # Precipitation -----------------------------------------------------------
-          conditionalPanel(
-            "input.selected_tab=='total_precip'",
-            render_indicator_page(
-              title="Total Precipitation",
-              maps=mod_precip_map_ui("precip_map_1"),
-              timeseries=mod_precip_plot_ui("precip_plot_1"),
-              summary=render_summary(
-
-              ),
-              tech_doc=render_tech_doc(
-
-              )
-            )
+          tabPanel("Seasonal Temperature", value = "seasonal_temp",
+                   render_indicator_page(
+                     title = "Seasonal Temperature",
+                     maps = mod_seasonal_temp_map_ui("seasonal_temp_map_1"),
+                     timeseries = mod_seasonal_temp_plot_ui("seasonal_temp_plot_1"),
+                     summary = render_summary(),
+                     tech_doc = render_tech_doc()
+                   )
           ),
 
-        # Sea Surface Temperature -------------------------------------------------
-        conditionalPanel(
-          "input.selected_tab=='sst'",
-          render_indicator_page(
-            title="Sea Surface Temperature",
-            timeseries=mod_sst_plot_ui("sst_plot_1"),
-            summary=render_summary(
-
-            ),
-            tech_doc=render_tech_doc(
-
-            )
-          )
-        ),
-
-        # Sea Level Change --------------------------------------------------------
-        conditionalPanel(
-          "input.selected_tab=='slr'",
-          render_indicator_page(
-            title="Sea Level",
-            maps=
-                mod_slr_map_ui("slr_map_1"),
-            timeseries=mod_slr_plot_ui("slr_plot_1"),
-            summary=render_summary(
-
-            ),
-            tech_doc=render_tech_doc(
-
-            )
-
-
-          )
-        ),
-
-
-        # Coastal Flooding --------------------------------------------------------
-        conditionalPanel(
-          "input.selected_tab=='coast_flood'",
-          render_indicator_page(
-            title="Coastal Flooding",
-            maps= mod_coast_fld_map_ui("coast_fld_map_1"),
-            summary=render_summary(
-
-            ),
-            tech_doc=render_tech_doc(
-
-            )
-
-
-          )
-        ),
-
-
-        # Ocean Acidity -----------------------------------------------------------
-        conditionalPanel(
-          "input.selected_tab=='ocean_acid'",
-          render_indicator_page(
-            title="Ocean Acidity",
-            timeseries=mod_ocean_acidity_plot_ui("ocean_acidity_plot_1"),
-            summary=render_summary(
-
-            ),
-            tech_doc=render_tech_doc(
-
-            )
-          )
-        ),
-
-        # Arctic Sea Ice Cover --------------------------------------------------------
-        conditionalPanel(
-          "input.selected_tab=='arctic_sea_ice'",
-          render_indicator_page(
-            title="Arctic Sea Ice",
-            timeseries=mod_arctic_sea_ice_plot_ui("arctic_sea_ice_plot_1"),
-            summary=render_summary(
-
-            ),
-            tech_doc=render_tech_doc(
-
-            )
-          )
-        ),
-
-      # Snow Cover --------------------------------------------------------------
-      conditionalPanel(
-        "input.selected_tab=='snow_cover'",
-        render_indicator_page(
-          title="Snow Cover",
-          timeseries=mod_snow_cover_plot_ui("snow_cover_plot_1"),
-          summary=render_summary(
-
+          tabPanel("Total Precipitation", value = "total_precip",
+                   render_indicator_page(
+                     title = "Total Precipitation",
+                     maps = mod_precip_map_ui("precip_map_1"),
+                     timeseries = mod_precip_plot_ui("precip_plot_1"),
+                     summary = render_summary(),
+                     tech_doc = render_tech_doc()
+                   )
           ),
-          tech_doc=render_tech_doc(
 
+          tabPanel("Sea Surface Temperature", value = "sst",
+                   render_indicator_page(
+                     title = "Sea Surface Temperature",
+                     timeseries = mod_sst_plot_ui("sst_plot_1"),
+                     summary = render_summary(),
+                     tech_doc = render_tech_doc()
+                   )
+          ),
+
+          tabPanel("Sea Level", value = "slr",
+                   render_indicator_page(
+                     title = "Sea Level",
+                     maps = mod_slr_map_ui("slr_map_1"),
+                     timeseries = mod_slr_plot_ui("slr_plot_1"),
+                     summary = render_summary(),
+                     tech_doc = render_tech_doc()
+                   )
+          ),
+
+          tabPanel("Coastal Flooding", value = "coast_flood",
+                   render_indicator_page(
+                     title = "Coastal Flooding",
+                     maps = mod_coast_fld_map_ui("coast_fld_map_1"),
+                     summary = render_summary(),
+                     tech_doc = render_tech_doc()
+                   )
+          ),
+
+          tabPanel("Ocean Acidity", value = "ocean_acid",
+                   render_indicator_page(
+                     title = "Ocean Acidity",
+                     timeseries = mod_ocean_acidity_plot_ui("ocean_acidity_plot_1"),
+                     summary = render_summary(),
+                     tech_doc = render_tech_doc()
+                   )
+          ),
+
+          tabPanel("Arctic Sea Ice", value = "arctic_sea_ice",
+                   render_indicator_page(
+                     title = "Arctic Sea Ice",
+                     timeseries = mod_arctic_sea_ice_plot_ui("arctic_sea_ice_plot_1"),
+                     summary = render_summary(),
+                     tech_doc = render_tech_doc()
+                   )
+          ),
+
+          tabPanel("Snow Cover", value = "snow_cover",
+                   render_indicator_page(
+                     title = "Snow Cover",
+                     timeseries = mod_snow_cover_plot_ui("snow_cover_plot_1"),
+                     summary = render_summary(),
+                     tech_doc = render_tech_doc()
+                   )
           )
         )
-      ),
-
-
-
-        )
-      ),
+      )
     )
   )
-
-
 }
+
 
 #' Add external Resources to the Application
 #'
