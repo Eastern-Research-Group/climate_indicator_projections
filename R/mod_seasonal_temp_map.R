@@ -1,3 +1,15 @@
+SEASONAL_TEMP_MAP_COLORS <- c(
+  "(-2,-0.1]" = "#D1D5EC",
+  "(-0.1,0.1]" = "#C7C7C7",
+  "(0.1,2]" = "#F0D7D6",
+  "(2,4]" =  "#F1C1BE",
+  "(4,6]" = "#EF9F9C",
+  "(6,8]" = "#ED7974",
+  "(8,10]" = "#E8413E",
+  "(10,12]" = "#BD2B2D",
+  "(12,14]" = "#A02725",
+  "(14,16]" = "#780707"
+)
 #' seasonal_temp_map UI Function
 #'
 #' @description A shiny Module.
@@ -29,6 +41,10 @@ mod_seasonal_temp_map_ui <- function(id) {
             tags$p("Change in "),
             textOutput(ns("selected_text")),
             tags$p(" Temperatures by State")
+          ),
+          legend=create_map_legend(
+            SEASONAL_TEMP_MAP_COLORS,
+            label_text = "Total temperature change (°F)"
           )
         )
       )
@@ -46,19 +62,6 @@ mod_seasonal_temp_map_server <- function(id){
 
 # Make the maps ------------------------------------------------------------
 
-    seas_temp_colors <- c(
-      "(-2,-0.1]" = "#D1D5EC",
-      "(-0.1,0.1]" = "#C7C7C7",
-      "(0.1,2]" = "#F0D7D6",
-      "(2,4]" =  "#F1C1BE",
-      "(4,6]" = "#EF9F9C",
-      "(6,8]" = "#ED7974",
-      "(8,10]" = "#E8413E",
-      "(10,12]" = "#BD2B2D",
-      "(12,14]" = "#A02725",
-      "(14,16]" = "#780707"
-    )
-
     # Get all the scenarios in the data
     all_scenarios <- unique(seas_temp_map_cln_data_fall$scenario)
     names(all_scenarios) <- all_scenarios  # Set names to match values
@@ -68,7 +71,7 @@ mod_seasonal_temp_map_server <- function(id){
       all_scenarios,
       create_static_map,
       seas_temp_map_cln_data_fall,
-      seas_temp_colors,
+      SEASONAL_TEMP_MAP_COLORS,
       "Change in Fall Temperatures by State",
       "Total temperature change (°F)",
       "white")
@@ -77,7 +80,7 @@ mod_seasonal_temp_map_server <- function(id){
       all_scenarios,
       create_static_map,
       seas_temp_map_cln_data_winter,
-      seas_temp_colors,
+      SEASONAL_TEMP_MAP_COLORS,
       "Change in Winter Temperatures by State",
       "Total temperature change (°F)",
       "white")
@@ -86,7 +89,7 @@ mod_seasonal_temp_map_server <- function(id){
       all_scenarios,
       create_static_map,
       seas_temp_map_cln_data_spring,
-      seas_temp_colors,
+      SEASONAL_TEMP_MAP_COLORS,
       "Change in Spring Temperatures by State",
       "Total temperature change (°F)",
       "white")
@@ -95,7 +98,7 @@ mod_seasonal_temp_map_server <- function(id){
       all_scenarios,
       create_static_map,
       seas_temp_map_cln_data_summer,
-      seas_temp_colors,
+      SEASONAL_TEMP_MAP_COLORS,
       "Change in Summer Temperatures by State",
       "Total temperature change (°F)",
       "white")
@@ -137,7 +140,7 @@ mod_seasonal_temp_map_server <- function(id){
       )
       return(which_map)
 
-    })
+    }, width = 1000, height = 600)
 
     output$map_2 <- renderPlot({
 
@@ -169,7 +172,7 @@ mod_seasonal_temp_map_server <- function(id){
       )
       return(which_map)
 
-    })
+    }, width = 1000, height = 600)
 
 
 

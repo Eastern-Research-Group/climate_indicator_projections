@@ -1,3 +1,15 @@
+GROW_SEASON_MAP_COLORS <- c(
+
+  "(-15,-1]" = "#DBC3AB",
+  "(-1,1]" = "white",
+  "(1,15]" = "#d1eac7",
+  "(15,30]" = "#a9c99d",
+  "(30,45]" = "#82a875",
+  "(45,60]" = "#5b884e",
+  "(60,75]" = "#346a29",
+  "(75,90]"= "#004c00"
+
+)
 #' grow_season_map UI Function
 #'
 #' @description A shiny Module.
@@ -16,7 +28,11 @@ mod_grow_season_map_ui <- function(id) {
       ns,
       obs_dates="1895–2023",
       proj_dates="2024–2100",
-      title="Change in Length of Growing Season by State"
+      title="Change in Length of Growing Season by State",
+      legend=create_map_legend(
+        GROW_SEASON_MAP_COLORS,
+        label_text = "Change in length of growing season (days)"
+      )
     )
   )
 
@@ -31,19 +47,6 @@ mod_grow_season_map_server <- function(id){
 
 # Make the maps ------------------------------------------------------------
 
-    gs_colors <- c(
-
-      "(-15,-1]" = "#DBC3AB",
-      "(-1,1]" = "white",
-      "(1,15]" = "#d1eac7",
-      "(15,30]" = "#a9c99d",
-      "(30,45]" = "#82a875",
-      "(45,60]" = "#5b884e",
-      "(60,75]" = "#346a29",
-      "(75,90]"= "#004c00"
-
-    )
-
     # Get all the scenarios in the data
     all_scenarios <- unique(grow_seas_map_cln_data$scenario)
     names(all_scenarios) <- all_scenarios  # Set names to match values
@@ -53,7 +56,7 @@ mod_grow_season_map_server <- function(id){
       all_scenarios,
       create_static_map,
       grow_seas_map_cln_data,
-      gs_colors,
+      GROW_SEASON_MAP_COLORS,
       "Change in Length of Growing Season by State",
       "Change in length of\ngrowing season (days)")
 
@@ -72,7 +75,7 @@ mod_grow_season_map_server <- function(id){
       )
       return(which_map)
 
-    })
+    }, width = 1000, height = 600)
 
     output$map_2 <- renderPlot({
 
@@ -86,7 +89,7 @@ mod_grow_season_map_server <- function(id){
       )
       return(which_map)
 
-    })
+    }, width = 1000, height = 600)
 
   })
 }

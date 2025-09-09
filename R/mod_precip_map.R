@@ -1,3 +1,12 @@
+PRECIP_MAP_COLORS <- c(
+  "(-30,-20]" = "#D9B651",
+  "(-20,-10]" = "#E6CD8F",
+  "(-10,-2]" = "#EFE2C7",
+  "(-2,2]" = "#C7C7C7",
+  "(2,10]" = "#91BBE1",
+  "(10,20]" = "#4781D2",
+  "(20,30]" = "#3466AC"
+)
 #' precip_map UI Function
 #'
 #' @description A shiny Module.
@@ -16,7 +25,11 @@ mod_precip_map_ui <- function(id) {
       ns,
       obs_dates="1901–2023",
       proj_dates="2024–2100",
-      title="Change in Precipitation in the United States"
+      title="Change in Precipitation in the United States",
+      legend=create_map_legend(
+        PRECIP_MAP_COLORS,
+        label_text = "Percent change in precipitation"
+      )
     )
   )
 
@@ -31,16 +44,6 @@ mod_precip_map_server <- function(id){
 
 # Make the maps ------------------------------------------------------------
 
-    precip_colors <- c(
-      "(-30,-20]" = "#D9B651",
-      "(-20,-10]" = "#E6CD8F",
-      "(-10,-2]" = "#EFE2C7",
-      "(-2,2]" = "#C7C7C7",
-      "(2,10]" = "#91BBE1",
-      "(10,20]" = "#4781D2",
-      "(20,30]" = "#3466AC"
-    )
-
     # Get all the scenarios in the data
     all_scenarios <- unique(precip_map_cln_data$scenario)
     names(all_scenarios) <- all_scenarios  # Set names to match values
@@ -49,7 +52,7 @@ mod_precip_map_server <- function(id){
       all_scenarios,
       create_static_map,
       precip_map_cln_data,
-      precip_colors,
+      PRECIP_MAP_COLORS,
       "Change in Precipitation in the United States",
       "Percent change in precipitation")
 
@@ -67,7 +70,7 @@ mod_precip_map_server <- function(id){
       )
       return(which_map)
 
-    })
+    }, width = 1000, height = 600)
 
     output$map_2 <- renderPlot({
 
@@ -81,7 +84,7 @@ mod_precip_map_server <- function(id){
       )
       return(which_map)
 
-    })
+    }, width = 1000, height = 600)
 
   })
 }
