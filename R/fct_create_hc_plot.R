@@ -22,8 +22,6 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit, is_oa = FA
 
   ipcc_colors <- c(hindcast_col, ssp126_col, ssp245_col, ssp370_col, ssp585_col)
 
-  scenario_df <- av_temp_plot_cln_data
-
   # Split up observed and modeled data
   obs_data <- scenario_df %>%
     dplyr::filter(scenario == "observed") %>%
@@ -59,6 +57,22 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit, is_oa = FA
   # Make the highchart
   area_tooltip <- sprintf("<br>{point.year}<br>90th Percentile: {point.high}%s <br> 10th Percentile: {point.low}%s", val_unit, val_unit)
 
+  tooltip_format <- list(headerFormat = "<b>{series.name}</b>",
+                       pointFormat = sprintf("<br>{point.year}: {point.y}%s", val_unit)
+  )
+
+  if (is_oa) {
+    tooltip_format <- list(
+      headerFormat = "<b>{series.name}</b>",
+      pointFormatter = htmlwidgets::JS(sprintf("
+    function() {
+      var dateStr = Highcharts.dateFormat('%%Y-%%m-%%d', this.x);
+      return '<br>' + dateStr + ': ' + this.y.toFixed(2) + '%s';
+    }
+  ", val_unit))
+    )
+  }
+
   hc_plot <- highcharter::highchart() %>%
 
     # Add dummy element to make legend group titles
@@ -77,18 +91,14 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit, is_oa = FA
                                                   group = scenario_line,
                                                   x = year, y = smoothed_anom_adj),
                                color = "black",
-                               tooltip = list(headerFormat = "<b>{series.name}</b>",
-                                              pointFormat = sprintf("<br>{point.year}: {point.y}%s", val_unit)
-                               )) %>%
+                               tooltip = tooltip_format) %>%
     # Projections data
     highcharter::hc_add_series(data = proj_line_data, type = "line",
                                highcharter::hcaes(name = scenario_line,
                                                   group = scenario_line,
                                                   x = year, y = smoothed_anom_adj),
                                dashStyle = "shortdash",
-                               tooltip = list(headerFormat = "<b>{series.name}</b>",
-                                              pointFormat = sprintf("<br>{point.year}: {point.y}%s", val_unit)
-                               )) %>%
+                               tooltip = tooltip_format) %>%
     # Add dummy element to make legend group titles
     highcharter::hc_add_series(
       name = "<u><b style='font-size:13px;'>Range</b></u>",
@@ -137,8 +147,8 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit, is_oa = FA
       highcharter::hc_xAxis(title = list(text = "Year", style = list(fontSize = "16px")),
                              type = "datetime",
                             labels = list(
-                              style = list(fontSize = "14px"),
-                                 format = "{value:%Y}"
+                              style = list(fontSize = "14px")
+                                 # format = "{value:%Y}"
                             )
 
       )
