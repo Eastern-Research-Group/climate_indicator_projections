@@ -75,6 +75,7 @@ mod_snow_cover_plot_server <- function(id){
                      " million square miles")
 
     })
+    outputOptions(output, "plot", suspendWhenHidden = TRUE)
 
   })
 }

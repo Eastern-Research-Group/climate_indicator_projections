@@ -86,6 +86,8 @@ mod_precip_map_server <- function(id){
       return(which_map)
 
     }, width = 1000, height = 600)
+    outputOptions(output, "map", suspendWhenHidden = TRUE)
+    outputOptions(output, "map_2", suspendWhenHidden = TRUE)
 
   })
 }

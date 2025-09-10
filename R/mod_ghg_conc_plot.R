@@ -106,6 +106,7 @@ mod_ghg_conc_plot_server <- function(id){
 
 
   })
+  outputOptions(output, "plot", suspendWhenHidden = TRUE)
 
 
 

@@ -32,6 +32,7 @@ mod_arctic_sea_ice_plot_server <- function(id){
                      " million square miles")
 
     })
+    outputOptions(output, "plot", suspendWhenHidden = TRUE)
 
   })
 }

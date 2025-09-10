@@ -31,6 +31,7 @@ mod_grow_season_plot_server <- function(id){
                      "days")
 
     })
+    outputOptions(output, "plot", suspendWhenHidden = TRUE)
 
   })
 }

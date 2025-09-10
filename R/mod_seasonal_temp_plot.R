@@ -77,6 +77,7 @@ mod_seasonal_temp_plot_server <- function(id){
                               "°F")
 
     })
+    outputOptions(output, "plot", suspendWhenHidden = TRUE)
 
 
   })

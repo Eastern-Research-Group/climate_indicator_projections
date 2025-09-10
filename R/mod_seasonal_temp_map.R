@@ -171,7 +171,8 @@ mod_seasonal_temp_map_server <- function(id){
 
     }, width = 1000, height = 600)
 
-
+    outputOptions(output, "map", suspendWhenHidden = TRUE)
+    outputOptions(output, "map_2", suspendWhenHidden = TRUE)
 
   })
 }

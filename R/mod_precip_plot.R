@@ -31,6 +31,7 @@ mod_precip_plot_server <- function(id){
                      " in.")
 
     })
+    outputOptions(output, "plot", suspendWhenHidden = TRUE)
 
 
   })

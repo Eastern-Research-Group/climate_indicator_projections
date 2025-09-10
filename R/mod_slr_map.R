@@ -129,6 +129,7 @@ mod_slr_map_server <- function(id){
 
     # generatae leaflet map
     output$map <- leaflet::renderLeaflet(leaflet_map)
+    outputOptions(output, "map", suspendWhenHidden = TRUE)
 
     city_selected <- reactiveVal(NULL)
 
@@ -167,6 +168,7 @@ mod_slr_map_server <- function(id){
     output$plot_title <- renderText({
       paste0(city_selected(), " Cumulative Sea Level Change\n(1960-2150)")
     })
+    outputOptions(output, "plot_title", suspendWhenHidden = TRUE)
 
 
 
@@ -181,7 +183,11 @@ mod_slr_map_server <- function(id){
 
     })
 
+    outputOptions(output, "plot", suspendWhenHidden = TRUE)
+
   })
+
+
 }
 
 ## To be copied in the UI

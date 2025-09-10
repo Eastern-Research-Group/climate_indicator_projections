@@ -31,6 +31,7 @@ mod_slr_plot_server <- function(id){
                     slr_plot_obs_csiro_bounds)
 
   })
+  outputOptions(output, "plot", suspendWhenHidden = TRUE)
   })
 }
 

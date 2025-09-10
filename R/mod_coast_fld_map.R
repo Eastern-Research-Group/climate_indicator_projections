@@ -259,6 +259,7 @@ mod_coast_fld_map_server <- function(id){
        })
 
      })
+     outputOptions(output, "map", suspendWhenHidden = TRUE)
 
 
 

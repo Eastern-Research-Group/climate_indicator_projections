@@ -37,8 +37,6 @@ mod_ocean_acidity_plot_server <- function(id){
     # reactive part
     oa_proj_all_out <- reactive({
       req(input$station_choice)
-      print("Updating ocean acidity")
-      print(input$station_choice)
       oa_proj_all <- switch(
         input$station_choice,
         "Hawaii" = oa_plot_cln_data_hawaii,
@@ -46,27 +44,23 @@ mod_ocean_acidity_plot_server <- function(id){
         "Bermuda" = oa_plot_cln_data_bermuda,
         "Cariaco" = oa_plot_cln_data_cariaco
       )
-      print("Read data file")
       return(oa_proj_all)
 
     })
 
 
     ### Create the plot ###
-    Rprof("profile_output.out")
     output$plot <- highcharter::renderHighchart({
-      print("Rendering plot")
       p <- create_hc_plot(oa_proj_all_out(),
                      sprintf("%s Ocean Acidity, 1950–2100", input$station_choice),
                      "pH",
                      "",
                      TRUE)
-      print("Done rendering plot")
       return(p)
 
     })
 
-
+    outputOptions(output, "plot", suspendWhenHidden = TRUE)
 
   })
 }
