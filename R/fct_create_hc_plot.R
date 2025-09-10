@@ -22,15 +22,23 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit, is_oa = FA
 
   ipcc_colors <- c(hindcast_col, ssp126_col, ssp245_col, ssp370_col, ssp585_col)
 
+  scenario_df <- av_temp_plot_cln_data
+
   # Split up observed and modeled data
   obs_data <- scenario_df %>%
-    dplyr::filter(scenario == "observed")
+    dplyr::filter(scenario == "observed") %>%
+    dplyr::select(year, scenario, scenario_line, smoothed_anom_adj)
 
-  proj_data <- scenario_df %>%
-    dplyr::filter(scenario != "observed")
+  proj_line_data <- scenario_df %>%
+    dplyr::filter(scenario != "observed")  %>%
+    dplyr::select(year, scenario, scenario_line, smoothed_anom_adj)
+
+  proj_range_data <- scenario_df %>%
+    dplyr::filter(scenario != "observed")  %>%
+    dplyr::select(year, scenario, scenario_ribbon, p10_adj, p90_adj)
 
   # Reorder the levels of the scenario names
-  proj_data$scenario_line <- factor(proj_data$scenario_line,
+  proj_line_data$scenario_line <- factor(proj_line_data$scenario_line,
                                     levels = c(
                                       "Model hindcast",
                                       "Low emissions (SSP1-2.6)",
@@ -39,7 +47,7 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit, is_oa = FA
                                       "Very high emissions (SSP5-8.5)"
                                     ))
 
-  proj_data$scenario_ribbon <- factor(proj_data$scenario_ribbon,
+  proj_range_data$scenario_ribbon <- factor(proj_range_data$scenario_ribbon,
                                       levels = c(
                                         "Model hindcast range",
                                         "Low emissions (SSP1-2.6) model range",
@@ -55,7 +63,7 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit, is_oa = FA
 
     # Add dummy element to make legend group titles
     highcharter::hc_add_series(
-      name = "<u><b style='font-size:13px;'>Model Average</b></u>",
+      name = "<u><b style='font-size:13px;'>Average</b></u>",
       data = list(),
       showInLegend = TRUE,
       enableMouseTracking = FALSE,
@@ -73,7 +81,7 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit, is_oa = FA
                                               pointFormat = sprintf("<br>{point.year}: {point.y}%s", val_unit)
                                )) %>%
     # Projections data
-    highcharter::hc_add_series(data = proj_data, type = "line",
+    highcharter::hc_add_series(data = proj_line_data, type = "line",
                                highcharter::hcaes(name = scenario_line,
                                                   group = scenario_line,
                                                   x = year, y = smoothed_anom_adj),
@@ -83,7 +91,7 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit, is_oa = FA
                                )) %>%
     # Add dummy element to make legend group titles
     highcharter::hc_add_series(
-      name = "<u><b style='font-size:13px;'>Model Range</b></u>",
+      name = "<u><b style='font-size:13px;'>Range</b></u>",
       data = list(),
       showInLegend = TRUE,
       enableMouseTracking = FALSE,
@@ -92,7 +100,7 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit, is_oa = FA
       states = list(hover = list(enabled = FALSE))
     ) %>%
     # Add model ranges
-    highcharter::hc_add_series(data = proj_data, type = "arearange",
+    highcharter::hc_add_series(data = proj_range_data, type = "arearange",
                                highcharter::hcaes(name = scenario_ribbon,
                                                   group = scenario_ribbon,
                                                   x = year,
