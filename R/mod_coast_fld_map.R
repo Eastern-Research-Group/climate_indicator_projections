@@ -26,7 +26,11 @@ mod_coast_fld_map_ui <- function(id) {
                       .irs--shiny .irs-from,.irs--shiny .irs-to,.irs--shiny .irs-single {
                         font-size: 14px;
                       }
-                      ")),
+                      .irs-bar {
+                        background-color: transparent !important;
+                        border-color: transparent !important;
+                      }
+                        ")),
               # Decade slider
               sliderInput(inputId = ns("decade"),
                           label = "Select Decade:",
