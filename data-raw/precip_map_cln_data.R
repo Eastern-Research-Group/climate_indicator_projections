@@ -51,40 +51,4 @@ precip_map_cln_data <- precip_map_obs_cln %>%
   dplyr::left_join(clim_div_cln, by = "climdiv") %>%
   sf::st_as_sf()
 
-
-
-
-precip_colors <- c(
-  "(-30,-20]" = "#D9B651",
-  "(-20,-10]" = "#E6CD8F",
-  "(-10,-2]" = "#EFE2C7",
-  "(-2,2]" = "#C7C7C7",
-  "(2,10]" = "#91BBE1",
-  "(10,20]" = "#4781D2",
-  "(20,30]" = "#3466AC"
-)
-
-# Create the map
-out_map <- ggplot2::ggplot() +
-  ggplot2::geom_sf(data = precip_map_cln_data, ggplot2::aes(fill = legend_buckets), color = "#88807F") +
-  ggplot2::facet_wrap(~scenario_title) +
-  ggplot2::scale_fill_manual(values = precip_colors, drop = FALSE) +
-  ggplot2::geom_sf(data = conus_cln, fill = NA, color = "black") +
-  ggplot2::labs(
-    title = "Change in Precipitation in the United States",
-    fill = "Percent change in precipitation"
-  ) +
-  ggthemes::theme_map() +
-  ggplot2::theme(
-    text = ggplot2::element_text(size = 12),
-    plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
-    #   legend.key.width = ggplot2::unit(2, 'cm'),
-    legend.position = "bottom"
-  )
-out_map
-
-ggplot2::ggsave(filename = "new_precip_maps.jpeg",
-                plot = out_map,
-                path = file.path(config::get("precip_path")))
-
 usethis::use_data(precip_map_cln_data, overwrite = TRUE)
