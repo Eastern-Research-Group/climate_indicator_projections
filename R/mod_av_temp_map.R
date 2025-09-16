@@ -85,7 +85,7 @@ mod_av_temp_map_server <- function(id){
       return(which_map)
 
     }, width = 1000, height = 600)
-
+    outputOptions(output, "map", suspendWhenHidden = TRUE)
     output$map_2 <- renderPlot({
 
       # Map selection to file paths
@@ -99,7 +99,7 @@ mod_av_temp_map_server <- function(id){
       return(which_map)
 
     }, width = 1000, height = 600)
-    outputOptions(output, "map", suspendWhenHidden = TRUE)
+
     outputOptions(output, "map_2", suspendWhenHidden = TRUE)
 })
 }
