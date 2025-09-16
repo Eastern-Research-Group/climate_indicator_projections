@@ -6,7 +6,6 @@
 #' @noRd
 app_server <- function(input, output, session) {
   # Your application server logic
-
   mod_sst_plot_server("sst_plot_1")
   mod_grow_season_plot_server("grow_season_plot_1")
   mod_grow_season_map_server("grow_season_map_1")
@@ -24,10 +23,17 @@ app_server <- function(input, output, session) {
   mod_ghg_conc_plot_server("ghg_conc_plot_1")
   mod_coast_fld_map_server("coast_fld_map_1")
 
+  last_run <- Sys.time()
   observeEvent(input$main_tabs, {
     req(input$main_tabs)
-    updateTabsetPanel(session, "main_tabs", selected = input$main_tabs)
-  })
+    if (Sys.time() > last_run + 0.5) {
+      updateTabsetPanel(session, "main_tabs", selected = input$main_tabs)
+      last_run = Sys.time();
+    }
+
+
+  },
+  priority = 10)
 
 
 }
