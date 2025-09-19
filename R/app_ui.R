@@ -28,8 +28,16 @@ app_ui <- function(request) {
                    render_indicator_page(
                      title = "Greenhouse Gas Concentrations",
                      timeseries = mod_ghg_conc_plot_ui("ghg_conc_plot_1"),
-                     summary = render_summary(),
-                     tech_doc = render_tech_doc()
+                     # INSET SUMMARY INFO
+                     summary = render_summary(
+                       background="insert background here", #read_app_text("ghg_background.txt")
+                       key_points="insert key points here",
+                       sources_and_methods="Some sources"
+                     ),
+                     # INSERT TECH DOC INFO
+                     tech_doc = render_tech_doc(
+                       "Some text goes here..."
+                     )
                    )
           ),
 
