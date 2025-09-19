@@ -33,7 +33,7 @@ create_static_map_ui <- function(ns,
                                      sprintf("Intermediate emissions (SSP2-4.5), %s", proj_dates),
                                      sprintf("High emissions (SSP3-7.0), %s", proj_dates),
                                      sprintf("Very high emissions (SSP5-8.5), %s", proj_dates)),
-                         width="500px"
+                         width="300px"
              )
 
       ),
@@ -50,7 +50,7 @@ create_static_map_ui <- function(ns,
                                      sprintf("High emissions (SSP3-7.0), %s", proj_dates),
                                      sprintf("Very high emissions (SSP5-8.5), %s", proj_dates)),
                          selected = sprintf("Intermediate emissions (SSP2-4.5), %s", proj_dates),
-                         width="500px"
+                         width="300px"
              )
 
       )
