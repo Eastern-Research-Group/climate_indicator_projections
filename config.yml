@@ -11,4 +11,5 @@ default:
   sst_path: inst/extdata/sea_surface_temp
   precip_path: inst/extdata/precip
   cf_path: inst/extdata/coastal_flooding
+  app_text_path: inst/extdata/app_text
 
