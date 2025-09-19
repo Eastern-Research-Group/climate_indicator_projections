@@ -31,11 +31,17 @@ mod_slr_map_ui <- function(id) {
             height = "auto",
             tagList(
               tags$div(
-                span(h4("Please select a location to view the sea level rise chart")),
+                span(h5("Please select a location to view the sea level rise chart")),
                 id=ns("no_data_selected")
               ),
               tags$div(
                 tagList(
+                  # Minimize button as an actionButton
+                  actionButton(
+                    inputId = ns("minimize_panel"),
+                    label = HTML("&#8722;"),  # Minus sign
+                    class = "btn btn-secondary btn-sm rounded-circle minimize-button"
+                  ),
                   h5(textOutput(ns("plot_title"))),
                   highcharter::highchartOutput(ns("plot"))
                 ),
@@ -137,6 +143,10 @@ mod_slr_map_server <- function(id){
       # ONce the map is loaded (we know it is loaded if we get a "Map bounds" event)
       # Then show the side overlay
       shinyjs::show("overlay")
+    })
+
+    observeEvent(input$minimize_panel, {
+      city_selected(NULL)
     })
 
     # Observe click event

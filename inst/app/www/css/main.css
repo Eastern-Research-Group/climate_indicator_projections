@@ -122,6 +122,18 @@ footer p.temp{
     font-weight: 700;
     text-align: center;
 }
+.minimize-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  font-size: 18px;
+  line-height: 1;
+  text-align: center;
+  z-index:1000;
+}
 #home{
     background: url(../images/home.jpg) top center no-repeat;
     background-size: 100% auto;
