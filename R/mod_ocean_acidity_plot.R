@@ -53,7 +53,7 @@ mod_ocean_acidity_plot_server <- function(id){
     output$plot <- highcharter::renderHighchart({
       p <- create_hc_plot(oa_proj_all_out(),
                      sprintf("%s Ocean Acidity, 1950–2100", input$station_choice),
-                     "pH",
+                     "pH (lower pH = more acidic)",
                      "",
                      TRUE)
       return(p)
