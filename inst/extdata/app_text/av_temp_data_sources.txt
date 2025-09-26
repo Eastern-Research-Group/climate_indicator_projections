@@ -1,11 +1,13 @@
+<h2>Data Sources</h2>
+
 <h3>3. Data Sources</h3>
 
-<h4><em>Observed Data<em></h4>
+<h4><em>Observed Data</em></h4>
 <p>
 This pairing uses temperature data provided by the National Oceanic and Atmospheric Administration’s (NOAA’s) National Centers for Environmental Information (NCEI). Specifically, it uses data from NCEI’s nClimDiv data set, which is based on data from the daily version of the Global Historical Climatology Network (GHCN-Daily). GHCN-Daily data undergo extensive processing by NCEI on a monthly basis for inclusion in nClimDiv. This is the same source featured in EPA’s U.S. and Global Temperature indicator.
 </p>
 
-<h4><em>Model Outputs<em></h4>
+<h4><em>Model Outputs</em></h4>
 <p>
 This pairing uses daily downscaled outputs from the Seasonal Trends and Analysis of Residuals Empirical-Statistical Downscaling Model (STAR-ESDM) (Hayhoe et al., 2024). STAR-ESDM is one of two downscaling approaches incorporated in the Fifth National Climate Assessment, with the other being Locally Constructed Analogs version 2 (LOCA2). Both are statistically downscaled ensemble products, downscaled to the NOAA nClimGrid product, that provide a nominally 5-kilometer grid over the CONUS.
 </p>
@@ -39,12 +41,12 @@ Specifically, this analysis uses the “tasmin” and “tasmax” variables, wh
 
 <h3>4. Data Availability</h3>
 
-<h4><em>Observed Data<em></h4>
+<h4><em>Observed Data</em></h4>
 <p>
 The nClimDiv data used in each figure can be accessed online, along with descriptions and metadata. These data were obtained from NCEI’s “Climate at a Glance” web interface. NCEI also provides access to underlying nClimDiv data and documentation.
 </p>
 
-<h4><em>Model Outputs<em></h4>
+<h4><em>Model Outputs</em></h4>
 <p>
 STAR-ESDM downscaled outputs were obtained from the publicly available data set. <a href="#" target="_blank">[link pending]</a>. The underlying CMIP6 climate model outputs are also publicly available. The overall technical documentation <a href="#" target="_blank">[to be linked]</a> for this effort identifies the organizational ownership and direct source links for each of the individual models.
 </p>
