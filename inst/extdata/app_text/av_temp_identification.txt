@@ -1,3 +1,5 @@
+<h2>Identification</h2>
+
 <h3>1. Description</h3>
 <p>This pairing examines annual average surface air temperatures over land in the contiguous United States (CONUS). It builds upon Figures 1 and 3 in EPA’s U.S. and Global Temperature indicator and includes the following components:</p>
 <ul>
@@ -7,4 +9,5 @@
 </ul>
 
 <h3>2. Revision History</h3>
-<p>XXX 2025 	Pairing published</p>
+<p>XXX 2025 Pairing published</p>
+
