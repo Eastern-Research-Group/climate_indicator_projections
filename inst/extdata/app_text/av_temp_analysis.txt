@@ -1,3 +1,5 @@
+<h2>Methodology</h2>
+
 <h3>10. Comparability Over Time and Space</h3>
 <p>Observed data collection methods have been applied consistently over time and space to the extent possible and adjusted for proper consistency otherwise. As described in Section 9, NOAA employs a rigorous process to adjust for changes over time in station location, methods, or instrumentation—or to weed out stations that are too inconsistent to adjust.</p>
 <p>GCMs inherently use consistent algorithms over time and space.</p>
