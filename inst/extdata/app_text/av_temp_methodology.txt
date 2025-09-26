@@ -2,47 +2,18 @@
 
 <p>The observed indicator is based on surface air temperature measurements from thousands of land-based weather stations throughout the United States, collected using standard meteorological instruments. Altogether, NOAA’s nClimDiv data set incorporates data from more than 10,000 stations. These stations are spread among 344 climate divisions in the CONUS, plus additional divisions in Alaska and Hawaii (although those divisions have fewer years of data). Widespread, reliable data were available back to 1901 for the CONUS. The nClimDiv data set also incorporates a grid-based computational approach known as climatologically aided interpolation (Willmott & Robeson, 1995), which helps to address topographic variability. Data from individual stations are combined in a grid that covers the entire contiguous 48 states with 5-kilometer resolution. The technical documentation for the U.S. and Global Temperature indicator provides more information, links, and supporting references for nClimDiv.</p>
 
-<h4>Observed Data</h4>
-<p>These stations provide the raw data that feed into nClimDiv, which is the primary source used for this indicator.</p>
-
-<h4>Model Outputs</h4>
-<p>This pairing uses daily downscaled outputs from the Seasonal Trends and Analysis of Residuals Empirical-Statistical Downscaling Model (STAR-ESDM) (Hayhoe et al., 2024). STAR-ESDM is one of two downscaling approaches incorporated in the Fifth National Climate Assessment, with the other being Locally Constructed Analogs version 2 (LOCA2). Both are statistically downscaled ensemble products, downscaled to the NOAA nClimGrid product, that provide a nominally 5-kilometer grid over the CONUS.</p>
-
-<p>This pairing presents downscaled STAR-ESDM outputs from 16 global climate models (GCMs) within the World Climate Research Programme (WCRP) Coupled Model Intercomparison Project Phase 6 (CMIP6) suite. Specific runs are noted in parentheses:</p>
-
-<ul>
-<li>ACCESS-CM2 (r1i1p1f1)</li>
-<li>ACCESS-ESM1-5 (r1i1p1f1)</li>
-<li>BCC-CSM2-MR (r1i1p1f1)</li>
-<li>CanESM5 (r1i1p1f1)</li>
-<li>EC-Earth3 (r1i1p1f1)</li>
-<li>FGOALS-g3 (r1i1p1f1)</li>
-<li>GFDL-ESM4 (r1i1p1f1)</li>
-<li>INM-CM4-8 (r1i1p1f1)</li>
-<li>INM-CM5-0 (r1i1p1f1)</li>
-<li>IPSL-CM6A-LR (r1i1p1f1)</li>
-<li>MIROC6 (r1i1p1f1)</li>
-<li>MPI-ESM1-2-HR (r1i1p1f1)</li>
-<li>MPI-ESM1-2-LR (r1i1p1f1)</li>
-<li>MRI-ESM2-0 (r1i1p1f1)</li>
-<li>NorESM2-LM (r1i1p1f1)</li>
-<li>NorESM2-MM (r1i1p1f1)</li>
-</ul>
-
-<p>Specifically, this analysis uses the “tasmin” and “tasmax” variables, which represent daily minimum and maximum surface air temperatures, respectively.</p>
-
 <h3>6. Indicator Derivation</h3>
 
 <p>Temperature data for this pairing are presented as anomalies. An anomaly represents the difference between an observed value and the corresponding value from a baseline period. This feature uses a baseline period of 1901–2000.</p>
 
-<h4>Observed Data</h4>
+<h4><em>Observed Data<em></h4>
 <p>NOAA calculated monthly observed temperature means for each station, incorporating bias corrections as described in Section 9 below. They then converted measurements into monthly anomalies in degrees Fahrenheit. The monthly anomalies then were averaged to determine an annual temperature anomaly for each year.</p>
 
 <p>To achieve uniform spatial coverage (i.e., not biased toward areas with a higher concentration of measuring stations), NOAA calculated area-weighted averages of grid-point estimates interpolated from station data. This made it possible to calculate a CONUS average for the graph.</p>
 
 <p>The map shows long-term rates of change in temperature over the CONUS for 1901–2023. This map is based on NOAA’s nClimDiv gridded analysis, with results averaged within each climate division. The slope of each temperature trend was calculated from the annual climate division anomalies by ordinary least-squares regression and then multiplied by 100 to obtain a rate of change per century.</p>
 
-<h4>Model Outputs</h4>
+<h4><em>Model Outputs<em></h4>
 <p>EPA performed the following steps via R and Python scripts:</p>
 
 <ul>
