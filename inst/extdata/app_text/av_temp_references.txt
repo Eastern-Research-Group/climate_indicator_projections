@@ -1,0 +1,40 @@
+<h3>References</h3>
+<ol>
+  <li>
+    Hayhoe, K., Scott-Fleming, I., Stoner, A., & Wuebbles, D. J. (2024).
+    STAR-ESDM: A generalizable approach to generating high-resolution climate projections through signal decomposition.
+    Earth’s Future, 12(7), e2023EF004107.
+    <a href="https://doi.org/10.1029/2023EF004107" target="_blank">https://doi.org/10.1029/2023EF004107</a>
+  </li>
+  <li>
+    Lafferty, D. C., & Sriver, R. L. (2023). Downscaling and bias-correction contribute considerable uncertainty to local climate projections in CMIP6.
+    npj Climate and Atmospheric Science, 6, 158.
+    <a href="https://doi.org/10.1038/s41612-023-00486-0" target="_blank">https://doi.org/10.1038/s41612-023-00486-0</a>
+  </li>
+  <li>
+    Massoud, E. C., Lee, H. K., Terando, A., & Wehner, M. (2023). Bayesian weighting of climate models based on climate sensitivity.
+    Communications Earth & Environment 4, 365.
+    <a href="https://doi.org/10.1038/s43247-023-01009-8" target="_blank">https://doi.org/10.1038/s43247-023-01009-8</a>
+  </li>
+  <li>
+    Menne, M. J., Williams, C. N., Gleason, B. E., Rennie, J. J., & Lawrimore, J. H. (2018).
+    The Global Historical Climatology Network monthly temperature dataset, version 4.
+    Journal of Climate, 31(24), 9835–9854.
+    <a href="https://doi.org/10.1175/JCLI-D-18-0094.1" target="_blank">https://doi.org/10.1175/JCLI-D-18-0094.1</a>
+  </li>
+  <li>
+    Vose, R. S., & Menne, M. J. (2004). A method to determine station density requirements for climate observing networks.
+    Journal of Climate, 17(15), 2961–2971.
+    <a href="https://doi.org/10.1175/1520-0442(2004)017&lt;2961:AMTDSD&gt;2.0.CO;2" target="_blank">https://doi.org/10.1175/1520-0442(2004)017&lt;2961:AMTDSD&gt;2.0.CO;2</a>
+  </li>
+  <li>
+    Willmott, C. J., & Robeson, S. M. (1995). Climatologically aided interpolation (CAI) of terrestrial air temperature.
+    International Journal of Climatology, 15(2), 221–229.
+    <a href="https://doi.org/10.1002/joc.3370150207" target="_blank">https://doi.org/10.1002/joc.3370150207</a>
+  </li>
+  <li>
+    Wooten, A., Terando, A., Reich, B. J., Boyles, R. P., & Semazzi, F. (2017). Characterizing sources of uncertainty from global climate models and downscaling techniques.
+    Journal of Applied Meteorology and Climatology, 56(12), 3245–3262.
+    <a href="https://doi.org/10.1175/JAMC-D-17-0087.1" target="_blank">https://doi.org/10.1175/JAMC-D-17-0087.1</a>
+  </li>
+</ol>
