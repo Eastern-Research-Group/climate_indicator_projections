@@ -66,7 +66,13 @@ app_ui <- function(request) {
                      maps = mod_grow_season_map_ui("grow_season_map_1"),
                      timeseries = mod_grow_season_plot_ui("grow_season_plot_1"),
                      summary = render_summary(),
-                     tech_doc = render_tech_doc()
+                     tech_doc = render_tech_doc(
+                       identification=read_app_text("grow_season/td_identification.html"),
+                       data_sources=read_app_text("grow_season/td_data_sources.html"),
+                       methodology=read_app_text("grow_season/td_methodology.html"),
+                       analysis=read_app_text("grow_season/td_analysis.html"),
+                       references=read_app_text("grow_season/td_references.html")
+                     )
                    )
           ),
 
