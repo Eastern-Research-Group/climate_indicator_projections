@@ -160,12 +160,20 @@ render_summary <- function(
 }
 
 render_tech_doc <- function(
-    tech_doc="Some text goes here..."
+    identification="Some text goes here...",
+    data_sources="Some text goes here...",
+    methodology="Some text goes here...",
+    analysis="Some text goes here...",
+    references="Some text goes here..."
 ) {
   return(
     htmlTemplate(
       app_sys("app/www/techdoc_mod.html"),
-      tech_doc=tech_doc
+      identification=identification,
+      data_sources=data_sources,
+      methodology=methodology,
+      analysis=analysis,
+      references=references
     )
   )
 }
