@@ -35,9 +35,7 @@ app_ui <- function(request) {
                        sources_and_methods="Some sources"
                      ),
                      # INSERT TECH DOC INFO
-                     tech_doc = render_tech_doc(
-                       "Some text goes here..."
-                     )
+                     tech_doc = render_tech_doc()
                    )
           ),
 
@@ -47,7 +45,13 @@ app_ui <- function(request) {
                      maps = mod_av_temp_map_ui("av_temp_map_1"),
                      timeseries = mod_av_temp_plot_ui("av_temp_plot_1"),
                      summary = render_summary(),
-                     tech_doc = render_tech_doc()
+                     tech_doc = render_tech_doc(
+                       identification=read_app_text("av_temp/td_identification.html"),
+                       data_sources=read_app_text("av_temp/td_data_sources.html"),
+                       methodology=read_app_text("av_temp/td_methodology.html"),
+                       analysis=read_app_text("av_temp/td_analysis.html"),
+                       references=read_app_text("av_temp/td_references.html")
+                     )
                    )
           ),
 
