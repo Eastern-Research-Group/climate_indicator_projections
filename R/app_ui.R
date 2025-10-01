@@ -35,7 +35,12 @@ app_ui <- function(request) {
                        sources_and_methods="Some sources"
                      ),
                      # INSERT TECH DOC INFO
-                     tech_doc = render_tech_doc()
+                     tech_doc = render_tech_doc(
+                       identification=read_app_text("ghg_conc/td_identification.html"),
+                       data_sources=read_app_text("ghg_conc/td_data_sources.html"),
+                       methodology=read_app_text("ghg_conc/td_methodology.html"),
+                       analysis=read_app_text("ghg_conc/td_analysis.html")
+                     )
                    )
           ),
 
