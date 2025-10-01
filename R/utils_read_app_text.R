@@ -8,5 +8,5 @@
 
 read_app_text <- function(filename) {
   path <- file.path(config::get("app_text_path"), filename)
-  return(readLines(path, warn = FALSE))
+  return(HTML(paste(readLines(path, warn = FALSE), sep="\n", collapse="\n")))
 }
