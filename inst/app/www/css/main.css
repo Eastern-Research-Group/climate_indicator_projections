@@ -172,9 +172,10 @@ footer p.temp{
 header {
     background-color: #162E51;
     color: #fff;
+    /*border-bottom: 20px solid #E1F3F8;*/
 }
 header h1 {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     margin: 0;
     padding: 1rem 3rem;
 }
@@ -270,6 +271,9 @@ header nav li:last-child a {
 }
 .sidebar .snow .nav-icon{
     background-position: 0 -313px;
+}
+.sidebar .about .nav-icon{
+    background-position: 0 -396px;
 }
 
 .nav-tabs ul {
@@ -407,7 +411,19 @@ main .content ul li{
 }
 
 
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .sidebar .nav-icon {
+    position: relative;
+  }
+  .sidebar ul li{
+    padding: 1rem;
+  }
+}
+
 @media screen and (max-width: 768px) {
+    header h1{
+        padding: 1rem;
+    }
     header nav a{
         font-size: 0.85rem;
     }
