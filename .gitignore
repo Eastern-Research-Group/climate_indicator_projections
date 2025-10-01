@@ -2,4 +2,4 @@
 .Rhistory
 data/
 inst/extdata/*
-!inst/extdata/app_text
+!inst/extdata/app_text/
