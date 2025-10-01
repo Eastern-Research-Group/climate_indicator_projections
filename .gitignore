@@ -2,3 +2,4 @@
 .Rhistory
 data/
 inst/extdata
+!inst/extdata/app_text
