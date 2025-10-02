@@ -132,7 +132,13 @@ app_ui <- function(request) {
                      title = "Ocean Acidity",
                      timeseries = mod_ocean_acidity_plot_ui("ocean_acidity_plot_1"),
                      summary = render_summary(),
-                     tech_doc = render_tech_doc()
+                     tech_doc = render_tech_doc(
+                       identification=read_app_text("ocean_acidity/td_identification.html"),
+                       data_sources=read_app_text("ocean_acidity/td_data_sources.html"),
+                       methodology=read_app_text("ocean_acidity/td_methodology.html"),
+                       analysis=read_app_text("ocean_acidity/td_analysis.html"),
+                       references=read_app_text("ocean_acidity/td_references.html")
+                     )
                    )
           ),
 
