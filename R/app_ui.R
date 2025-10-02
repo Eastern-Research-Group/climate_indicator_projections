@@ -102,7 +102,14 @@ app_ui <- function(request) {
                      maps = mod_slr_map_ui("slr_map_1"),
                      timeseries = mod_slr_plot_ui("slr_plot_1"),
                      summary = render_summary(),
-                     tech_doc = render_tech_doc()
+                     tech_doc = render_tech_doc(
+                       identification=read_app_text("sea_level/td_identification.html"),
+                       data_sources=read_app_text("sea_level/td_data_sources.html"),
+                       methodology=read_app_text("sea_level/td_methodology.html"),
+                       analysis=read_app_text("sea_level/td_analysis.html"),
+                       references=read_app_text("sea_level/td_references.html")
+
+                     )
                    )
           ),
 
