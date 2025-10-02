@@ -147,7 +147,13 @@ app_ui <- function(request) {
                      title = "Arctic Sea Ice",
                      timeseries = mod_arctic_sea_ice_plot_ui("arctic_sea_ice_plot_1"),
                      summary = render_summary(),
-                     tech_doc = render_tech_doc()
+                     tech_doc = render_tech_doc(
+                       identification=read_app_text("arctic_sea_ice/td_identification.html"),
+                       data_sources=read_app_text("arctic_sea_ice/td_data_sources.html"),
+                       methodology=read_app_text("arctic_sea_ice/td_methodology.html"),
+                       analysis=read_app_text("arctic_sea_ice/td_analysis.html"),
+                       references=read_app_text("arctic_sea_ice/td_references.html")
+                     )
                    )
           ),
 
