@@ -18,7 +18,7 @@ mod_about_ui <- function(id) {
       ),
       tabPanel(
         "Methods",
-        "Some other ocntent"
+        read_app_text("about/gen_tech_doc.html")
       )
     )
 

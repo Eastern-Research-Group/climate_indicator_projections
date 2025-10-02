@@ -1,0 +1,973 @@
+<h2>General Technical Documentation</h2>
+
+<h4>1. Revision History</h4>
+<p>XXX&nbsp;2025 Published</p>
+<h4>2. Overview and Scope</h4>
+<p>This pairing project is a pilot effort to identify how a subset of EPA&rsquo;s <a
+        href="https://www.epa.gov/climate-indicators">indicators of observed climate change</a> align with historical
+    and projected model data under a variety of plausible climate change scenarios. Projections come from the best
+    available global climate models (GCMs), which, at the time of publication, were drawn from the World Climate
+    Research Programme (WCRP) Coupled Model Intercomparison Project Phase 6 (CMIP6) suite. Steps have been taken to
+    align projections with the corresponding observed indicator with respect to spatial coverage, spatial and temporal
+    aggregation, and other indicator derivation steps (i.e., how physical measurements are transformed into an
+    indicator). In simple terms, a successful alignment should allow projections and observations to be graphed or
+    mapped in a common format. For example, an indicator represented by a time series in a line graph should be able to
+    display projections as dashed lines continuing out into the future.</p>
+<p>This effort focuses on variables that can be derived directly from GCM projections. Thus, it covers physical
+    attributes of weather and climate, the oceans, and some aspects of the cryosphere. It does not include human or
+    ecological impacts, nor does it include physical variables that would require supplementary modeling of dynamic
+    responses or highly location-specific factors (for example, the response of ice sheets and small glaciers to
+    continued warming). EPA&rsquo;s separate <a href="https://www.epa.gov/cira">Climate Change Impacts and Risk Analysis
+        (CIRA)</a> effort provides peer reviewed modeling of ecological, human health, societal, and economic impacts of
+    future climate change.</p>
+<p>The results from this effort are intended to complement EPA&rsquo;s suite of observed climate change indicators.
+    EPA&rsquo;s observed indicators are the primary source of historical data. Other observation sources have been
+    introduced in limited instances, where doing so was necessary to create a proper temporal, spatial, and definitional
+    alignment with GCM projections.</p>
+<p>Projection sources and methods were selected to align with the U.S. Global Change Research Program&rsquo;s
+    (USGCRP&rsquo;s) <a href="https://nca2023.globalchange.gov/">Fifth National Climate Assessment</a>, as described in
+    more detail below.</p>
+
+<h4>3. Project Development</h4>
+<p><em>Feasibility Assessment</em></p>
+<p>The project began with a feasibility assessment to identify the extent to which each of EPA&rsquo;s observed metrics
+    could be projected credibly into the future using the best available GCMs. Use of the term &ldquo;metrics&rdquo;
+    here is intentional, as many of EPA&rsquo;s indicators contain multiple metrics, sometimes reflecting a variety of
+    sources, methods, units, and spatial and temporal characteristics. It is highly possible that a single EPA climate
+    change indicator could include some metrics that are easily projectable and others that are not. To account for
+    this, subsequent review examined each individual metric on its own merits. Altogether, the project team reviewed 143
+    metrics. For each metric, the assessment considered factors such as, but not limited to:</p>
+<ul>
+    <li>How the observed variable has been calculated or derived.</li>
+    <li>Whether the same variable can be calculated directly from GCM outputs. For example, EPA&rsquo;s Ocean Acidity
+        indicator includes a pH component that has been modeled by GCMs and an aragonite saturation component that has
+        not.</li>
+    <li>The extent to which the projections will likely align with the observations. If the alignment is not perfect
+        (for example, if it uses a different unit of measure, baseline, or calculation method), either the observed data
+        set or the projections might require some degree of transformation to ensure compatibility. However, some cases
+        might involve a less easily surmountable difference. For example, the project team anticipated a mismatch
+        between observed and projected approaches for snowpack. Observations are point-based, projections are gridded,
+        and the GCM grid is unlikely to capture the elevation, terrain, and microclimate effects that influence snowpack
+        accumulation at any given long-term measurement site.</li>
+    <li>The number of CMIP6 GCMs with available data. Indicators with fewer than seven models available were excluded
+        from further analysis.</li>
+    <li>Value added. For example, devoting the available resources to modeling a variety of topics was determined to be
+        more useful than, say, modeling three different definitions of drought, focusing largely on greenhouse gas
+        inputs, or focusing on one metric that requires a disproportionate share of resources to compute.</li>
+</ul>
+<p>The project team used the results of this feasibility review to sort metrics into six bins, as shown in Table 1. The
+    project team also identified at least 12 cases where an identical metric could not be calculated from GCM
+    projections, but a similar metric could.</p>
+<p>Table 1. Categories Assigned in Project Team&rsquo;s Projection Feasibility Analysis</p>
+<table width="666">
+    <tbody>
+        <tr>
+            <td width="348">
+                <p><strong>Category</strong></p>
+            </td>
+            <td width="318">
+                <p><strong>Examples</strong></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="348">
+                <p>Group 1: Calculate directly from a CMIP GCM input or output variable with no modifications</p>
+            </td>
+            <td width="318">
+                <p>Contiguous United States mean temperature, Arctic sea ice, Northern Hemisphere snow extent</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="348">
+                <p>Group 2: Calculate from CMIP downscaled temperature and/or precipitation</p>
+            </td>
+            <td width="318">
+                <p>Heat waves based on temperature only, extreme precipitation</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="348">
+                <p>Group 3: Projections available from a secondary model driven by GCM or downscaled CMIP projections
+                </p>
+            </td>
+            <td width="318">
+                <p>Peak runoff due to snowmelt, Great Lakes levels, calculated from a hydrological model</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="348">
+                <p>Group 4: Could calculate if additional CMIP downscaled variables become available</p>
+            </td>
+            <td width="318">
+                <p>Heat index (temperature + humidity)</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="348">
+                <p>Group 5: Can obtain projections from a non-GCM source</p>
+            </td>
+            <td width="318">
+                <p>National Oceanic and Atmospheric Administration&rsquo;s (NOAA's) coastal flooding projections (a
+                    derived product, though fundamentally based on GCMs)</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="348">
+                <p>Group 6: Reliable projections not yet available but could eventually be in Group 3</p>
+            </td>
+            <td width="318">
+                <p>Glacier extent</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>Ultimately, a subset of the metrics from Groups 1, 2, and 5 were selected for further analysis and publication.
+    Additional variables may be integrated in the future.</p>
+<p><em>Data Acquisition, Processing, and Review</em></p>
+<p>The project team inspected and obtained data, calculated and aggregated projections to align with observed
+    indicators, and checked each provisional alignment carefully. These steps are described in more detail below. If
+    modeled results did not align well with historical observations, steps were taken to improve the alignment. If no
+    credible steps could be taken to rectify a lack of alignment (i.e., to &ldquo;close the gap&rdquo;), the indicator
+    was excluded from further consideration.</p>
+<p><em>Peer Review</em></p>
+<p>Methods and results underwent an independent peer review that followed the procedures in <em>EPA&rsquo;s Peer Review
+        Handbook, </em>4<sup>th</sup> Edition (EPA/100/B-15/001) (U.S. EPA, 2015) for reports that do not provide
+    influential scientific information. The review was managed by a contractor under the direction of a designated EPA
+    peer review leader, who prepared a peer review plan, the scope of work for the review contract, and the charge for
+    the reviewers. The peer review leader played no role in producing this product.</p>
+<p>The peer review consisted of an external individual letter review by two climate science who had familiarity with
+    USGCRP reports, general circulation models, observational datasets, downscaling approaches, applied statistics,
+    and/or model evaluation. The two experts independently selected by an external contractor (ICF International) were
+    Drs. Adrienne Wootten (University of Oklahoma) and Vaishali Naik (NOAA). These experts had no conflicts of interest.
+</p>
+<p>The peer review charge asked reviewers to provide detailed comments and to assess if the project effectively
+    communicated the purpose, methodology, and limitations of comparing observed indicators with climate model data.
+    Reviewers requested a more detailed discussion of uncertainty, particularly regarding downscaling methods and
+    inherent model limitations. This feedback was addressed by adding a dedicated section on downscaling uncertainty and
+    incorporating language about model uncertainty into relevant indicators. Another concern raised was the
+    inconsistency in baselines, time periods, and mapping divisions used across indicators. However, these differences
+    reflect the structure of EPA&rsquo;s existing observed indicator products, which represent the best available data
+    from disparate sources. As this project&rsquo;s goal was to align with those existing indicators, no changes were
+    made in this area. The products were revised to address peer reviewers&rsquo; comments and a spreadsheet was
+    prepared to document how each of the approximately 50 comments from the peer review was addressed.</p>
+
+<h4>4. Data Sources for Historical Observations</h4>
+<p>Historical observations primarily come from EPA&rsquo;s existing suite of <a
+        href="https://www.epa.gov/climate-indicators">climate change indicators</a>. Each indicator has a description of
+    data sources and a corresponding technical documentation file that provides more specific details regarding direct
+    source data, underlying data, metadata, data collection and processing methods, and how users can access data files.
+    All of EPA&rsquo;s indicators were screened and peer reviewed to ensure they fulfill a set of <a
+        href="https://www.epa.gov/climate-indicators/data-sources-and-methods">10 data quality criteria</a>. Key
+    criteria include (but are not limited to) a requirement that the historical indicator data be based on actual
+    measurements and provide long-term coverage that is comparable over time and space and suitable for analyzing
+    trends.</p>
+<p>The project team used existing EPA indicator data for these observation/projection pairings wherever possible. A few
+    pairings used other historical sources due to methodological or definitional limitations or mismatches between the
+    available projections and EPA&rsquo;s existing indicators. Alternative data sources considered for this effort
+    included NOAA&rsquo;s <a href="https://www.ncei.noaa.gov/products/land-based-station/nclimgrid-daily">nClimGrid
+        Daily</a> (1951&ndash;present for the contiguous United States) and <a
+        href="https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00332">nClimGrid
+        Monthly</a> (1895&ndash;present for the contiguous United States and Alaska). The nClimGrid products offer data
+    on a 5-kilometer grid. Whenever an alternative observation source was used, the existing indicator&rsquo;s
+    methodological approach was replicated to the extent possible. Each observed/projected pairing&rsquo;s detailed
+    technical documentation file identifies specific historical data sources and the rationale for their selection.</p>
+
+<h4>5. Data Sources for Modeled Data</h4>
+<p>Model data for this effort come from the CMIP6 suite of GCMs. Four types of CMIP6-derived products were used,
+    depending on what was most appropriate for each metric:</p>
+<ul>
+    <li><strong>Group A: Direct outputs from the CMIP6 suite.</strong> This approach was used for metrics that can be
+        readily calculated from GCM gridded outputs without a need for further downscaling, such as sea ice extent and
+        snow cover. All raw CMIP6 GCM outputs used for this project were obtained from the publicly available <a
+            href="https://esgf-node.llnl.gov/projects/cmip6/">CMIP6 data archive</a> hosted by the Earth System Grid
+        Federation (ESGF). The CMIP6 suite includes several dozen models or variations thereof; however, for consistency
+        across metrics and consistency with other federal government efforts, this project used the same subset of 16
+        GCMs that were used for projections throughout the Fifth National Climate Assessment. Table 2 lists the 16
+        selected models and their sources. These 16 models were selected for the Fifth National Climate Assessment
+        because they are the same 16 models for which STAR-ESDM and LOCA2 have downscaled projections. Spatial
+        resolution of gridded outputs depends on various factors, but the GCMs overall use 0.5- to 1-degree pixels. The
+        reason for using a suite of climate models is to capture model uncertainty and differences in climate
+        sensitivity and variability between the models (Hawkins &amp; Sutton, 2009). Individual GCMs perform multiple
+        ensemble runs. For feasibility purposes, one ensemble run was used from each GCM&mdash;generally the first run
+        that had the required variables. In most cases, this was the &ldquo;r1i1p1f1&rdquo; run.</li>
+</ul>
+<p>Table 2. GCMs Used for This Analysis</p>
+<table width="671">
+    <thead>
+        <tr>
+            <td width="79">
+                <p><strong>Model</strong></p>
+            </td>
+            <td width="226">
+                <p><strong>Organizational Owner/Developer</strong></p>
+            </td>
+            <td width="366">
+                <p><strong>Source Link</strong></p>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td width="79">
+                <p>ACCESS-CM2</p>
+            </td>
+            <td width="226">
+                <p>Commonwealth Scientific and Industrial Research Organisation, Australia (CSIRO), Australian Research
+                    Council Centre of Excellence for Climate System Science (ARCCSS) (CSIRO-ARCCSS)</p>
+            </td>
+            <td width="366">
+                <p><a href="https://www.publish.csiro.au/ES/ES19040">www.publish.csiro.au/ES/ES19040</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="79">
+                <p>ACCESS-ESM1-5</p>
+            </td>
+            <td width="226">
+                <p>CSIRO, ARCCSS (CSIRO-ARCCSS)</p>
+            </td>
+            <td width="366">
+                <p><a href="https://www.publish.csiro.au/es/pdf/ES19035">www.publish.csiro.au/es/pdf/ES19035</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="79">
+                <p>BCC-CSM2-MR</p>
+            </td>
+            <td width="226">
+                <p>Beijing Climate Center, Beijing, China</p>
+            </td>
+            <td width="366">
+                <p><a href="https://doi.org/10.5194/gmd-12-1573-2019">https://doi.org/10.5194/gmd-12-1573-2019</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="79">
+                <p>CanESM5</p>
+            </td>
+            <td width="226">
+                <p>Canadian Centre for Climate Modelling and Analysis, Environment and Climate Change Canada</p>
+            </td>
+            <td width="366">
+                <p><a href="https://doi.org/10.5194/gmd-12-4823-2019">https://doi.org/10.5194/gmd-12-4823-2019</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="79">
+                <p>EC-Earth3</p>
+            </td>
+            <td width="226">
+                <p>EC-Earth consortium (many European institutions and countries, <a
+                        href="https://ec-earth.org">https://ec-earth.org</a>)</p>
+            </td>
+            <td width="366">
+                <p><a href="https://doi.org/10.5194/gmd-15-2973-2022">https://doi.org/10.5194/gmd-15-2973-2022</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="79">
+                <p>FGOALS-g3</p>
+            </td>
+            <td width="226">
+                <p>Chinese Academy of Sciences, Beijing, China</p>
+            </td>
+            <td width="366">
+                <p><a href="https://doi.org/10.1029/2019MS002012">https://doi.org/10.1029/2019MS002012</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="79">
+                <p>GFDL-ESM4</p>
+            </td>
+            <td width="226">
+                <p>NOAA, Geophysical Fluid Dynamics Laboratory, Princeton, New Jersey, USA</p>
+            </td>
+            <td width="366">
+                <p><a href="https://doi.org/10.1029/2019MS002015">https://doi.org/10.1029/2019MS002015</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="79">
+                <p>INM-CM4-8</p>
+            </td>
+            <td width="226">
+                <p>Institute for Numerical Mathematics, Russian Academy of Science, Moscow, Russia</p>
+            </td>
+            <td width="366">
+                <p><a href="https://doi.org/10.1515/rnam-2018-0032">https://doi.org/10.1515/rnam-2018-0032</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="79">
+                <p>INM-CM5-0</p>
+            </td>
+            <td width="226">
+                <p>Institute for Numerical Mathematics, Russian Academy of Science, Moscow, Russia</p>
+            </td>
+            <td width="366">
+                <p><a href="https://doi.org/10.1007/s00382-017-3539-7">https://doi.org/10.1007/s00382-017-3539-7</a>; <a
+                        href="https://doi.org/10.1134/S0001433820030123">https://doi.org/10.1134/S0001433820030123</a>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="79">
+                <p>IPSL-CM6A-LR</p>
+            </td>
+            <td width="226">
+                <p>Institut Pierre Simon Laplace, Paris, France</p>
+            </td>
+            <td width="366">
+                <p><a href="https://doi.org/10.1029/2019MS002010">https://doi.org/10.1029/2019MS002010</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="79">
+                <p>MIROC6</p>
+            </td>
+            <td width="226">
+                <p>Japan Agency for Marine-Earth Science and Technology, Kanagawa, Japan; Atmosphere and Ocean Research
+                    Institute, The University of Tokyo, Chiba, Japan; National Institute for Environmental Studies,
+                    Ibaraki, Japan; and RIKEN Center for Computational Science, Hyogo, Japan</p>
+            </td>
+            <td width="366">
+                <p><a href="https://doi.org/10.5194/gmd-12-2727-2019">https://doi.org/10.5194/gmd-12-2727-2019</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="79">
+                <p>MPI-ESM1-2-HR</p>
+            </td>
+            <td width="226">
+                <p>Max Planck Institute for Meteorology, Hamburg, Germany</p>
+            </td>
+            <td width="366">
+                <p><a href="https://doi.org/10.1029/2018MS001400">https://doi.org/10.1029/2018MS001400</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="79">
+                <p>MPI-ESM1-2-LR</p>
+            </td>
+            <td width="226">
+                <p>Max Planck Institute for Meteorology, Hamburg, Germany</p>
+            </td>
+            <td width="366">
+                <p><a href="https://doi.org/10.1029/2018MS001400">https://doi.org/10.1029/2018MS001400</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="79">
+                <p>MRI-ESM2-0</p>
+            </td>
+            <td width="226">
+                <p>Meteorological Research Institute, Tsukuba, Ibaraki, Japan</p>
+            </td>
+            <td width="366">
+                <p><a href="https://doi.org/10.2151/jmsj.2019-051">https://doi.org/10.2151/jmsj.2019-051</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="79">
+                <p>NorESM2-LM</p>
+            </td>
+            <td width="226">
+                <p>NorESM climate modeling consortium, Norway (several Norwegian institutions, <a
+                        href="https://www.noresm.org/consortium/">www.noresm.org/consortium</a>)</p>
+            </td>
+            <td width="366">
+                <p><a href="https://doi.org/10.5194/gmd-13-6165-2020">https://doi.org/10.5194/gmd-13-6165-2020</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="79">
+                <p>NorESM2-MM</p>
+            </td>
+            <td width="226">
+                <p>NorESM climate modeling consortium, Norway (several Norwegian institutions, <a
+                        href="https://www.noresm.org/consortium/">www.noresm.org/consortium</a>)</p>
+            </td>
+            <td width="366">
+                <p><a href="https://doi.org/10.5194/gmd-13-6165-2020">https://doi.org/10.5194/gmd-13-6165-2020</a></p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<ul>
+    <li><strong>Group B: Downscaled CMIP6 data. </strong>Several variables&mdash;namely, those that relate to air
+        temperature and precipitation&mdash;can be downscaled to a higher-resolution grid for more robust and locally
+        useful projections. Downscaled data were obtained from the Seasonal Trends and Analysis of Residuals
+        Empirical-Statistical Downscaling Model (STAR-ESDM) (Hayhoe et al., 2024). STAR-ESDM is one of two downscaling
+        approaches incorporated in the Fifth National Climate Assessment, with the other being <a
+            href="https://loca.ucsd.edu/">Locally Constructed Analogs version 2 (LOCA2)</a>. Both are statistically
+        downscaled ensemble products that provide a nominally 5-kilometer grid over the contiguous United States. Both
+        have been trained using observed gridded products; STAR-ESDM using NOAA&rsquo;s nClimGrid Daily and LOCA2 using
+        the &ldquo;Livneh&rdquo; data sets from the University of Colorado&rsquo;s Cooperative Institute for Research in
+        Environmental Sciences. Both STAR-ESDM and LOCA2 have been peer reviewed and validated (e.g., Ullrich et al.,
+        2023). STAR-ESDM was selected for this project because its results were more readily accessible to the project
+        team at the time of project development and reduced the cost associated with working with multiple data sets.
+        <p>STAR-ESDM has proven to be robust out to the 99<sup>th</sup> percentile of the distribution for both
+            temperature and precipitation variables (Hayhoe et al., 2024). Independent evaluation of the downscaling
+            approach and comparison with LOCA2 shows that the two methods, both state-of-the-art downscaled products,
+            are largely in agreement with each other with some differences in the very extreme tails and in regions with
+            large uncertainties in the observational data used, such as in mountain ranges (Ullrich, 2023; Hartke et
+            al., 2025). Both methods display some dampening of future intensification of frontal precipitation events
+            (Baek et al., 2024); however, that is not a focus of this effort and therefore not a cause for concern in
+            this analysis.</p>
+        <p>The STAR-ESDM effort has downscaled more than 20 GCMs. This effort used downscaled data from the same subset
+            of 16 GCMs listed in Table 2 above. STAR-ESDM data are available for public download from: [link pending].
+        </p>
+        <p>The choice of downscaling approach introduces a source of uncertainty relating to the technique and data used
+            in the downscaling model, which tends to be higher in areas with high topographical variation and for
+            indicators describing climate extremes (e.g., Lafferty and Sriver, 2023; Wooten et al., 2017). There are
+            many different dynamical and statistical downscaling models available, each with their respective level of
+            uncertainty stemming from the observational data used to train the model as well as how well the downscaling
+            model handles conditions in the climate that have never been observed, or changes in the relationship
+            between the large-scale climate processes and local-scale responses to changes in those processes (i.e.,
+            climate stationarity). The proportion of uncertainty from the choice of downscaling approach is typically
+            much smaller than the uncertainty due to spread among climate models and between different scenarios.</p>
+    </li>
+</ul>
+<ul>
+    <li><strong>Group C: Updated sea level projections from NOAA. </strong>For sea level and coastal flooding, the
+        federal government&rsquo;s authoritative projections are those published and periodically updated by NOAA. This
+        effort used the most recent NOAA projections available at the time of publication, which were published in
+        NOAA&rsquo;s 2022 report, <em>Global and Regional Sea Level Rise Scenarios for the United States</em> (Sweet et
+        al., 2022).
+        <p>The NOAA team&rsquo;s approach combines CMIP6 GCM outputs; multiple methods of projecting future changes in
+            the ice sheets of Antarctica and Greenland; projections for glaciers, land water storage, and other factors;
+            and an understanding of vertical land motion to project future sea level and coastal flooding relative to
+            the shoreline at specific locations along U.S. coasts. These same methods were used for the sea level
+            projections in the Intergovernmental Panel on Climate Change&rsquo;s (IPCC&rsquo;s) <a
+                href="https://www.ipcc.ch/assessment-report/ar6/">Sixth Assessment Report</a> (AR6), published in 2021
+            and 2022. NOAA&rsquo;s report describes sources and methods in detail. The report, along with projection
+            data and metadata, can be viewed and downloaded publicly at <a
+                href="https://oceanservice.noaa.gov/hazards/sealevelrise/sealevelrise-tech-report.html">NOAA's
+                website</a>.</p>
+    </li>
+</ul>
+<ul>
+    <li><strong>Group D: Inputs to the CMIP6 ensemble runs.</strong> Projections of greenhouse gas concentrations come
+        from the official Shared Socioeconomic Pathway (SSP) scenarios that fed into the CMIP6 GCM runs described above.
+        These projections can be downloaded publicly from the <a href="https://iiasa.ac.at/models-tools-data/ssp">SSP
+            Database</a> (version 2.0, December 2018). See section 6, &ldquo;Future Climate Scenarios,&rdquo; for more
+        details about the SSP scenarios.</li>
+</ul>
+
+<h4>6. Future Climate Scenarios</h4>
+<p>For metrics in Groups A, B, and D, projections for four distinct climate change scenarios are displayed to illustrate
+    the range of possible future outcomes and to demonstrate why it is important that climate change solutions consider
+    both mitigation and adaptation. Divergence of projected impacts over time show that actions to mitigate greenhouse
+    gas emissions and reduce warming will make a noticeable difference, yet even the lowest-emissions scenarios have
+    impacts that demonstrate a need for adaptation. Group C metrics also show multiple scenarios for the same reason,
+    but they reflect a different set of scenarios because of the additional factors that NOAA&rsquo;s team integrated
+    into their modeling.</p>
+<p>The Group A, B, and D data visualizations feature the four SSPs described in Table 3. These four SSPs were selected
+    to provide a range of possible outcomes (as described above) in a manner consistent with the authoritative national
+    and global assessments of climate change, as the climate science community has largely standardized on the use of
+    these SSPs. The SSPs are defined by a set of socioeconomic development narratives and delineate future greenhouse
+    gas emissions trajectories (Lamie et al., 2024 and O&rsquo;Neill et al., 2014). The IPCC has not assigned
+    likelihoods to these scenarios. The graphs and maps provide all four SSPs at face value. For effective
+    communication, the SSPs in the observation/projection alignment product are referred to using consistent plain
+    language names from the IPCC AR6 Summary for Policymakers, as listed in Table 3, rather than by their formal SSP
+    numbers.</p>
+<p>Table 3. SSPs Used in This Effort</p>
+<table width="100%">
+    <tbody>
+        <tr>
+            <td width="78">
+                <p>Scenario</p>
+            </td>
+            <td width="101">
+                <p>Relative Level of Greenhouse Gas Emissions</p>
+            </td>
+            <td width="141">
+                <p>Corresponding SSP Narrative</p>
+            </td>
+            <td width="117">
+                <p>Projected 2021&ndash;2040 Global Avg. Temperature Change</p>
+            </td>
+            <td width="117">
+                <p>Projected 2041&ndash;2060 Global Avg. Temperature Change</p>
+            </td>
+            <td width="117">
+                <p>Projected 2081&ndash;2100 Global Avg. Temperature Change</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="78">
+                <p>SSP1-2.6</p>
+            </td>
+            <td width="101">
+                <p>Low</p>
+            </td>
+            <td width="141">
+                <p>Sustainable development: Sustainable development proceeds at a reasonably high pace.</p>
+            </td>
+            <td width="117">
+                <p>2.7&deg;F (1.5&deg;C)</p>
+                <p>(range: 2.16&ndash;3.24&deg;F)</p>
+            </td>
+            <td width="117">
+                <p>3.06&deg;F (1.7&deg;C)</p>
+                <p>(range: 2.34&ndash;3.96&deg;F)</p>
+            </td>
+            <td width="117">
+                <p>3.24&deg;F (1.8&deg;C)</p>
+                <p>(range: 2.34&ndash;4.32&deg;F)</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="78">
+                <p>SSP2-4.5</p>
+            </td>
+            <td width="101">
+                <p>Intermediate</p>
+            </td>
+            <td width="141">
+                <p>Middle of the road: An intermediate case between SSP1 and SSP3.</p>
+            </td>
+            <td width="117">
+                <p>2.7&deg;F (1.5&deg;C)</p>
+                <p>(range: 2.16&ndash;3.24&deg;F)</p>
+            </td>
+            <td width="117">
+                <p>3.6&deg;F (2.0&deg;C)</p>
+                <p>(range: 2.88&ndash;4.5&deg;F)</p>
+            </td>
+            <td width="117">
+                <p>4.86&deg;F (2.7&deg;C)</p>
+                <p>(range: 3.78&ndash;6.3&deg;F)</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="78">
+                <p>SSP3-7.0</p>
+            </td>
+            <td width="101">
+                <p>High</p>
+            </td>
+            <td width="141">
+                <p>Regional rivalry: Unmitigated emissions are high due to moderate economic growth, a rapidly growing
+                    population, and slow technological change in the energy sector.</p>
+            </td>
+            <td width="117">
+                <p>2.7&deg;F (1.5&deg;C)</p>
+                <p>(range: 2.16&ndash;3.24&deg;F)</p>
+            </td>
+            <td width="117">
+                <p>3.78&deg;F (2.1&deg;C)</p>
+                <p>(range: 3.06&ndash;4.68&deg;F)</p>
+            </td>
+            <td width="117">
+                <p>6.48&deg;F (3.6&deg;C)</p>
+                <p>(range: 5.04&ndash;8.28&deg;F)</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="78">
+                <p>SSP5-8.5</p>
+            </td>
+            <td width="101">
+                <p>Very high</p>
+            </td>
+            <td width="141">
+                <p>Fossil fueled development: Energy demand is high and most of this demand is met with carbon-based
+                    fuels.</p>
+            </td>
+            <td width="117">
+                <p>2.88&deg;F (1.6&deg;C)</p>
+                <p>(range: 2.34&ndash;3.42&deg;F)</p>
+            </td>
+            <td width="117">
+                <p>4.32&deg;F (2.4&deg;C)</p>
+                <p>(range: 3.42&ndash;5.4&deg;F)</p>
+            </td>
+            <td width="117">
+                <p>7.92&deg;F (4.4&deg;C)</p>
+                <p>(range: 5.94&ndash;10.26&deg;F)</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><em>Table notes: Table adapted from the 2024 New York State Climate Impacts Assessment (Lamie et al., 2024).
+        Corresponding greenhouse gas emissions terminology from IPCC AR6 (IPCC, 2021). SSP narratives adapted from
+        O&rsquo;Neill et al. (2014). The projected global average surface temperature change is relative to
+        1850&ndash;1900; best estimate and &ldquo;very likely&rdquo; range are listed. These global temperature
+        projections come from IPCC AR6 Table SPM.1 and have been converted from Celsius in the original source. </em>
+</p>
+<p>NOAA&rsquo;s projections of sea level rise and coastal flooding use a different set of five scenarios, shown in Table
+    4. These scenarios do not correspond directly to the SSPs. However, Table 2.4 in NOAA&rsquo;s technical report
+    (Sweet et al., 2022) provides a comparison that includes each sea level scenario&rsquo;s estimated probability of
+    occurrence under different degrees of global mean surface air temperature change, which in turn are related back to
+    the SSPs. NOAA&rsquo;s &ldquo;intermediate-low&rdquo; and &ldquo;intermediate&rdquo; scenarios provide reasonable
+    estimates of the lower and upper bounds for the most likely sea level rise by 2100, respectively. Thus, this effort
+    focuses on these two scenarios. They have been labeled as &ldquo;lower sea level rise&rdquo; and &ldquo;higher sea
+    level rise&rdquo; in the figures, to avoid confusion or conflation with the emissions scenarios shown in other
+    figures. NOAA&rsquo;s &ldquo;intermediate-high&rdquo; and &ldquo;high&rdquo; scenarios rely to a larger extent on
+    low-confidence ice sheet processes in addition to high or very high greenhouse gas emissions.</p>
+<p>Table 4. NOAA 2022 Sea Level Rise Scenarios</p>
+<table width="378">
+    <tbody>
+        <tr>
+            <td width="138">
+                <p>Sea Level Scenario</p>
+            </td>
+            <td width="240">
+                <p>Global Mean Sea Level Rise by 2100 (Relative to 2005 Baseline)</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="138">
+                <p>Low</p>
+            </td>
+            <td width="240">
+                <p>0.3 meters</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="138">
+                <p>Intermediate-low</p>
+            </td>
+            <td width="240">
+                <p>0.5 meters</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="138">
+                <p>Intermediate</p>
+            </td>
+            <td width="240">
+                <p>1.0 meters</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="138">
+                <p>Intermediate-high</p>
+            </td>
+            <td width="240">
+                <p>1.5 meters</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="138">
+                <p>High</p>
+            </td>
+            <td width="240">
+                <p>2.0 meters</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p><em>Table notes: Table adapted from NOAA (Sweet et al., 2022). The two shaded rows represent the scenarios used in
+        the project team&rsquo;s observation/projection pairing effort.</em></p>
+<p>In addition to projections of greenhouse gas concentrations, the SSP scenarios also include emissions projections for
+    other gas and aerosol pollutants, such as sulfur dioxide and black carbon (IPCC, 2021). The presence of sulfur
+    dioxide, a precursor for sulfate aerosols, has a cooling effect due to short-wave radiation from the sun being
+    reflected back into space by the aerosol particles, whereas black carbon in the atmosphere can have a warming effect
+    due to absorbing radiation. The net effect of anthropogenic aerosol emissions has been to cool the atmosphere. Thus,
+    anthropogenic aerosol emissions have in some areas been able to mask or offset a portion of the warming caused by
+    increases in greenhouse concentrations. The IPCC Sixth Assessment Report, Chapter 1 (IPCC, 2021) shows projected
+    decreases in anthropogenic emissions of aerosols over the next several decades, which as very likely to reduce their
+    cooling offset and unmask greenhouse gas warming.</p>
+
+<h4>7. Temporal Considerations</h4>
+<p>This section describes a variety of considerations related to timeframes and temporal averaging.</p>
+<p><strong>Historical observations.</strong> Timeframes for historical observations are consistent with <a
+        href="https://www.epa.gov/climate-indicators">EPA&rsquo;s climate change indicator suite</a>. Decisions on how
+    far back in time to display historical data reflect a thorough review of data availability, consistency, and
+    comparability, and have been documented in each indicator&rsquo;s peer reviewed technical documentation.</p>
+<p><strong>Projection horizon.</strong> NOAA&rsquo;s 2022 projections for sea level and coastal flooding extend through
+    2150, so they are being shown over their full range. All other projections in this effort extend through 2100. This
+    endpoint was selected because many GCM runs stop at 2100, so this time period offers the greatest richness of models
+    to aggregate together. Projections for each indicator start from the end of the available observed indicator data.
+    For example, if an indicator had observed data from 1950 to 2024, the climate projections would stretch from 2024 to
+    2100.</p>
+<p><strong>Scenario divergence and hindcasts.</strong> The SSPs and CMIP6 model runs used as a basis for this effort
+    start to show divergence between scenarios in 2015. Modeled values prior to 2015 represent hindcasts and are shown
+    as a single line on each graph. This part of the modeled data is referred to as a &ldquo;hindcast&rdquo; because it
+    is run using observed greenhouse gas concentrations, volcanic forcing events, solar radiation variations, and
+    aerosols. However, these hindcasts still include internal variability, such as El Ni&ntilde;o-Southern Oscillation
+    (ENSO) events that will not align with the timing of ENSO events that were experienced in reality. The graphs show
+    hindcasts back to 1950 as well as any prior years for which both the observed indicator and the hindcast had data
+    available for comparison. In general, downscaled STAR variables had hindcasts available back to 1950, while
+    non-downscaled GCM outputs could go back as far as 1850. Comparing actual observations with concurrent hindcasts can
+    illustrate how accurately the models represent the climate phenomena in question, it gives a sense of how well
+    scientists understand the historical changes in those indicators, and it is a vital step in aligning historical
+    observations and future projections for this effort. Meanwhile, comparing historical observations with the modeled
+    projections allows the audience to calibrate their lived experiences of historical change against the magnitude of
+    changes seen in future climate model output.</p>
+<p><strong>Averaging.</strong> In climate modeling, it is common to report and visualize projections that are averaged
+    over 10- to 30-year windows, in part to capture year-to-year variability and to avoid implying false year-to-year
+    precision in the models. The decision to average projections is largely a question of how one presents and
+    visualizes results, as the models themselves provide outputs at annual or sub-annual resolution. For this effort,
+    unless noted otherwise, projections are generally displayed as 11-year moving averages in line graphs (i.e., a data
+    point is plotted at each year, reflecting an arithmetic mean of the 11 years centered that point in time). Endpoints
+    are not padded, so the last 11-year average (2090&ndash;2100) is plotted at 2095, and the line graphs plot no data
+    for 2096&ndash;2100. Similar smoothing is applied to the blended model hindcast, which means the last hindcast value
+    is plotted at 2009, as 2014 was the last year before scenarios began to diverge. This smoothing, along with
+    multi-model averaging, is why the model data displayed in these graphs typically look smoother than the historical
+    trends.</p>
+<p><strong>Baselines. </strong>Some of EPA&rsquo;s observed indicators report anomalies relative to a specific
+    historical baseline period. For alignment, projections should be presented in reference to the same baseline. If
+    such alignment was not possible in certain cases (for example, if modeled data were not available for the entire
+    period needed to establish the baseline), projections were shifted based on a shared period of overlap (see the
+    &ldquo;delta method&rdquo; in section 8 below) or both observed and projected data were shifted to a new common
+    baseline. The technical documentation for each observation/projection pairing describes any such shifts in detail.
+</p>
+<p>For maps, total change was calculated from the end of the observed data record through 2100. For example, if an
+    indicator has observed data through 2020, the map would calculate total projected change from 2021 to 2100.</p>
+
+<h4>8. Calculation, Alignment, and Data Transformation Methods</h4>
+<p>Each indicator/model data pairing page provides access to a technical document that discusses specific methods in
+    detail. Therefore, this section of the general technical documentation focuses instead on general calculation steps
+    and approaches shared across the entire project. The descriptions below cover an overarching sequence of steps.</p>
+<ol>
+    <li><strong>Calculate the intended metric for each model. </strong>The project team attempted to apply the same
+        definition and calculation methods that were used in the corresponding observed indicator. For example, the
+        Seasonal Temperature indicator used daily mean temperatures averaged over each meteorological season, while
+        developing the Marine Heat Waves pairing involved running GCM outputs through the same script that EPA&rsquo;s
+        observed indicator uses to first establish location-specific, percentile-based thresholds, and then identify
+        four-consecutive-day events that exceeded these thresholds.
+        <p>The gridded projections were analyzed to match the spatial coverage and resolution of the observed indicator.
+            With respect to coverage, the team used geographic information systems (GIS) software to clip the
+            projections to the target domain and to mask land or non-land grid cells or portions thereof, where needed.
+            With respect to resolution, at one extreme, certain metrics required all grid cells to be averaged over a
+            large area, such as the contiguous United States. In such cases, the necessary averaging was done in GIS
+            software, using appropriate area weighting to account for partial grid cells and for latitudinal effects on
+            cell size. At the other extreme, metrics such as pH required data to be selected from a specific subset of
+            modeled grid cells that correspond to the point locations where historical measurements have been collected.
+        </p>
+    </li>
+</ol>
+<ol start="2">
+    <li><strong>Adjust baselines for comparability, if needed. </strong>Many of EPA&rsquo;s observed indicators use a
+        defined historical baseline period as a basis for reporting anomalies or change. Others use a historical
+        baseline period to derive thresholds for comparison, such as those necessary to define location-specific
+        &ldquo;average&rdquo; conditions for a drought index and those necessary to define what constitutes an
+        &ldquo;extreme&rdquo; event. Aligning future projections with these historical observations requires that the
+        projections refer to the same baseline. Where possible, the project team calculated the projected metric with
+        respect to the modeled hindcast values for the same baseline period.
+        <p>The project team encountered some situations where the observed indicator&rsquo;s defined baseline period
+            extended outside the temporal range of modeled data. That is, the modeled hindcasts did not extend back far
+            enough in time to cover the full baseline period that must be used to compute the indicator. The solution
+            depended on the nature of each case, as the following examples illustrate:</p>
+        <ul>
+            <li>EPA&rsquo;s Length of Growing Season indicator reports anomalies relative to the average over the entire
+                observed data set (1895&ndash;present), whereas hindcasts for the full set of GCMs are available back to
+                only 1951. Because this indicator only uses a baseline to report anomalies, and because the variable in
+                question represents an absolute measure (number of days), it is straightforward and defensible to simply
+                pick a new common baseline period and reset the indicator to it. This essentially means shifting one or
+                both series up or down on the graph, adding or subtracting a constant across all years. It does not
+                change the shape of the curve or the slope of any resulting trends. In practice, projections could be
+                shifted this way while leaving the historical observation data consistent with the way they are
+                presented in EPA&rsquo;s published indicators.</li>
+            <li>EPA&rsquo;s U.S. and Global Precipitation indicator calculates precipitation anomalies and percent
+                change relative to a 1901&ndash;2000 baseline period, whereas hindcasts for the full set of GCMs are
+                again available back to only 1951. Percent change does not allow curves to be simply shifted up or down
+                on the graph by a constant as described in the previous example. Thus, percent change was recalculated
+                for the historical observations relative to a 1951&ndash;2000 baseline, then applied the same baseline
+                period with the GCM outputs. This affects the map of percent change, but not the time-series graph that
+                uses anomalies in inches.</li>
+            <li>Figure 1 of EPA&rsquo;s Heavy Precipitation indicator comes from NOAA&rsquo;s Climate Extremes Index
+                (CEI), which defines extreme events relative to percentile thresholds derived from the entire period of
+                record, which begins in 1910. With hindcasts available back to 1951, and without the flexibility to
+                redefine the CEI to use a different baseline period, no further analysis or alignment was pursued for
+                this indicator. Use of a different observed data source in the future could reopen the potential for
+                alignment with GCM projections.</li>
+        </ul>
+        <p>In general, where a new baseline period was needed for recalculations, a 1951&ndash;2000 baseline was used.
+        </p>
+    </li>
+</ol>
+<ol start="3">
+    <li><strong>Calculate a multi-model mean.</strong> Projections for Group A and B variables came from up to 16 GCMs.
+        Authoritative assessments have traditionally weighted GCMs in a prescribed way when calculating central
+        estimates. For this effort, the same weighting approach used in the Fifth National Climate Assessment was used:
+        a Bayesian weighting approach documented by Massoud et al. (2023). This approach calculates a weight for each
+        model based on factors that include the individual models&rsquo; equilibrium and transient climate response
+        consistent with assessed estimates of Earth&rsquo;s climate sensitivity (Massoud et al., 2023). Note that this
+        approach does not eliminate outlier models (if any) from being included in the average, but models that deviate
+        further from what is deemed a realistic or expected sensitivity are given lower weights compared with models
+        that have a climate sensitivity closer to the expected value. The weights given to each model depend on the
+        specific set of models in the ensemble, such that their combined weight sums to 1.
+        <p>For variables that only had projections from a subset of the 16 GCMs, the authors of Massoud et al. (2023)
+            were consulted. They provided a custom Bayesian weighting for the subset, following the same principles as
+            the 16-GCM weighting approach.</p>
+        <p>Group C variables reflect a multi-GCM blending that was conducted by NOAA&rsquo;s project team and published
+            in NOAA&rsquo;s 2022 technical report prior to inclusion in this effort.</p>
+        <p>Group D, projected greenhouse gas concentrations, represents a common set of inputs to all the models. Thus,
+            no multi-model aggregation was needed.</p>
+    </li>
+</ol>
+<ol start="4">
+    <li><strong>Calculate a range of modeled values.</strong> For Group A and B metrics, the line graphs included a
+        shaded band around each SSP to offer users a sense of the range of projections available from different GCMs.
+        This range includes the 10<sup>th</sup> to 90<sup>th</sup> percentiles of the distribution of results from
+        individual models (up to 16 models). This approach is widely used to show the spread of plausible outcomes and
+        acknowledge the uncertainty inherent in future projections (a key reason for incorporating more than a dozen
+        different models) while omitting any true outliers. These ranges were calculated based on annual projected
+        values, without applying any multi-year smoothing.
+        <p>For Group C topics (sea level and coastal flooding), figures with ranges show the 17<sup>th</sup> to
+            83<sup>rd</sup> percentiles as reported by NOAA.</p>
+        <p>Group D (projected greenhouse gas concentrations) is inherently a single set of inputs shared across all
+            GCMs, so there is no range of values to show around each SSP. Here, the spread among the four SSPs
+            constitutes the most relevant range to show.</p>
+    </li>
+</ol>
+<ol start="5">
+    <li><strong>Check alignment.</strong> Projections and historical observations were plotted in the same format and
+        their degree of alignment over the time period in which the observations overlap with modeled hindcasts or (for
+        the most recent years) SSP projections was considered. The extent to which the time series appears to transition
+        from observed to projected, or whether the transition shows continuity or a notable &ldquo;step&rdquo; that
+        suggests a discontinuity, has been documented. This step primarily involved visual comparison, though the
+        project team also used some simple quantitative comparisons (e.g., percent difference) to characterize the
+        degree of alignment or deviation. As somewhat of a pilot exercise, this effort did not use more involved
+        statistical techniques to test alignment.</li>
+</ol>
+<ol start="6">
+    <li><strong>Transform as needed. </strong>The project team took steps to achieve credible pairings between
+        historical observations and projections. Specific steps are described in each pairing&rsquo;s technical
+        documentation, but they generally followed the hierarchy below:</li>
+    <p><em>Good alignment:</em> If the previous step revealed projections reasonably well aligned with the historical
+        observations, the results were plotted and published with no further transformation. Figure TD-1 shows an
+        example for sea surface temperature. After converting units and calculating anomalies with respect to the same
+        30-year baseline, the authors found that observed and modeled results aligned reasonably well.</p>
+
+    <p style="text-align: center"><em>Figure TD-1. Global mean sea surface temperature alignment example</em></p>
+    <img src="www/images/figure_td_1.png" alt="Figure TD-1" style="display: block; margin: 0 auto; width: 85%;">
+
+    <p><em>Moderate lack of alignment:</em> The project team investigated further to determine if the apparent
+        discontinuity between observations and projections could be a symptom of a mismatch in how the data were
+        processed or calculated. Figure TD-2 shows an example of a mismatch for snow cover. This figure depicts the
+        annual average snow-covered area over all of North America excluding Greenland; the authors found similar
+        mismatches for individual seasons. In this case, further investigation included discussion with the Rutgers
+        Global Snow Lab, which had provided the observed data analysis to the project team. The original Rutgers product
+        was derived from satellite imagery using a relatively coarse grid for analysis, but Rutgers provided a prototype
+        product they had developed using a higher-resolution grid, and it aligned much more closely with GCM outputs,
+        closing the gap by approximately half in all seasons. The project team proceeded with the higher-resolution
+        observations for this pairing and made plans to update the <a
+            href="https://www.epa.gov/climate-indicators/climate-change-indicators-snow-cover">Snow Cover</a> indicator
+        on EPA&rsquo;s website with the new source once Rutgers officially publishes it. This still left a gap between
+        observed and modeled time series, possibly related to different calculation methods required for the larger grid
+        cells in the model outputs, so a straightforward vertical shift was applied&mdash;a bias correction using the
+        well-established &ldquo;delta method.&rdquo; All GCM outputs (hindcast and future projections) were shifted up
+        by a constant amount to align the observed and modeled 1979&ndash;2014 means.</p>
+    <p>In other cases, an apparent mismatch did not have such an obvious explanation related to definitions or methods.
+        It could well be that the GCMs simply do not represent a particular process or attribute as accurately as they
+        represent a more fundamental measure like surface temperature, or that different cell sizes between the observed
+        and modeled grids skewed the analysis. Monthly average Arctic sea ice extent is one such example. Extent is
+        defined as the total areal coverage of pixels that are at least 15 percent frozen. After confirming that the
+        models were using the same definition as the observed indicator, the authors noted that there was still a
+        persistent gap between observations and modeled outputs (Figure TD-3), but, importantly, the two curves follow a
+        nearly identical shape. This diagnosis made Arctic sea ice a candidate for a bias correction. In this case, a
+        multiplicative shift was applied, adjusting all GCM outputs (hindcast and future projections) up by a constant
+        ratio to align the observed and modeled 1979&ndash;2014 means. In this case, a multiplicative bias correction
+        was more effective than an additive correction at retaining the accuracy of an eventual asymptote&mdash;where
+        sea ice extent reaches a near-zero level in the warmest scenarios. Figure TD-3 shows the result of this
+        transformation.</p>
+
+    <p style="text-align: center"><em>Figure TD-2. Snow cover alignment example</em></p>
+    <img src="www/images/figure_td_2.png" alt="Figure TD-2" style="display: block; margin: 0 auto; width: 85%;">
+
+    <p style="text-align: center"><em>Figure TD-3. Arctic sea ice alignment example</em></p>
+    <img src="www/images/figure_td_3.png" alt="Figure TD-3" style="display: block; margin: 0 auto; width: 85%;">
+
+    <p><em>Poor alignment:</em> If observed and modeled results were highly out of alignment, and/or the curves were of
+        a notably different shape, and no reasonable solution could be found (e.g., a different source, better alignment
+        of methods, or bias correction), the project team did not proceed with the pairing.</p>
+    </li>
+</ol>
+
+<h4>9. Communication</h4>
+<p>For each indicator/projection pairing, the project team has created a webpage that presents the following content:
+</p>
+<ul>
+    <li>One or more <strong>graphs or maps</strong> that allow the audience to view historical observations and
+        associated future projections in a common frame. These figures are interactive. On graphs, interactivity allows
+        the audience to toggle specific series on or off, drill down into specific scenarios where possible, and hover
+        to display numbers. On maps, interactivity allows the audience to pan, zoom in and out, and select data points
+        on vector-format maps (points, polygons). Specific graphics have been designed to display a compelling but not
+        overwhelming amount of information by default and to use terms, labels, and visualization practices that make
+        the information accessible to a wide audience. For example, this project intentionally uses English/imperial
+        units in many cases, rather than metric. Colors for the four SSP scenarios have been standardized across figures
+        and aligned with the colors used in the <a
+            href="https://www.ipcc.ch/report/ar6/wg1/downloads/report/IPCC_AR6_WGI_SPM.pdf">IPCC AR6 Summary for
+            Policymakers</a>. Where shaded bands are used, they depict the range between the 10<sup>th</sup> and
+        90<sup>th</sup> percentiles of all the individual models that were run.</li>
+    <li><strong>Background text.</strong> Contextual information about the topic is intentionally brief, as readers can
+        find deeper discussion within each of the indicators on <a href="https://www.epa.gov/climate-indicators">EPA's
+            climate change indicators website</a>.</li>
+    <li><strong>Key points</strong> that briefly summarize the shape of the data, notable patterns or trends, maxima and
+        minima, differences between scenarios, and other attributes that can help readers interpret the
+        &ldquo;story&rdquo; that the data are telling. The text generally describes the direction and magnitude of
+        change but does not present detailed trend analysis, as that was outside the scope of this pilot exercise. This
+        section can also introduce additional insights from the scientific literature that provide useful context for
+        understanding. Preference is given to authoritative IPCC and USGCRP assessments, where possible.</li>
+    <li><strong>Sources and methods.</strong> Each indicator page summarizes this information for quick reference but
+        points readers to a technical documentation file if they seek more details.</li>
+</ul>
+
+<h4>10. Acknowledgments</h4>
+<p>Funding for this effort was provided by the U.S. EPA through a series of task orders awarded to Eastern Research
+    Group, Inc. (ERG) under contract #68HERH19D0028. The authors wish to thank Marcus Sarofim and Sargon de Jesus of the
+    EPA, and Michael Kolian, formerly of the EPA, for their direction and guidance throughout the project. The authors
+    also recognize Katharine Hayhoe of the Nature Conservancy and Texas Tech University for her strategic advising in
+    the formative stages of this project and her valuable input on feasibility and analytical methods. The supporting
+    analysis and the text and technical documentation within the Explorer application benefited from an independent peer
+    review conducted through a separate U.S. EPA contract, with comments from Adrienne Wootten (University of Oklahoma)
+    and Vaishali Naik (National Oceanic and Atmospheric Administration) leading to numerous improvements in the analysis
+    and the associated communication products.</p>
+<h4>11. References</h4>
+<p>Baek, S. H., Ullrich, P. A., Dong, B., &amp; Lee, J. (2024). Evaluating downscaled products with expected
+    hydroclimatic co-variances. <em>Geoscientific</em><em> Model Development, 17</em>(23), 8665&ndash;8681, <a
+        href="https://doi.org/10.5194/gmd-17-8665-2024">https://doi.org/10.5194/gmd-17-8665-2024</a></p>
+<p>Hartke, S. H., Newman, A. J., Gutmann, E. D., McCrary, R. R., Lybarger, N. D., Lehner, F., Wood, A. W., Arnold, J.
+    R., &amp; Dixon, K. W. (2025). Lack of clear standards and usable comparisons of downscaled climate projections pose
+    a roadblock for US climate discovery and adaptation. <em>Environmental Research Letters</em><em>,
+        20</em>(5)<em>,</em> 054067. <a
+        href="https://doi.org/10.1088/1748-9326/adc74e">https://doi.org/10.1088/1748-9326/adc74e</a></p>
+<p>Hawkins, E., &amp; Sutton, R. (2009). The potential to narrow uncertainty in regional climate predictions.
+    <em>Bulletin of the American Meteorological Society, 90</em>(8), 1095&ndash;1108. <a
+        href="https://doi.org/10.1175/2009BAMS2607.1">https://doi.org/10.1175/2009BAMS2607.1</a>
+</p>
+<p>Hayhoe, K., Scott-Fleming, I., Stoner, A., &amp; Wuebbles, D. J. (2024). STAR-ESDM: A generalizable approach to
+    generating high-resolution climate projections through signal decomposition. <em>Earth&rsquo;s Future</em>,
+    <em>12</em>(7), e2023EF004107. <a
+        href="https://doi.org/10.1029/2023EF004107">https://doi.org/10.1029/2023EF004107</a>
+</p>
+<p>Intergovernmental Panel on Climate Change (IPCC). (2021). <em>Climate change 2021: The physical science basis.
+        Contribution of Working Group I to the Sixth Assessment Report of the Intergovernmental Panel on Climate
+        Change</em>. Cambridge University Press. <a
+        href="https://doi.org/10.1017/9781009157896">https://doi.org/10.1017/9781009157896</a></p>
+<p>Lafferty, D. C., &amp; Sriver, R. L. (2023). Downscaling and bias-correction contribute considerable uncertainty to
+    local climate projections in CMIP6. <em>npj Climate and Atmospheric Science</em> 6, 158. <a
+        href="https://doi.org/10.1038/s41612-023-00486-0">https://doi.org/10.1038/s41612-023-00486-0</a></p>
+<p>Lamie, C., Bader, D., Graziano, K., Horton, R. John, K., O&rsquo;Hern, N., &amp; Spungin, S. (2024). Chapter 2: New
+    York State&rsquo;s changing climate. In <em>New York State Climate Impacts Assessment</em> [interim version for
+    public release]. <a href="https://nysclimateimpacts.org">https://nysclimateimpacts.org</a></p>
+<p>Massoud, E. C., Lee, H. K., Terando, A., &amp; Wehner, M. (2023). Bayesian weighting of climate models based on
+    climate sensitivity. <em>Communications Earth &amp; Environment</em><em>4,</em> 365. <a
+        href="https://doi.org/10.1038/s43247-023-01009-8">https://doi.org/10.1038/s43247-023-01009-8</a></p>
+<p>O&rsquo;Neill, B. C., Kriegler, E., Riahi, K., Ebi, K. L., Hallegatte, S., Carter, T. R., Mathur, R., &amp; van
+    Vuuren, D. P. (2014). A new scenario framework for climate change research: the concept of shared socioeconomic
+    pathways. <em>Climatic Change, 122</em>(3), 387&ndash;400. <a
+        href="https://doi.org/10.1007/s10584-013-0905-2">https://doi.org/10.1007/s10584-013-0905-2</a></p>
+<p>Sweet, W. V., Hamlington, B. D., Kopp, R. E., Weaver, C. P., Barnard, P. L., Bekaert, D., Brooks, W., Craghan, M.,
+    Dusek, G., Frederikse, T., Garner, G., Genz, A. S., Krasting, J. P., Larour, E., Marcy, D., Marra, J. J.,
+    Obeysekera, J., Osler, M., Pendleton, M., Roman, D., Schmied, L., Veatch, W., White, K. D., &amp; Zuzak, C. (2022).
+    <em>Global and regional sea level rise scenarios for the United States: Updated mean projections and extreme water
+        level probabilities along U.S. coastlines. </em>NOAA Technical Report NOS 01. <a
+        href="https://oceanservice.noaa.gov/hazards/sealevelrise/sealevelrise-tech-report.html">https://oceanservice.noaa.gov/hazards/sealevelrise/sealevelrise-tech-report.html</a>
+</p>
+<p>Ullrich, P.A. (2023). <em>Validation of LOCA2 and STAR-ESDM statistically downscaled products. </em>Lawrence
+    Livermore National Laboratory. LLNL-TR-856094. <a
+        href="https://doi.org/10.2172/2202926">https://doi.org/10.2172/2202926</a></p>
+<p>U.S. Environmental Protection Agency. (2015). <em>EPA&rsquo;s peer review handbook</em> (4<sup>th</sup> ed.). EPA
+    100/B-15/001. <a
+        href="http://www.epa.gov/osa/peer-review-handbook-4th-edition-2015">www.epa.gov/osa/peer-review-handbook-4th-edition-2015</a>
+</p>
+<p>Wooten, A., Terando, A., Reich, B. J., Boyles, R. P., &amp; Semazzi, F. (2017). Characterizing sources of uncertainty
+    from global climate models and downscaling techniques. <em>Journal of Applied Meteorology and Climatology,
+        56</em>(12), 3245&ndash;3262. <a
+        href="https://doi.org/10.1175/JAMC-D-17-0087.1">https://doi.org/10.1175/JAMC-D-17-0087.1</a></p>
