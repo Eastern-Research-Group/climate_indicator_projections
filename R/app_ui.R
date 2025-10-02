@@ -98,7 +98,13 @@ app_ui <- function(request) {
                      maps = mod_precip_map_ui("precip_map_1"),
                      timeseries = mod_precip_plot_ui("precip_plot_1"),
                      summary = render_summary(),
-                     tech_doc = render_tech_doc()
+                     tech_doc = render_tech_doc(
+                         identification=read_app_text("total_precip/td_identification.html"),
+                         data_sources=read_app_text("total_precip/td_data_sources.html"),
+                         methodology=read_app_text("total_precip/td_methodology.html"),
+                         analysis=read_app_text("total_precip/td_analysis.html"),
+                         references=read_app_text("total_precip/td_references.html")
+                     )
                    )
           ),
 
@@ -107,7 +113,13 @@ app_ui <- function(request) {
                      title = "Sea Surface Temperature",
                      timeseries = mod_sst_plot_ui("sst_plot_1"),
                      summary = render_summary(),
-                     tech_doc = render_tech_doc()
+                     tech_doc = render_tech_doc(
+                       identification=read_app_text("sst/td_identification.html"),
+                       data_sources=read_app_text("sst/td_data_sources.html"),
+                       methodology=read_app_text("sst/td_methodology.html"),
+                       analysis=read_app_text("sst/td_analysis.html"),
+                       references=read_app_text("sst/td_references.html")
+                     )
                    )
           ),
 
