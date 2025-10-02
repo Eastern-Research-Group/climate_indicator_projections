@@ -14,7 +14,7 @@ mod_about_ui <- function(id) {
     tabsetPanel(
       tabPanel(
         "Tool",
-        "Some content0"
+        read_app_text("about/tool.html")
       ),
       tabPanel(
         "Methods",
