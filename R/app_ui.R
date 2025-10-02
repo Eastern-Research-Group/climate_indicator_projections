@@ -108,7 +108,6 @@ app_ui <- function(request) {
                        methodology=read_app_text("sea_level/td_methodology.html"),
                        analysis=read_app_text("sea_level/td_analysis.html"),
                        references=read_app_text("sea_level/td_references.html")
-
                      )
                    )
           ),
@@ -118,7 +117,13 @@ app_ui <- function(request) {
                      title = "Coastal Flooding",
                      maps = mod_coast_fld_map_ui("coast_fld_map_1"),
                      summary = render_summary(),
-                     tech_doc = render_tech_doc()
+                     tech_doc = render_tech_doc(
+                       identification=read_app_text("coastal_flooding/td_identification.html"),
+                       data_sources=read_app_text("coastal_flooding/td_data_sources.html"),
+                       methodology=read_app_text("coastal_flooding/td_methodology.html"),
+                       analysis=read_app_text("coastal_flooding/td_analysis.html"),
+                       references=read_app_text("coastal_flooding/td_references.html")
+                     )
                    )
           ),
 
