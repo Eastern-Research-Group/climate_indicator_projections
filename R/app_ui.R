@@ -162,7 +162,13 @@ app_ui <- function(request) {
                      title = "Snow Cover",
                      timeseries = mod_snow_cover_plot_ui("snow_cover_plot_1"),
                      summary = render_summary(),
-                     tech_doc = render_tech_doc()
+                     tech_doc = render_tech_doc(
+                       identification=read_app_text("snow_cover/td_identification.html"),
+                       data_sources=read_app_text("snow_cover/td_data_sources.html"),
+                       methodology=read_app_text("snow_cover/td_methodology.html"),
+                       analysis=read_app_text("snow_cover/td_analysis.html"),
+                       references=read_app_text("snow_cover/td_references.html")
+                     )
                    )
           )
         )
