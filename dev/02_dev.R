@@ -45,6 +45,8 @@ golem::add_module(name = "ocean_acidity_plot", with_test = TRUE) # Ocean Acidity
 golem::add_module(name = "arctic_sea_ice_plot", with_test = TRUE) # Arctic Sea Ice
 golem::add_module(name = "snow_cover_plot", with_test = TRUE) # Snow Cover
 golem::add_module(name = "ghg_conc_plot", with_test = TRUE) # GHG concentrations
+# About pages
+golem::add_module(name = "about")
 
 ## Add helper functions ----
 ## Creates fct_* and utils_*

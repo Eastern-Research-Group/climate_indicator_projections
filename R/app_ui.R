@@ -22,8 +22,10 @@ app_ui <- function(request) {
         content = content <- tabsetPanel(
           id = "main_tabs",
           type = "hidden",  # Hide default tab headers (you use a custom sidebar)
-          selected="av_temp",
-
+          selected="about",
+          tabPanel("About", value = "about",
+                   mod_about_ui("about_1")
+          ),
           tabPanel("Greenhouse Gas Concentrations", value = "ghg_conc",
                    render_indicator_page(
                      title = "Greenhouse Gas Concentrations",
