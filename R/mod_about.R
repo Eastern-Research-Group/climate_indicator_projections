@@ -10,14 +10,14 @@
 mod_about_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    tags$h2("About"),
+    tags$h2("About the Explorer"),
     tabsetPanel(
       tabPanel(
-        "Tool",
+        "Tool Overview",
         read_app_text("about/tool.html")
       ),
       tabPanel(
-        "Methods",
+        "General Technical Documentation",
         read_app_text("about/gen_tech_doc.html")
       )
     )

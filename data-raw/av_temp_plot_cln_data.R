@@ -41,4 +41,8 @@
     which_anom = smoothed_anom,
     min_hind_yr = min_hind_yr)
 
+# create example plot
+  av_temp_plot_mod_all
+  av_temp_plot_proj_av_raw
+
 usethis::use_data(av_temp_plot_cln_data, overwrite = TRUE)
