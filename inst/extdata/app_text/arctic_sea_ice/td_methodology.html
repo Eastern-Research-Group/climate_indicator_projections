@@ -1,29 +1,93 @@
 <h4>5. Historical Data Collection</h4>
-<p>The observed indicator is based on maps of sea ice extent in the Arctic Ocean and surrounding waters, which were developed using brightness temperature imagery in the microwave wavelengths collected by satellites. The technical documentation for the <a href="https://www.epa.gov/climate-indicators/climate-change-indicators-arctic-sea-ice">Arctic Sea Ice indicator</a> describes the specific satellite missions and their periods of operation, instrumentation, and spatial resolution. Satellite data collection began in October 1978, so 1979 was the first year of the September time series.</p>
+<p>The observed indicator is based on maps of sea ice extent in the Arctic Ocean and surrounding waters, which were
+    developed using brightness temperature imagery in the microwave wavelengths collected by satellites. The technical
+    documentation for the <a
+        href="https://www.epa.gov/climate-indicators/climate-change-indicators-arctic-sea-ice">Arctic Sea Ice
+        indicator</a> describes the specific satellite missions and their periods of operation, instrumentation, and
+    spatial resolution. Satellite data collection began in October 1978, so 1979 was the first year of the September
+    time series.</p>
 <h4>6. Indicator Derivation</h4>
-<p>This pairing focuses on sea ice extent, which NSIDC defines as the total area covered by all pixels on the map that have an ice concentration of at least 15 percent&mdash;meaning that at least 15 percent of the ocean surface within that pixel is frozen over. The 15 percent concentration cutoff for extent is based on validation studies that showed that a 15 percent threshold provided the best approximation of the &ldquo;true&rdquo; ice edge and the lowest bias. The project team chose to examine extent rather than total area (area-integrated concentration) because it is a more complete time series and provides more complete coverage of the &ldquo;pole hole&rdquo; (the area directly above and surrounding the North Pole that these particular satellites cannot cover), which can be reasonably assumed to have all pixels with 15 percent coverage or greater, at least during the observed record, based on other observations of this area.</p>
+<p>This pairing focuses on sea ice extent, which NSIDC defines as the total area covered by all pixels on the map that
+    have an ice concentration of at least 15 percent&mdash;meaning that at least 15 percent of the ocean surface within
+    that pixel is frozen over. The 15 percent concentration cutoff for extent is based on validation studies that showed
+    that a 15 percent threshold provided the best approximation of the &ldquo;true&rdquo; ice edge and the lowest bias.
+    The project team chose to examine extent rather than total area (area-integrated concentration) because it is a more
+    complete time series and provides more complete coverage of the &ldquo;pole hole&rdquo; (the area directly above and
+    surrounding the North Pole that these particular satellites cannot cover), which can be reasonably assumed to have
+    all pixels with 15 percent coverage or greater, at least during the observed record, based on other observations of
+    this area.</p>
 <p><em>Observed Data</em></p>
-<p>Satellite data are used to develop daily ice extent and concentration maps using an algorithm developed by NASA. The technical documentation for the <a href="https://www.epa.gov/climate-indicators/climate-change-indicators-arctic-sea-ice">Arctic Sea Ice indicator</a> describes the specific image processing steps in more detail. These steps include measures to address false positives, mixed land/ocean pixels, and occasional temporal gaps due to satellite or sensor outages. NASA performed initial steps, followed by further processing by NSIDC. The project team obtained monthly averages from NSIDC and converted units from square kilometers to square miles for public accessibility.</p>
+<p>Satellite data are used to develop daily ice extent and concentration maps using an algorithm developed by NASA. The
+    technical documentation for the <a
+        href="https://www.epa.gov/climate-indicators/climate-change-indicators-arctic-sea-ice">Arctic Sea Ice
+        indicator</a> describes the specific image processing steps in more detail. These steps include measures to
+    address false positives, mixed land/ocean pixels, and occasional temporal gaps due to satellite or sensor outages.
+    NASA performed initial steps, followed by further processing by NSIDC. The project team obtained monthly averages
+    from NSIDC and converted units from square kilometers to square miles for public accessibility.</p>
 <p><em>Model Outputs</em></p>
 <p>The project team performed the following steps via R scripts:</p>
 <ul>
-<li>For each model, and each year&rsquo;s September layer, the team used the &ldquo;siconc&rdquo; variable to identify all pixels with at least 15 percent ice cover.</li>
-<li>The team calculated the total area of the pixels that met or exceeded the 15 percent threshold. The area of the corresponding ocean grid cells comes from the CMIP6 variable &ldquo;areacello.&rdquo;</li>
-<li>In performing these calculations, the project team applied a coastline mask to eliminate land-based ice. This meant that mixed land/ocean pixels were included in the analysis as only partial (ocean) pixels.</li>
-<li>The team aggregated the 16 models using the standard Bayesian model weighting approach used in the Fifth National Climate Assessment and documented by Massoud et al. (2023).</li>
-<li>The team smoothed modeled results using an 11-year moving average. The team performed this step independently for the hindcast (through 2014) and for each scenario from 2015 (the first year of divergence) forward.</li>
+    <li>For each model, and each year&rsquo;s September layer, the team used the &ldquo;siconc&rdquo; variable to
+        identify all pixels with at least 15 percent ice cover.</li>
+    <li>The team calculated the total area of the pixels that met or exceeded the 15 percent threshold. The area of the
+        corresponding ocean grid cells comes from the CMIP6 variable &ldquo;areacello.&rdquo;</li>
+    <li>In performing these calculations, the project team applied a coastline mask to eliminate land-based ice. This
+        meant that mixed land/ocean pixels were included in the analysis as only partial (ocean) pixels.</li>
+    <li>The team aggregated the 16 models using the standard Bayesian model weighting approach used in the Fifth
+        National Climate Assessment and documented by Massoud et al. (2023).</li>
+    <li>The team smoothed modeled results using an 11-year moving average. The team performed this step independently
+        for the hindcast (through 2014) and for each scenario from 2015 (the first year of divergence) forward.</li>
 </ul>
 <h4>7. Alignment</h4>
-<p>Observations were within the wide range of modeled values even before bias correction. However, the all-model weighted average was consistently lower than observed values during the period of overlap, which started in 1979. The two curves have a similar shape, but they are offset vertically. Figure TD-1 shows these differences; see the &ldquo;original&rdquo; lines for the hindcast and two scenarios (the highest and lowest emissions scenarios, for illustration purposes). The project team reviewed the observed and modeled analyses and confirmed that they apply the same definitions. One factor that might contribute to the fairly consistent offset between observed and modeled ice extent is a difference in original pixel sizes. The observed data set is based on satellite instruments with nominal 25-kilometer resolution, which results in pixel sizes ranging from 382 to 664 square kilometers due to the Earth&rsquo;s curvature. The GCMs use 0.5- to 1-degree pixels, which have an area ranging from 300 to 2,500 square kilometers in the Arctic region, depending on the GCM, resolution, grid type, latitude, and longitude, so excluding grid cells with less than 15 percent sea ice concentration could leave out a nontrivial amount of sea ice. Other reasons for the offset might simply relate to the precision with which GCMs are able to represent model monthly average sea ice extent.</p>
-<p>Regardless of the reasons for this particular offset, the consistent shape of the curves and their reasonable closeness&mdash;including observations falling within the overall range of the 16 models&mdash;led the project team to retain this pairing and apply a straightforward multiplicative bias correction. The team shifted all GCM outputs (hindcast and future projections) up by a constant ratio to align the observed and modeled 1979&ndash;2014 means. These are all years with observed data before the scenarios begin to diverge. Figure TD-1 shows the result of this transformation. The project team chose a multiplicative rather than additive (&ldquo;delta method&rdquo;) bias correction because Arctic sea ice extent approaches a natural asymptote at zero in a warming future, and an additive upward shift would have shown ice extent stabilizing at a number substantially higher than zero even under the warmest future conditions&mdash;an outcome for which there is no physical basis.</p>
+<p>Observations were within the wide range of modeled values even before bias correction. However, the all-model
+    weighted average was consistently lower than observed values during the period of overlap, which started in 1979.
+    The two curves have a similar shape, but they are offset vertically. Figure TD-1 shows these differences; see the
+    &ldquo;original&rdquo; lines for the hindcast and two scenarios (the highest and lowest emissions scenarios, for
+    illustration purposes). The project team reviewed the observed and modeled analyses and confirmed that they apply
+    the same definitions. One factor that might contribute to the fairly consistent offset between observed and modeled
+    ice extent is a difference in original pixel sizes. The observed data set is based on satellite instruments with
+    nominal 25-kilometer resolution, which results in pixel sizes ranging from 382 to 664 square kilometers due to the
+    Earth&rsquo;s curvature. The GCMs use 0.5- to 1-degree pixels, which have an area ranging from 300 to 2,500 square
+    kilometers in the Arctic region, depending on the GCM, resolution, grid type, latitude, and longitude, so excluding
+    grid cells with less than 15 percent sea ice concentration could leave out a nontrivial amount of sea ice. Other
+    reasons for the offset might simply relate to the precision with which GCMs are able to represent model monthly
+    average sea ice extent.</p>
+<p>Regardless of the reasons for this particular offset, the consistent shape of the curves and their reasonable
+    closeness&mdash;including observations falling within the overall range of the 16 models&mdash;led the project team
+    to retain this pairing and apply a straightforward multiplicative bias correction. The team shifted all GCM outputs
+    (hindcast and future projections) up by a constant ratio to align the observed and modeled 1979&ndash;2014 means.
+    These are all years with observed data before the scenarios begin to diverge. Figure TD-1 shows the result of this
+    transformation. The project team chose a multiplicative rather than additive (&ldquo;delta method&rdquo;) bias
+    correction because Arctic sea ice extent approaches a natural asymptote at zero in a warming future, and an additive
+    upward shift would have shown ice extent stabilizing at a number substantially higher than zero even under the
+    warmest future conditions&mdash;an outcome for which there is no physical basis.</p>
 <p>Figure TD-1. Arctic sea ice alignment</p>
 <h4>8. Display</h4>
 <p>The interactive graph for this pairing shows the following elements:</p>
 <ul>
-<li>Observed data from EPA&rsquo;s indicator from 1979 to 2024.</li>
-<li>Modeled hindcast from 1950 to 2014. The line on the graph shows the Bayesian weighted average of the 16 GCMs, smoothed using an 11-year moving average. The resulting 11-year means are plotted from 1955 to 2009, as the project team did not attempt to apply any endpoint padding at either end of the series.</li>
-<li>Modeled projections from 2015 to 2100 for four emissions scenarios (SSP1-2.6, SSP2-4.5, SSP3-7.0, and SSP5-8.5), with 2014 added for continuity (2014 is the last year before the scenarios diverge). Each scenario line on the graph shows the Bayesian weighted average of the 16 GCMs, smoothed using an 11-year moving average. The resulting 11-year means are plotted starting at 2014 to provide continuity with the hindcast annual ranges, although the scenarios do not start to diverge until 2015. Smoothed values for 2014&ndash;2019 pick up some hindcast years in the average. The 11-year means are plotted through 2095, including data from 2090 through 2100, the last year of available data. Scenarios have been assigned &ldquo;plain-language&rdquo; names for consistency throughout this pairings effort.</li>
-<li>A shaded band around each of the scenarios, reflecting the 10<sup>th</sup> to 90<sup>th</sup> percentiles among the 16 models. This shaded band therefore illustrates the range of modeled values. The shaded bands show annual values; they have not been smoothed. The projected ranges start in 2014 to provide continuity with the hindcast, but the scenarios begin to diverge in 2015.</li>
+    <li>Observed data from EPA&rsquo;s indicator from 1979 to 2024.</li>
+    <li>Modeled hindcast from 1950 to 2014. The line on the graph shows the Bayesian weighted average of the 16 GCMs,
+        smoothed using an 11-year moving average. The resulting 11-year means are plotted from 1955 to 2009, as the
+        project team did not attempt to apply any endpoint padding at either end of the series.</li>
+    <li>Modeled projections from 2015 to 2100 for four emissions scenarios (SSP1-2.6, SSP2-4.5, SSP3-7.0, and SSP5-8.5),
+        with 2014 added for continuity (2014 is the last year before the scenarios diverge). Each scenario line on the
+        graph shows the Bayesian weighted average of the 16 GCMs, smoothed using an 11-year moving average. The
+        resulting 11-year means are plotted starting at 2014 to provide continuity with the hindcast annual ranges,
+        although the scenarios do not start to diverge until 2015. Smoothed values for 2014&ndash;2019 pick up some
+        hindcast years in the average. The 11-year means are plotted through 2095, including data from 2090 through
+        2100, the last year of available data. Scenarios have been assigned &ldquo;plain-language&rdquo; names for
+        consistency throughout this pairings effort.</li>
+    <li>A shaded band around each of the scenarios, reflecting the 10<sup>th</sup> to 90<sup>th</sup> percentiles among
+        the 16 models. This shaded band therefore illustrates the range of modeled values. The shaded bands show annual
+        values; they have not been smoothed. The projected ranges start in 2014 to provide continuity with the hindcast,
+        but the scenarios begin to diverge in 2015.</li>
 </ul>
 <h4>9. Quality Assurance and Quality Control</h4>
-<p>The technical documentation for the <a href="https://www.epa.gov/climate-indicators/climate-change-indicators-arctic-sea-ice">Arctic Sea Ice indicator</a> provides details about specific quality measures employed during the image processing steps that fed into the observed time series. Quality procedures for each GCM (e.g., validation) are described in source papers published by the organizations that have developed and run each model; these sources are available through the links in the overall technical documentation [to be linked] for this effort. For each pairing, the project team conducted typical quality control steps including independently checking all aggregations, unit conversions, transformations, and other calculations.</p>
+<p>The technical documentation for the <a
+        href="https://www.epa.gov/climate-indicators/climate-change-indicators-arctic-sea-ice">Arctic Sea Ice
+        indicator</a> provides details about specific quality measures employed during the image processing steps that
+    fed into the observed time series. Quality procedures for each GCM (e.g., validation) are described in source papers
+    published by the organizations that have developed and run each model; these sources are available through the links
+    in the overall technical documentation [to be linked] for this effort. For each pairing, the project team conducted
+    typical quality control steps including independently checking all aggregations, unit conversions, transformations,
+    and other calculations.</p>
