@@ -37,7 +37,12 @@ app_ui <- function(request) {
                        sources_and_methods="Some sources"
                      ),
                      # INSERT TECH DOC INFO
-                     tech_doc = render_tech_doc()
+                     tech_doc = render_tech_doc(
+                       identification=read_app_text("ghg_conc/td_identification.html"),
+                       data_sources=read_app_text("ghg_conc/td_data_sources.html"),
+                       methodology=read_app_text("ghg_conc/td_methodology.html"),
+                       analysis=read_app_text("ghg_conc/td_analysis.html")
+                     )
                    )
           ),
 
@@ -63,7 +68,13 @@ app_ui <- function(request) {
                      maps = mod_grow_season_map_ui("grow_season_map_1"),
                      timeseries = mod_grow_season_plot_ui("grow_season_plot_1"),
                      summary = render_summary(),
-                     tech_doc = render_tech_doc()
+                     tech_doc = render_tech_doc(
+                       identification=read_app_text("grow_season/td_identification.html"),
+                       data_sources=read_app_text("grow_season/td_data_sources.html"),
+                       methodology=read_app_text("grow_season/td_methodology.html"),
+                       analysis=read_app_text("grow_season/td_analysis.html"),
+                       references=read_app_text("grow_season/td_references.html")
+                     )
                    )
           ),
 
@@ -73,7 +84,13 @@ app_ui <- function(request) {
                      maps = mod_seasonal_temp_map_ui("seasonal_temp_map_1"),
                      timeseries = mod_seasonal_temp_plot_ui("seasonal_temp_plot_1"),
                      summary = render_summary(),
-                     tech_doc = render_tech_doc()
+                     tech_doc = render_tech_doc(
+                       identification=read_app_text("seasonal_temp/td_identification.html"),
+                       data_sources=read_app_text("seasonal_temp/td_data_sources.html"),
+                       methodology=read_app_text("seasonal_temp/td_methodology.html"),
+                       analysis=read_app_text("seasonal_temp/td_analysis.html"),
+                       references=read_app_text("seasonal_temp/td_references.html")
+                     )
                    )
           ),
 
@@ -83,7 +100,13 @@ app_ui <- function(request) {
                      maps = mod_precip_map_ui("precip_map_1"),
                      timeseries = mod_precip_plot_ui("precip_plot_1"),
                      summary = render_summary(),
-                     tech_doc = render_tech_doc()
+                     tech_doc = render_tech_doc(
+                         identification=read_app_text("total_precip/td_identification.html"),
+                         data_sources=read_app_text("total_precip/td_data_sources.html"),
+                         methodology=read_app_text("total_precip/td_methodology.html"),
+                         analysis=read_app_text("total_precip/td_analysis.html"),
+                         references=read_app_text("total_precip/td_references.html")
+                     )
                    )
           ),
 
@@ -92,7 +115,13 @@ app_ui <- function(request) {
                      title = "Sea Surface Temperature",
                      timeseries = mod_sst_plot_ui("sst_plot_1"),
                      summary = render_summary(),
-                     tech_doc = render_tech_doc()
+                     tech_doc = render_tech_doc(
+                       identification=read_app_text("sst/td_identification.html"),
+                       data_sources=read_app_text("sst/td_data_sources.html"),
+                       methodology=read_app_text("sst/td_methodology.html"),
+                       analysis=read_app_text("sst/td_analysis.html"),
+                       references=read_app_text("sst/td_references.html")
+                     )
                    )
           ),
 

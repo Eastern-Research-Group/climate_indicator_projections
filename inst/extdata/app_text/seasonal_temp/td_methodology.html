@@ -1,0 +1,42 @@
+<h4>5. Historical Data Collection</h4>
+<p>The observed indicator is based on surface air temperature measurements from thousands of land-based weather stations throughout the CONUS, collected using standard meteorological instruments. Altogether, NOAA&rsquo;s <em>n</em>ClimDiv data set incorporates data from more than 10,000 stations. Widespread, reliable data were available back to 1896. The <em>n</em>ClimDiv data set also incorporates a grid-based computational approach known as climatologically aided interpolation (Willmott &amp; Robeson, 1995), which helps to address topographic variability. Data from individual stations are combined in a grid that covers the entire contiguous 48 states with 5-kilometer resolution. The technical documentation for the <a href="https://www.epa.gov/climate-indicators/climate-change-indicators-us-and-global-temperature">Seasonal Temperature indicator</a> provides more information, links, and supporting references for <em>n</em>ClimDiv.</p>
+<h4>6. Indicator Derivation</h4>
+<p>Temperature data for this pairing are presented as anomalies. An anomaly represents the difference between an observed value and the corresponding value from a baseline period. This feature uses a baseline period of 1901&ndash;2000. Seasonal averaging uses meteorological seasons:</p>
+<ul>
+<li>Winter: December (of the prior calendar year), January, and February.</li>
+<li>Spring: March, April, and May.</li>
+<li>Summer: June, July, and August.</li>
+<li>Fall: September, October, and November.</li>
+</ul>
+<p><em>Observed Data</em></p>
+<p>NOAA calculated monthly observed temperature means for each station, incorporating bias corrections as described in Section 9 below. They then converted measurements into monthly anomalies in degrees Fahrenheit. The monthly anomalies were averaged to determine seasonal anomalies for each year.</p>
+<p>To achieve uniform spatial coverage (i.e., not biased toward areas with a higher concentration of measuring stations), NOAA calculated area-weighted averages of grid-point estimates interpolated from station data. This made it possible to calculate CONUS averages for the graphs.</p>
+<p>The map shows long-term rates of change in temperature over the CONUS for 1896&ndash;2023. The slope of each temperature trend was calculated from the three-month anomalies by ordinary least-squares regression and then multiplied by the change in years (2023 - 1896 = 127) to estimate the total change over the period of record.</p>
+<p><em>Model Outputs</em></p>
+<p>The project team performed the following steps via R scripts:</p>
+<ul>
+<li>For each STAR-ESDM downscaled model, the team averaged the daily &ldquo;tasmin&rdquo; and &ldquo;tasmax&rdquo; variables (daily minimum and maximum surface air temperatures) to estimate a daily mean temperature, then aggregated them to compute seasonal means.</li>
+<li>The team converted temperature outputs from Celsius to Fahrenheit and converted absolute temperatures to anomalies.</li>
+<li>The team calculated spatial averages for the CONUS (for the graph) and for individual states (for the map).</li>
+<li>The team aggregated the 16 models using the standard Bayesian model weighting approach used in the Fifth National Climate Assessment and documented by Massoud et al. (2023).</li>
+<li>The team smoothed modeled results for the graph using an 11-year moving average. The team performed this step independently for the hindcast (through 2014) and for each scenario from 2015 (the first year of divergence) forward.</li>
+<li>The team calculated total change for the 2024&ndash;2100 period for each scenario on the maps via linear regression slope multiplied by the length of the period.</li>
+</ul>
+<h4>7. Alignment</h4>
+<p>To ensure consistency in how the anomalies are defined, the project team had to ensure that the observed and modeled anomalies were all presented relative to a common baseline. The observed CONUS anomalies for the graph had already been calculated with respect to a 1901&ndash;2000 baseline, as shown in the <a href="https://www.epa.gov/climate-indicators/climate-change-indicators-seasonal-temperature">Seasonal Temperature indicator</a>. Downscaled model outputs were only available back to 1950, so the modeled anomalies were initially calculated relative to a standard 50-year baseline period: 1951&ndash;2000. The project team then shifted the model outputs vertically on each graph, such that the 1951&ndash;2000 mean for the model hindcast would match the 1951&ndash;2000 mean for the observed time series. This aligns the model outputs with the observed anomalies that remain based on a 1901&ndash;2000 baseline. The alignment of baseline here is essentially just a vertical shift on each graph, not a change to the shape of the time series.</p>
+<p>The results show good alignment. Thus, no other transformation was necessary.</p>
+<h4>8. Display</h4>
+<p>The interactive graphs for this pairing show the following elements:</p>
+<ul>
+<li>Observed data from 1896 to 2023.</li>
+<li>Modeled hindcast from 1950 to 2014. The line on the graph shows the Bayesian weighted average of the 16 GCMs, smoothed using an 11-year moving average. The resulting 11-year means are plotted from 1955 to 2009, as the project team did not attempt to apply any endpoint padding at either end of the series.</li>
+<li>Modeled projections from 2015 to 2100 for four emissions scenarios (SSP1-2.6, SSP2-4.5, SSP3-7.0, and SSP5-8.5), with 2014 added for continuity (2014 is the last year before the scenarios diverge). Each scenario line on the graph shows the Bayesian weighted average of the 16 GCMs, smoothed using an 11-year moving average. The resulting 11-year means are plotted starting at 2014 to provide continuity with the hindcast annual ranges, although the scenarios do not start to diverge until 2015. Smoothed values for 2014&ndash;2019 pick up some hindcast years in the average. The 11-year means are plotted through 2095, including data from 2090 through 2100, the last year of available data. Scenarios have been assigned &ldquo;plain-language&rdquo; names for consistency throughout this pairings effort.</li>
+<li>A shaded band around each of the scenarios reflects the 10<sup>th</sup> to 90<sup>th</sup> percentiles among the 16 models. This shaded band therefore illustrates the range of modeled values. The shaded bands show annual values; they have not been smoothed. The projected ranges start in 2014 to provide continuity with the hindcast, but the scenarios begin to diverge in 2015.</li>
+</ul>
+<p>The interactive maps show:</p>
+<ul>
+<li>Total observed change from 1896 to 2023.</li>
+<li>Total projected change from 2024 to 2100 for four emissions scenarios (SSP1-2.6, SSP2-4.5, SSP3-7.0, and SSP5-8.5). Each scenario shows the Bayesian weighted average of the 16 GCMs.</li>
+</ul>
+<h4>9. Quality Assurance and Quality Control</h4>
+<p>The technical documentation for the <a href="https://www.epa.gov/climate-indicators/climate-change-indicators-seasonal-temperature">Seasonal Temperature indicator</a> discusses steps that NOAA takes to identify errors and biases in the data and to either remove these stations from the time series or apply correction factors. These steps address changes to station locations, methods (e.g., measurement time of day), and instrumentation. Quality procedures for each GCM (e.g., validation) are described in source papers published by the organizations that have developed and run each model, available through the links in the overall technical documentation [to be linked] for this effort. For each pairing, the project team conducted typical quality control steps including independently checking all aggregations, unit conversions, transformations, and other calculations.</p>
