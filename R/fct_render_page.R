@@ -48,7 +48,7 @@ render_indicator_page <- function(
     idx <- idx + 1
   }
 
-  if (!is.null(timeseries)) {
+  if (!is.null(tech_doc)) {
     panels[[idx]] <-
       tabPanel("Technical Documentation", tech_doc)
     idx <- idx + 1
