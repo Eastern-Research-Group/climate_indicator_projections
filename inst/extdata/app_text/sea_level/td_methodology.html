@@ -1,0 +1,85 @@
+<h4>5. Historical Data Collection</h4>
+<p>The technical documentation for the <a
+        href="https://www.epa.gov/climate-indicators/climate-change-indicators-sea-level">Sea Level indicator</a>
+    provides detailed discussion of how observational data were collected, including specific programs and the relative
+    advantages of each method and how they complement each other. To summarize, sea level relative to the shore
+    (&ldquo;relative&rdquo; sea level) is measured using tide gauges, which are mechanical measuring devices placed
+    along the shore, while global mean sea level now comes from satellite measurement of sea surface heights (altimetry)
+    relative to the center of the Earth.</p>
+<p>Tide gauges devices measure the change in sea level relative to the land surface, which means the resulting data
+    reflect both the change in absolute sea surface height and the change in local land levels. NOAA (2014) describes
+    tide gauge data and how they were collected. Data collection methods are documented in a series of <a
+        href="https://tidesandcurrents.noaa.gov/pub.html">NOAA manuals and standards</a>. EPA&rsquo;s graph shows trends
+    for a subset of stations along the ocean coasts that had sufficient data from 1960 to 2023.</p>
+<p>Tide gauge data can be converted to absolute change through a series of adjustments as described in Section 6. This
+    is how global mean sea level can be estimated prior to the onset of satellite measurement in 1979.</p>
+<h4>6. Indicator Derivation</h4>
+<p><em>Observed Data</em></p>
+<p>NOAA processed all of the satellite measurements so they could be combined into a single time series. In doing so,
+    NOAA limited its analysis to data between 66 degrees south and 66 degrees north, which covers a large majority of
+    the Earth&rsquo;s surface and represents the area with the most complete satellite coverage. The technical
+    documentation for the <a href="https://www.epa.gov/climate-indicators/climate-change-indicators-sea-level">Sea Level
+        indicator</a> provides citations and explains several adjustments and corrections that were made to ensure
+    consistency across multiple satellite missions, adjust for air pressure differences and seasonal signals, and so on.
+    NOAA reported data at approximately 10-day intervals, from which the project team calculated monthly and then annual
+    averages.</p>
+<p>CSIRO developed the long-term tide gauge reconstruction using a series of adjustments to convert relative tide gauge
+    measurements into an absolute global mean sea level trend. Church and White (2011) describe the methods used, which
+    include data screening; calibration with satellite altimeter data to establish patterns of spatial variability; and
+    a correction for glacial isostatic adjustment, which represents the ongoing change in the size and shape of the
+    ocean basins associated with changes in surface loading.</p>
+<p>The graph shows annual change relative to the reconstruction&rsquo;s 1880 starting point. The project team anchored
+    the first year of the satellite time series (1993) to the corresponding data point in the reconstruction. The team
+    has labeled the graph as &ldquo;cumulative sea level change&rdquo; for the sake of clarity.</p>
+<p>For the map, NOAA used monthly sea level means to calculate a long-term annual rate of change for each station, which
+    was determined by linear regression. Then, the annual rate of change was multiplied by the length of the analysis
+    period to determine total change. This part of the analysis was limited to long-term tide gauges that met certain
+    data availability criteria outlined in the technical documentation for the <a
+        href="https://www.epa.gov/climate-indicators/climate-change-indicators-sea-level">Sea Level indicator</a>.</p>
+<p>The inset plots on the map show average annual sea levels relative to the 1960s average for each station. The project
+    team calculated annual values from monthly means for each year that had at least seven months of data.</p>
+<p><em>Projections</em></p>
+<p>The project team obtained source data from NOAA. NOAA&rsquo;s scenarios present sea level change relative to the base
+    year 2005, with data points at 2020, 2030, and every 10 years thereafter, ending in 2150. The two scenarios begin to
+    diverge between 2020 and 2030. The project team converted from metric to English units to support accessibility to a
+    wider U.S.-based audience.</p>
+<h4>7. Alignment</h4>
+<p>For the graphs, the project team aligned each projected time series to the observed satellite-based time series using
+    the average of the years 2005 to 2020. Specifically, the team calculated the 2005&ndash;2020 average for the
+    observed data, calculated the 2005&ndash;2020 average for the modeled data, calculated the difference between the
+    two, and shifted all modeled values up or down by this amount. The satellite-based time series had already been
+    chained to the long-term reconstruction at year 1993 as part of EPA&rsquo;s <a
+        href="https://www.epa.gov/climate-indicators/climate-change-indicators-sea-level">Sea Level indicator</a>. This
+    chaining essentially results in the projections being shifted vertically on the graph, with no change to their shape
+    or slope. The resulting graph now shows cumulative change relative to the start of the record in 1880.</p>
+<p>For the map, the project team did not conduct any aligning steps as the maps shows the total change across years.</p>
+<p>The results show good alignment. Thus, no other transformation was necessary.</p>
+<h4>8. Display</h4>
+<p>The interactive graph for this pairing shows the following elements:</p>
+<ul>
+    <li>Observed data from 1880 to 2023, encompassing CSIRO&rsquo;s reconstruction for 1880&ndash;2013 and satellite
+        altimetry for 1993&ndash;2023.</li>
+    <li>Projections for the two selected scenarios with data points at 2005 and 2020 (no divergence yet) and for 2020,
+        2030, and every 10 years thereafter until 2150. The graph displays straight lines to connect these decadal data
+        points.</li>
+    <li>Shaded bands around the projections, representing the range of likely values as defined by NOAA from the
+        17<sup>th</sup> to 83<sup>rd</sup></li>
+</ul>
+<p>The interactive maps for this pairing show relative sea level change at specific locations, encompassing the
+    following elements:</p>
+<ul>
+    <li>Observed data from EPA&rsquo;s indicator, representing total change from 1960 to 2020.</li>
+    <li>Total change from 2020 to 2150 for each of the two chosen scenarios (intermediate-low, labeled &ldquo;lower sea
+        level rise,&rdquo; and intermediate, labeled &ldquo;higher sea level rise&rdquo;).</li>
+</ul>
+<h4>9. Quality Assurance and Quality Control</h4>
+<p>Satellite data processing involves extensive quality assurance and quality control (QA/QC) protocols&mdash;for
+    example, to check for instrumental drift by comparing with tide gauge data. The technical documentation for the <a
+        href="https://www.epa.gov/climate-indicators/climate-change-indicators-sea-level">Sea Level indicator</a>
+    provides citations that document these QA/QC procedures. Church and White (2011) and earlier publications cited
+    therein describe steps that were taken to select the highest-quality sites and correct for various sources of
+    potential error in tide gauge measurements used for the long-term reconstruction. Quality assurance and quality
+    control procedures for U.S. tide gauge data are described in various publications available at <a
+        href="https://tidesandcurrents.noaa.gov/pub.html">NOAA&rsquo;s CO-OPS Publications site</a>. For each pairing,
+    the project team conducted typical quality control steps including independently checking all aggregations, unit
+    conversions, transformations, and other calculations.</p>

@@ -1,0 +1,56 @@
+<h4>10. Comparability Over Time and Space</h4>
+<p>Observed data have been collected and analyzed using consistent methods over space. The satellites that collect the
+    data cover all of North America in their orbital paths. While mapping methods have improved over time, GSL has taken
+    steps to reanalyze older maps to ensure consistency with the latest approach. GSL provides <a
+        href="http://climate.rutgers.edu/snowcover/docs.php?target=cdr">more information</a> about these correction
+    steps. This feature excludes pre-1981 data that were not collected or analyzed with the same methods; hence, it
+    starts with historical observations in 1981.</p>
+<p>GCMs inherently use consistent algorithms over time and space.</p>
+<p>The observed and projected time series cover the same spatial extent: North America, excluding Greenland. However,
+    they are fundamentally based on different pixel sizes for analysis, as the observed data set uses 24-kilometer
+    pixels while the model resolutions range from less than 1 degree to 2.8 degrees (more than 300 kilometers per side
+    at the equator). As a result of this difference, the project team computed the modeled version of the indicator
+    differently from the observed analysis, as described in Sections 6 and 7 above. This difference was necessary
+    because the observed analysis applies a &ldquo;50 percent of pixel area&rdquo; threshold that would not have been
+    practical to apply at the scale of the GCM grid cells.</p>
+<h4>11. Data Limitations</h4>
+<p>The technical documentation for the <a
+        href="https://www.epa.gov/climate-indicators/climate-change-indicators-snow-cover">Snow Cover indicator</a>
+    identifies some factors that may impact the confidence, application, or conclusions that readers can draw from the
+    observed portion of this pairing. For example, it notes some of the challenges inherent in detecting snow cover in
+    obscured conditions (thick forest, cloud cover) and small discontinuous patches, which especially reduce confidence
+    in summer measurements.</p>
+<p>Future projections of any variable have inherent uncertainty, as described in Section 12 below. Snow cover is
+    influenced by multiple systems and processes, so it may be less direct to model than, say, surface air temperature.
+</p>
+<h4>12. Sources of Uncertainty</h4>
+<p>Observations inevitably reflect <strong>measurement uncertainty</strong>. Uncertainty measurements are not readily
+    available for this indicator or for the underlying data, but extensive quality assurance/quality control and
+    third-party verification measures show that steps have been taken to minimize uncertainty and ensure that users are
+    able to draw accurate conclusions from the data. Maps based on satellite imagery are often superior to maps based on
+    ground observations, which can be biased due to sparse station coverage&mdash;both geographically and in terms of
+    elevation (e.g., a station in a valley will not necessarily have snow cover when nearby mountains do)&mdash;and due
+    to the effects of urban heat islands in locations such as airports. Hence, satellite-based maps are generally more
+    representative of regional snow extent, particularly for mountainous or sparsely populated regions.</p>
+<p>Model outputs inevitably reflect <strong>model uncertainty</strong>. Each GCM represents aspects of, and processes
+    within, the climate system differently. These differences will lead to differences in how the GCMs represent both
+    present-day climate and how the climate responds to changes in greenhouse gases. For example, GCMs differ in climate
+    sensitivity, defined as the increase in global temperature when carbon dioxide in the atmosphere doubles relative to
+    pre-industrial times. Even a single GCM will yield different results if presented with different initial conditions,
+    as the chaotic processes within the model will lead to different timing of various modes of variability within the
+    model (such as the El Ni&ntilde;o cycle). The shaded bands in the graph for this pairing illustrate this type of
+    uncertainty in the spread of models, as well as year-to-year variations due to internal variability within each
+    model.</p>
+<p>Interpreting projections also requires users to consider <strong>scenario uncertainty</strong>. Projecting future
+    conditions requires assumptions about future greenhouse gas emissions. This feature presents four widely used
+    scenarios to illustrate a range of possibilities without assigning likelihoods to them, nor do these scenarios
+    necessarily bound possible futures.</p>
+<h4>13. Sources of Variability</h4>
+<p>Variability in snow cover naturally results from variation in weather patterns, multi-year climate cycles such as the
+    El Ni&ntilde;o&ndash;Southern Oscillation and Pacific Decadal Oscillation, and other factors. Underlying weekly
+    measurements have even more variability. The construction of this pairing addresses variability in a few ways:</p>
+<ul>
+    <li>Presenting a long-term record (several decades) and calculating annual and seasonal averages to reduce some of
+        the day-to-day &ldquo;noise&rdquo; inherent in snow cover measurements.</li>
+    <li>Smoothing GCM outputs with an 11-year moving average.</li>
+</ul>
