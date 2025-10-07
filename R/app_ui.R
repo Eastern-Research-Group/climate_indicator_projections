@@ -115,7 +115,12 @@ app_ui <- function(request) {
                      title = "Total Precipitation",
                      maps = mod_precip_map_ui("precip_map_1"),
                      timeseries = mod_precip_plot_ui("precip_plot_1"),
-                     summary = render_summary(),
+                     summary = render_summary(
+                       intro=read_app_text("total_precip/text_intro.html"),
+                       background=read_app_text("total_precip/text_background.html"),
+                       key_points=read_app_text("total_precip/text_key_points.html"),
+                       sources_and_methods=read_app_text("total_precip/text_sources.html")
+                     ),
                      tech_doc = render_tech_doc(
                          identification=read_app_text("total_precip/td_identification.html"),
                          data_sources=read_app_text("total_precip/td_data_sources.html"),
