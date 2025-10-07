@@ -94,7 +94,12 @@ app_ui <- function(request) {
                      title = "Seasonal Temperature",
                      maps = mod_seasonal_temp_map_ui("seasonal_temp_map_1"),
                      timeseries = mod_seasonal_temp_plot_ui("seasonal_temp_plot_1"),
-                     summary = render_summary(),
+                     summary = render_summary(
+                       intro=read_app_text("seasonal_temp/text_intro.html"),
+                       background=read_app_text("seasonal_temp/text_background.html"),
+                       key_points=read_app_text("seasonal_temp/text_key_points.html"),
+                       sources_and_methods=read_app_text("seasonal_temp/text_sources.html")
+                     ),
                      tech_doc = render_tech_doc(
                        identification=read_app_text("seasonal_temp/td_identification.html"),
                        data_sources=read_app_text("seasonal_temp/td_data_sources.html"),
