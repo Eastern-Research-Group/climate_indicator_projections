@@ -135,7 +135,12 @@ app_ui <- function(request) {
                    render_indicator_page(
                      title = "Sea Surface Temperature",
                      timeseries = mod_sst_plot_ui("sst_plot_1"),
-                     summary = render_summary(),
+                     summary = render_summary(
+                       intro=read_app_text("sst/text_intro.html"),
+                       background=read_app_text("sst/text_background.html"),
+                       key_points=read_app_text("sst/text_key_points.html"),
+                       sources_and_methods=read_app_text("sst/text_sources.html")
+                     ),
                      tech_doc = render_tech_doc(
                        identification=read_app_text("sst/td_identification.html"),
                        data_sources=read_app_text("sst/td_data_sources.html"),
