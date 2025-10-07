@@ -32,9 +32,9 @@ app_ui <- function(request) {
                      timeseries = mod_ghg_conc_plot_ui("ghg_conc_plot_1"),
                      # INSET SUMMARY INFO
                      summary = render_summary(
-                       background="insert background here", #read_app_text("ghg_background.txt")
-                       key_points="insert key points here",
-                       sources_and_methods="Some sources"
+                       background=read_app_text("ghg_conc/text_background.html"), #read_app_text("ghg_background.txt")
+                       key_points=read_app_text("ghg_conc/text_key_points.html"),
+                       sources_and_methods=read_app_text("ghg_conc/text_sources.html")
                      ),
                      # INSERT TECH DOC INFO
                      tech_doc = render_tech_doc()
