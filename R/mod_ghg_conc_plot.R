@@ -24,6 +24,7 @@ mod_ghg_conc_plot_ui <- function(id) {
     render_timeseries_page(
       title="",
       timeseries=shinycssloaders::withSpinner(highcharter::highchartOutput(ns("plot"))),
+      caption=read_app_text("ghg_conc/plot_caption_text.html")
     )
 
   )
