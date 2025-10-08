@@ -32,10 +32,10 @@ app_ui <- function(request) {
                      timeseries = mod_ghg_conc_plot_ui("ghg_conc_plot_1"),
                      # INSET SUMMARY INFO
                      summary = render_summary(
-                       intro="Some intro sentences here",
-                       background="insert background here", #read_app_text("ghg_background.txt")
-                       key_points="insert key points here",
-                       sources_and_methods="Some sources"
+                       intro=read_app_text("ghg_conc/text_intro.html"),
+                       background=read_app_text("ghg_conc/text_background.html"),
+                       key_points=read_app_text("ghg_conc/text_key_points.html"),
+                       sources_and_methods=read_app_text("ghg_conc/text_sources.html")
                      ),
                      # INSERT TECH DOC INFO
                      tech_doc = render_tech_doc(
@@ -52,7 +52,12 @@ app_ui <- function(request) {
                      title = "Average Temperature",
                      maps = mod_av_temp_map_ui("av_temp_map_1"),
                      timeseries = mod_av_temp_plot_ui("av_temp_plot_1"),
-                     summary = render_summary(),
+                     summary = render_summary(
+                       intro=read_app_text("av_temp/text_intro.html"),
+                       background=read_app_text("av_temp/text_background.html"),
+                       key_points=read_app_text("av_temp/text_key_points.html"),
+                       sources_and_methods=read_app_text("av_temp/text_sources.html")
+                     ),
                      tech_doc = render_tech_doc(
                        identification=read_app_text("av_temp/td_identification.html"),
                        data_sources=read_app_text("av_temp/td_data_sources.html"),
@@ -68,7 +73,12 @@ app_ui <- function(request) {
                      title = "Length of Growing Season",
                      maps = mod_grow_season_map_ui("grow_season_map_1"),
                      timeseries = mod_grow_season_plot_ui("grow_season_plot_1"),
-                     summary = render_summary(),
+                     summary = render_summary(
+                       intro=read_app_text("grow_season/text_intro.html"),
+                       background=read_app_text("grow_season/text_background.html"),
+                       key_points=read_app_text("grow_season/text_key_points.html"),
+                       sources_and_methods=read_app_text("grow_season/text_sources.html")
+                     ),
                      tech_doc = render_tech_doc(
                        identification=read_app_text("grow_season/td_identification.html"),
                        data_sources=read_app_text("grow_season/td_data_sources.html"),
@@ -84,7 +94,12 @@ app_ui <- function(request) {
                      title = "Seasonal Temperature",
                      maps = mod_seasonal_temp_map_ui("seasonal_temp_map_1"),
                      timeseries = mod_seasonal_temp_plot_ui("seasonal_temp_plot_1"),
-                     summary = render_summary(),
+                     summary = render_summary(
+                       intro=read_app_text("seasonal_temp/text_intro.html"),
+                       background=read_app_text("seasonal_temp/text_background.html"),
+                       key_points=read_app_text("seasonal_temp/text_key_points.html"),
+                       sources_and_methods=read_app_text("seasonal_temp/text_sources.html")
+                     ),
                      tech_doc = render_tech_doc(
                        identification=read_app_text("seasonal_temp/td_identification.html"),
                        data_sources=read_app_text("seasonal_temp/td_data_sources.html"),
@@ -100,7 +115,12 @@ app_ui <- function(request) {
                      title = "Total Precipitation",
                      maps = mod_precip_map_ui("precip_map_1"),
                      timeseries = mod_precip_plot_ui("precip_plot_1"),
-                     summary = render_summary(),
+                     summary = render_summary(
+                       intro=read_app_text("total_precip/text_intro.html"),
+                       background=read_app_text("total_precip/text_background.html"),
+                       key_points=read_app_text("total_precip/text_key_points.html"),
+                       sources_and_methods=read_app_text("total_precip/text_sources.html")
+                     ),
                      tech_doc = render_tech_doc(
                          identification=read_app_text("total_precip/td_identification.html"),
                          data_sources=read_app_text("total_precip/td_data_sources.html"),
@@ -115,7 +135,12 @@ app_ui <- function(request) {
                    render_indicator_page(
                      title = "Sea Surface Temperature",
                      timeseries = mod_sst_plot_ui("sst_plot_1"),
-                     summary = render_summary(),
+                     summary = render_summary(
+                       intro=read_app_text("sst/text_intro.html"),
+                       background=read_app_text("sst/text_background.html"),
+                       key_points=read_app_text("sst/text_key_points.html"),
+                       sources_and_methods=read_app_text("sst/text_sources.html")
+                     ),
                      tech_doc = render_tech_doc(
                        identification=read_app_text("sst/td_identification.html"),
                        data_sources=read_app_text("sst/td_data_sources.html"),
@@ -131,7 +156,12 @@ app_ui <- function(request) {
                      title = "Sea Level",
                      maps = mod_slr_map_ui("slr_map_1"),
                      timeseries = mod_slr_plot_ui("slr_plot_1"),
-                     summary = render_summary(),
+                     summary = render_summary(
+                       intro=read_app_text("sea_level/text_intro.html"),
+                       background=read_app_text("sea_level/text_background.html"),
+                       key_points=read_app_text("sea_level/text_key_points.html"),
+                       sources_and_methods=read_app_text("sea_level/text_sources.html")
+                     ),
                      tech_doc = render_tech_doc(
                        identification=read_app_text("sea_level/td_identification.html"),
                        data_sources=read_app_text("sea_level/td_data_sources.html"),
@@ -146,7 +176,12 @@ app_ui <- function(request) {
                    render_indicator_page(
                      title = "Coastal Flooding",
                      maps = mod_coast_fld_map_ui("coast_fld_map_1"),
-                     summary = render_summary(),
+                     summary = render_summary(
+                       intro=read_app_text("coastal_flooding/text_intro.html"),
+                       background=read_app_text("coastal_flooding/text_background.html"),
+                       key_points=read_app_text("coastal_flooding/text_key_points.html"),
+                       sources_and_methods=read_app_text("coastal_flooding/text_sources.html")
+                     ),
                      tech_doc = render_tech_doc(
                        identification=read_app_text("coastal_flooding/td_identification.html"),
                        data_sources=read_app_text("coastal_flooding/td_data_sources.html"),
@@ -161,7 +196,12 @@ app_ui <- function(request) {
                    render_indicator_page(
                      title = "Ocean Acidity",
                      timeseries = mod_ocean_acidity_plot_ui("ocean_acidity_plot_1"),
-                     summary = render_summary(),
+                     summary = render_summary(
+                       intro=read_app_text("ocean_acidity/text_intro.html"),
+                       background=read_app_text("ocean_acidity/text_background.html"),
+                       key_points=read_app_text("ocean_acidity/text_key_points.html"),
+                       sources_and_methods=read_app_text("ocean_acidity/text_sources.html")
+                     ),
                      tech_doc = render_tech_doc(
                        identification=read_app_text("ocean_acidity/td_identification.html"),
                        data_sources=read_app_text("ocean_acidity/td_data_sources.html"),
@@ -176,7 +216,12 @@ app_ui <- function(request) {
                    render_indicator_page(
                      title = "Arctic Sea Ice",
                      timeseries = mod_arctic_sea_ice_plot_ui("arctic_sea_ice_plot_1"),
-                     summary = render_summary(),
+                     summary = render_summary(
+                       intro=read_app_text("arctic_sea_ice/text_intro.html"),
+                       background=read_app_text("arctic_sea_ice/text_background.html"),
+                       key_points=read_app_text("arctic_sea_ice/text_key_points.html"),
+                       sources_and_methods=read_app_text("arctic_sea_ice/text_sources.html")
+                     ),
                      tech_doc = render_tech_doc(
                        identification=read_app_text("arctic_sea_ice/td_identification.html"),
                        data_sources=read_app_text("arctic_sea_ice/td_data_sources.html"),
@@ -191,7 +236,12 @@ app_ui <- function(request) {
                    render_indicator_page(
                      title = "Snow Cover",
                      timeseries = mod_snow_cover_plot_ui("snow_cover_plot_1"),
-                     summary = render_summary(),
+                     summary = render_summary(
+                       intro=read_app_text("snow_cover/text_intro.html"),
+                       background=read_app_text("snow_cover/text_background.html"),
+                       key_points=read_app_text("snow_cover/text_key_points.html"),
+                       sources_and_methods=read_app_text("snow_cover/text_sources.html")
+                     ),
                      tech_doc = render_tech_doc(
                        identification=read_app_text("snow_cover/td_identification.html"),
                        data_sources=read_app_text("snow_cover/td_data_sources.html"),
