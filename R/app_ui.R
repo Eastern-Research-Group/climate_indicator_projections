@@ -196,7 +196,12 @@ app_ui <- function(request) {
                    render_indicator_page(
                      title = "Ocean Acidity",
                      timeseries = mod_ocean_acidity_plot_ui("ocean_acidity_plot_1"),
-                     summary = render_summary(),
+                     summary = render_summary(
+                       intro=read_app_text("ocean_acidity/text_intro.html"),
+                       background=read_app_text("ocean_acidity/text_background.html"),
+                       key_points=read_app_text("ocean_acidity/text_key_points.html"),
+                       sources_and_methods=read_app_text("ocean_acidity/text_sources.html")
+                     ),
                      tech_doc = render_tech_doc(
                        identification=read_app_text("ocean_acidity/td_identification.html"),
                        data_sources=read_app_text("ocean_acidity/td_data_sources.html"),
