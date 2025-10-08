@@ -176,7 +176,12 @@ app_ui <- function(request) {
                    render_indicator_page(
                      title = "Coastal Flooding",
                      maps = mod_coast_fld_map_ui("coast_fld_map_1"),
-                     summary = render_summary(),
+                     summary = render_summary(
+                       intro=read_app_text("coastal_flooding/text_intro.html"),
+                       background=read_app_text("coastal_flooding/text_background.html"),
+                       key_points=read_app_text("coastal_flooding/text_key_points.html"),
+                       sources_and_methods=read_app_text("coastal_flooding/text_sources.html")
+                     ),
                      tech_doc = render_tech_doc(
                        identification=read_app_text("coastal_flooding/td_identification.html"),
                        data_sources=read_app_text("coastal_flooding/td_data_sources.html"),
