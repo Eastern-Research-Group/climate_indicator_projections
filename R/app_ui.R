@@ -216,7 +216,12 @@ app_ui <- function(request) {
                    render_indicator_page(
                      title = "Arctic Sea Ice",
                      timeseries = mod_arctic_sea_ice_plot_ui("arctic_sea_ice_plot_1"),
-                     summary = render_summary(),
+                     summary = render_summary(
+                       intro=read_app_text("arctic_sea_ice/text_intro.html"),
+                       background=read_app_text("arctic_sea_ice/text_background.html"),
+                       key_points=read_app_text("arctic_sea_ice/text_key_points.html"),
+                       sources_and_methods=read_app_text("arctic_sea_ice/text_sources.html")
+                     ),
                      tech_doc = render_tech_doc(
                        identification=read_app_text("arctic_sea_ice/td_identification.html"),
                        data_sources=read_app_text("arctic_sea_ice/td_data_sources.html"),
