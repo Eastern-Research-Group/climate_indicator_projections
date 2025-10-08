@@ -156,7 +156,12 @@ app_ui <- function(request) {
                      title = "Sea Level",
                      maps = mod_slr_map_ui("slr_map_1"),
                      timeseries = mod_slr_plot_ui("slr_plot_1"),
-                     summary = render_summary(),
+                     summary = render_summary(
+                       intro=read_app_text("sea_level/text_intro.html"),
+                       background=read_app_text("sea_level/text_background.html"),
+                       key_points=read_app_text("sea_level/text_key_points.html"),
+                       sources_and_methods=read_app_text("sea_level/text_sources.html")
+                     ),
                      tech_doc = render_tech_doc(
                        identification=read_app_text("sea_level/td_identification.html"),
                        data_sources=read_app_text("sea_level/td_data_sources.html"),
