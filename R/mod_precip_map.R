@@ -30,7 +30,9 @@ mod_precip_map_ui <- function(id) {
         PRECIP_MAP_COLORS,
         label_text = "Percent change in precipitation"
       )
-    )
+    ),
+    data_source=read_app_text("total_precip/map_caption_data_source.html"),
+    caption=read_app_text("total_precip/map_caption_text.html")
   )
 
 }

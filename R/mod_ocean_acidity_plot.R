@@ -22,6 +22,8 @@ mod_ocean_acidity_plot_ui <- function(id) {
     render_timeseries_page(
       title="",
       timeseries=shinycssloaders::withSpinner(highcharter::highchartOutput(ns("plot"))),
+      data_source=read_app_text("ocean_acidity/plot_caption_data_source.html"),
+      caption=read_app_text("ocean_acidity/plot_caption_text.html")
     )
 
   )

@@ -33,7 +33,9 @@ mod_av_temp_map_ui <- function(id) {
       legend=create_map_legend(
         AV_TEMP_MAP_COLORS
       )
-    )
+    ),
+    data_source=read_app_text("av_temp/map_caption_data_source.html"),
+    caption=read_app_text("av_temp/map_caption_text.html")
   )
 
 }

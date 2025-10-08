@@ -52,7 +52,9 @@ mod_slr_map_ui <- function(id) {
             )
           )
         ),
-    )
+    ),
+    data_source=read_app_text("sea_level/map_caption_data_source.html"),
+    caption=read_app_text("sea_level/map_caption_text.html")
   )
 
 }

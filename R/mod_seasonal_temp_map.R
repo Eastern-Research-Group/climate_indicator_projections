@@ -46,7 +46,9 @@ mod_seasonal_temp_map_ui <- function(id) {
             SEASONAL_TEMP_MAP_COLORS,
             label_text = "Total temperature change (°F)"
           )
-        )
+        ),
+        data_source=read_app_text("seasonal_temp/map_caption_data_source.html"),
+        caption=read_app_text("seasonal_temp/map_caption_text.html")
       )
     )
   )

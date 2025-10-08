@@ -33,7 +33,9 @@ mod_grow_season_map_ui <- function(id) {
         GROW_SEASON_MAP_COLORS,
         label_text = "Change in length of growing season (days)"
       )
-    )
+    ),
+    data_source=read_app_text("grow_season/map_caption_data_source.html"),
+    caption=read_app_text("grow_season/map_caption_text.html")
   )
 
 }

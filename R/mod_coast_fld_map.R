@@ -84,7 +84,9 @@ mod_coast_fld_map_ui <- function(id) {
                 )
               )
             ),
-          )
+          ),
+        data_source=read_app_text("coastal_flooding/map_caption_data_source.html"),
+        caption=read_app_text("coastal_flooding/map_caption_text.html")
       )
 
 
