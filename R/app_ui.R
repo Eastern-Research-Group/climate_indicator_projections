@@ -39,7 +39,8 @@ app_ui <- function(request) {
                        identification=read_app_text("ghg_conc/td_identification.html"),
                        data_sources=read_app_text("ghg_conc/td_data_sources.html"),
                        methodology=read_app_text("ghg_conc/td_methodology.html"),
-                       analysis=read_app_text("ghg_conc/td_analysis.html")
+                       analysis=read_app_text("ghg_conc/td_analysis.html"),
+                       references=""
                      )
                    )
           ),
