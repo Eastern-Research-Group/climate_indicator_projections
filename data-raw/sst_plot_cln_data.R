@@ -29,15 +29,19 @@ proj_obs_sst <- proj_sst %>%
   rbind(obs_sst_cln) %>%
   dplyr::filter(!is.na(smoothed_anom))
 
-# Process and align the model data
-sst_plot_cln_data <- model_processing(
-  mod_data = ssps_sst,
-  var_name = sst,
-  base_start = base_yr_start,
-  base_end = base_yr_end,
-  obs_mod_data = proj_obs_sst,
-  which_anom = smoothed_anom,
-  min_hind_yr = min_hind_yr) %>%
-  dplyr::arrange(year, scenario)
+# Calculate the anomaly for the model range, No need to align
+mod_range_sst <- calc_anom(ssps_sst, sst, base_yr_start, base_yr_end, window_size = 11, nclimgrid_smooth = FALSE, model_range = TRUE) %>%
+  calc_model_range(., anomaly)
+
+# Combine together
+sst_plot_cln_data <- dplyr::full_join(proj_obs_sst, mod_range_sst, by = c("year", "scenario")) %>%
+  rename_scenarios() %>%
+  dplyr::arrange(year, scenario) %>%
+  #rename for plot function
+  dplyr::rename(
+    smoothed_anom_adj = smoothed_anom,
+    p10_adj = p10,
+    p90_adj = p90
+  )
 
 usethis::use_data(sst_plot_cln_data, overwrite = TRUE)
