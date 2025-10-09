@@ -17,7 +17,6 @@ create_static_map_ui <- function(ns,
                                  legend=NULL) {
 
   map_id <- ns("map_comparison")
-
   tagList(
       tags$p("Choose two scenarios to compare using the slider."),
 
@@ -74,8 +73,8 @@ create_static_map_ui <- function(ns,
         tags$div(
           id = map_id,
           style="width: 1000px; margin: 0 auto;",
-          shinycssloaders::withSpinner(plotOutput(ns("map"), width = "1000px", height = "600px")),
-          shinycssloaders::withSpinner(plotOutput(ns("map_2"), width = "1000px", height = "600px"))
+          shinycssloaders::withSpinner(uiOutput(ns("map"), width = "1000px", height = "600px")),
+          shinycssloaders::withSpinner(uiOutput(ns("map_2"), width = "1000px", height = "600px"))
         ),
         tags$div(
           style="width: 1000px; margin: 0 auto;",

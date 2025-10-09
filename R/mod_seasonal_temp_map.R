@@ -59,49 +59,50 @@ mod_seasonal_temp_map_ui <- function(id) {
 #'
 #' @noRd
 mod_seasonal_temp_map_server <- function(id){
+
+  # Make the maps ------------------------------------------------------------
+
+  cln_data <- sf::st_as_sf(seas_temp_map_cln_data_fall)
+  # Get all the scenarios in the data
+  all_scenarios <- unique(cln_data$scenario)
+  names(all_scenarios) <- all_scenarios  # Set names to match values
+
+  # Create a map for each scenario and season
+
+  fall_maps <- generate_static_maps(
+    seas_temp_map_cln_data_fall,
+    paste(id, "fall_maps", sep="/"),
+    which_colors = SEASONAL_TEMP_MAP_COLORS,
+    title = "Change in Fall Temperatures by State",
+    legend_title = "Total temperature change (°F)"
+  )
+
+  winter_maps <- generate_static_maps(
+    seas_temp_map_cln_data_winter,
+    paste(id, "winter_maps", sep="/"),
+    which_colors = SEASONAL_TEMP_MAP_COLORS,
+    title = "Change in Winter Temperatures by State",
+    legend_title = "Total temperature change (°F)"
+  )
+
+  spring_maps <- generate_static_maps(
+    seas_temp_map_cln_data_spring,
+    paste(id, "spring_maps", sep="/"),
+    which_colors = SEASONAL_TEMP_MAP_COLORS,
+    title = "Change in Spring Temperatures by State",
+    legend_title = "Total temperature change (°F)"
+  )
+
+  summer_maps <- generate_static_maps(
+    seas_temp_map_cln_data_summer,
+    paste(id, "summer_maps", sep="/"),
+    which_colors = SEASONAL_TEMP_MAP_COLORS,
+    title = "Change in Summer Temperatures by State",
+    legend_title = "Total temperature change (°F)"
+  )
+
   moduleServer(id, function(input, output, session){
     ns <- session$ns
-
-# Make the maps ------------------------------------------------------------
-
-    cln_data <- sf::st_as_sf(seas_temp_map_cln_data_fall)
-    # Get all the scenarios in the data
-    all_scenarios <- unique(cln_data$scenario)
-    names(all_scenarios) <- all_scenarios  # Set names to match values
-
-    # Create a map for each scenario and season
-    fall_maps <- lapply(
-      all_scenarios,
-      create_static_map,
-      seas_temp_map_cln_data_fall,
-      SEASONAL_TEMP_MAP_COLORS,
-      "Change in Fall Temperatures by State",
-      "Total temperature change (°F)")
-
-    winter_maps <- lapply(
-      all_scenarios,
-      create_static_map,
-      seas_temp_map_cln_data_winter,
-      SEASONAL_TEMP_MAP_COLORS,
-      "Change in Winter Temperatures by State",
-      "Total temperature change (°F)")
-
-    spring_maps <- lapply(
-      all_scenarios,
-      create_static_map,
-      seas_temp_map_cln_data_spring,
-      SEASONAL_TEMP_MAP_COLORS,
-      "Change in Spring Temperatures by State",
-      "Total temperature change (°F)")
-
-    summer_maps <- lapply(
-      all_scenarios,
-      create_static_map,
-      seas_temp_map_cln_data_summer,
-      SEASONAL_TEMP_MAP_COLORS,
-      "Change in Summer Temperatures by State",
-      "Total temperature change (°F)")
-
 
 # Make reactive -----------------------------------------------------------
 
@@ -109,7 +110,7 @@ mod_seasonal_temp_map_server <- function(id){
       input$seasonRadioButtons  # This returns the selected value from the radio button
     })
 
-    output$map <- renderPlot({
+    output$map <- renderUI({
 
       if (input$seasonRadioButtons == "Fall") {
 
@@ -137,11 +138,17 @@ mod_seasonal_temp_map_server <- function(id){
                           "High emissions (SSP3-7.0), 2024–2100" = all_maps$ssp370,
                           "Very high emissions (SSP5-8.5), 2024–2100" = all_maps$ssp585
       )
-      return(which_map)
+      return(
+        tags$img(
+          src=which_map,
+          width="1000px",
+          height="600px"
+        )
+      )
 
-    }, width = 1000, height = 600)
+    })
 
-    output$map_2 <- renderPlot({
+    output$map_2 <- renderUI({
 
       if (input$seasonRadioButtons == "Fall") {
 
@@ -169,9 +176,14 @@ mod_seasonal_temp_map_server <- function(id){
                           "High emissions (SSP3-7.0), 2024–2100" = all_maps$ssp370,
                           "Very high emissions (SSP5-8.5), 2024–2100" = all_maps$ssp585
       )
-      return(which_map)
-
-    }, width = 1000, height = 600)
+      return(
+        tags$img(
+          src=which_map,
+          width="1000px",
+          height="600px"
+        )
+      )
+    })
 
     outputOptions(output, "map", suspendWhenHidden = TRUE)
     outputOptions(output, "map_2", suspendWhenHidden = TRUE)
