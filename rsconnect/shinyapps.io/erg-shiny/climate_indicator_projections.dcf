@@ -5,7 +5,7 @@ account: erg-shiny
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 15397365
-bundleId: 11009987
+bundleId: 11015405
 url: https://erg-shiny.shinyapps.io/climate_indicator_projections/
 version: 1
 asMultiple: FALSE
