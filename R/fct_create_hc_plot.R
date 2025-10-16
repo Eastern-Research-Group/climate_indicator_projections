@@ -83,7 +83,8 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit, is_oa = FA
       enableMouseTracking = FALSE,
       color = "transparent",
       marker = list(enabled = FALSE),
-      states = list(hover = list(enabled = FALSE))
+      states = list(hover = list(enabled = FALSE)),
+      events = list(legendItemClick = highcharter::JS("function () { return false; }"))
     ) %>%
     # Observed data
     highcharter::hc_add_series(data = obs_data, type = "line",
@@ -101,13 +102,14 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit, is_oa = FA
                                tooltip = tooltip_format) %>%
     # Add dummy element to make legend group titles
     highcharter::hc_add_series(
-      name = "<u><b style='font-size:13px;'>Range</b></u>",
+      name = "<u><b style='font-size:13px;'>Range (Click to view)</b></u>",
       data = list(),
       showInLegend = TRUE,
       enableMouseTracking = FALSE,
       color = "transparent",
       marker = list(enabled = FALSE),
-      states = list(hover = list(enabled = FALSE))
+      states = list(hover = list(enabled = FALSE)),
+      events = list(legendItemClick = highcharter::JS("function () { return false; }"))
     ) %>%
     # Add model ranges
     highcharter::hc_add_series(data = proj_range_data, type = "arearange",
