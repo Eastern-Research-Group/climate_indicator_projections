@@ -279,7 +279,7 @@ mod_coast_fld_map_server <- function(id){
            ) %>%
            highcharter::hc_plotOptions(bar = list(animation = FALSE)) %>%
            highcharter::hc_tooltip(valueDecimals = 0) %>%
-       #    highcharter::hc_title(text = sprintf("Average Flood Days per Year Each Decade in %s", city_selected())) %>%
+           highcharter::hc_title(text = sprintf("Average Flood Days per Year Each Decade in %s", city_selected())) %>%
            highcharter::hc_xAxis(title = list(text = "Decade"), categories = decade_categories) %>%
            highcharter::hc_yAxis(title = list(text = "Average Flood Days"), max = max_y)
 
