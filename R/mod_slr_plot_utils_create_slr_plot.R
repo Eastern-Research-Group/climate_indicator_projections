@@ -48,7 +48,7 @@ create_slr_plot <- function(slr_obs_cln, slr_proj_all, csiro_bounds, vertical_le
                                color = c("orange", "blue")) %>%
     # Add dummy element to make legend group titles
     highcharter::hc_add_series(
-      name = "<u><b style='font-size:13px;'>Range</b></u>",
+      name = "<u><b style='font-size:13px;'>Range (Click to view)</b></u>",
       data = list(),
       showInLegend = TRUE,
       enableMouseTracking = FALSE,
