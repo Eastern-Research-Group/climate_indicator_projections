@@ -244,6 +244,7 @@ mod_coast_fld_map_server <- function(id){
        filtered_loc <- coastal_flood_cln_data %>%
          dplyr::filter(station_name == city_selected())
 
+
        #maximum y axis
        max_y <- 370
 
@@ -263,7 +264,10 @@ mod_coast_fld_map_server <- function(id){
 
          filtered_data <- filtered_loc %>%
            sf::st_drop_geometry() %>%
-           dplyr::mutate(decade = as.character(decade))
+           dplyr::mutate(decade = as.character(decade)) %>%
+           dplyr::arrange(decade)
+
+         decade_categories <- as.character(unique(filtered_data$decade))
 
          inset_plot <- highcharter::highchart() %>%
            highcharter::hc_add_series(data = filtered_data,
@@ -275,8 +279,8 @@ mod_coast_fld_map_server <- function(id){
            ) %>%
            highcharter::hc_plotOptions(bar = list(animation = FALSE)) %>%
            highcharter::hc_tooltip(valueDecimals = 0) %>%
-           highcharter::hc_title(text = sprintf("Average Flood Days per Year Each Decade in %s", city_selected())) %>%
-           highcharter::hc_xAxis(title = list(text = "Decade"), tickInterval = 10) %>%
+       #    highcharter::hc_title(text = sprintf("Average Flood Days per Year Each Decade in %s", city_selected())) %>%
+           highcharter::hc_xAxis(title = list(text = "Decade"), categories = decade_categories) %>%
            highcharter::hc_yAxis(title = list(text = "Average Flood Days"), max = max_y)
 
          if (isTRUE(input$check)){
