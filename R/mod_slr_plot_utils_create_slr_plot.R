@@ -20,7 +20,8 @@ create_slr_plot <- function(slr_obs_cln, slr_proj_all, csiro_bounds, vertical_le
       enableMouseTracking = FALSE,
       color = "transparent",
       marker = list(enabled = FALSE),
-      states = list(hover = list(enabled = FALSE))
+      states = list(hover = list(enabled = FALSE)),
+      events = list(legendItemClick = highcharter::JS("function () { return false; }"))
     ) %>%
     # Observed data
     highcharter::hc_add_series(data = slr_obs_cln,
@@ -53,7 +54,8 @@ create_slr_plot <- function(slr_obs_cln, slr_proj_all, csiro_bounds, vertical_le
       enableMouseTracking = FALSE,
       color = "transparent",
       marker = list(enabled = FALSE),
-      states = list(hover = list(enabled = FALSE))
+      states = list(hover = list(enabled = FALSE)),
+      events = list(legendItemClick = highcharter::JS("function () { return false; }"))
     ) %>%
     # Add tide gauge ranges
     highcharter::hc_add_series(data = csiro_bounds, type = "arearange",
