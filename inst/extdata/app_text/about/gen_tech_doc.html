@@ -1,5 +1,5 @@
 <h4>1. Revision History</h4>
-<p>XXX&nbsp;2025 Published</p>
+<p>November 2025 Published</p>
 <h4>2. Overview and Scope</h4>
 <p>This pairing project is a pilot effort to identify how a subset of EPA&rsquo;s <a
         href="https://www.epa.gov/climate-indicators">indicators of observed climate change</a> align with historical
@@ -23,7 +23,7 @@
     introduced in limited instances, where doing so was necessary to create a proper temporal, spatial, and definitional
     alignment with GCM projections.</p>
 <p>Projection sources and methods were selected to align with the U.S. Global Change Research Program&rsquo;s
-    (USGCRP&rsquo;s) <a href="https://nca2023.globalchange.gov/">Fifth National Climate Assessment</a>, as described in
+    (USGCRP&rsquo;s) <a href="https://nca5.climate.us/">Fifth National Climate Assessment</a>, as described in
     more detail below.</p>
 
 <h4>3. Project Development</h4>
@@ -378,7 +378,7 @@
     </tbody>
 </table>
 <ul>
-    <li><strong>Group B: Downscaled CMIP6 data. </strong>Several variables&mdash;namely, those that relate to air
+    <li><p><strong>Group B: Downscaled CMIP6 data. </strong>Several variables&mdash;namely, those that relate to air
         temperature and precipitation&mdash;can be downscaled to a higher-resolution grid for more robust and locally
         useful projections. Downscaled data were obtained from the Seasonal Trends and Analysis of Residuals
         Empirical-Statistical Downscaling Model (STAR-ESDM) (Hayhoe et al., 2024). STAR-ESDM is one of two downscaling
@@ -389,7 +389,7 @@
         the &ldquo;Livneh&rdquo; data sets from the University of Colorado&rsquo;s Cooperative Institute for Research in
         Environmental Sciences. Both STAR-ESDM and LOCA2 have been peer reviewed and validated (e.g., Ullrich et al.,
         2023). STAR-ESDM was selected for this project because its results were more readily accessible to the project
-        team at the time of project development and reduced the cost associated with working with multiple data sets.
+        team at the time of project development and reduced the cost associated with working with multiple data sets.</p>
         <p>STAR-ESDM has proven to be robust out to the 99<sup>th</sup> percentile of the distribution for both
             temperature and precipitation variables (Hayhoe et al., 2024). Independent evaluation of the downscaling
             approach and comparison with LOCA2 shows that the two methods, both state-of-the-art downscaled products,
@@ -399,7 +399,7 @@
             (Baek et al., 2024); however, that is not a focus of this effort and therefore not a cause for concern in
             this analysis.</p>
         <p>The STAR-ESDM effort has downscaled more than 20 GCMs. This effort used downscaled data from the same subset
-            of 16 GCMs listed in Table 2 above. STAR-ESDM data are available for public download from: [link pending].
+            of 16 GCMs listed in Table 2 above. STAR-ESDM data are available for public download from: <a href="#" target="_blank">[link pending]</a>.
         </p>
         <p>The choice of downscaling approach introduces a source of uncertainty relating to the technique and data used
             in the downscaling model, which tends to be higher in areas with high topographical variation and for
@@ -413,11 +413,11 @@
     </li>
 </ul>
 <ul>
-    <li><strong>Group C: Updated sea level projections from NOAA. </strong>For sea level and coastal flooding, the
+    <li><p><strong>Group C: Updated sea level projections from NOAA. </strong>For sea level and coastal flooding, the
         federal government&rsquo;s authoritative projections are those published and periodically updated by NOAA. This
         effort used the most recent NOAA projections available at the time of publication, which were published in
         NOAA&rsquo;s 2022 report, <em>Global and Regional Sea Level Rise Scenarios for the United States</em> (Sweet et
-        al., 2022).
+        al., 2022).</p>
         <p>The NOAA team&rsquo;s approach combines CMIP6 GCM outputs; multiple methods of projecting future changes in
             the ice sheets of Antarctica and Greenland; projections for glaciers, land water storage, and other factors;
             and an understanding of vertical land motion to project future sea level and coastal flooding relative to
@@ -691,12 +691,12 @@
     detail. Therefore, this section of the general technical documentation focuses instead on general calculation steps
     and approaches shared across the entire project. The descriptions below cover an overarching sequence of steps.</p>
 <ol>
-    <li><strong>Calculate the intended metric for each model. </strong>The project team attempted to apply the same
+    <li><p><strong>Calculate the intended metric for each model. </strong>The project team attempted to apply the same
         definition and calculation methods that were used in the corresponding observed indicator. For example, the
         Seasonal Temperature indicator used daily mean temperatures averaged over each meteorological season, while
         developing the Marine Heat Waves pairing involved running GCM outputs through the same script that EPA&rsquo;s
         observed indicator uses to first establish location-specific, percentile-based thresholds, and then identify
-        four-consecutive-day events that exceeded these thresholds.
+        four-consecutive-day events that exceeded these thresholds.</p>
         <p>The gridded projections were analyzed to match the spatial coverage and resolution of the observed indicator.
             With respect to coverage, the team used geographic information systems (GIS) software to clip the
             projections to the target domain and to mask land or non-land grid cells or portions thereof, where needed.
@@ -709,19 +709,19 @@
     </li>
 </ol>
 <ol start="2">
-    <li><strong>Adjust baselines for comparability, if needed. </strong>Many of EPA&rsquo;s observed indicators use a
+    <li><p><strong>Adjust baselines for comparability, if needed. </strong>Many of EPA&rsquo;s observed indicators use a
         defined historical baseline period as a basis for reporting anomalies or change. Others use a historical
         baseline period to derive thresholds for comparison, such as those necessary to define location-specific
         &ldquo;average&rdquo; conditions for a drought index and those necessary to define what constitutes an
         &ldquo;extreme&rdquo; event. Aligning future projections with these historical observations requires that the
         projections refer to the same baseline. Where possible, the project team calculated the projected metric with
-        respect to the modeled hindcast values for the same baseline period.
+        respect to the modeled hindcast values for the same baseline period.</p>
         <p>The project team encountered some situations where the observed indicator&rsquo;s defined baseline period
             extended outside the temporal range of modeled data. That is, the modeled hindcasts did not extend back far
             enough in time to cover the full baseline period that must be used to compute the indicator. The solution
             depended on the nature of each case, as the following examples illustrate:</p>
         <ul>
-            <li>EPA&rsquo;s Length of Growing Season indicator reports anomalies relative to the average over the entire
+            <li><p>EPA&rsquo;s Length of Growing Season indicator reports anomalies relative to the average over the entire
                 observed data set (1895&ndash;present), whereas hindcasts for the full set of GCMs are available back to
                 only 1951. Because this indicator only uses a baseline to report anomalies, and because the variable in
                 question represents an absolute measure (number of days), it is straightforward and defensible to simply
@@ -729,27 +729,27 @@
                 both series up or down on the graph, adding or subtracting a constant across all years. It does not
                 change the shape of the curve or the slope of any resulting trends. In practice, projections could be
                 shifted this way while leaving the historical observation data consistent with the way they are
-                presented in EPA&rsquo;s published indicators.</li>
-            <li>EPA&rsquo;s U.S. and Global Precipitation indicator calculates precipitation anomalies and percent
+                presented in EPA&rsquo;s published indicators.</p></li>
+            <li><p>EPA&rsquo;s U.S. and Global Precipitation indicator calculates precipitation anomalies and percent
                 change relative to a 1901&ndash;2000 baseline period, whereas hindcasts for the full set of GCMs are
                 again available back to only 1951. Percent change does not allow curves to be simply shifted up or down
                 on the graph by a constant as described in the previous example. Thus, percent change was recalculated
                 for the historical observations relative to a 1951&ndash;2000 baseline, then applied the same baseline
                 period with the GCM outputs. This affects the map of percent change, but not the time-series graph that
-                uses anomalies in inches.</li>
-            <li>Figure 1 of EPA&rsquo;s Heavy Precipitation indicator comes from NOAA&rsquo;s Climate Extremes Index
+                uses anomalies in inches.</p></li>
+            <li><p>Figure 1 of EPA&rsquo;s Heavy Precipitation indicator comes from NOAA&rsquo;s Climate Extremes Index
                 (CEI), which defines extreme events relative to percentile thresholds derived from the entire period of
                 record, which begins in 1910. With hindcasts available back to 1951, and without the flexibility to
                 redefine the CEI to use a different baseline period, no further analysis or alignment was pursued for
                 this indicator. Use of a different observed data source in the future could reopen the potential for
-                alignment with GCM projections.</li>
+                alignment with GCM projections.</p></li>
         </ul>
         <p>In general, where a new baseline period was needed for recalculations, a 1951&ndash;2000 baseline was used.
         </p>
     </li>
 </ol>
 <ol start="3">
-    <li><strong>Calculate a multi-model mean.</strong> Projections for Group A and B variables came from up to 16 GCMs.
+    <li><p></p><strong>Calculate a multi-model mean.</strong> Projections for Group A and B variables came from up to 16 GCMs.
         Authoritative assessments have traditionally weighted GCMs in a prescribed way when calculating central
         estimates. For this effort, the same weighting approach used in the Fifth National Climate Assessment was used:
         a Bayesian weighting approach documented by Massoud et al. (2023). This approach calculates a weight for each
@@ -758,7 +758,7 @@
         approach does not eliminate outlier models (if any) from being included in the average, but models that deviate
         further from what is deemed a realistic or expected sensitivity are given lower weights compared with models
         that have a climate sensitivity closer to the expected value. The weights given to each model depend on the
-        specific set of models in the ensemble, such that their combined weight sums to 1.
+        specific set of models in the ensemble, such that their combined weight sums to 1.</p>
         <p>For variables that only had projections from a subset of the 16 GCMs, the authors of Massoud et al. (2023)
             were consulted. They provided a custom Bayesian weighting for the subset, following the same principles as
             the 16-GCM weighting approach.</p>
@@ -769,13 +769,13 @@
     </li>
 </ol>
 <ol start="4">
-    <li><strong>Calculate a range of modeled values.</strong> For Group A and B metrics, the line graphs included a
+    <li><p></p><strong>Calculate a range of modeled values.</strong> For Group A and B metrics, the line graphs included a
         shaded band around each SSP to offer users a sense of the range of projections available from different GCMs.
         This range includes the 10<sup>th</sup> to 90<sup>th</sup> percentiles of the distribution of results from
         individual models (up to 16 models). This approach is widely used to show the spread of plausible outcomes and
         acknowledge the uncertainty inherent in future projections (a key reason for incorporating more than a dozen
         different models) while omitting any true outliers. These ranges were calculated based on annual projected
-        values, without applying any multi-year smoothing.
+        values, without applying any multi-year smoothing.</p>
         <p>For Group C topics (sea level and coastal flooding), figures with ranges show the 17<sup>th</sup> to
             83<sup>rd</sup> percentiles as reported by NOAA.</p>
         <p>Group D (projected greenhouse gas concentrations) is inherently a single set of inputs shared across all
@@ -794,9 +794,9 @@
         statistical techniques to test alignment.</li>
 </ol>
 <ol start="6">
-    <li><strong>Transform as needed. </strong>The project team took steps to achieve credible pairings between
+    <li><p></p><strong>Transform as needed. </strong>The project team took steps to achieve credible pairings between
         historical observations and projections. Specific steps are described in each pairing&rsquo;s technical
-        documentation, but they generally followed the hierarchy below:</li>
+        documentation, but they generally followed the hierarchy below:</p></li>
     <p><em>Good alignment:</em> If the previous step revealed projections reasonably well aligned with the historical
         observations, the results were plotted and published with no further transformation. Figure TD-1 shows an
         example for sea surface temperature. After converting units and calculating anomalies with respect to the same
