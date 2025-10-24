@@ -86,7 +86,8 @@ mod_slr_map_server <- function(id){
                                 fillOpacity = 1,
                                 group = "Observations (1960-2023)",
                                 label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " ft"),
-                                color = ~pal(relative_sea_level_change)
+                                color = ~pal(relative_sea_level_change),
+                                options=leaflet::pathOptions(className="circle_tabbable")
       ) %>%
       # Lower sea level rise
       leaflet::addCircleMarkers(data = slr_map_lo_fnl,
@@ -96,7 +97,8 @@ mod_slr_map_server <- function(id){
                                 fillOpacity = 1,
                                 group = "Lower sea level rise (2020-2150)",
                                 label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " ft"),
-                                color = ~pal(relative_sea_level_change)
+                                color = ~pal(relative_sea_level_change),
+                                options=leaflet::pathOptions(className="circle_tabbable")
       ) %>%
       # Higher sea level rise
       leaflet::addCircleMarkers(data = slr_map_hi_fnl,
@@ -106,7 +108,8 @@ mod_slr_map_server <- function(id){
                                 fillOpacity = 1,
                                 group = "Higher sea level rise (2020-2150)",
                                 label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " ft"),
-                                color = ~pal(relative_sea_level_change)
+                                color = ~pal(relative_sea_level_change),
+                                options=leaflet::pathOptions(className="circle_tabbable")
       ) %>%
       leaflet::setView(., lng = -99, lat = 39, zoom = 4) %>%
       leaflet::addLegend(pal = pal_legend,
@@ -114,17 +117,6 @@ mod_slr_map_server <- function(id){
                          opacity = 1,
                          title = "Relative Sea<br>Level Change (ft)",
                          position = "topleft",
-                         # labels =  c("-80 - -59",
-                         #             "-60 - -39",
-                         #             "-40 - -19",
-                         #             "-20 - -1",
-                         #             "0 - 19",
-                         #             "20 - 39",
-                         #             "40 - 59",
-                         #             "60 - 79",
-                         #             "80 - 99",
-                         #             "100 - 120"
-                         #             ),
                          labFormat = leaflet::labelFormat(transform = function(x) sort(x, decreasing = TRUE))
                          ) %>%
       leaflet::addLayersControl(
