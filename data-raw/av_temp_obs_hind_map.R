@@ -79,6 +79,10 @@ av_temp_map_cln_data <- rbind(av_temp_map_obs, av_temp_map_mod) %>%
   dplyr::mutate(legend_buckets_01 = cut(rate_change_100, breaks = c(-0.1, 0.1, 1))) %>%
   dplyr::mutate(legend_buckets = ifelse(rate_change_100 <= 1, as.character(legend_buckets_01), as.character(legend_buckets)))
 
+test <- av_temp_map_cln_data %>%
+  tidyr::pivot_wider(names_from = scenario, values_from = rate_change) %>%
+  dplyr::mutate(diff = (observed - hindcast)*100)
+
 av_temp_map_cln_data$legend_buckets <- as.factor(av_temp_map_cln_data$legend_buckets)
 av_temp_map_cln_data$legend_buckets <- forcats::fct_relevel(
   av_temp_map_cln_data$legend_buckets, c(
