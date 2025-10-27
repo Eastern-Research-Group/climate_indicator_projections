@@ -88,6 +88,7 @@ golem::add_utils("read_app_text", with_test = TRUE)
 ## External resources
 ## Creates .js and .css files at inst/app/www
 golem::add_js_file("script")
+golem::add_js_file("js/leaflet_accesibility")
 golem::add_js_handler("handlers")
 golem::add_css_file("custom")
 golem::add_sass_file("custom")
@@ -101,6 +102,7 @@ usethis::use_data_raw(name = "asi_plot_cln_data", open = rlang::is_interactive()
 # Average temperature:
 usethis::use_data_raw(name = "av_temp_plot_cln_data", open = rlang::is_interactive()) # Plots
 usethis::use_data_raw(name = "av_temp_map_cln_data", open = rlang::is_interactive()) # Maps
+usethis::use_data_raw(name = "av_temp_obs_hind_map", open = rlang::is_interactive())
 
 # Precipitation
 usethis::use_data_raw(name = "precip_plot_cln_data", open = rlang::is_interactive()) # Plots

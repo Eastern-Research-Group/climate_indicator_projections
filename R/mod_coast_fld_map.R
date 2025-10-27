@@ -48,6 +48,9 @@ mod_coast_fld_map_ui <- function(id) {
                 width = "100%",
                 height = 800
               ),
+              # Accessibility enhancement for keyboard navigation
+              tags$script(HTML("")
+              ),
               # Inset plot
               absolutePanel(
                 id = ns("overlay"),
@@ -172,7 +175,8 @@ mod_coast_fld_map_server <- function(id){
                                   fillOpacity = 1,
                                   group = "Lower sea level rise",
                                   label = ~paste0(station_name, ": ", round(fld_days_pdec,0), " days"),
-                                  color = ~pal(fld_days_pdec)
+                                  color = ~pal(fld_days_pdec),
+                                  options=leaflet::pathOptions(className="circle_tabbable")
         ) %>%
         # Higher sea level rise
         leaflet::addCircleMarkers(data = higher_slr_filt,
@@ -182,7 +186,8 @@ mod_coast_fld_map_server <- function(id){
                                   fillOpacity = 1,
                                   group = "Higher sea level rise",
                                   label = ~paste0(station_name, ": ", round(fld_days_pdec,0), " days"),
-                                  color = ~pal(fld_days_pdec)
+                                  color = ~pal(fld_days_pdec),
+                                  options=leaflet::pathOptions(className="circle_tabbable")
         )
 
 
