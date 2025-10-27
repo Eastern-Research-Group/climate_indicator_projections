@@ -89,6 +89,7 @@ golem::add_utils("read_app_text", with_test = TRUE)
 ## Creates .js and .css files at inst/app/www
 golem::add_js_file("script")
 golem::add_js_file("js/leaflet_accesibility")
+golem::add_js_file("js/a11y_fixes")
 golem::add_js_handler("handlers")
 golem::add_css_file("custom")
 golem::add_sass_file("custom")
