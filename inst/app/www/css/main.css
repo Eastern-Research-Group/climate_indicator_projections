@@ -281,6 +281,13 @@ header nav li:last-child a {
     background-position: 0 -396px;
 }
 
+legend {
+  border-bottom: none;
+  margin-bottom: 0.7rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
 .nav-tabs ul {
     list-style: none;
     margin: 0;
