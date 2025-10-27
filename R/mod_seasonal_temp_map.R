@@ -37,11 +37,7 @@ mod_seasonal_temp_map_ui <- function(id) {
           ns,
           obs_dates="1896–2023",
           proj_dates="2024–2100",
-          title=tagList(
-            tags$p("Change in "),
-            textOutput(ns("selected_text")),
-            tags$p(" Temperatures by State")
-          ),
+          title=textOutput(ns("selected_text")),
           legend=create_map_legend(
             SEASONAL_TEMP_MAP_COLORS,
             label_text = "Total temperature change (°F)"
@@ -107,7 +103,7 @@ mod_seasonal_temp_map_server <- function(id){
 # Make reactive -----------------------------------------------------------
 
     output$selected_text <- renderText({
-      input$seasonRadioButtons  # This returns the selected value from the radio button
+      paste0("Change in ", input$seasonRadioButtons, " Temperatures by State")  # This returns the selected value from the radio button
     })
 
     output$map <- renderUI({
