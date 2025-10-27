@@ -25,6 +25,9 @@ mod_coast_fld_map_ui <- function(id) {
                       }
                       .irs--shiny .irs-from,.irs--shiny .irs-to,.irs--shiny .irs-single {
                         font-size: 14px;
+                        font-weight: bold !important;
+                        color: white !important;
+                        background: #162E51 !important;
                       }
                       .irs-bar {
                         background-color: transparent !important;
@@ -57,15 +60,16 @@ mod_coast_fld_map_ui <- function(id) {
                 class = "panel panel-default map_overlay",
                 top = 200,
                 right = 20,
-                width = 440,
+                width = 450,
                 style="display:none;", # Start with it hidden, so it doesn't appear without the map
                 fixed=TRUE,
                 draggable = TRUE,
                 height = "auto",
                 tagList(
                   tags$div(
-                    span(h5("Please select a location to view coastal flooding plot.")),
-                    id=ns("no_data_selected")
+                    span(strong("Please select a location to view coastal flooding plot.")),
+                    id=ns("no_data_selected"),
+                    style="min-height: 2rem; padding-top: 0.3rem;"
                   ),
                   tags$div(
                     tagList(

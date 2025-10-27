@@ -24,15 +24,16 @@ mod_slr_map_ui <- function(id) {
             class = "panel panel-default map_overlay",
             top = 60,
             right = 20,
-            width = 440,
+            width = 470,
             style="display:none;", # Start with it hidden, so it doesn't appear without the map
             fixed=TRUE,
             draggable = TRUE,
             height = "auto",
             tagList(
               tags$div(
-                span(h5("Please select a location to view the sea level rise chart")),
-                id=ns("no_data_selected")
+                span(strong("Please select a location to view the sea level rise chart")),
+                id=ns("no_data_selected"),
+                style="min-height: 2rem; padding-top: 0.3rem;"
               ),
               tags$div(
                 tagList(
