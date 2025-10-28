@@ -1,0 +1,77 @@
+/* --- Base handle --- */
+.handle-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: ew-resize;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+  border: 1px solid #ccc;
+}
+
+/* --- Full divider line --- */
+.beforeafter-divider-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 100%;
+  background: #fff;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 2;
+  border: 1px solid #ccc;
+  transition: opacity 0.2s ease;
+}
+
+/* --- Arrows --- */
+.handle-grip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.handle-grip .arrow {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid #333;
+  border-right: 2px solid #333;
+  margin: 0 1px;
+}
+
+.handle-grip .arrow.left {
+  transform: rotate(-135deg);
+}
+
+.handle-grip .arrow.right {
+  transform: rotate(45deg);
+}
+
+/* --- Active state --- */
+.handle-circle:focus,
+.handle-circle:hover,
+.handle-circle.ba-draggable {
+  opacity: 1.0;
+}
+
+/* --- Match line opacity when handle active --- */
+.handle-circle:focus + .beforeafter-divider-line,
+.handle-circle:hover + .beforeafter-divider-line,
+.handle-circle.ba-draggable + .beforeafter-divider-line {
+  opacity: 1.0;
+}
