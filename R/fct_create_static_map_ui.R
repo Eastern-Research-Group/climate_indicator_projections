@@ -64,7 +64,7 @@ create_static_map_ui <- function(ns,
         imagePath: 'img/',
         introDuration: 500,
         showFullLinks: false
-    })
+    });
                 });
     ", map_id)),
     tags$div(title, class="title"),
