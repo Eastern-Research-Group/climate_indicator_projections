@@ -24,15 +24,16 @@ mod_slr_map_ui <- function(id) {
             class = "panel panel-default map_overlay",
             top = 60,
             right = 20,
-            width = 440,
+            width = 470,
             style="display:none;", # Start with it hidden, so it doesn't appear without the map
             fixed=TRUE,
             draggable = TRUE,
             height = "auto",
             tagList(
               tags$div(
-                span(h5("Please select a location to view the sea level rise chart")),
-                id=ns("no_data_selected")
+                span(strong("Please select a location to view the sea level rise chart")),
+                id=ns("no_data_selected"),
+                style="min-height: 2rem; padding-top: 0.3rem;"
               ),
               tags$div(
                 tagList(
@@ -52,7 +53,9 @@ mod_slr_map_ui <- function(id) {
             )
           )
         ),
-    )
+    ),
+    data_source=read_app_text("sea_level/map_caption_data_source.html"),
+    caption=read_app_text("sea_level/map_caption_text.html")
   )
 
 }
@@ -86,7 +89,8 @@ mod_slr_map_server <- function(id){
                                 fillOpacity = 1,
                                 group = "Observations (1960-2023)",
                                 label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " ft"),
-                                color = ~pal(relative_sea_level_change)
+                                color = ~pal(relative_sea_level_change),
+                                options=leaflet::pathOptions(className="circle_tabbable")
       ) %>%
       # Lower sea level rise
       leaflet::addCircleMarkers(data = slr_map_lo_fnl,
@@ -96,7 +100,8 @@ mod_slr_map_server <- function(id){
                                 fillOpacity = 1,
                                 group = "Lower sea level rise (2020-2150)",
                                 label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " ft"),
-                                color = ~pal(relative_sea_level_change)
+                                color = ~pal(relative_sea_level_change),
+                                options=leaflet::pathOptions(className="circle_tabbable")
       ) %>%
       # Higher sea level rise
       leaflet::addCircleMarkers(data = slr_map_hi_fnl,
@@ -106,7 +111,8 @@ mod_slr_map_server <- function(id){
                                 fillOpacity = 1,
                                 group = "Higher sea level rise (2020-2150)",
                                 label = ~paste0(station_name, ": ", round(relative_sea_level_change,2), " ft"),
-                                color = ~pal(relative_sea_level_change)
+                                color = ~pal(relative_sea_level_change),
+                                options=leaflet::pathOptions(className="circle_tabbable")
       ) %>%
       leaflet::setView(., lng = -99, lat = 39, zoom = 4) %>%
       leaflet::addLegend(pal = pal_legend,
@@ -114,17 +120,6 @@ mod_slr_map_server <- function(id){
                          opacity = 1,
                          title = "Relative Sea<br>Level Change (ft)",
                          position = "topleft",
-                         # labels =  c("-80 - -59",
-                         #             "-60 - -39",
-                         #             "-40 - -19",
-                         #             "-20 - -1",
-                         #             "0 - 19",
-                         #             "20 - 39",
-                         #             "40 - 59",
-                         #             "60 - 79",
-                         #             "80 - 99",
-                         #             "100 - 120"
-                         #             ),
                          labFormat = leaflet::labelFormat(transform = function(x) sort(x, decreasing = TRUE))
                          ) %>%
       leaflet::addLayersControl(

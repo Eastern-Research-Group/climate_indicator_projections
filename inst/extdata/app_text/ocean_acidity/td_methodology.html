@@ -1,0 +1,77 @@
+<h4>5. Historical Data Collection</h4>
+<p>The observed data report on the pH of the upper 5 meters of the ocean. Each data set covers a different time period:
+</p>
+<ul>
+    <li><a href="https://bats.bios.asu.edu/">BATS data</a> used in this indicator are available from 1983 to 2015.
+        Samples were collected from two locations in the Atlantic Ocean near Bermuda (BATS and Hydrostation S, at
+        31&deg;43' N, 64&deg;10' W; and 32&deg;10&rsquo; N, 64&deg;30&rsquo; W, respectively).</li>
+    <li>ESTOC data are available from 1995 to 2009. ESTOC is at 29&deg;10&rsquo; N, 15&deg;30&rsquo; W in the Atlantic
+        Ocean.</li>
+    <li>CARIACO data are available from 1995 to 2017. The CARIACO station is at 10.5&deg; N, 64.67&deg; W in the
+        Caribbean Sea: specifically, the Cariaco Basin off the coast of Venezuela.</li>
+    <li>HOT data are available from 1988 to 2022. The HOT station is at 23&deg; N, 158&deg; W in the Pacific Ocean.</li>
+</ul>
+<p>At ESTOC and CARIACO, pH and alkalinity were measured directly. For BATS and HOT, pH was derived from other measured
+    parameters as described in the technical documentation for EPA&rsquo;s <a
+        href="https://www.epa.gov/climate-indicators/climate-change-indicators-ocean-acidity">Ocean Acidity
+        indicator</a>. That technical documentation also provides links and publications that lay out each
+    station&rsquo;s internally consistent sampling protocols. All four stations have reported values at approximately
+    monthly intervals, though exact timing varies by station, and there are some small gaps.</p>
+<h4>6. Indicator Derivation</h4>
+<p><em>Observed Data</em></p>
+<p>For all four locations, the graphs show <em>in situ</em> measured or calculated values for pH, as opposed to values
+    adjusted to a standard temperature. The project team also did not attempt to adjust for seasonal variability. The
+    time between reported sampling events is somewhat irregular at all four locations, so moving averages and monthly or
+    annual averages based on these data could be misleading. Thus, the project team elected to show individual
+    measurements, which have approximately monthly resolution, and which offer the benefit of showing the
+    sometimes-sizable seasonal variations inherent in ocean acidity.</p>
+<p><em>Model Outputs</em></p>
+<p>The project team identified the GCM output grid cells in which each of the stations are located. The Bermuda site had
+    two stations in different cells, so the team averaged the results from those two cells. The team performed the
+    following steps via R and Python scripts:</p>
+<ul>
+    <li>The team aggregated the seven models using the standard Bayesian model weighting approach used in the Fifth
+        National Climate Assessment and documented by Massoud et al. (2023). Because the standard weighting is based on
+        16 models, the authors of Massoud et al. (2023) provided corresponding weights for the subset of seven models
+        used here.</li>
+    <li>The team averaged the GCM monthly grids to generate annual means, then further smoothed the weighted average
+        modeled results using an 11-year moving average. The team performed this step independently for the hindcast
+        (through 2014) and for each scenario from 2015 (the first year of divergence) forward.</li>
+    <li>The team retained monthly GCM resolution in calculating 10<sup>th</sup> to 90<sup>th</sup> percentile ranges for
+        the graphs.</li>
+</ul>
+<h4>7. Alignment</h4>
+<p>Observations were generally centered within the range of modeled values for all sites. Thus, no bias correction or
+    other transformation was necessary.</p>
+<h4>8. Display</h4>
+<p>The interactive graphs for this pairing show the following elements:</p>
+<ul>
+    <li>Observed data from EPA&rsquo;s indicator from 1983 to 2022. Some sites only have data for portions of this
+        range. Sub-annual resolution from EPA&rsquo;s indicator has been retained to show how pH varies throughout the
+        year.</li>
+    <li>Modeled hindcast from 1950 to 2014. The line on each graph shows the Bayesian weighted average of the seven
+        GCMs, smoothed using an 11-year moving average. The resulting 11-year means are plotted from 1955 to 2009, as
+        the project team did not attempt to apply any endpoint padding at either end of the series.</li>
+    <li>Modeled projections from 2015 to 2100 for four emissions scenarios (SSP1-2.6, SSP2-4.5, SSP3-7.0, and SSP5-8.5),
+        with 2014 added for continuity (2014 is the last year before the scenarios diverge). Each scenario line on the
+        graph shows the Bayesian weighted average of the seven GCMs, smoothed using an 11-year moving average. The
+        resulting 11-year means are plotted starting at 2014 to provide continuity with the hindcast annual ranges,
+        although the scenarios do not start to diverge until 2015. Smoothed values for 2014&ndash;2019 pick up some
+        hindcast years in the average. The 11-year means are plotted through 2095, including data from 2090 through
+        2100, the last year of available data. Scenarios have been assigned &ldquo;plain-language&rdquo; names for
+        consistency throughout this pairings effort.</li>
+    <li>A shaded band around each of the scenarios, reflecting the 10<sup>th</sup> to 90<sup>th</sup> percentiles among
+        the seven models. This shaded band therefore illustrates the range of modeled values. The shaded bands show
+        original monthly values to provide a sense of how the intra-annual variations shown in the observed data set
+        will continue into the future; they have not been smoothed. The projected ranges start in 2014 to provide
+        continuity with the hindcast, but the scenarios begin to diverge in 2015.</li>
+</ul>
+<h4>9. Quality Assurance and Quality Control</h4>
+<p>The technical documentation for the <a
+        href="https://www.epa.gov/climate-indicators/climate-change-indicators-ocean-acidity">Ocean Acidity
+        indicator</a> provides references that address the quality assurance and quality control steps followed during
+    observed data collection and data analysis. Quality procedures for each GCM (e.g., validation) are described in
+    source papers published by the organizations that have developed and run each model; these sources are available
+    through links in the overall technical documentation <a href="#" target="_blank">[to be linked]</a> for this effort. For each pairing, the project
+    team conducted typical quality control steps, including independently checking all aggregations, unit conversions,
+    transformations, and other calculations.</p>

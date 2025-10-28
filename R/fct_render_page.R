@@ -48,7 +48,7 @@ render_indicator_page <- function(
     idx <- idx + 1
   }
 
-  if (!is.null(timeseries)) {
+  if (!is.null(tech_doc)) {
     panels[[idx]] <-
       tabPanel("Technical Documentation", tech_doc)
     idx <- idx + 1
@@ -145,6 +145,7 @@ render_timeseries_page <- function(
 }
 
 render_summary <- function(
+    intro="Some text",
     background="Some background",
     key_points="Some key points",
     sources_and_methods="Some sources"
@@ -152,6 +153,7 @@ render_summary <- function(
   return(
     htmlTemplate(
       app_sys("app/www/summary_mod.html"),
+      intro=intro,
       background=background,
       key_points=key_points,
       sources_and_methods=sources_and_methods

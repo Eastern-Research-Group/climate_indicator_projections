@@ -1,0 +1,106 @@
+<h4>5. Historical Data Collection</h4>
+<p>The observed time series are based on data from instruments on satellites that collect images that can be used to
+    generate weekly maps of snow cover. Data are collected for the entire Northern Hemisphere. Data were compiled as
+    part of NOAA&rsquo;s IMS, which incorporates imagery from a variety of satellite instruments (e.g., Advanced Very
+    High Resolution Radiometer [AVHRR], Geostationary Satellite Server [GOES], Special Sensor Microwave Imager [SSMI])
+    as well as derived mapped products and surface observations. The technical documentation for the <a
+        href="https://www.epa.gov/climate-indicators/climate-change-indicators-snow-cover">Snow Cover indicator</a>
+    provides more information with links to peer-reviewed methodology papers and satellite mission descriptions.</p>
+<h4>6. Indicator Derivation</h4>
+<p>This feature involves calculating the total area of all grid cells on a map that are at least 50 percent
+    snow-covered. Seasonal averaging uses meteorological seasons:</p>
+<ul>
+    <li>Winter: December (of the prior calendar year), January, and February.</li>
+    <li>Spring: March, April, and May.</li>
+    <li>Summer: June, July, and August.</li>
+    <li>Fall: September, October, and November.</li>
+</ul>
+<p><em>Observed Data</em></p>
+<p>NOAA digitized satellite maps weekly using the National Meteorological Center Limited-Area Fine Mesh grid. Rutgers
+    University&rsquo;s GSL reanalyzed the digitized maps produced by NOAA to correct for biases in the data set caused
+    by locations of land masses and bodies of water that NOAA&rsquo;s land mask does not completely resolve. GSL also
+    applied a higher-resolution grid, with 24-kilometer resolution. The technical documentation for the <a
+        href="https://www.epa.gov/climate-indicators/climate-change-indicators-snow-cover">Snow Cover indicator</a>
+    provides links to publications and websites that describe processing steps and reprocessing improvements. Of
+    particular note, this analysis aggregates the total area of all grid cells that have at least 50 percent snow cover.
+</p>
+<p>Weekly estimates were averaged to determine seasonal and annual averages. The project team converted all of these
+    value from square kilometers to square miles to make the results accessible to a wider audience.</p>
+<p><em>Model Outputs</em></p>
+<p>The project team performed the following steps via R scripts:</p>
+<ul>
+    <li>The team analyzed monthly model outputs, or, in the case of two models that provide daily outputs, aggregated
+        them to monthly for consistency with the other models.</li>
+    <li>For each model, the project team used the monthly &ldquo;snc&rdquo; variable to identify the proportion of each
+        grid cell covered by snow, multiplied this proportion by each grid cell&rsquo;s full area (CMIP6&rsquo;s
+        &ldquo;areacella&rdquo; variable), and then aggregated snow-covered area across North America (excluding
+        Greenland).</li>
+    <li>The team aggregated the 13 models using a modified version of the Bayesian model weighting approach used in the
+        Fifth National Climate Assessment and documented by Massoud et al. (2023). Because the standard weighting is
+        based on 16 models, the authors of Massoud et al. (2023) provided corresponding weights for the subset of 13
+        models used here.</li>
+    <li>The team smoothed modeled results using an 11-year moving average. The team performed this step independently
+        for the hindcast (through 2014) and for each scenario from 2015 (the first year of divergence) forward.</li>
+</ul>
+<h4>7. Alignment</h4>
+<p>The project team began this effort with the historical data set that appeared in EPA&rsquo;s <a
+        href="https://www.epa.gov/climate-indicators/climate-change-indicators-snow-cover">Snow Cover indicator</a>.
+    However, this data set showed a lack of alignment with model outputs. Upon discussion with GSL, the project team
+    learned that they had developed a new product based on a higher-resolution gridded analysis. The resolution
+    difference is sizable: each cell in the original published analysis had a resolution range of 16,000 to 42,000
+    square kilometers, compared with a nominal 576 square kilometers (24 x 24 kilometers) for the newer version. Figure
+    TD-1 shows that switching to the new grid closed much of the gap between observations and projections for annual
+    average snow cover. The same was true for seasonal averages.</p>
+<p style="text-align: center"><em>Figure TD-1. Snow cover alignment: Changing observed resolution</em></p>
+    <img src="www/images/figure_td_2.png" alt="Figure TD-2" style="display: block; margin: 0 auto; width: 85%;">
+<p>Even after switching to the new observed data set, there was still a sizable gap between observations and
+    projections, and that gap widened once the newest model selection and weighting was applied. (Figure TD-1 shows an
+    earlier weighting.) Figure TD-2 shows the newer gap on the annual graph.</p>
+<p style="text-align: center"><em>Figure TD-2. Snow cover alignment: Remaining gap requiring bias correctio</em></p>
+    <img src="www/images/sc_figure_td_2.png" alt="Figure TD-2" style="display: block; margin: 0 auto; width: 85%;">
+<p>The gap could have multiple explanations, including the models&rsquo; ability to project snow cover, the difference
+    in grid cell size for analysis, and an associated difference in indicator methods. Regarding grid cell size, the GCM
+    grid cells are much larger than the observed analysis&rsquo;s grid cells, which precluded adoption of the observed
+    analysis&rsquo;s 50 percent yes/no criterion and associated &ldquo;all or nothing&rdquo; inclusion. With much larger
+    grid cells in the model outputs, the project team determined that it would be more appropriate to count actual
+    modeled snow-covered area than to risk including or excluding large areas in their entirety based on a threshold
+    applied over a large and potentially heterogeneous spatial domain. In particular, the project team wanted to avoid
+    overlooking modest expanses of snow cover that might have registered in the observed analysis but would not meet the
+    50 percent threshold in a much larger GCM grid cell. This could be a particular concern for summer.</p>
+<p>The fact that improving the resolution of the observed data set demonstrably reduced the gap between observed and
+    modeled snow area suggests in general that some type of bias is likely the cause of the observed gap. Thus, it is
+    reasonable to expect that a bias correction would be an appropriate way to close the remaining gap. The project team
+    applied a straightforward &ldquo;delta method&rdquo; additive bias correction to do so. The project team shifted all
+    GCM outputs (hindcast and future projections) up by a constant amount to align the observed and modeled
+    1981&ndash;2014 means. The project team did this for annual average as well as each of the four seasons. The annual
+    average model outputs shifted up by approximately 0.33 million square miles.</p>
+<h4>8. Display</h4>
+<p>The interactive graph for this pairing shows the following elements:</p>
+<ul>
+    <li>Observed data from 1981 to 2023.</li>
+    <li>Modeled hindcast from 1950 to 2014. The line on the graph shows the Bayesian weighted average of the 13 GCMs,
+        smoothed using an 11-year moving average. The resulting 11-year means are plotted from 1955 to 2009, as the
+        project team did not attempt to apply any endpoint padding at either end of the series.</li>
+    <li>Modeled projections from 2015 to 2100 for four emissions scenarios (SSP1-2.6, SSP2-4.5, SSP3-7.0, and SSP5-8.5),
+        with 2014 added for continuity (2014 is the last year before the scenarios diverge). Each scenario line on the
+        graph shows the Bayesian weighted average of the 13 GCMs, smoothed using an 11-year moving average. The
+        resulting 11-year means are plotted starting at 2014 to provide continuity with the hindcast annual ranges,
+        although the scenarios do not start to diverge until 2015. Smoothed values for 2014&ndash;2019 pick up some
+        hindcast years in the average. The 11-year means are plotted through 2095, including data from 2090 through
+        2100, the last year of available data. Scenarios have been assigned &ldquo;plain-language&rdquo; names for
+        consistency throughout this pairings effort.</li>
+    <li>A shaded band around each of the scenarios, reflecting the 10<sup>th</sup> to 90<sup>th</sup> percentiles among
+        the 16 models. This shaded band therefore illustrates the range of modeled values. The shaded bands show annual
+        values; they have not been smoothed. The projected ranges start in 2014 to provide continuity with the hindcast,
+        but the scenarios begin to diverge in 2015.</li>
+</ul>
+<h4>9. Quality Assurance and Quality Control</h4>
+<p>The technical documentation for the <a
+        href="https://www.epa.gov/climate-indicators/climate-change-indicators-snow-cover">Snow Cover indicator</a>
+    provides citations and links for quality assurance and quality control measures that occur throughout the analytical
+    process for the observed data, particularly in GSL&rsquo;s filtering and correction steps. Through its review, GSL
+    helps to provide objective third-party verification of NOAA data. Quality procedures for each GCM (e.g., validation)
+    are described in source papers published by the organizations that have developed and run each model, available
+    through the links in the overall technical documentation <a href="#" target="_blank">[to be linked]</a> for this effort. For each pairing, the
+    project team conducted typical quality control steps including independently checking all aggregations, unit
+    conversions, transformations, and other calculations.</p>

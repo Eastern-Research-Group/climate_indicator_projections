@@ -22,7 +22,8 @@ create_ghg_plot <- function(observed_data, projected_data, which_ghg, unit, whic
       enableMouseTracking = FALSE,
       color = "transparent",
       marker = list(enabled = FALSE),
-      states = list(hover = list(enabled = FALSE))
+      states = list(hover = list(enabled = FALSE)),
+      events = list(legendItemClick = highcharter::JS("function () { return false; }"))
     ) %>%
     # Observed data
     highcharter::hc_add_series(data = observed_data, type = "line",
@@ -39,7 +40,8 @@ create_ghg_plot <- function(observed_data, projected_data, which_ghg, unit, whic
       enableMouseTracking = FALSE,
       color = "transparent",
       marker = list(enabled = FALSE),
-      states = list(hover = list(enabled = FALSE))
+      states = list(hover = list(enabled = FALSE)),
+      events = list(legendItemClick = highcharter::JS("function () { return false; }"))
     ) %>%
     # Projections data
     highcharter::hc_add_series(data = projected_data, type = "line",

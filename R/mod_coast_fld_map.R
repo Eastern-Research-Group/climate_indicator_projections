@@ -25,6 +25,9 @@ mod_coast_fld_map_ui <- function(id) {
                       }
                       .irs--shiny .irs-from,.irs--shiny .irs-to,.irs--shiny .irs-single {
                         font-size: 14px;
+                        font-weight: bold !important;
+                        color: white !important;
+                        background: #162E51 !important;
                       }
                       .irs-bar {
                         background-color: transparent !important;
@@ -48,21 +51,25 @@ mod_coast_fld_map_ui <- function(id) {
                 width = "100%",
                 height = 800
               ),
+              # Accessibility enhancement for keyboard navigation
+              tags$script(HTML("")
+              ),
               # Inset plot
               absolutePanel(
                 id = ns("overlay"),
                 class = "panel panel-default map_overlay",
                 top = 200,
                 right = 20,
-                width = 440,
+                width = 450,
                 style="display:none;", # Start with it hidden, so it doesn't appear without the map
                 fixed=TRUE,
                 draggable = TRUE,
                 height = "auto",
                 tagList(
                   tags$div(
-                    span(h5("Please select a location to view coastal flooding plot.")),
-                    id=ns("no_data_selected")
+                    span(strong("Please select a location to view coastal flooding plot.")),
+                    id=ns("no_data_selected"),
+                    style="min-height: 2rem; padding-top: 0.3rem;"
                   ),
                   tags$div(
                     tagList(
@@ -84,7 +91,9 @@ mod_coast_fld_map_ui <- function(id) {
                 )
               )
             ),
-          )
+          ),
+        data_source=read_app_text("coastal_flooding/map_caption_data_source.html"),
+        caption=read_app_text("coastal_flooding/map_caption_text.html")
       )
 
 
@@ -170,7 +179,8 @@ mod_coast_fld_map_server <- function(id){
                                   fillOpacity = 1,
                                   group = "Lower sea level rise",
                                   label = ~paste0(station_name, ": ", round(fld_days_pdec,0), " days"),
-                                  color = ~pal(fld_days_pdec)
+                                  color = ~pal(fld_days_pdec),
+                                  options=leaflet::pathOptions(className="circle_tabbable")
         ) %>%
         # Higher sea level rise
         leaflet::addCircleMarkers(data = higher_slr_filt,
@@ -180,7 +190,8 @@ mod_coast_fld_map_server <- function(id){
                                   fillOpacity = 1,
                                   group = "Higher sea level rise",
                                   label = ~paste0(station_name, ": ", round(fld_days_pdec,0), " days"),
-                                  color = ~pal(fld_days_pdec)
+                                  color = ~pal(fld_days_pdec),
+                                  options=leaflet::pathOptions(className="circle_tabbable")
         )
 
 
@@ -242,6 +253,7 @@ mod_coast_fld_map_server <- function(id){
        filtered_loc <- coastal_flood_cln_data %>%
          dplyr::filter(station_name == city_selected())
 
+
        #maximum y axis
        max_y <- 370
 
@@ -261,7 +273,10 @@ mod_coast_fld_map_server <- function(id){
 
          filtered_data <- filtered_loc %>%
            sf::st_drop_geometry() %>%
-           dplyr::mutate(decade = as.character(decade))
+           dplyr::mutate(decade = as.character(decade)) %>%
+           dplyr::arrange(decade)
+
+         decade_categories <- as.character(unique(filtered_data$decade))
 
          inset_plot <- highcharter::highchart() %>%
            highcharter::hc_add_series(data = filtered_data,
@@ -274,7 +289,7 @@ mod_coast_fld_map_server <- function(id){
            highcharter::hc_plotOptions(bar = list(animation = FALSE)) %>%
            highcharter::hc_tooltip(valueDecimals = 0) %>%
            highcharter::hc_title(text = sprintf("Average Flood Days per Year Each Decade in %s", city_selected())) %>%
-           highcharter::hc_xAxis(title = list(text = "Decade"), tickInterval = 10) %>%
+           highcharter::hc_xAxis(title = list(text = "Decade"), categories = decade_categories) %>%
            highcharter::hc_yAxis(title = list(text = "Average Flood Days"), max = max_y)
 
          if (isTRUE(input$check)){

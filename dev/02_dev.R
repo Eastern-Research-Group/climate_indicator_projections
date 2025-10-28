@@ -56,6 +56,7 @@ golem::add_fct("create_hc_plot", with_test = TRUE)
 golem::add_fct("create_static_map", with_test = TRUE)
 golem::add_fct("render_page", with_test = TRUE)
 golem::add_fct("create_static_map_ui", with_test = TRUE)
+golem::add_fct("generate_static_maps", with_test = TRUE)
 golem::add_utils("calc_anom", with_test = TRUE)
 golem::add_utils("calc_model_range", with_test = TRUE)
 golem::add_utils("calc_diff_avs", with_test = TRUE)
@@ -87,8 +88,12 @@ golem::add_utils("read_app_text", with_test = TRUE)
 ## External resources
 ## Creates .js and .css files at inst/app/www
 golem::add_js_file("script")
+golem::add_js_file("js/leaflet_accesibility")
+golem::add_js_file("js/a11y_fixes")
+golem::add_js_file("js/before_after_slider")
 golem::add_js_handler("handlers")
 golem::add_css_file("custom")
+golem::add_css_file("css/before_after_slider")
 golem::add_sass_file("custom")
 golem::add_any_file("file.json")
 
@@ -100,6 +105,7 @@ usethis::use_data_raw(name = "asi_plot_cln_data", open = rlang::is_interactive()
 # Average temperature:
 usethis::use_data_raw(name = "av_temp_plot_cln_data", open = rlang::is_interactive()) # Plots
 usethis::use_data_raw(name = "av_temp_map_cln_data", open = rlang::is_interactive()) # Maps
+usethis::use_data_raw(name = "av_temp_obs_hind_map", open = rlang::is_interactive())
 
 # Precipitation
 usethis::use_data_raw(name = "precip_plot_cln_data", open = rlang::is_interactive()) # Plots
