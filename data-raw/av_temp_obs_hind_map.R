@@ -75,9 +75,9 @@ av_temp_map_cln_data <- rbind(av_temp_map_obs, av_temp_map_mod) %>%
   sf::st_as_sf() %>%
   rename_scenarios(., TRUE) %>%
   dplyr::mutate(rate_change_100 = rate_change*100) %>%
-  dplyr::mutate(legend_buckets = cut(rate_change_100, breaks = seq(0, 5, by = 1))) %>%
-  dplyr::mutate(legend_buckets_01 = cut(rate_change_100, breaks = c(-0.1, 0.1, 1))) %>%
-  dplyr::mutate(legend_buckets = ifelse(rate_change_100 <= 1, as.character(legend_buckets_01), as.character(legend_buckets)))
+  dplyr::mutate(legend_buckets = cut(rate_change_100, breaks = seq(0, 5, by = 1))) #%>%
+  # dplyr::mutate(legend_buckets_01 = cut(rate_change_100, breaks = c(-0.1, 0.1, 1))) %>%
+  # dplyr::mutate(legend_buckets = ifelse(rate_change_100 <= 1, as.character(legend_buckets_01), as.character(legend_buckets)))
 
 test <- av_temp_map_cln_data %>%
   tidyr::pivot_wider(names_from = scenario, values_from = rate_change) %>%
@@ -86,7 +86,7 @@ test <- av_temp_map_cln_data %>%
 av_temp_map_cln_data$legend_buckets <- as.factor(av_temp_map_cln_data$legend_buckets)
 av_temp_map_cln_data$legend_buckets <- forcats::fct_relevel(
   av_temp_map_cln_data$legend_buckets, c(
-    "(0.1,1]",
+    "(0,1]",
     "(1,2]",
     "(2,3]",
     "(3,4]",
@@ -95,7 +95,7 @@ av_temp_map_cln_data$legend_buckets <- forcats::fct_relevel(
 
 # Create the map -----------------------------------------------------
 obs_hind_map_colors <- c(
-  "(0.1,1]"= "#C7C7C7",
+  "(0,1]"= "#C7C7C7",
   "(1,2]"= "#F0D7D6",
   "(2,3]"= "#EF9F9C",
   "(3,4]"= "#E8413E",
@@ -124,7 +124,8 @@ obs_hind_map <- ggplot2::ggplot() +
   ggplot2::geom_sf(data = av_temp_map_cln_data,
                    ggplot2::aes(fill = rate_change_100), color = "#88807F", show.legend = TRUE) +
   ggplot2::geom_sf(data = conus_cln, fill = NA, color = "white") +
-  viridis::scale_fill_viridis(option="magma") +
+  #viridis::scale_fill_viridis(option="inferno") +
+  ggplot2::scale_fill_distiller(palette = "YlOrRd", direction = 1)+
   ggplot2::labs(
     title = "Rate of Temperature Change 1950–2014\nBaseline period: 1951–2000",
     fill = "Rate of temperature\nchange(°F per century)"
