@@ -69,46 +69,32 @@ av_temp_map_mod <- av_temp_map_mod_raw %>%
   plyr::mutate(scenario = "hindcast")
 
 # Combine and process -----------------------------------------------------
-av_temp_map_cln_data <- rbind(av_temp_map_obs, av_temp_map_mod) %>%
+# Calculate the difference between modeled and observed
+av_temp_obs_hind_diff <- rbind(av_temp_map_obs, av_temp_map_mod) %>%
   dplyr::mutate(climdiv = as.integer(climdiv)) %>%
-  dplyr::left_join(clim_div_cln, by = "climdiv") %>%
-  sf::st_as_sf() %>%
-  rename_scenarios(., TRUE) %>%
-  dplyr::mutate(rate_change_100 = rate_change*100) %>%
-  dplyr::mutate(legend_buckets = cut(rate_change_100, breaks = seq(0, 5, by = 1))) #%>%
-  # dplyr::mutate(legend_buckets_01 = cut(rate_change_100, breaks = c(-0.1, 0.1, 1))) %>%
-  # dplyr::mutate(legend_buckets = ifelse(rate_change_100 <= 1, as.character(legend_buckets_01), as.character(legend_buckets)))
-
-test <- av_temp_map_cln_data %>%
   tidyr::pivot_wider(names_from = scenario, values_from = rate_change) %>%
-  dplyr::mutate(diff = (observed - hindcast)*100)
+  dplyr::mutate(diff = (hindcast - observed)*100) %>%
+  dplyr::mutate(legend_buckets = cut(diff, breaks = seq(-3, 3, by = 1))) %>%
+  dplyr::left_join(clim_div_cln, by = "climdiv") %>%
+  sf::st_as_sf()
 
-av_temp_map_cln_data$legend_buckets <- as.factor(av_temp_map_cln_data$legend_buckets)
-av_temp_map_cln_data$legend_buckets <- forcats::fct_relevel(
-  av_temp_map_cln_data$legend_buckets, c(
-    "(0,1]",
-    "(1,2]",
-    "(2,3]",
-    "(3,4]",
-    "(4,5]"
-  ))
 
 # Create the map -----------------------------------------------------
-obs_hind_map_colors <- c(
+
+obs_hind_diff_map_colors <- c(
+  "(-3,-2]" = "#B4BDDF",
+  "(-2,-1]" = "#D1D4EB",
+  "(-1,0]"= "#C7C7C7",
   "(0,1]"= "#C7C7C7",
   "(1,2]"= "#F0D7D6",
-  "(2,3]"= "#EF9F9C",
-  "(3,4]"= "#E8413E",
-  "(4,5]" = "#A02725"
+  "(2,3]"= "#F1C1BE"
 )
 
 obs_hind_map <- ggplot2::ggplot() +
-  ggplot2::geom_sf(data = av_temp_map_cln_data,
-                   ggplot2::aes(fill = legend_buckets), color = "#88807F", show.legend = TRUE) +
-  ggplot2::scale_fill_manual(
-    values = obs_hind_map_colors) +
-  ggplot2::geom_sf(data = conus_cln, fill = NA, color = "white") +
-  ggplot2::facet_wrap(~scenario_title) +
+  ggplot2::geom_sf(data = av_temp_obs_hind_diff,
+                   ggplot2::aes(fill = legend_buckets), color = "#88807F", show.legend = FALSE) +
+  ggplot2::scale_fill_manual(values = obs_hind_diff_map_colors) +
+  ggplot2::geom_sf(data = conus_cln, fill = NA, color = "black") +
   ggthemes::theme_map() +
   ggplot2::theme(
     text = ggplot2::element_text(size = 12),
@@ -117,28 +103,19 @@ obs_hind_map <- ggplot2::ggplot() +
     strip.background = ggplot2::element_blank(),
     strip.text = ggplot2::element_text(size = 14, face = "bold")
   )
-obs_hind_map
+
+ggplot2::ggsave(plot = obs_hind_map, filename = "td_fig_obs_hind.png")
 
 
-obs_hind_map <- ggplot2::ggplot() +
-  ggplot2::geom_sf(data = av_temp_map_cln_data,
-                   ggplot2::aes(fill = rate_change_100), color = "#88807F", show.legend = TRUE) +
-  ggplot2::geom_sf(data = conus_cln, fill = NA, color = "white") +
-  #viridis::scale_fill_viridis(option="inferno") +
-  ggplot2::scale_fill_distiller(palette = "YlOrRd", direction = 1)+
-  ggplot2::labs(
-    title = "Rate of Temperature Change 1950–2014\nBaseline period: 1951–2000",
-    fill = "Rate of temperature\nchange(°F per century)"
-  ) +
-  ggplot2::facet_wrap(~scenario_title) +
-  ggthemes::theme_map() +
-  ggplot2::theme(
-    text = ggplot2::element_text(size = 12),
-    plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
-    legend.position = "bottom",
-    strip.background = ggplot2::element_blank(),
-    strip.text = ggplot2::element_text(size = 14, face = "bold")
-  )
-obs_hind_map
+# Make the legend
+  # Create the SVG content
+  svg_legend <- create_map_legend(obs_hind_diff_map_colors)
+
+  # Convert to a raw SVG string
+  svg_legend_string <- as.character(tagList(svg_legend))
+
+  # Save to PNG
+  rsvg::rsvg_png(charToRaw(svg_legend_string), file = "legend.png", width = 500, height = 120)
+
 
 usethis::use_data(av_temp_obs_hind_map, overwrite = TRUE)
