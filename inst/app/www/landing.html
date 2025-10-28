@@ -3,16 +3,24 @@
 <head>
     <meta charset="UTF-8" />
     <title>Climate Change Indicator Projections</title>
+    <meta property="DC.language" content="en" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
+    <div class="skiplinks" role="navigation" aria-labelledby="skip-to-main">
+        <a id="skip-to-main" href="#main" class="skiplinks__link visually-hidden focusable">Skip to main content</a>
+    </div>
     <header>
         <h1>Climate Change Indicator Projections Explorer</h1>
     </header>
-    <main>
-      </p>
+    <main id="main" class="main" role="main" tabindex="-1">
         <div class="layout-container">
+            <button class="sidebar-hamburger" aria-label="Open menu" type="button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <div class="sidebar">
                 <nav>
                     <ul>
@@ -52,11 +60,71 @@
             <div class="main">
                 {{ content }}
 
+                <table class="usa-table">
+                    <caption>
+                        Table caption goes here...
+                    </caption>
+                    <thead>
+                        <th>Category</th>
+                        <th>Examples</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Group 1: Calculate directly from a CMIP GCM input or output variable with no modifications
+                            </td>
+                            <td>
+                                Contiguous United States mean temperature, Arctic sea ice, Northern Hemisphere snow extent
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Group 2: Calculate from CMIP downscaled temperature and/or precipitation
+                            </td>
+                            <td>
+                                Heat waves based on temperature only, extreme precipitation
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Group 3: Projections available from a secondary model driven by GCM or downscaled CMIP projections                                
+                            </td>
+                            <td>
+                                Peak runoff due to snowmelt, Great Lakes levels, calculated from a hydrological model
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Group 4: Could calculate if additional CMIP downscaled variables become available
+                            </td>
+                            <td>
+                                Heat index (temperature + humidity)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Group 5: Can obtain projections from a non-GCM source
+                            </td>
+                            <td>
+                                National Oceanic and Atmospheric Administration's (NOAA's) coastal flooding projections (a derived product, though fundamentally based on GCMs)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Group 6: Reliable projections not yet available but could eventually be in Group 3
+                            </td>
+                            <td>
+                                Glacier extent
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>                
             </div><!--/.main-->
         </div><!--/.layout-container-->
     </main>
     <footer>
     </footer>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
