@@ -1,43 +1,44 @@
+// --- Helper: Fix orphaned label accessibility ---
+function fix_radio_button_a11y(label) {
+  const targetId = label.getAttribute("for");
+  const target = document.getElementById(targetId);
 
-$(document).ready(function() {
+  // Skip if label already processed or linked correctly
+  if (label.dataset.a11yFixed) return;
+  if (target && ["INPUT", "SELECT", "TEXTAREA"].includes(target.tagName)) return;
 
-  // --- Helper: Fix orphaned label accessibility ---
-  function fix_radio_button_a11y(label) {
-    const targetId = label.getAttribute("for");
-    const target = document.getElementById(targetId);
+  // If the target is a container for radio buttons, fix it semantically
+  if (target && target.querySelector("input[type='radio']")) {
+    console.log(`Fixing radio group label for #${targetId}`);
 
-    // Skip if label already processed or linked correctly
-    if (label.dataset.a11yFixed) return;
-    if (target && ["INPUT", "SELECT", "TEXTAREA"].includes(target.tagName)) return;
+    const fieldset = document.createElement("fieldset");
+    const legend = document.createElement("legend");
+    legend.textContent = label.textContent;
+    legend.className = label.className;
 
-    // If the target is a container for radio buttons, fix it semantically
-    if (target && target.querySelector("input[type='radio']")) {
-      console.log(`Fixing radio group label for #${targetId}`);
+    target.parentNode.insertBefore(fieldset, target);
+    fieldset.appendChild(legend);
+    fieldset.appendChild(target);
 
-      const fieldset = document.createElement("fieldset");
-      const legend = document.createElement("legend");
-      legend.textContent = label.textContent;
-      legend.className = label.className;
-
-      target.parentNode.insertBefore(fieldset, target);
-      fieldset.appendChild(legend);
-      fieldset.appendChild(target);
-
-      label.dataset.a11yFixed = "true";
-      label.remove();
-      return;
-    }
-
-    // Otherwise, just remove invalid 'for'
-    console.log(`Removing orphaned 'for' attribute from label #${label.id}`);
-    label.removeAttribute("for");
     label.dataset.a11yFixed = "true";
+    label.remove();
+    return;
   }
+
+  // Otherwise, just remove invalid 'for'
+  console.log(`Removing orphaned 'for' attribute from label #${label.id}`);
+  label.removeAttribute("for");
+  label.dataset.a11yFixed = "true";
+}
 
   // --- Helper: Process new labels ---
   function processNewLabels(root) {
     root.querySelectorAll("label[for]").forEach(fix_radio_button_a11y);
   }
+
+
+
+$(document).ready(function() {
 
   // --- Observe only inside Shiny content areas ---
   const observedContainers = document.querySelectorAll(
