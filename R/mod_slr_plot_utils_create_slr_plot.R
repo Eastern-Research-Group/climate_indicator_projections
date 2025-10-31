@@ -94,7 +94,8 @@ create_slr_plot <- function(slr_obs_cln, slr_proj_all, csiro_bounds, vertical_le
                             style = list(fontSize = "14px")
                           )) %>%
     highcharter::hc_plotOptions(line = list(marker = list(enabled = FALSE)),
-                                arearange  = list(marker = list(enabled = FALSE)))
+                                arearange  = list(marker = list(enabled = FALSE))) %>%
+    highcharter::hc_exporting(enabled = TRUE)
 
   if (vertical_legend) {
 
@@ -107,6 +108,9 @@ create_slr_plot <- function(slr_obs_cln, slr_proj_all, csiro_bounds, vertical_le
         useHTML = TRUE,
         itemStyle = list(
           fontSize = "12px"
+        ),
+        itemHiddenStyle = list(
+          color = "#757575"  # darker gray for hidden series
         )
       )
 
@@ -114,18 +118,13 @@ create_slr_plot <- function(slr_obs_cln, slr_proj_all, csiro_bounds, vertical_le
 
     slr_plot <- slr_plot %>%
       highcharter::hc_legend(
-        # layout = "vertical",
-        # align = "center",
-        # verticalAlign = "bottom",
         useHTML = TRUE,
         align = "left",
-        # y = "10px",
-        # verticalAlign = "bottom",
-        # itemWidth = 200,
-        # symbolWidth = 20,
-        # width = 400,
         itemStyle = list(
           fontSize = "12px"
+        ),
+        itemHiddenStyle = list(
+          color = "#757575"  # darker gray for hidden series
         )
       )
 

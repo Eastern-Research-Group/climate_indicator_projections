@@ -82,8 +82,12 @@ create_ghg_plot <- function(observed_data, projected_data, which_ghg, unit, whic
       useHTML = TRUE,
       itemStyle = list(
         fontSize = "12px"
+      ),
+      itemHiddenStyle = list(
+        color = "#757575"        # darker gray for hidden series
       )
-    )
+    ) %>%
+    highcharter::hc_exporting(enabled = TRUE)
 
   return(ghg_plot)
 
