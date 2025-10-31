@@ -228,7 +228,7 @@ header nav li:last-child a {
     padding: 0 0 0 1rem;
 }
 .main {
-    width: 80%;
+    width: 100%;
     order: 1;
     padding: 0 3rem;
 }
@@ -440,19 +440,14 @@ main .content ul li{
     background-color: #e6e6e6;
     color: #1b1b1b;
 }
-
-
 .usa-table td, .usa-table th {
     border: 1px solid #1b1b1b;
     padding: .5rem 1rem;
 }
-
 .usa-table td {
     background-color: #fff;
     font-weight: 400;
 }
-
-/* Hamburger menu */
 .sidebar-hamburger {
     display: none;
     position: fixed;
