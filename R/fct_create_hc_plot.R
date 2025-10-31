@@ -140,8 +140,12 @@ create_hc_plot = function(scenario_df, plot_title, y_title, val_unit, is_oa = FA
       useHTML = TRUE,
       itemStyle = list(
         fontSize = "12px"
+      ),
+      itemHiddenStyle = list(
+        color = "#757575"        # darker gray for hidden series
       )
-    )
+    ) %>%
+    highcharter::hc_exporting(enabled = TRUE)
 
   if (is_oa) { # if it's the ocean acidity plot
 
