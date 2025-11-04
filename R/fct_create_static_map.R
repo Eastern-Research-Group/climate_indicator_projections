@@ -29,7 +29,6 @@ create_static_map <- function(which_scenario, map_data, which_colors, title, leg
       ggplot2::theme(
         text = ggplot2::element_text(size = 12),
         plot.title = ggplot2::element_text(size = 14, hjust = 0.5),
-        #   legend.key.width = ggplot2::unit(2, 'cm'),
         legend.position = "bottom"
       )
 
