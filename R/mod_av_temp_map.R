@@ -67,11 +67,21 @@ mod_av_temp_map_server <- function(id){
                           "High emissions (SSP3-7.0), 2024–2100" = all_maps$ssp370,
                           "Very high emissions (SSP5-8.5), 2024–2100" = all_maps$ssp585
                           )
+      # Alt text for each map
+      alt_text <- switch(input$scenario_choice,
+           "Observations, 1901–2023" = "a",
+           "Low emissions (SSP1-2.6), 2024–2100" = "b",
+           "Intermediate emissions (SSP2-4.5), 2024–2100" = "c",
+           "High emissions (SSP3-7.0), 2024–2100" = "d",
+           "Very high emissions (SSP5-8.5), 2024–2100" = "e"
+      )
+
       return(
         tags$img(
           src = which_map,
           width = "1000px",
           height="600px",
+          alt=alt_text
         )
       )
 
@@ -87,11 +97,24 @@ mod_av_temp_map_server <- function(id){
                           "High emissions (SSP3-7.0), 2024–2100" = all_maps$ssp370,
                           "Very high emissions (SSP5-8.5), 2024–2100" = all_maps$ssp585
       )
+
+
+      # Alt text for each map
+      alt_text <- switch(input$scenario_choice,
+                         "Observations, 1901–2023" = "a",
+                         "Low emissions (SSP1-2.6), 2024–2100" = "b",
+                         "Intermediate emissions (SSP2-4.5), 2024–2100" = "c",
+                         "High emissions (SSP3-7.0), 2024–2100" = "d",
+                         "Very high emissions (SSP5-8.5), 2024–2100" = "e"
+      )
+
+
       return(
         tags$img(
           src = which_map,
           width = "1000px",
           height="600px",
+          alt=alt_text
         )
       )
 
