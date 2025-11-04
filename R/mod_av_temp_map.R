@@ -100,7 +100,7 @@ mod_av_temp_map_server <- function(id){
 
 
       # Alt text for each map
-      alt_text <- switch(input$scenario_choice,
+      alt_text <- switch(input$scenario_choice_2,
                          "Observations, 1901–2023" = "a",
                          "Low emissions (SSP1-2.6), 2024–2100" = "b",
                          "Intermediate emissions (SSP2-4.5), 2024–2100" = "c",
