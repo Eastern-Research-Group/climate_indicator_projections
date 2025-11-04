@@ -73,8 +73,9 @@ create_static_map_ui <- function(ns,
         tags$div(
           id = map_id,
           style="width: 1000px; margin: 0 auto;",
-          shinycssloaders::withSpinner(uiOutput(ns("map"), width = "1000px", height = "600px")),
-          shinycssloaders::withSpinner(uiOutput(ns("map_2"), width = "1000px", height = "600px"))
+          # First container shows up on the right
+          shinycssloaders::withSpinner(uiOutput(ns("map_2"), width = "1000px", height = "600px")),
+          shinycssloaders::withSpinner(uiOutput(ns("map"), width = "1000px", height = "600px"))
         ),
         tags$div(
           style="width: 1000px; margin: 0 auto;",
