@@ -97,6 +97,27 @@ mod_seasonal_temp_map_server <- function(id){
     legend_title = "Total temperature change (°F)"
   )
 
+  fall_obs_alt = "Map of the contiguous United States showing the observed change in average fall temperature from 1896 to 2023 by state."
+  fall_low_alt = "Map of the contiguous United States showing the projected change in average fall temperature from 2024 to 2100 under the low emissions scenario (SSP1-2.6) by state."
+  fall_intmd_alt = "Map of the contiguous United States showing the projected change in average fall temperature from 2024 to 2100 under the intermediate emissions scenario (SSP2-4.5) by state."
+  fall_high_alt = "Map of the contiguous United States showing the projected change in average fall temperature from 2024 to 2100 under the high emissions scenario (SSP3-7.0) by state."
+  fall_v_high_alt = "Map of the contiguous United States showing the projected change in average fall temperature from 2024 to 2100 under the very high emissions scenario (SSP5-8.5) by state."
+  winter_obs_alt = "Map of the contiguous United States showing the observed change in average winter temperature from 1896 to 2023 by state."
+  winter_low_alt = "Map of the contiguous United States showing the projected change in average winter temperature from 2024 to 2100 under the low emissions scenario (SSP1-2.6) by state."
+  winter_intmd_alt = "Map of the contiguous United States showing the projected change in average winter temperature from 2024 to 2100 under the intermediate emissions scenario (SSP2-4.5) by state."
+  winter_high_alt = "Map of the contiguous United States showing the projected change in average winter temperature from 2024 to 2100 under the high emissions scenario (SSP3-7.0) by state."
+  winter_v_high_alt = "Map of the contiguous United States showing the projected change in average winter temperature from 2024 to 2100 under the very high emissions scenario (SSP5-8.5) by state."
+  spring_obs_alt = "Map of the contiguous United States showing the observed change in average spring temperature from 1896 to 2023 by state."
+  spring_low_alt = "Map of the contiguous United States showing the projected change in average spring temperature from 2024 to 2100 under the low emissions scenario (SSP1-2.6) by state."
+  spring_intmd_alt = "Map of the contiguous United States showing the projected change in average spring temperature from 2024 to 2100 under the intermediate emissions scenario (SSP2-4.5) by state."
+  spring_high_alt = "Map of the contiguous United States showing the projected change in average spring temperature from 2024 to 2100 under the high emissions scenario (SSP3-7.0) by state."
+  spring_v_high_alt = "Map of the contiguous United States showing the projected change in average spring temperature from 2024 to 2100 under the very high emissions scenario (SSP5-8.5) by state."
+  summer_obs_alt = "Map of the contiguous United States showing the observed change in average summer temperature from 1896 to 2023 by state."
+  summer_low_alt = "Map of the contiguous United States showing the projected change in average summer temperature from 2024 to 2100 under the low emissions scenario (SSP1-2.6) by state."
+  summer_intmd_alt = "Map of the contiguous United States showing the projected change in average summer temperature from 2024 to 2100 under the intermediate emissions scenario (SSP2-4.5) by state."
+  summer_high_alt = "Map of the contiguous United States showing the projected change in average summer temperature from 2024 to 2100 under the high emissions scenario (SSP3-7.0) by state."
+  summer_v_high_alt = "Map of the contiguous United States showing the projected change in average summer temperature from 2024 to 2100 under the very high emissions scenario (SSP5-8.5) by state."
+
   moduleServer(id, function(input, output, session){
     ns <- session$ns
 
@@ -134,11 +155,37 @@ mod_seasonal_temp_map_server <- function(id){
                           "High emissions (SSP3-7.0), 2024–2100" = all_maps$ssp370,
                           "Very high emissions (SSP5-8.5), 2024–2100" = all_maps$ssp585
       )
+
+      # Alt text for each map
+      alt_text <- switch(EXPR = paste(input$seasonRadioButtons, input$scenario_choice),
+                         "Fall Observations, 1896–2023" = fall_obs_alt,
+                         "Fall Low emissions (SSP1-2.6), 2024–2100" = fall_low_alt,
+                         "Fall Intermediate emissions (SSP2-4.5), 2024–2100" = fall_intmd_alt,
+                         "Fall High emissions (SSP3-7.0), 2024–2100" = fall_high_alt,
+                         "Fall Very high emissions (SSP5-8.5), 2024–2100" = fall_v_high_alt,
+                         "Winter Observations, 1896–2023" = winter_obs_alt,
+                         "Winter Low emissions (SSP1-2.6), 2024–2100" = winter_low_alt,
+                         "Winter Intermediate emissions (SSP2-4.5), 2024–2100" = winter_intmd_alt,
+                         "Winter High emissions (SSP3-7.0), 2024–2100" = winter_high_alt,
+                         "Winter Very high emissions (SSP5-8.5), 2024–2100" = winter_v_high_alt,
+                         "Spring Observations, 1896–2023" = spring_obs_alt,
+                         "Spring Low emissions (SSP1-2.6), 2024–2100" = spring_low_alt,
+                         "Spring Intermediate emissions (SSP2-4.5), 2024–2100" = spring_intmd_alt,
+                         "Spring High emissions (SSP3-7.0), 2024–2100" = spring_high_alt,
+                         "Spring Very high emissions (SSP5-8.5), 2024–2100" = spring_v_high_alt,
+                         "Summer Observations, 1896–2023" = summer_obs_alt,
+                         "Summer Low emissions (SSP1-2.6), 2024–2100" = summer_low_alt,
+                         "Summer Intermediate emissions (SSP2-4.5), 2024–2100" = summer_intmd_alt,
+                         "Summer High emissions (SSP3-7.0), 2024–2100" = summer_high_alt,
+                         "Summer Very high emissions (SSP5-8.5), 2024–2100" = summer_v_high_alt
+      )
+
       return(
         tags$img(
           src=which_map,
           width="1000px",
-          height="600px"
+          height="600px",
+          alt=alt_text
         )
       )
 
@@ -172,11 +219,37 @@ mod_seasonal_temp_map_server <- function(id){
                           "High emissions (SSP3-7.0), 2024–2100" = all_maps$ssp370,
                           "Very high emissions (SSP5-8.5), 2024–2100" = all_maps$ssp585
       )
+
+      # Alt text for each map
+      alt_text <- switch(EXPR = paste(input$seasonRadioButtons, input$scenario_choice_2),
+                         "Fall Observations, 1896–2023" = fall_obs_alt,
+                         "Fall Low emissions (SSP1-2.6), 2024–2100" = fall_low_alt,
+                         "Fall Intermediate emissions (SSP2-4.5), 2024–2100" = fall_intmd_alt,
+                         "Fall High emissions (SSP3-7.0), 2024–2100" = fall_high_alt,
+                         "Fall Very high emissions (SSP5-8.5), 2024–2100" = fall_v_high_alt,
+                         "Winter Observations, 1896–2023" = winter_obs_alt,
+                         "Winter Low emissions (SSP1-2.6), 2024–2100" = winter_low_alt,
+                         "Winter Intermediate emissions (SSP2-4.5), 2024–2100" = winter_intmd_alt,
+                         "Winter High emissions (SSP3-7.0), 2024–2100" = winter_high_alt,
+                         "Winter Very high emissions (SSP5-8.5), 2024–2100" = winter_v_high_alt,
+                         "Spring Observations, 1896–2023" = spring_obs_alt,
+                         "Spring Low emissions (SSP1-2.6), 2024–2100" = spring_low_alt,
+                         "Spring Intermediate emissions (SSP2-4.5), 2024–2100" = spring_intmd_alt,
+                         "Spring High emissions (SSP3-7.0), 2024–2100" = spring_high_alt,
+                         "Spring Very high emissions (SSP5-8.5), 2024–2100" = spring_v_high_alt,
+                         "Summer Observations, 1896–2023" = summer_obs_alt,
+                         "Summer Low emissions (SSP1-2.6), 2024–2100" = summer_low_alt,
+                         "Summer Intermediate emissions (SSP2-4.5), 2024–2100" = summer_intmd_alt,
+                         "Summer High emissions (SSP3-7.0), 2024–2100" = summer_high_alt,
+                         "Summer Very high emissions (SSP5-8.5), 2024–2100" = summer_v_high_alt
+      )
+
       return(
         tags$img(
           src=which_map,
           width="1000px",
-          height="600px"
+          height="600px",
+          alt=alt_text
         )
       )
     })
