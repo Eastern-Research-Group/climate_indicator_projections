@@ -280,7 +280,7 @@ mod_coast_fld_map_server <- function(id){
            tidyr::complete(scenario, decade, station_name, fill = list(fld_days_pdec = NA))
 
          decade_categories <- as.character(unique(filtered_data$decade))
-        print(filtered_data)
+
          inset_plot <- highcharter::highchart() %>%
            highcharter::hc_add_series(data = filtered_data,
                                       type = "column",
