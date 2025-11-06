@@ -49,6 +49,12 @@ mod_precip_map_server <- function(id){
     legend_title="Percent change in precipitation"
   )
 
+  obs_alt = "Map of the contiguous United States showing the observed change in precipitation from 1901 to 2023 by NOAA climate division."
+  low_alt = "Map of the contiguous United States showing the projected change in precipitation from 2024 to 2100 under the low emissions scenario (SSP1-2.6) by NOAA climate division."
+  intmd_alt = "Map of the contiguous United States showing the projected change in precipitation from 2024 to 2100 under the intermediate emissions scenario (SSP2-4.5) by NOAA climate division."
+  high_alt = "Map of the contiguous United States showing the projected change in precipitation from 2024 to 2100 under the high emissions scenario (SSP3-7.0) by NOAA climate division."
+  v_high_alt = "Map of the contiguous United States showing the projected change in precipitation from 2024 to 2100 under the very high emissions scenario (SSP5-8.5) by NOAA climate division."
+
   moduleServer(id, function(input, output, session){
     ns <- session$ns
 
@@ -64,11 +70,21 @@ mod_precip_map_server <- function(id){
                           "High emissions (SSP3-7.0), 2024–2100" = all_maps$ssp370,
                           "Very high emissions (SSP5-8.5), 2024–2100" = all_maps$ssp585
       )
+
+      alt_text <- switch(input$scenario_choice,
+                         "Observations, 1901–2023" = obs_alt,
+                         "Low emissions (SSP1-2.6), 2024–2100" = low_alt,
+                         "Intermediate emissions (SSP2-4.5), 2024–2100" = intmd_alt,
+                         "High emissions (SSP3-7.0), 2024–2100" = high_alt,
+                         "Very high emissions (SSP5-8.5), 2024–2100" = v_high_alt
+      )
+
       return(
         tags$img(
           src = which_map,
           width = "1000px",
           height="600px",
+          alt=alt_text
         )
       )
 
@@ -84,11 +100,21 @@ mod_precip_map_server <- function(id){
                           "High emissions (SSP3-7.0), 2024–2100" = all_maps$ssp370,
                           "Very high emissions (SSP5-8.5), 2024–2100" = all_maps$ssp585
       )
+
+      alt_text <- switch(input$scenario_choice_2,
+                         "Observations, 1901–2023" = obs_alt,
+                         "Low emissions (SSP1-2.6), 2024–2100" = low_alt,
+                         "Intermediate emissions (SSP2-4.5), 2024–2100" = intmd_alt,
+                         "High emissions (SSP3-7.0), 2024–2100" = high_alt,
+                         "Very high emissions (SSP5-8.5), 2024–2100" = v_high_alt
+      )
+
       return(
         tags$img(
           src =  which_map,
           width = "1000px",
           height="600px",
+          alt=alt_text
         )
       )
 

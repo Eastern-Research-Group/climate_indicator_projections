@@ -53,6 +53,12 @@ mod_av_temp_map_server <- function(id){
     legend_title="Rate of temperature change\n(°F per century)"
   )
 
+  obs_alt = "Map of the contiguous United States showing the observed rate of temperature change from 1901 to 2023 by NOAA climate division."
+  low_alt = "Map of the contiguous United States showing the projected rate of temperature change from 2024 to 2100 under the low emissions scenario (SSP1-2.6) by NOAA climate division."
+  intmd_alt = "Map of the contiguous United States showing the projected rate of temperature change from 2024 to 2100 under the intermediate emissions scenario (SSP2-4.5) by NOAA climate division."
+  high_alt = "Map of the contiguous United States showing the projected rate of temperature change from 2024 to 2100 under the high emissions scenario (SSP3-7.0) by NOAA climate division."
+  v_high_alt = "Map of the contiguous United States showing the projected rate of temperature change from 2024 to 2100 under the very high emissions scenario (SSP5-8.5) by NOAA climate division."
+
   moduleServer(id, function(input, output, session){
     ns <- session$ns
 
@@ -69,11 +75,11 @@ mod_av_temp_map_server <- function(id){
                           )
       # Alt text for each map
       alt_text <- switch(input$scenario_choice,
-           "Observations, 1901–2023" = "a",
-           "Low emissions (SSP1-2.6), 2024–2100" = "b",
-           "Intermediate emissions (SSP2-4.5), 2024–2100" = "c",
-           "High emissions (SSP3-7.0), 2024–2100" = "d",
-           "Very high emissions (SSP5-8.5), 2024–2100" = "e"
+           "Observations, 1901–2023" = obs_alt,
+           "Low emissions (SSP1-2.6), 2024–2100" = low_alt,
+           "Intermediate emissions (SSP2-4.5), 2024–2100" = intmd_alt,
+           "High emissions (SSP3-7.0), 2024–2100" = high_alt,
+           "Very high emissions (SSP5-8.5), 2024–2100" = v_high_alt
       )
 
       return(
@@ -101,11 +107,11 @@ mod_av_temp_map_server <- function(id){
 
       # Alt text for each map
       alt_text <- switch(input$scenario_choice_2,
-                         "Observations, 1901–2023" = "a",
-                         "Low emissions (SSP1-2.6), 2024–2100" = "b",
-                         "Intermediate emissions (SSP2-4.5), 2024–2100" = "c",
-                         "High emissions (SSP3-7.0), 2024–2100" = "d",
-                         "Very high emissions (SSP5-8.5), 2024–2100" = "e"
+                         "Observations, 1901–2023" = obs_alt,
+                         "Low emissions (SSP1-2.6), 2024–2100" = low_alt,
+                         "Intermediate emissions (SSP2-4.5), 2024–2100" = intmd_alt,
+                         "High emissions (SSP3-7.0), 2024–2100" = high_alt,
+                         "Very high emissions (SSP5-8.5), 2024–2100" = v_high_alt
       )
 
 
