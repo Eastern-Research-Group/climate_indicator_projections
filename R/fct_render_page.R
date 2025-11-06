@@ -161,13 +161,28 @@ render_summary <- function(
   )
 }
 
+prepare_section <- function(section_name, section_value) {
+  if (!is.null(section_value)) {
+    section_value = tagList(
+      tags$h3(
+        section_name
+      ),
+      section_value
+    )
+  }
+  return(section_value);
+}
+
 render_tech_doc <- function(
     identification="Some text goes here...",
     data_sources="Some text goes here...",
     methodology="Some text goes here...",
     analysis="Some text goes here...",
-    references="Some text goes here..."
+    references=NULL
 ) {
+  # Wrap references in header
+  references <- prepare_section("References", references)
+
   return(
     htmlTemplate(
       app_sys("app/www/techdoc_mod.html"),
