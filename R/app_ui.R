@@ -273,10 +273,10 @@ golem_add_external_resources <- function() {
   )
 
   tags$head(
-    golem::favicon(),
+    golem::favicon(ext = "png"),
     golem::bundle_resources(
       path = app_sys("app/www"),
-      app_title = "climate_indicator_projections"
+      app_title = "Climate Change Indicator Projections Explorer"
     ),
     shinyjs::useShinyjs(),
     # Add here other external resources

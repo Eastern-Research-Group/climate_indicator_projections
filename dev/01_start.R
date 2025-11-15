@@ -20,8 +20,9 @@
 ##
 golem::fill_desc(
   pkg_name = "ClimateIndicatorProjections", # The name of the golem package containing the app (typically lowercase, no underscore or periods)
-  pkg_title = "Climate Change Indicator Projections", # What the Package Does (One Line, Title Case, No Period)
-  pkg_description = "PKG_DESC.", # What the package does (one paragraph).
+  pkg_title = "Climate Change Indicator Projections Explorer", # What the Package Does (One Line, Title Case, No Period)
+  pkg_description = "The Climate Change Indicator Projections Explorer visualizes how possible future changes compare with historical patterns in EPA’s Climate Change Indicators.
+  This tool aligns a selection of EPA’s observed indicators with data from the most recent global climate model comparison effort, showing how these indicators could evolve under continued climate change.", # What the package does (one paragraph).
   authors = person(
     given = "AnnaClaire", # Your First Name
     family = "Marley", # Your Last Name
@@ -38,7 +39,7 @@ golem::install_dev_deps()
 
 ## Create Common Files ----
 ## See ?usethis for more information
-usethis::use_mit_license("Golem User") # You can set another license here
+usethis::use_mit_license("Eastern Research Group, Inc.") # You can set another license here
 golem::use_readme_rmd(open = FALSE)
 devtools::build_readme()
 # Note that `contact` is required since usethis version 2.1.5
@@ -53,7 +54,7 @@ golem::use_recommended_tests()
 
 ## Favicon ----
 # If you want to change the favicon (default is golem's one)
-golem::use_favicon() # path = "path/to/ico". Can be an online file.
+golem::use_favicon("inst/app/www/images/erg-logo-leaf.png") # path = "path/to/ico". Can be an online file.
 # golem::remove_favicon() # Uncomment to remove the default favicon
 
 ## Add helper functions ----
