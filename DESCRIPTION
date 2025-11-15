@@ -1,14 +1,13 @@
 Package: ClimateIndicatorProjections
-Title: Climate Change Indicator Projections
+Title: Climate Change Indicator Projections Explorer
 Version: 0.0.0.9000
 Authors@R: 
     person("AnnaClaire", "Marley", , "annaclaire.marley@erg.com", role = c("aut", "cre"))
-Description: PKG_DESC.
-License: What license is it under?
-URL: 
-    https://github.com/Eastern-Research-Group/climate_indicator_projections.git
-BugReports: 
-    https://github.com/Eastern-Research-Group/climate_indicator_projections.git/issues
+Description: The Climate Change Indicator Projections Explorer visualizes how possible future changes compare with historical patterns in EPA’s Climate Change Indicators. 
+  This tool aligns a selection of EPA’s observed indicators with data from the most recent global climate model comparison effort, showing how these indicators could evolve under continued climate change.
+License: MIT + file LICENSE
+URL: https://github.com/Eastern-Research-Group/climate_indicator_projections.git
+BugReports: https://github.com/Eastern-Research-Group/climate_indicator_projections.git/issues
 Imports: 
     config,
     dplyr,
