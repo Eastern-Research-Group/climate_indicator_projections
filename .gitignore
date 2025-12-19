@@ -1,5 +1,5 @@
 .Rproj.user
 .Rhistory
 data/
-inst/extdata/*
+tests/*
 !inst/extdata/app_text/
