@@ -17,7 +17,7 @@
       return normalize(el.dataset.value);
     }
 
-    if (el.getAttribute("href") === "#" && el.id) {
+    if (el.classList.contains("link_clickable") && el.id) {
       return normalize(el.id);
     }
 

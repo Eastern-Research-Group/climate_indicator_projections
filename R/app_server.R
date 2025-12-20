@@ -5,6 +5,7 @@
 #' @import shiny
 #' @noRd
 app_server <- function(input, output, session) {
+
   # Your application server logic
   mod_sst_plot_server("sst_plot_1")
   mod_grow_season_plot_server("grow_season_plot_1")
