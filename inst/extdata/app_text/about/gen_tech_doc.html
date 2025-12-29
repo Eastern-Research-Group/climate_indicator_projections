@@ -665,6 +665,22 @@
     observations and future projections for this effort. Meanwhile, comparing historical observations with the modeled
     projections allows the audience to calibrate their lived experiences of historical change against the magnitude of
     changes seen in future climate model output.</p>
+    <p>
+      While each indicator’s time series graph allows for comparison between observed data and the model hindcast, the hindcast
+      is not included in indicator maps. This is because the maps based on observed data incorporate years prior to 1950—before modeled
+      data are available. To enable a direct comparison, each observed indicator would need to be recalculated using the model hindcast’s
+      time period, which would not align with this project’s objective of reproducing EPA’s Climate Change Indicators.
+      For demonstration purposes, the project team has included a comparison analysis for the average temperature indicator, shown in
+      Figure TD-1. The authors calculated the total change in temperature per century using the same methodology as the observed indicator
+      but over the period from 1950 to 2014 (the timeframe for which hindcast data are available), using a baseline period of 1951 to 2000.
+      In most climate divisions, the hindcast was within ±1°F of the observed data. However, the model hindcast tended to estimate a warmer
+      trend in the midwestern and south-central states than the observed data, and cooler trends along the central and southern coast of
+      California and south Florida. These differences between the hindcast and observed data are likely due to natural year-to-year variability
+      that is not captured in hindcast or climate model calculations. Climate models are not designed to be in year-to-year sync with observations,
+      even though overall statistics for climatological periods are expected to be similar.
+    </p>
+    <p style="text-align: center"><em>Figure TD-1. Difference between modeled hindcast and observed data in depicting the rate of temperature change in the United States, 1950–2014.</em></p>
+    <img src="www/images/figure_td_1.png" alt="Map of the contiguous United States showing the difference in the rate of temperature change between modeled hindcast and observed data from 1950 to 2014." style="display: block; margin: 0 auto; width: 85%;">
 <p><strong>Averaging.</strong> In climate modeling, it is common to report and visualize projections that are averaged
     over 10- to 30-year windows, in part to capture year-to-year variability and to avoid implying false year-to-year
     precision in the models. The decision to average projections is largely a question of how one presents and
@@ -798,16 +814,16 @@
         historical observations and projections. Specific steps are described in each pairing&rsquo;s technical
         documentation, but they generally followed the hierarchy below:</p></li>
     <p><em>Good alignment:</em> If the previous step revealed projections reasonably well aligned with the historical
-        observations, the results were plotted and published with no further transformation. Figure TD-1 shows an
+        observations, the results were plotted and published with no further transformation. Figure TD-2 shows an
         example for sea surface temperature. After converting units and calculating anomalies with respect to the same
         30-year baseline, the authors found that observed and modeled results aligned reasonably well.</p>
 
-    <p style="text-align: center"><em>Figure TD-1. Global mean sea surface temperature alignment example</em></p>
-    <img src="www/images/figure_td_1.png" alt="Line graph showing temperature anomalies in °F for global sea surface temperature from 1850 to 2100, relative to the historical 1971–2000 average. A modeled hindcast is shown from 1850 to 2014, observations are shown from 1880 to 2020, and modeled projections for four different emissions scenarios (SSP1-2.6, SSP2-4.5, SSP3-7.0, and SSP5-8.5) are shown from 2015 to 2100." style="display: block; margin: 0 auto; width: 85%;">
+    <p style="text-align: center"><em>Figure TD-2. Global mean sea surface temperature alignment example</em></p>
+    <img src="www/images/figure_td_2.png" alt="Line graph showing temperature anomalies in °F for global sea surface temperature from 1850 to 2100, relative to the historical 1971–2000 average. A modeled hindcast is shown from 1850 to 2014, observations are shown from 1880 to 2020, and modeled projections for four different emissions scenarios (SSP1-2.6, SSP2-4.5, SSP3-7.0, and SSP5-8.5) are shown from 2015 to 2100." style="display: block; margin: 0 auto; width: 85%;">
 
     <p><em>Moderate lack of alignment:</em> The project team investigated further to determine if the apparent
         discontinuity between observations and projections could be a symptom of a mismatch in how the data were
-        processed or calculated. Figure TD-2 shows an example of a mismatch for snow cover. This figure depicts the
+        processed or calculated. Figure TD-3 shows an example of a mismatch for snow cover. This figure depicts the
         annual average snow-covered area over all of North America excluding Greenland; the authors found similar
         mismatches for individual seasons. In this case, further investigation included discussion with the Rutgers
         Global Snow Lab, which had provided the observed data analysis to the project team. The original Rutgers product
@@ -827,19 +843,19 @@
         and modeled grids skewed the analysis. Monthly average Arctic sea ice extent is one such example. Extent is
         defined as the total areal coverage of pixels that are at least 15 percent frozen. After confirming that the
         models were using the same definition as the observed indicator, the authors noted that there was still a
-        persistent gap between observations and modeled outputs (Figure TD-3), but, importantly, the two curves follow a
+        persistent gap between observations and modeled outputs (Figure TD-4), but, importantly, the two curves follow a
         nearly identical shape. This diagnosis made Arctic sea ice a candidate for a bias correction. In this case, a
         multiplicative shift was applied, adjusting all GCM outputs (hindcast and future projections) up by a constant
         ratio to align the observed and modeled 1979&ndash;2014 means. In this case, a multiplicative bias correction
         was more effective than an additive correction at retaining the accuracy of an eventual asymptote&mdash;where
-        sea ice extent reaches a near-zero level in the warmest scenarios. Figure TD-3 shows the result of this
+        sea ice extent reaches a near-zero level in the warmest scenarios. Figure TD-4 shows the result of this
         transformation.</p>
 
-    <p style="text-align: center"><em>Figure TD-2. Snow cover alignment example</em></p>
-    <img src="www/images/figure_td_2.png" alt="Line graph showing snow-covered area in million square miles from 1970 to 2100. A modeled hindcast is shown from 1970 to 2014, original and higher-resolution observations are shown from 1972 to 2020 and 1981 to 2019, respectively, and modeled projections for four different emissions scenarios (SSP1-2.6, SSP2-4.5, SSP3-7.0, and SSP5-8.5) are shown from 2015 to 2100. Compared to the original observations, the higher-resolution observations more closely align with the modeled data, partially closing the gap between the observation data and the model data." style="display: block; margin: 0 auto; width: 85%;">
+    <p style="text-align: center"><em>Figure TD-3. Snow cover alignment example</em></p>
+    <img src="www/images/figure_td_3.png" alt="Line graph showing snow-covered area in million square miles from 1970 to 2100. A modeled hindcast is shown from 1970 to 2014, original and higher-resolution observations are shown from 1972 to 2020 and 1981 to 2019, respectively, and modeled projections for four different emissions scenarios (SSP1-2.6, SSP2-4.5, SSP3-7.0, and SSP5-8.5) are shown from 2015 to 2100. Compared to the original observations, the higher-resolution observations more closely align with the modeled data, partially closing the gap between the observation data and the model data." style="display: block; margin: 0 auto; width: 85%;">
 
-    <p style="text-align: center"><em>Figure TD-3. Arctic sea ice alignment example</em></p>
-    <img src="www/images/figure_td_3.png" alt="Line graph showing  Arctic sea ice extent in million square miles from 1950 to 2100. Observations are shown from 1979 through 2023. Model data shown include a hindcast from 1950 to 2014 and projections for two different emissions scenarios (SSP1-2.6 and SSP5-8.5) from 2015 to 2100. The original model data are shown, and they are vertically lower on the graph compared to the observations. The graph also shows the same model data adjusted vertically upwards on the graph to more closely align with the observations." style="display: block; margin: 0 auto; width: 85%;">
+    <p style="text-align: center"><em>Figure TD-4. Arctic sea ice alignment example</em></p>
+    <img src="www/images/figure_td_4.png" alt="Line graph showing  Arctic sea ice extent in million square miles from 1950 to 2100. Observations are shown from 1979 through 2023. Model data shown include a hindcast from 1950 to 2014 and projections for two different emissions scenarios (SSP1-2.6 and SSP5-8.5) from 2015 to 2100. The original model data are shown, and they are vertically lower on the graph compared to the observations. The graph also shows the same model data adjusted vertically upwards on the graph to more closely align with the observations." style="display: block; margin: 0 auto; width: 85%;">
 
     <p><em>Poor alignment:</em> If observed and modeled results were highly out of alignment, and/or the curves were of
         a notably different shape, and no reasonable solution could be found (e.g., a different source, better alignment
