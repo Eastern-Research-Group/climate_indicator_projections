@@ -82,12 +82,14 @@ av_temp_obs_hind_diff <- rbind(av_temp_map_obs, av_temp_map_mod) %>%
 # Create the map -----------------------------------------------------
 
 obs_hind_diff_map_colors <- c(
+  "(-4,-3]" = "#8E9ACD",
   "(-3,-2]" = "#B4BDDF",
   "(-2,-1]" = "#D1D4EB",
   "(-1,0]"= "#C7C7C7",
   "(0,1]"= "#C7C7C7",
   "(1,2]"= "#F0D7D6",
-  "(2,3]"= "#F1C1BE"
+  "(2,3]"= "#F1C1BE",
+  "(3,4]" = "#EF9F9C"
 )
 
 obs_hind_map <- ggplot2::ggplot() +
@@ -104,18 +106,20 @@ obs_hind_map <- ggplot2::ggplot() +
     strip.text = ggplot2::element_text(size = 14, face = "bold")
   )
 
-ggplot2::ggsave(plot = obs_hind_map, filename = "td_fig_obs_hind.png")
+ggplot2::ggsave(plot = obs_hind_map, filename = "inst/app/www/images/fig_td_1_map.png")
 
 
 # Make the legend
   # Create the SVG content
-  svg_legend <- create_map_legend(obs_hind_diff_map_colors)
+  svg_legend <- create_map_legend(
+    obs_hind_diff_map_colors,
+    label_text = "Difference in rate of temperature change (°F per century)")
 
   # Convert to a raw SVG string
   svg_legend_string <- as.character(tagList(svg_legend))
 
   # Save to PNG
-  rsvg::rsvg_png(charToRaw(svg_legend_string), file = "legend.png", width = 500, height = 120)
+  rsvg::rsvg_png(charToRaw(svg_legend_string), file = "inst/app/www/images/fig_td_1_legend.png", width = 600, height = 120)
 
 
 usethis::use_data(av_temp_obs_hind_map, overwrite = TRUE)
