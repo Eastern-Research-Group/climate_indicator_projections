@@ -1,6 +1,6 @@
 # Climate Change Indicator Projections Explorer
 
-**Live App:** https://erg-shiny.shinyapps.io/climate_indicator_projections/  
+**Live App:** https://ergapps.shinyapps.io/climate_indicator_projections/  
 
 A R **{shiny}** application built with the **{golem}** framework for exploring a selection of the [Environmental Protection Agency's Climate Change Indicators](https://19january2025snapshot.epa.gov/climate-indicators/index.html) with data from the most recent global climate model comparison effort, showing how these indicators could evolve under continued climate change.
 
