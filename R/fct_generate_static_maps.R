@@ -48,8 +48,10 @@ generate_static_maps <- function(
         ggplot2::ggsave(
           filename = img_path,
           plot = map,
-          width = width / 72,
-          height = height / 72,
+          width = width,
+          height = height,
+          units = "px",
+          device = "png",
           dpi = 72
         )
       }
