@@ -80,7 +80,7 @@ mod_slr_map_server <- function(id){
     pal_legend <- leaflet::colorBin("RdYlBu", domain = cln_data$relative_sea_level_change, right = FALSE)
 
     leaflet_map <- leaflet::leaflet() %>%
-      leaflet::addTiles(., urlTemplate = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png') %>%
+      leaflet::addTiles(., urlTemplate = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=cb1_2h8e_1_eae4078d6a6e1a61d2e211d6') %>%
       # Observed data
       leaflet::addCircleMarkers(data = slr_map_obs_fnl,
                                 layerId = ~paste0(station_name, " Observations"),

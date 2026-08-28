@@ -115,7 +115,7 @@ mod_coast_fld_map_server <- function(id){
     # Initialize the map
     output$map <- leaflet::renderLeaflet({
         lmap <- leaflet::leaflet() %>%
-          leaflet::addTiles(., urlTemplate = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png') %>%
+          leaflet::addTiles(., urlTemplate = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=cb1_2h8e_1_eae4078d6a6e1a61d2e211d6') %>%
           leaflet::setView(., lng = -99, lat = 39, zoom = 4) %>%
           leaflet::addLegend(pal = pal_legend, values =  coastal_flood_cln_data$fld_days_pdec, opacity = 1,
                              title = "Average number of<br>flood days per year",
